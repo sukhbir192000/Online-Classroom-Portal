@@ -1,0 +1,25 @@
+{
+  "name": "minor_project",
+  "version": "1.0.0",
+  "description": "MISP minor project(online portal)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-I-S-P/Minor_Project.git"
+  },
+  "author": "MISP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/M-I-S-P/Minor_Project/issues"
+  },
+  "homepage": "https://github.com/M-I-S-P/Minor_Project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.4"
+  }
+}
