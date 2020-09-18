@@ -1,0 +1,10 @@
+const express=require('express');
+const Router=express.Router();
+const contentController=require('../controllers/content');
+Router.get('/announcements',contentController.announcement);
+Router.get('/studymaterial',contentController.studyMaterial);
+Router.get('/recordedlectures',contentController.recordedLectures);
+Router.get('/assignments',contentController.assignments);
+Router.get('/timetable',contentController.timeTable);
+Router.get('/doubts',contentController.doubts);
+module.exports=Router;
