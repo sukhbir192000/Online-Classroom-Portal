@@ -1,0 +1,296 @@
+/*
+ NOTE: 
+    1. Everything is sorted alphabetically
+    2. Everything is classified into classes, tags and queries.
+ */
+
+/* Classes */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.answer{
+    height: auto;
+    outline: none;
+    overflow-wrap: break-word;
+    min-height: 4.5em;
+    padding: 0.5em 0.5em;
+    resize: none;
+}
+
+.bg_header{
+    background-color: #1D3557;
+}
+
+.bg_middle{
+    background-color: #F1FAEE;
+}
+
+.bg_ques_bar{
+    background-color: #1D3557;
+}
+
+.bg_ques_heading{
+    background-color: #E63946;
+     /* #D62648; */
+}
+
+.bg_timer{
+    background-color: #457B9D;
+}
+
+.blank_area_left{
+    background-color: #A8DADC;
+    margin: 0;
+    padding: 0;
+    width: 20vw;
+    /* 14.6vw; */
+}
+
+.blank_area_right{
+    background-color: #A8DADC;
+    margin: 0;
+    padding: 0;
+    width: 20vw;
+}
+
+[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.count::before{
+    counter-increment: question;
+    content: "Q." counter(question) "\00a0 ";
+}
+
+.clear_selection{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5em 1em 0 1em;
+}
+
+.font_cs{
+    border: solid 1px black;
+    font-size: 0.8em;
+    padding: 0.25em;
+}
+
+.font_header{
+    font-size: 1.4em;
+    font-weight: 550;
+}
+
+.font_mcq{
+    font-size: 1.2em;
+}
+
+.font_ques_bar{
+    color: #FFF;
+    font-size: 1.5em;
+}
+
+.font_ques_heading{
+    color: #F1FAEE;
+    font-size: 1.1em;
+}
+
+.font_quiz_topic{
+    color: #1D3557;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.fontColor_timer{
+    color: #F1FAEE;
+}
+
+.img_radio{
+    align-items: center;
+    display: flex;
+    margin: 0.5em;
+}
+
+.main_area{
+    display: flex;
+    flex-direction: row;
+    min-height: 90vh;
+    width: auto;
+}
+
+.middle{
+    counter-reset: question;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    padding: 1em;
+    width: 60vw;
+}
+
+.mcq{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
+.number{
+    counter-reset: qnum;
+    height: 2em;
+}
+
+.option{
+    margin: 0.8em;
+    transform: scale(1.3);
+}
+
+.q_bar_link{
+    color: #FFF;
+    text-decoration: none;
+}
+
+
+.q_bar_style{
+    padding: 0.5em;
+    border-bottom: solid 0.05em #FFF;
+}
+
+.q_num::before{
+    counter-increment: qnum;
+    content: "Q." counter(qnum) "\00a0";
+}
+
+.ques{
+    background-color: #FFF;
+    border-radius: 0.5em;
+    box-shadow: 0.3em 0.3em 0.5em 0.001em gray;
+    display: flex;
+    flex-direction: column;
+    margin: 2.25em 0;
+    width: 50vw;
+}
+
+.ques_heading{
+    border-radius: 0.5em 0.5em 0 0;
+    display: flex;
+    height: auto;
+    padding: 0.5em;
+}
+
+.ques_bar{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 4.5vw;
+}
+
+.quiz_topic{
+    margin: 0.5em 0 1.5em 0;
+}
+
+.timer{
+    align-items: center;
+    display: flex;
+    font-size: 1.5em;
+    height: 5vh;
+    justify-content: center;
+    width: auto;
+}
+
+
+/* Tags */
+
+header{
+    align-items: center;
+    color: #FFF;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 8vh;
+    justify-content: center;
+    padding: 1em;
+    width: auto;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+
+/* Media Queries */
+
+
+/* Mobile-phones small*/
+
+@media screen and (max-width: 600px){
+    .blank_area_left{
+        width: 0;
+    }
+    
+    .blank_area_right{
+        width: 0;
+    }
+
+    .middle{
+        width: 100vw;
+    }
+
+    .ques{
+        width: 85vw;
+    }
+
+    .font_header{
+        font-size: 1.2em;
+    }
+}
+
+/* Mobile-phones medium */
+
+@media screen and (min-width: 600px) and (max-width: 768px){
+    .blank_area_left{
+        width: 6.2vw;
+    }
+    
+    .blank_area_right{
+        width: 6.2vw;
+    }
+
+    .middle{
+        width: 88vw;
+    }
+
+    .ques{
+        width: 75vw;
+    }
+
+    .font_header{
+        font-size: 1.2em;
+    }
+}
+
+/* Tablets */
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .blank_area_left{
+        width: 16vw;
+        /* 14.6vw; */
+    }
+    
+    .blank_area_right{
+        width: 16vw;
+    }
+
+    .middle{
+        width: 68vw;
+    }
+
+    .ques{
+        width: 60vw;
+    }
+
+    .font_header{
+        font-size: 1.2em;
+    }
+}
