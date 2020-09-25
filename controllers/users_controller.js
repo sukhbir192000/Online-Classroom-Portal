@@ -1,0 +1,9 @@
+module.exports.createSession = function(req, res){
+    // req.flash('success',"Logged in");
+    return res.redirect('/');
+}
+module.exports.destroySession = function(req, res){
+    // req.flash('success',"Logged Out");
+    req.logout();
+    return res.redirect('/');
+}

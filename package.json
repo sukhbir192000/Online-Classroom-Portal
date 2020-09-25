@@ -18,8 +18,15 @@
   },
   "homepage": "https://github.com/M-I-S-P/Minor_Project#readme",
   "dependencies": {
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.5",
-    "nodemon": "^2.0.4"
+    "express-session": "^1.17.1",
+    "mongoose": "^5.10.7",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0"
   }
 }
