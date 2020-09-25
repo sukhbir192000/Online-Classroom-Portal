@@ -2,13 +2,13 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose');
-const app=express();
-const port=8000;
+const app = express();
+const port = 8000;
 
 
 const session = require('express-session');
-const passport=require('passport');
-const passportGoogle=require('./config/passport-google-oauth2-strategy');
+const passport = require('passport');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const MongoStore = require('connect-mongo')(session);
 
 
