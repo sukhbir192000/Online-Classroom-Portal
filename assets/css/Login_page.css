@@ -32,12 +32,14 @@ body{
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    pointer-events: none;
 }
 .welcome_user_heading{
 display: flex;
 flex-direction: row;
 justify-content: flex-end;
 padding-right: 2em;
+cursor:default;
 }
 .hamburger_icon{
 visibility: hidden;
@@ -57,6 +59,8 @@ cursor: pointer;
 .welcome_user_content{
 padding: 0.3em 1em 0.3em 0;
 font-size: 1.3em;
+cursor: default;
+user-select:none;
 }
 
 
@@ -72,6 +76,8 @@ font-size: 1.3em;
 font-weight: 700;
 color: rgb(30, 43, 71);
 text-transform: uppercase;
+cursor: default;
+user-select:none;
 }
 
 
@@ -98,7 +104,7 @@ overflow: hidden;
 transition: all 0.3s ;
 }
 
-.navbar:hover .nav_content{
+/* .navbar:hover .nav_content{
 width: auto;
 min-width: 9em;
 overflow: visible;
@@ -106,27 +112,28 @@ padding: 1.2em 1.5em 1.2em 0;
 font-size: 1.2em;
 color: white;
 text-decoration: none;
-}
+} */
 
 .navbar a{
 display: flex;
 flex-direction: row;
 text-decoration: none;
+pointer-events:none;
 }
 
-.navbar a:hover .nav_content{
+/* .navbar a:hover .nav_content{
 font-weight: 600;
 transform: scale(1.01);
-}
+} */
 
-.navbar a:hover .nav_icon{
+/* .navbar a:hover .nav_icon{
 transform: scale(1.2);
 transition: all 0.3s;
-}
+} */
 
-.navbar a:active{
+/* .navbar a:active{
 background-color: black;
-}
+} */
 
 #black_screen{
 position: fixed;
@@ -347,11 +354,6 @@ border-radius: 20px;
 margin-bottom: 1.5em;
 
 }
-
-a{
-    text-decoration: none;
-}
-
 .filter_heading{
 font-size: 1.2em;
 font-weight: 600;
