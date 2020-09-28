@@ -1,5 +1,7 @@
 module.exports.announcement=function(req,res){
-    return res.send("announcements");  
+    return res.render("announcements",{
+        title:"Announcements"
+    });  
 }
 
 module.exports.studyMaterial=function(req,res){
