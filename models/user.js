@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const path=require('path');
+const path = require('path');
+
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -13,7 +14,32 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
-    }
+    },
+    sid: {
+        type: Number
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    class: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Class'
+    },
+    group: {
+        type: Number
+    },
+    subgroup: {
+        type: Number
+    },
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+    }],
+    class_sub: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Class_Sub'
+    }]
 }, {
     timestamps: true
 });
