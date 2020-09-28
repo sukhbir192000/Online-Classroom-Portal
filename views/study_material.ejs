@@ -1,56 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Material</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/f6bdc44dbc.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/study_material.css">
-   
-</head>
-<body>
-    
-
-    
-    
-    
+<link rel="stylesheet" type="text/css" href="/css/study_material.css">
     <div class="main">
-        <div class="navbar bgcolor_welcome_user">
-            <a id="announcements" href="announcements/html#announcements">
-                <div class="nav_icon "><i class="fa fa-bell fa-2x fa-fw "></i> </div>
-                <div class="nav_content">Announcements</div>
-            </a>
-            <a id="study_material" href="study_material.html#study_material">
-                <div class="nav_icon"><i class="fa fa-book fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Study Material</div>
-            </a>
-            <a id="recorded_lectures" href="recorded_lectures.html#recorded_lectures">
-                <div class="nav_icon"><i class="fa fa-video-camera fa-2x fa-fw"></i></div>
-                <div class="nav_content">Recorded lectures</div>
-            </a>
-            <a id="assgn" href="assgn.html#assgn">
-                <div class="nav_icon"><i class="fa fa-pencil-alt fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Assignments</div>
-            </a>
-            <a id="quizzes" href="quizzes.html#quizzes">
-                <div class="nav_icon"><i class="fas fa-brain fa-2x fa-fw"></i></div>
-                <div class="nav_content">Quizzes/ Tests</div>
-            </a>
-            <a id="time_table" href="time_table.html#time_table">
-                <div class="nav_icon"><i class="fa fa-calendar fa-2x fa-fw "></i> </div>
-                <div class="nav_content">Time-table</div>
-            </a>
-            <a id="doubts" href="doubts.html#doubts">
-                <div class="nav_icon"><i class="fa fa-question-circle fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Doubts</div>
-            </a>
-            <div>
-                <div class="nav_icon"></div>
-                <div class="nav_content"></div>
-            </div>
-            
-        </div>
+        <%- include('navbar') %>
 
         <div id="black_screen"></div>
 
@@ -155,11 +105,5 @@
     </div>
 
     
-    <footer class="footer bgcolor_welcome_user">
-        <div class="footer_content color_white">
-            Copyrights reserved &copy;
-        </div>
-    </footer>
-    <script src="scripts/study_material.js"></script>
-</body>
-</html>
+    
+<script src="scripts/study_material.js"></script>

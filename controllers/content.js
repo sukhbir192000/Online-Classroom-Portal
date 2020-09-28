@@ -5,11 +5,15 @@ module.exports.announcement=function(req,res){
 }
 
 module.exports.studyMaterial=function(req,res){
-    return res.send("studyMaterial");  
+    return res.render("study_material",{
+        title:"Study Material"
+    }); 
 }
 
 module.exports.recordedLectures=function(req,res){
-    return res.send("recordedLectures");  
+    return res.render("recorded_lectures",{
+        title:"Recorded Lectures"
+    });
 }
 
 module.exports.assignments=function(req,res){
