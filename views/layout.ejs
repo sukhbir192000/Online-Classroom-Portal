@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>
+            <%= title  %>
+        </title>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css"> -->
+        
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/f6bdc44dbc.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <% if(title!='Login'){ %>
+            <link rel="stylesheet" href="/css/layout.css">
+            <link rel="stylesheet" type="text/css" href="/css/_header.css">
+        <% } %>
+    
+        <%- style %>   
+       
+    </head>
+    <body>
+        <% if(title!='Login'){ %>
+        <%- include('_header') %>
+        <% } %>
+        <main id="layout-main">
+            <%- body %>
+        </main>
+        <% if(title!='Login'){ %>
+            <%- include('_footer') %>
+            <%- script %>
+        <% } %>
+        
+        
+    </body>
+</html>

@@ -1,0 +1,142 @@
+.header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index:1;
+}
+
+.welcome_user{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.welcome_user_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 2em;
+}
+.hamburger_icon{
+    visibility: hidden;
+    cursor: pointer;
+}
+.profile_icon{
+    display: flex;
+    padding-right:1em;
+    padding-top:0.2em;
+    font-size: 1.7em;
+    cursor: pointer;
+}
+
+.welcome_user_content{
+    padding: 0.3em 1em 0.3em 0;
+    font-size: 1.3em;
+}
+
+
+.banner{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    cursor: pointer;
+}
+.banner_content{
+    position:relative;
+    padding: 0.6em;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: rgb(30, 43, 71);
+    text-transform: uppercase;
+}
+.profile{
+    visibility: hidden;
+    position: fixed;
+    top:2.5em;
+    right:3em;
+    width:auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: flex-end;
+    border: 2px solid gray;
+    cursor: pointer;
+}
+.profile div{
+    display: flex;
+    padding:0.5em;
+    margin:0;
+    justify-content: center;
+}
+.profile div:hover{
+    background-color: #1D3557;
+    color:white;
+}
+.show{
+    visibility: visible;
+}
+
+
+/* ---------------tablet------------ */
+@media(min-width: 767px) and (max-width: 991px){
+    .banner_content{
+        font-size: 1em;
+    }
+    .welcome_user{
+        justify-content: space-between;
+    }
+    .welcome_user_heading{
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .hamburger_icon{
+        visibility: visible;
+        padding: 0.3em 0 0.3em 1em;
+    }
+    .welcome_user_content{
+        font-size: 1em;
+        padding-right:0.2em ;
+    }
+    .profile{
+        top:2em;
+    }
+    .profile_icon{
+        font-size: 1.5em;
+        display: flex;
+        padding: 0.2em 1em;
+    }
+}
+/* ------mobile----------- */
+@media(max-width: 767px){
+    .banner_content{
+        font-size:0.8em;
+    }
+    .welcome_user_content{
+        font-size: 1em;
+        visibility: hidden;
+    }
+    .welcome_user{
+        justify-content: space-between;
+    }
+    .welcome_user_heading{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .profile_icon{
+        font-size: 1.5em;
+        display: flex;
+        padding: 0.2em 0.5em;
+    }
+    .hamburger_icon{
+        visibility: visible;
+        padding: 0.3em 0 0.3em 0.5em;
+    }
+    .profile{
+        top:2em;
+    }
+    .profile>div{
+        font-size: 0.9em;
+    }
+}

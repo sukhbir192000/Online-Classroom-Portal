@@ -7,7 +7,10 @@ body{
     font-family:Helvetica, Arial, sans-serif;
     overflow: hidden;
 }
-
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
 .bgcolor_welcome_user{
     background-color: #1D3557;

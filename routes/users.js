@@ -14,5 +14,5 @@ router.get('/auth/google/callback',passport.authenticate(
 ),usersController.createSession);
 
 router.get('/login', usersController.login);
-router.get('/logout',usersController.destroySession);
+router.get('/logout',passport.checkAuthentication,usersController.destroySession);
 module.exports=router;

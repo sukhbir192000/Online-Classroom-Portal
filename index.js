@@ -2,6 +2,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const port = 8000;
 
@@ -41,7 +42,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(passport.setAuthenticatedUser);
-
+app.use(expressLayouts);
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 app.use('/',require('./routes'));
 
 

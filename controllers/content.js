@@ -1,5 +1,5 @@
 module.exports.announcement=function(req,res){
-    return res.send("announcement");  
+    return res.send("announcements");  
 }
 
 module.exports.studyMaterial=function(req,res){
@@ -7,11 +7,13 @@ module.exports.studyMaterial=function(req,res){
 }
 
 module.exports.recordedLectures=function(req,res){
-    return res.send("announcement");  
+    return res.send("recordedLectures");  
 }
 
 module.exports.assignments=function(req,res){
-    return res.send("assignments");  
+    return res.render("assgn",{
+        title:'Assignments'
+    });  
 }
 
 module.exports.timeTable=function(req,res){

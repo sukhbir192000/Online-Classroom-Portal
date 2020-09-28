@@ -2,7 +2,9 @@ module.exports.login = (req, res) => {
     if(req.isAuthenticated()){
         return res.redirect('/');
     }
-    return res.render('Login_page_final');
+    return res.render('Login_page_final',{
+        title:'Login'
+    });
 }
 
 module.exports.createSession = function(req, res){
