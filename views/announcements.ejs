@@ -14,16 +14,24 @@
                 </div>
                
             </div>
+            <!-- delete this later -->
+            <form method="Post" action="/content/announcements/create">
+                <input type="text" name="title">
+                <input type="text" name="content">
+                <button type="submit">Submit</button>
+            </form>
             <div class="box_layout">
-                <% for(let announcement in announcements){ %>
+                
+                <% for(let announcement of announcements){ %>
+
                     <div class="box">
                         <div class="box_heading"> 
-                            <div class="subject">TO DO LATER</div>
+                            <div class="subject"><%= announcement.title %></div>
                         </div>
                         <div class="box_content">  
                             <div class="box_content_details">                    
                                 <div class="description"><%= announcement.content %></div>
-                                <div class="date_posted"><%= announcement.createdAt %></div>
+                                <div class="date_posted">Posted on <%= announcement.createdAt %></div>
                             </div>
                         </div>
                     </div>
