@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const path = require('path');
+const classSubSchema = require('./class-sub');
 
 const assignmentSchema = new mongoose.Schema({
     title: {
-        type: String,
+        type: String
+    },
+    description: {
+        type: String
+    },
+    deadline: {
+        type: Date,
         required: true
     },
-    content: {
-        type: String,
-        required: true
-    },
-    course: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
-    }
+    classSub: [classSubSchema]
 }, {
     timestamps: true
 });

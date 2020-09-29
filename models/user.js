@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const path = require('path');
+const classSubSchema = require('./class-sub');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -29,33 +30,14 @@ const userSchema = new mongoose.Schema({
     group: {
         type: Number
     },
-    subgroup: {
+    subGroup: {
         type: Number
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'
     }],
-    class_sub: [
-        new mongoose.Schema({
-            course: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Course'
-            },
-            class: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Class'
-            },
-            group: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Group'
-            },
-            subgroup: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'SubGroup'
-            }
-        })
-    ]
+    classSub: [classSubSchema]
 }, {
     timestamps: true
 });
