@@ -8,11 +8,11 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.createSession = function(req, res){
-    // req.flash('success',"Logged in");
-    return res.redirect('/');
+    req.flash('success',"Logged in");
+    return res.redirect('/content/announcements');
 }
 module.exports.destroySession = function(req, res){
-    // req.flash('success',"Logged Out");
+    req.flash('success',"Logged Out");
     req.logout();
-    return res.redirect('/');
+    return res.redirect('/users/login');
 }

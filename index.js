@@ -11,13 +11,20 @@ const session = require('express-session');
 const passport = require('passport');
 const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const MongoStore = require('connect-mongo')(session);
-
-
+const flash=require('connect-flash');
+const flashMiddleware=require('./config/flashMiddleware');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static('./assets'));
+app.use(expressLayouts);
 
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
+
+app.set('view engine', 'ejs');
+app.set('views', './views');
 app.use(session({
     name: 'MISP',
     // TODO change the secret before deployment in production mode
@@ -41,16 +48,14 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(passport.setAuthenticatedUser);
-app.use(expressLayouts);
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
+app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(flashMiddleware.setFlash);
 app.use('/',require('./routes'));
 
 
 
-app.set('view engine', 'ejs');
-app.set('views', './views');
+
 
 
 // Listen to server on port
