@@ -1,6 +1,24 @@
-module.exports.announcement=function(req,res){
+const AnnouncementsModel=require('../models/announcement');
+   
+module.exports.announcement=async function(req,res){
+    
+    let user=res.locals.user;
+    let announcementsList;
+    for(let course in user.courses){
+        let announcements=await AnnouncementsModel.find({
+            "classSub.course":course,
+            "classSub.class":user.class,
+            "classSub.group":user.group,
+            "classSub.subGroup":user.subGroup
+        });
+        if(announcements){
+            announcementsList.append(announcements);
+        }
+    }
+    
     return res.render("announcements",{
-        title:"Announcements"
+        title:"Announcements",
+        announcements:announcementsList
     });  
 }
 

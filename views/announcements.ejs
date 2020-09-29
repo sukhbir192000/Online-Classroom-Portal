@@ -15,40 +15,20 @@
                
             </div>
             <div class="box_layout">
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">Quiz on 29th September,2020</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
+                <% for(let announcement in announcements){ %>
+                    <div class="box">
+                        <div class="box_heading"> 
+                            <div class="subject">TO DO LATER</div>
+                        </div>
+                        <div class="box_content">  
+                            <div class="box_content_details">                    
+                                <div class="description"><%= announcement.content %></div>
+                                <div class="date_posted"><%= announcement.createdAt %></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                    </div>
-                </div>
+                <% } %>
+                
             </div>
         </div>
         <div class="filters">
