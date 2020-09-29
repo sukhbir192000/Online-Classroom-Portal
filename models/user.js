@@ -36,13 +36,29 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'
     }],
-    class_sub: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Class_Sub'
-    }]
+    class_sub: [
+        new mongoose.Schema({
+            course: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Course'
+            },
+            class: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Class'
+            },
+            group: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Group'
+            },
+            subgroup: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'SubGroup'
+            }
+        })
+    ]
 }, {
     timestamps: true
 });
-const User = mongoose.model('User', userSchema);
 
+const User = mongoose.model('User', userSchema);
 module.exports = User;

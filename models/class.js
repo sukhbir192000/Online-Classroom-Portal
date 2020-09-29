@@ -1,30 +1,28 @@
 const mongoose = require('mongoose');
 const path = require('path');
 
-const courseSchema = new mongoose.Schema({
-    code: {
+const classSchema = new mongoose.Schema({
+    stream: {
         type: String,
         required: true
     },
-    name: {
-        type: String,
-        required: true
-    },
-    credits: {
+    passingOutYear: {
         type: Number,
         required: true
     },
-    students: [{
+    student: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    sem: {
+    totalGroups: {
+        type: Number,
+        required: true
+    },
+    totalSubGroups: {
         type: Number,
         required: true
     }
-}, {
-    timestamps: true
 });
 
-const Course = mongoose.model('Course', courseSchema);
-module.exports = Course;
+const Class = mongoose.model('Class', classSchema);
+module.exports = Class;
