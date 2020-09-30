@@ -15,11 +15,13 @@
                
             </div>
             <!-- delete this later -->
+            <% if(user.isAdmin){ %>
             <form method="Post" action="/content/announcements/create">
                 <input type="text" name="title">
                 <input type="text" name="content">
                 <button type="submit">Submit</button>
             </form>
+            <% } %>
             <div class="box_layout">
                 
                 <% for(let announcement of announcements){ %>
@@ -34,9 +36,10 @@
                                 <div class="date_posted">Posted on <%= announcement.createdAt %></div>
                             </div>
                         </div>
-
+                        <% if(user.isAdmin){ %>
                         <a href='/content/announcements/edit/<%=announcement._id%>' class="edit_box">Edit</a>
                         <a href='/content/announcements/delete/<%=announcement._id%>'>Delete</a>
+                        <% } %>
                     </div>
                 <% } %>
                 
