@@ -15,31 +15,85 @@
                
             </div>
             <!-- delete this later -->
-            <% if(user.isAdmin){ %>
+            <!-- <% if(user.isAdmin){ %>
             <form method="Post" action="/content/announcements/create">
                 <input type="text" name="title">
                 <input type="text" name="content">
                 <button type="submit">Submit</button>
             </form>
-            <% } %>
+            <% } %> -->
             <div class="box_layout">
-                
+                <% if(user.isAdmin){ %>
+                    <div class="add">
+                        <div class="add_icon"><i class="fas fa-plus"></i></div>
+                        <div class="add_content">Add </div>
+                    </div>
+                    <div class="add_admin">
+                        <form>
+                            <label for="subject">Subject:</label>
+                            <select id="subject" name="subject">
+                                <option value="All">All</option>
+                                <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
+                                <option value="Embedded Systems">Embedded Systems</option>
+                                <option value="Advanced Communication">Advanced Communication</option>
+                                <option value="Wireless Communication">Wireless Communication</option>
+                            </select><br><br>
+                            <label for="branch">Branch:</label>
+                            <select id="branch" name="branch">
+                                <option value="All">All</option>
+                                <option value="Electronics and Commmunication">Electronics and Commmunication</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Mechaical">Mechaical</option>
+                            </select><br><br>
+                            <label for="group">Class Group:</label>
+                            <select id="group" name="group">
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select><br><br>
+                            <label for="sub_group">Lab Group:</label>
+                            <select id="sub_group" name="sub_group" >
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="3">2</option>
+                                <option value="3">3</option>
+                                <option value="3">4</option>
+                                <option value="5">5</option>
+                                <option value="7">6</option>
+                            </select><br><br>
+                            <!-- <label for="title">Title:</label> -->
+                            <input type="text" name="title" placeholder="Enter the title" ></textarea><br><br>
+                            <!-- <label for="message">Message:</label> -->
+                            <textarea name="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                <% } %>
                 <% for(let announcement of announcements){ %>
 
                     <div class="box">
                         <div class="box_heading"> 
-                            <div class="subject"><%= announcement.title %></div>
+                            <div class="subject" >Computer Architecture</div>
+                            <div class="title"><%= announcement.title %></div>
                         </div>
                         <div class="box_content">  
                             <div class="box_content_details">                    
                                 <div class="description"><%= announcement.content %></div>
                                 <div class="date_posted">Posted on <%= announcement.createdAt %></div>
+                                <% if(user.isAdmin){ %>
+                                    <div class="buttons">
+                                        <div class="buttons_admin">
+                                            <div class="edit"><i class="far fa-edit"></i></div>
+                                            <a href="/content/announcements/delete/<%=announcement._id%>"><div class="delete"><i class="fas fa-trash"></i></div></a>
+                                        </div>
+                                        <div class="buttons_admin_save">
+                                            <div class="savechanges"><i class="fas fa-save"></i></div>
+                                        </div>
+                                    </div>
+                                <% } %>
                             </div>
                         </div>
-                        <% if(user.isAdmin){ %>
-                        <a href='/content/announcements/edit/<%=announcement._id%>' class="edit_box">Edit</a>
-                        <a href='/content/announcements/delete/<%=announcement._id%>'>Delete</a>
-                        <% } %>
                     </div>
                 <% } %>
                 

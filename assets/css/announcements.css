@@ -283,6 +283,13 @@ body{
     overflow-wrap: break-word;
 }
 
+.title{
+    padding-top:0.25em;
+    font-size: 1.1em;
+    color: #F1FAEE;
+    overflow-wrap: break-word;
+}
+
 .box_content{
     display: flex;
     flex-direction: column;
@@ -310,7 +317,81 @@ body{
 .show{
     visibility: visible;
 }
+.hide{
+    display: none;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.buttons_admin{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* width:100%; */
+    /* background-color: black; */
+}
+.edit{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.2em;
+    cursor: pointer;
+    visibility: visible;
+}
 
+.delete{
+    font-size: 1.2em;
+    cursor:pointer;
+    visibility: visible;
+}
+.buttons_admin_save{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+}
+.savechanges{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.4em;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.add{
+    margin:1em 1.5em;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:white; 
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #1D3557;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+}
+.add_admin{
+    margin:1em 1.5em;
+    border:1px solid black;
+    padding: 0.8em;
+}
+input,textarea{
+    width:95%;
+    overflow-y: auto;
+}
 
 /* FOOTER */
 .footer{
@@ -741,6 +822,9 @@ li:hover{
         font-size: 1.3em;
         padding-left:1.3em;
         
+    }
+    .title{
+        font-size: 0.8em;
     }
     .filters_small{
         /* visibility: visible; */
