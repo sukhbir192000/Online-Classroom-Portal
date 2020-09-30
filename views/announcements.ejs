@@ -29,7 +29,7 @@
                         <div class="add_content">Add </div>
                     </div>
                     <div class="add_admin">
-                        <form>
+                        <form method="POST" action="/content/announcements/create">
                             <label for="subject">Subject:</label>
                             <select id="subject" name="subject">
                                 <option value="All">All</option>
@@ -41,10 +41,9 @@
                             <label for="branch">Branch:</label>
                             <select id="branch" name="branch">
                                 <option value="All">All</option>
-                                <option value="Electronics and Commmunication">Electronics and Commmunication</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Electrical">Electrical</option>
-                                <option value="Mechaical">Mechaical</option>
+                                <option value="ECE">Electronics and Commmunication</option>
+                                <option value="CSE">Computer Science</option>
+                                <option value="ELE">Electrical</option>
                             </select><br><br>
                             <label for="group">Class Group:</label>
                             <select id="group" name="group">
@@ -56,11 +55,11 @@
                             <select id="sub_group" name="sub_group" >
                                 <option value="All">All</option>
                                 <option value="1">1</option>
-                                <option value="3">2</option>
+                                <option value="2">2</option>
                                 <option value="3">3</option>
-                                <option value="3">4</option>
+                                <option value="4">4</option>
                                 <option value="5">5</option>
-                                <option value="7">6</option>
+                                <option value="6">6</option>
                             </select><br><br>
                             <!-- <label for="title">Title:</label> -->
                             <input type="text" name="title" placeholder="Enter the title" ></textarea><br><br>

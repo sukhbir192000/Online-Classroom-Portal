@@ -51,9 +51,15 @@ module.exports.announcement=async function(req,res){
 module.exports.announcementCreate=async function(req,res){
     console.log(req.body);
     try{
+        
         let post=await AnnouncementsModel.create({
             title:req.body.title,
-            content:req.body.content
+            content:req.body.message,
+            classSub:{
+                course:"5f6e2a1e78a45c07ec7d6a84",
+                class:"5f6e2a1e78a45c07ec7d6a84",//req.body.branch,
+                
+            }
         });
         return res.redirect('back')
     }
