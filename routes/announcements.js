@@ -5,5 +5,6 @@ const contentController=require('../controllers/announcement_controller');
 Router.get('/',contentController.announcement);
 //change to isAdmin
 Router.post('/create',passport.checkAuthentication,contentController.announcementCreate);
-
+// Router.get('/edit/:',passport.checkAuthentication,contentController.announcementEdit);
+Router.get('/delete/:id',passport.checkAuthentication,contentController.announcementDelete);
 module.exports = Router;

@@ -48,3 +48,17 @@ module.exports.announcementCreate=async function(req,res){
 
     
 }
+module.exports.announcementDelete=function(req,res){
+    console.log(req.params.id);
+    AnnouncementsModel.findByIdAndDelete(req.params.id,function(err){
+        if(err){
+            console.log("error while deleting announcement :",err);
+            return res.redirect('back');
+        }
+        else{
+            console.log("deleted Announcement");
+            return res.redirect('back');
+        }
+    })
+    
+}

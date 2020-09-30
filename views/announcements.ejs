@@ -34,8 +34,9 @@
                                 <div class="date_posted">Posted on <%= announcement.createdAt %></div>
                             </div>
                         </div>
-                        <a href='#'>Edit</a>
-                        <a href='#'>Delete</a>
+
+                        <a href='/content/announcements/edit/<%=announcement._id%>' class="edit_box">Edit</a>
+                        <a href='/content/announcements/delete/<%=announcement._id%>'>Delete</a>
                     </div>
                 <% } %>
                 
