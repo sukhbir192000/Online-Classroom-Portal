@@ -5,7 +5,7 @@ const contentController=require('../controllers/content');
 Router.use('/announcements',require('./announcements'));
 Router.get('/studymaterial',contentController.studyMaterial);
 Router.get('/recordedlectures',contentController.recordedLectures);
-Router.get('/assignments',contentController.assignments);
+Router.use('/assignments',require('./assignments'));
 Router.get('/timetable',contentController.timeTable);
 Router.get('/doubts',contentController.doubts);
 module.exports=Router;
