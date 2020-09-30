@@ -4,23 +4,39 @@ module.exports.announcement=async function(req,res){
     try{
         let user=res.locals.user;
 
-        let announcementsList=await AnnouncementsModel.find({}).sort('-createdAt');
+        let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
         for(let course of user.courses){
-            
-            
             let announcements=await AnnouncementsModel.find({
-                // "classSub.course":course,
-                // "classSub.class":user.class,
-                // "classSub.group":user.group,
-                // "classSub.subGroup":user.subGroup
-            }).sort('-createdAt');
-            if(announcements){
-                announcementsList.append(announcements);
-            }  
+                $and: [
+                    {
+                        "classSub.course":course,
+                        "classSub.class":user.class
+                    },
+                    {
+                        $or: [
+                            {"classSub.group": undefined},
+                            {
+                                $and: [
+                                    {"classSub.group": user.group},
+                                    {$or: [
+                                        {"classSub.subGroup": undefined},
+                                        {"classSub.subGroup": user.subGroup}
+                                    ]}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            });
+            if(announcements.length>0){
+                announcementsList = announcementsList.concat(announcements);
+            }
             
         }
-        
-        
+        console.log(announcementsList);
+        announcementsList.sort(function(a,b){
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
         return res.render("announcements",{
             title:"Announcements",
             announcements:announcementsList

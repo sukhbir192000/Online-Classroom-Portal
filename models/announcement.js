@@ -9,7 +9,7 @@ const announcementSchema = new mongoose.Schema({
     content: {
         type: String
     },
-    classSub: [classSubSchema]
+    classSub: classSubSchema
 }, {
     timestamps: true
 });

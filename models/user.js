@@ -28,10 +28,12 @@ const userSchema = new mongoose.Schema({
         ref: 'Class'
     },
     group: {
-        type: Number
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group'
     },
     subGroup: {
-        type: Number
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SubGroup'
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,

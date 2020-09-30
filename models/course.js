@@ -20,7 +20,9 @@ const courseSchema = new mongoose.Schema({
     }],
     sem: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max: 8
     }
 }, {
     timestamps: true
