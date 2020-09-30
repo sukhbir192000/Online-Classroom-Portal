@@ -75,6 +75,16 @@ passport.setAuthenticatedUser = function(req, res, next){
     next();
 }
 
+passport.checkAdmin = function(req, res, next){
+    // if the user is signed in, then pass on the request to the next function(controller's action)
+    if (res.locals.user.isAdmin){
+        return next();
+    }
+    else{
+        req.flash('success', "Not Authorized");
+        return res.redirect('back');
+    }
+}
 
 
 module.exports = passport;
