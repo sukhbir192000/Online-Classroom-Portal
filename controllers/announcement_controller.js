@@ -1,5 +1,7 @@
 const AnnouncementsModel=require('../models/announcement');
 const CourseModel=require('../models/course');
+var dateFormat = require('dateformat');
+
    
 module.exports.announcement=async function(req,res){
     try{
@@ -7,8 +9,9 @@ module.exports.announcement=async function(req,res){
 
         let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
         var courseList=[];
-        if(req.query.sub=="All"){
-            cousreList=user.courses;
+        console.log("query: ", req.query);
+        if(!req.query.sub || req.query.sub=="All"){
+            courseList=courseList.concat(user.courses);
         }
         else{
             try{
@@ -51,9 +54,7 @@ module.exports.announcement=async function(req,res){
             if(announcements.length>0){
                 announcementsList = announcementsList.concat(announcements);
             }
-            
         }
-        console.log(announcementsList);
         announcementsList.sort(function(a,b){
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
