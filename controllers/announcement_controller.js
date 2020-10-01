@@ -6,7 +6,26 @@ module.exports.announcement=async function(req,res){
         let user=res.locals.user;
 
         let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
-        for(let course of user.courses){
+        var courseList=[];
+        if(req.query.sub=="All"){
+            cousreList=user.courses;
+        }
+        else{
+            try{
+                let coursefind=await CourseModel.find({
+                    name:req.query.sub
+                });
+                // console.log(coursefind);
+                if(coursefind.length!=0){
+                    courseList.push(coursefind[0]._id);
+                }
+            }
+            catch(err){
+                console.log("error in finding course ",err);
+            }
+        }
+        for(let course of courseList){
+
             let announcements=await AnnouncementsModel.find({
                 $and: [
                     {
