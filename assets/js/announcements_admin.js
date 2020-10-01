@@ -75,20 +75,29 @@ groupForm.disabled=true;
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
 var subjectForm=document.getElementById("subject");
-subjectForm.addEventListener('click',function(e){
+var addButton=document.getElementById("addButton");
+addButton.addEventListener('click',function(e){
     $.ajax({
         url:"/content/announcements/form/subjects",
         cache:false,
         type:"GET",
         success:function(response){
+            subjectForm.innerText="";
+            var opt = document.createElement('option');
+            opt.value="All",
+            opt.innerText="All",
+            subjectForm.appendChild(opt);
             for(let obj of response.data.subjectsId){
-                    var opt = document.createElement('option');
-                    opt.value=obj.id,
-                    opt.innerText=obj.name,
-                    subjectForm.appendChild(opt);
+                var opt = document.createElement('option');
+                opt.value=obj.id,
+                opt.innerText=obj.name,
+                subjectForm.appendChild(opt);
             }
         }
     })
+})
+subjectForm.addEventListener('click',function(e){
+   
     // console.log(subjectForm.value);
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
