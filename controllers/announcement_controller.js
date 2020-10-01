@@ -1,5 +1,6 @@
 const AnnouncementsModel=require('../models/announcement');
 const CourseModel=require('../models/course');
+const ClassModel=require('../models/class');
 
    
 module.exports.announcement=async function(req,res){
@@ -105,20 +106,37 @@ module.exports.getSubjects=async function(req,res){
                 subjectsId:subjectList,
             
             },
-            message:"Post Deleted"
+            message:"Subjects Sent"
         });
     }
     else{
         return res.send("hi");
     }
 }
-// module.exports.getClasses=async function(req,res){
-//     if(req.xhr){
-//         return res.status(200).json({
-            
-//         });
-//     }
-// }
+
+module.exports.getBranches=async function(req,res){
+    if(req.xhr){
+        let user = res.locals.user;
+        let branchList = [];
+        for(let classSub of user.classSub){
+            if(classSub.course == req.body.course){
+                console.log("id: ",classSub.class);
+                var branchElement = await ClassModel.findById(classSub.class);
+                console.log(branchElement);
+                branchList.push({
+                    id: classSub.class,
+                    name: branchElement.stream
+                })
+            }
+        }
+        return res.status(200).json({
+            data:{
+                branchList:branchList
+            },
+            message:"Subjects Sent"
+        });
+    }
+}
 // module.exports.getGroups=async function(req,res){
 //     if(req.xhr){
 //         return res.status(200).json({
