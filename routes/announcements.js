@@ -7,4 +7,5 @@ Router.get('/',contentController.announcement);
 Router.post('/create',passport.checkAdmin,contentController.announcementCreate);
 // Router.get('/edit/:',passport.checkAuthentication,contentController.announcementEdit);
 Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelete);
+Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);
 module.exports = Router;

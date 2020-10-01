@@ -1,12 +1,11 @@
 const AnnouncementsModel=require('../models/announcement');
 const CourseModel=require('../models/course');
-var dateFormat = require('dateformat');
 
    
 module.exports.announcement=async function(req,res){
     try{
         let user=res.locals.user;
-
+        
         let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
         var courseList=[];
         console.log("query: ", req.query);
@@ -73,10 +72,12 @@ module.exports.announcement=async function(req,res){
         }
         // console.log(filterList);
         res.locals.user=await res.locals.user.populate('courses').execPopulate();
+        
         return res.render("announcements",{
             title:"Announcements",
             announcements:announcementsList,
             filterList:filterList
+        
         });  
     }
     catch(err){
@@ -84,7 +85,44 @@ module.exports.announcement=async function(req,res){
         return res.redirect('back');
     }
 }
-
+module.exports.getSubjects=async function(req,res){
+    var subjectList=[];
+    for(let classSubElement of res.locals.user.classSub){
+        subjectList.push(classSubElement.course);
+    }
+    if(req.xhr){
+        return res.status(200).json({
+            data:{
+                subjects:subjectList
+            },
+            message:"Post Deleted"
+        });
+    }
+    else{
+        return res.send("hi");
+    }
+}
+// module.exports.getClasses=async function(req,res){
+//     if(req.xhr){
+//         return res.status(200).json({
+            
+//         });
+//     }
+// }
+// module.exports.getGroups=async function(req,res){
+//     if(req.xhr){
+//         return res.status(200).json({
+            
+//         });
+//     }
+// }
+// module.exports.getSubGroups=async function(req,res){
+//     if(req.xhr){
+//         return res.status(200).json({
+            
+//         });
+//     }
+// }
 module.exports.announcementCreate=async function(req,res){
     console.log(req.body);
     try{
