@@ -81,7 +81,12 @@ subjectForm.addEventListener('click',function(e){
         cache:false,
         type:"GET",
         success:function(response){
-            console.log(response);
+            for(let obj of response.data.subjectsId){
+                    var opt = document.createElement('option');
+                    opt.value=obj.id,
+                    opt.innerText=obj.name,
+                    subjectForm.appendChild(opt);
+            }
         }
     })
     // console.log(subjectForm.value);

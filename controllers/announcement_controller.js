@@ -89,14 +89,14 @@ module.exports.getSubjects=async function(req,res){
     var subjectList=[];
   
     for(let classSubElement of res.locals.user.classSub){
-        let name=await CourseModel.findById(classSubElement.course).name;
+        let course=await CourseModel.findById(classSubElement.course);
         let id=classSubElement.course;
         var obj={
-            name:name,
+            name:course.name,
             id:id
         };
         
-        subjectsList.push(obj)
+        subjectList.push(obj)
 
     }
     if(req.xhr){
