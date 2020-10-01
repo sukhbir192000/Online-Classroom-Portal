@@ -1,4 +1,5 @@
 const AnnouncementsModel=require('../models/announcement');
+const CourseModel=require('../models/course');
    
 module.exports.announcement=async function(req,res){
     try{
@@ -51,7 +52,7 @@ module.exports.announcement=async function(req,res){
             filterList.sort="Latest First"
         }
         // console.log(filterList);
-        res.locals.user=await res.locals.user.populate('Courses').execPopulate();
+        res.locals.user=await res.locals.user.populate('courses').execPopulate();
         return res.render("announcements",{
             title:"Announcements",
             announcements:announcementsList,
