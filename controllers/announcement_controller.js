@@ -37,9 +37,25 @@ module.exports.announcement=async function(req,res){
         announcementsList.sort(function(a,b){
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
+        var filterList={
+            courseName:"",
+            sort:""
+        };
+        // console.log(req.query);
+        if(req.query.sub||req.query.date){
+            filterList.courseName=req.query.sub,
+            filterList.sort=req.query.date
+        }
+        else{
+            filterList.courseName="All",
+            filterList.sort="Latest First"
+        }
+        // console.log(filterList);
+        res.locals.user=await res.locals.user.populate('Courses').execPopulate();
         return res.render("announcements",{
             title:"Announcements",
-            announcements:announcementsList
+            announcements:announcementsList,
+            filterList:filterList
         });  
     }
     catch(err){

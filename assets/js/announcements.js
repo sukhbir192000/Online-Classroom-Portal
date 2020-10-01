@@ -110,3 +110,33 @@ document.addEventListener('mouseup',function(e){
          }
      }
  })
+
+//---------------- filters-------------- 
+
+
+
+
+
+
+var filterSubject=document.getElementsByClassName('filter_subject');
+for(let filterElement of filterSubject){
+    filterElement.addEventListener('click',function(e){
+        var subjectQUery=filterElement.innerText;
+        
+        var sortQuery=document.querySelectorAll(".filter_sort.selected")[0].innerText;
+        window.location.href="/content/announcements/?sub="+subjectQuery+"&date="+sortQuery;
+    });
+}
+var filterSort=document.getElementsByClassName('filter_sort');
+for(let filterElement of filterSort){
+    filterElement.addEventListener('click',function(e){
+        var sortQuery=filterElement.innerText;
+        var subjectQuery=document.querySelectorAll(".filter_subject.selected")[0].innerText;
+
+        window.location.href="/content/announcements/?sub="+subjectQuery+"&date="+sortQuery;
+    });
+}
+
+
+
+//-----------------filters-end---------------

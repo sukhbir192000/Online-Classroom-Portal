@@ -103,11 +103,10 @@
                 <div class="filter_heading">Subjects:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>All </li>
-                        <li>Computer Architecture and Organisation</li>
-                        <li>Embedded Systems</li>
-                        <li>Wireless Communication</li>
-                        <li>Advanced Communication</li>
+                        <li class="filter_subject<% if(filterList.courseName=="All"){ %> selected <% } %>" >All </li>
+                        <% for(let course of user.courses){ %>
+                            <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -115,8 +114,8 @@
                 <div class="filter_heading">Date:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>Ascending</li>
-                        <li>Descending</li>
+                        <li class="filter_sort<% if(filterList.sort=="Oldest First"){ %> selected <% } %>" >Oldest First</li>
+                        <li class="filter_sort<% if(filterList.sort=="Latest First"){ %> selected <% } %>" >Latest First</li>
                     </ul>
                 </div>
             </div>
