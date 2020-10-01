@@ -87,13 +87,23 @@ module.exports.announcement=async function(req,res){
 }
 module.exports.getSubjects=async function(req,res){
     var subjectList=[];
+  
     for(let classSubElement of res.locals.user.classSub){
-        subjectList.push(classSubElement.course);
+        let name=await CourseModel.findById(classSubElement.course).name;
+        let id=classSubElement.course;
+        var obj={
+            name:name,
+            id:id
+        };
+        
+        subjectsList.push(obj)
+
     }
     if(req.xhr){
         return res.status(200).json({
             data:{
-                subjects:subjectList
+                subjectsId:subjectList,
+            
             },
             message:"Post Deleted"
         });
