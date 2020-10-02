@@ -248,14 +248,26 @@ module.exports.getSubGroups=async function(req,res){
     }
 }
 module.exports.announcementCreate=async function(req,res){
-    console.log(req.body);
+    
     try{
+        var subjectList;
+        let user=res.local.user
+        if(req.body.subject=="All"){
+            for(let subjects of user.courseSub){
+                subjectList.push(subjects.course);
+            }
+            
+        }   
+        else{
+            subjectList.push(req.body.subject);
+        } 
+        
         
         let post=await AnnouncementsModel.create({
             title:req.body.title,
             content:req.body.message,
             classSub:{
-                course:,
+                course:"",
                 class:"5f6e2a1e78a45c07ec7d6a84",//req.body.branch,
                 
             }
@@ -266,14 +278,14 @@ module.exports.announcementCreate=async function(req,res){
         console.log("error while adding to Db announcements :",err);
         return res.redirect('back');    
     }
-    {
-        subject: '5f7474e8ed898e4664816678',
-        branch: '5f7439c114b9781df80b3c4f',
-        group: '5f746dde33b7d3478095bb02',
-        sub_group: 'All',
-        title: 'Hello Chlidren',
-        message: 'How are you?'
-      }
+    // {
+    //     subject: '5f7474e8ed898e4664816678',
+    //     branch: '5f7439c114b9781df80b3c4f',
+    //     group: '5f746dde33b7d3478095bb02',
+    //     sub_group: 'All',
+    //     title: 'Hello Chlidren',
+    //     message: 'How are you?'
+    //   }
 
     
 }
