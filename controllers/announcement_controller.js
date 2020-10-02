@@ -53,7 +53,37 @@ module.exports.announcement=async function(req,res){
             }
         }
         if(user.isAdmin){
-            announcementsList = await AnnouncementsModel.find({postedBy: user._id}).populate('classSub.course');
+            if(req.query.sub && req.query.sub!="All"){
+                if(req.query.branch!="All"){
+                    let courseId=await CourseModel.find({
+                        name:req.query.sub
+                    })._id;
+                    let classId=await ClassModel.find({
+                        stream:req.query.branch
+                    })._id;
+                    announcementsList = await AnnouncementsModel.find({
+                        postedBy: user._id,
+                        classSub:{
+                            course:courseId,
+                            class:classId,
+                        }
+                    }).populate('classSub.course');
+                }
+                else{
+                    let courseId=await CourseModel.find({
+                        name:req.query.sub
+                    })._id;
+                    announcementsList = await AnnouncementsModel.find({
+                        postedBy: user._id,
+                        classSub:{
+                            course:courseId
+                        }
+                    }).populate('classSub.course');
+                }
+            }
+            else{
+                announcementsList = await AnnouncementsModel.find({postedBy: user._id}).populate('classSub.course');
+            }
         }
         else{
             for(let course of courseList){
