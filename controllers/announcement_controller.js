@@ -60,7 +60,7 @@ module.exports.announcement=async function(req,res){
         }
         announcementsList.sort(function(a,b){
             return new Date(b.createdAt) - new Date(a.createdAt);
-          });
+        });
         var filterList={
             courseName:"",
             sort:""
@@ -250,28 +250,70 @@ module.exports.getSubGroups=async function(req,res){
 module.exports.announcementCreate=async function(req,res){
     
     try{
-        var subjectList;
-        let user=res.local.user
+        let user=res.locals.user
         if(req.body.subject=="All"){
-            for(let subjects of user.courseSub){
-                subjectList.push(subjects.course);
+            for(let subjects of user.classSub){
+                await AnnouncementsModel.create({
+                    title: req.body.title,
+                    content: req.body.message,
+                    classSub: subjects
+                })
             }
-            
-        }   
+        }
         else{
-            subjectList.push(req.body.subject);
-        } 
-        
-        
-        let post=await AnnouncementsModel.create({
-            title:req.body.title,
-            content:req.body.message,
-            classSub:{
-                course:"",
-                class:"5f6e2a1e78a45c07ec7d6a84",//req.body.branch,
-                
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                for(let classSubElement of user.classSub){
+                    if(subject==classSubElement.course){
+                        await AnnouncementsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: classSubElement
+                        })
+                    }
+                }
             }
-        });
+            else{
+                var branch = req.body.branch;
+                if(req.body.group == "All"){
+                    for(let classSubElement of user.classSub){
+                        if(subject==classSubElement.course && branch==classSubElement.class){
+                            await AnnouncementsModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: classSubElement
+                            })
+                        }
+                    }
+                }
+                else{
+                    var group = req.body.group;
+                    if(req.body.sub_group == "All"){
+                        for(let classSubElement of user.classSub){
+                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                                await AnnouncementsModel.create({
+                                    title: req.body.title,
+                                    content: req.body.message,
+                                    classSub: classSubElement
+                                })
+                            }
+                        }
+                    }
+                    else{
+                        await AnnouncementsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: {
+                                course: course,
+                                class: branch,
+                                group: group,
+                                subGroup: req.body.sub_group
+                            }
+                        })
+                    }
+                }
+            }
+        }
         return res.redirect('back')
     }
     catch(err){
