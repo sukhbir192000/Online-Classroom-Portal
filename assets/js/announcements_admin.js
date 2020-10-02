@@ -174,6 +174,28 @@ branchForm.addEventListener('change',function(e){
         groupForm.disabled=true;
         subGroupForm.disabled=true;
     }
+    if(branchForm.value!="All"){
+        $.ajax({
+            url:"/content/announcements/form/groups",
+            data: {course: subjectForm.value,class:branchForm.value},
+            cache:false,
+            type:"POST",
+            success:function(response){
+                console.log(response);
+                groupForm.innerText="";
+                var opt = document.createElement('option');
+                opt.value="All",
+                opt.innerText="All",
+                groupForm.appendChild(opt);
+                for(let obj of response.data.groupList){
+                    var opt = document.createElement('option');
+                    opt.value=obj.id,
+                    opt.innerText=obj.name,
+                    groupForm.appendChild(opt);
+                }
+            }
+        })
+    }
 })
 groupForm.addEventListener('change',function(e){
     if(groupForm.value!="All"){
