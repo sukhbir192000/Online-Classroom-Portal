@@ -11,7 +11,29 @@ function onlyUnique(value, index, self) {
 module.exports.announcement=async function(req,res){
     try{
         let user=res.locals.user;
-        
+        let courseFilterAdmin = []
+        if(user.isAdmin){
+            for(let classSubElement of user.classSub){
+                let course = await CourseModel.findById(classSubElement.course);
+                courseFilterAdmin.push(course);
+            }
+            let mymap = new Map();
+
+            courseFilterAdmin = courseFilterAdmin.filter(el => { 
+                const val = mymap.get(el.name);
+                if(val) { 
+                    if(el.id < val) { 
+                        mymap.delete(el.name); 
+                        mymap.set(el.name, el.id); 
+                        return true; 
+                    } else { 
+                        return false; 
+                    } 
+                } 
+                mymap.set(el.name, el.id); 
+                return true; 
+            });
+        }
         let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
         var courseList=[];
         if(!req.query.sub || req.query.sub=="All"){
@@ -30,46 +52,51 @@ module.exports.announcement=async function(req,res){
                 console.log("error in finding course ",err);
             }
         }
-        for(let course of courseList){
+        if(user.isAdmin){
+            announcementsList = await AnnouncementsModel.find({postedBy: user._id}).populate('classSub.course');
+        }
+        else{
+            for(let course of courseList){
 
-            let announcements=await AnnouncementsModel.find({
-                $and: [
-                    {
-                        "classSub.course":course,
-                        "classSub.class":user.class
-                    },
-                    {
-                        $or: [
-                            {"classSub.group": undefined},
-                            {
-                                $and: [
-                                    {"classSub.group": user.group},
-                                    {$or: [
-                                        {"classSub.subGroup": undefined},
-                                        {"classSub.subGroup": user.subGroup}
-                                    ]}
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }).populate('classSub.course');
-            if(announcements.length>0){
-                // announcements = await announcements.populate('classSub.course').execPopulate();
-                announcementsList = announcementsList.concat(announcements);
+                let announcements=await AnnouncementsModel.find({
+                    $and: [
+                        {
+                            "classSub.course":course,
+                            "classSub.class":user.class
+                        },
+                        {
+                            $or: [
+                                {"classSub.group": undefined},
+                                {
+                                    $and: [
+                                        {"classSub.group": user.group},
+                                        {$or: [
+                                            {"classSub.subGroup": undefined},
+                                            {"classSub.subGroup": user.subGroup}
+                                        ]}
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }).populate('classSub.course');
+                if(announcements.length>0){
+                    // announcements = await announcements.populate('classSub.course').execPopulate();
+                    announcementsList = announcementsList.concat(announcements);
+                }
             }
         }
+        
         if(!req.query.date || req.query.date=="Latest First"){
             announcementsList.sort(function(a,b){
                 return new Date(b.createdAt) - new Date(a.createdAt);
-            });   
+            });
         }
         else{
             announcementsList.sort(function(a,b){
                 return new Date(a.createdAt) - new Date(b.createdAt);
             });   
         }
-        console.log(announcementsList);
         var filterList={
             courseName:"",
             sort:"",
@@ -86,14 +113,42 @@ module.exports.announcement=async function(req,res){
             filterList.sort="Latest First",
             filterList.branch="All"
         }
-        console.log(filterList);
-        res.locals.user=await res.locals.user.populate('courses').execPopulate();
-        
+        // res.locals.user=await res.locals.user.populate('courses').execPopulate();
+        branchList=[]
+        if(req.query.sub && req.query.sub!="All"){
+            for(let classSubElement of user.classSub){
+                let course = await CourseModel.findById(classSubElement.course);
+                if(course.name == req.query.sub){
+                    let branch = await ClassModel.findById(classSubElement.class);
+                    branchList.push(branch);
+                }
+            }
+        }
+        else{
+            filterList.branch="All"
+        }
+        let mymap = new Map();
+
+        branchList = branchList.filter(el => { 
+            const val = mymap.get(el.name);
+            if(val) { 
+                if(el.id < val) { 
+                    mymap.delete(el.name); 
+                    mymap.set(el.name, el.id); 
+                    return true; 
+                } else { 
+                    return false; 
+                } 
+            } 
+            mymap.set(el.name, el.id); 
+            return true; 
+        });
         return res.render("announcements",{
             title:"Announcements",
             announcements:announcementsList,
-            filterList:filterList
-        
+            filterList:filterList,
+            courseFilters:courseFilterAdmin,
+            branchList: branchList
         });  
     }
     catch(err){
@@ -268,7 +323,8 @@ module.exports.announcementCreate=async function(req,res){
                 await AnnouncementsModel.create({
                     title: req.body.title,
                     content: req.body.message,
-                    classSub: subjects
+                    classSub: subjects,
+                    postedBy: user._id
                 })
             }
         }
@@ -280,7 +336,8 @@ module.exports.announcementCreate=async function(req,res){
                         await AnnouncementsModel.create({
                             title: req.body.title,
                             content: req.body.message,
-                            classSub: classSubElement
+                            classSub: classSubElement,
+                            postedBy: user._id
                         })
                     }
                 }
@@ -293,7 +350,8 @@ module.exports.announcementCreate=async function(req,res){
                             await AnnouncementsModel.create({
                                 title: req.body.title,
                                 content: req.body.message,
-                                classSub: classSubElement
+                                classSub: classSubElement,
+                                postedBy: user._id
                             })
                         }
                     }
@@ -306,7 +364,8 @@ module.exports.announcementCreate=async function(req,res){
                                 await AnnouncementsModel.create({
                                     title: req.body.title,
                                     content: req.body.message,
-                                    classSub: classSubElement
+                                    classSub: classSubElement,
+                                    postedBy: user._id
                                 })
                             }
                         }
@@ -319,13 +378,15 @@ module.exports.announcementCreate=async function(req,res){
                                 course: course,
                                 class: branch,
                                 group: group,
-                                subGroup: req.body.sub_group
+                                subGroup: req.body.sub_group,
+                                postedBy: user._id
                             }
                         })
                     }
                 }
             }
         }
+        req.flash('success', 'Posted Announcement');
         return res.redirect('back')
     }
     catch(err){

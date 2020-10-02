@@ -100,8 +100,14 @@
                 <div class="filter_content">
                     <ul class="list">
                         <li class="filter_subject<% if(filterList.courseName=="All"){ %> selected <% } %>" >All </li>
-                        <% for(let course of user.courses){ %>
-                            <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                        <% if(user.isAdmin){ %>
+                            <% for(let course of courseFilters){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
+                        <% }else{ %>
+                            <% for(let course of user.courses){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
                         <% } %>
                     </ul>
                 </div>
@@ -122,13 +128,13 @@
                         <ul class="list">
                             <!-- <% console.log(filterList)%> -->
                             <li class="filter_branch<% if(filterList.branch=="All"){ %> selected <% } %>" >All </li>
-                            <% for(let course of user.classSub){ %>
-                                <li class="filter_branch<% if(filterList.branch==course.class.name){ %> selected <% } %>" ><%=course.class.name%></li>
+                            <% for(let branch of branchList){ %>
+                                <li class="filter_branch<% if(filterList.branch==branch.stream){ %> selected <% } %>" ><%=branch.stream%></li>
                             <% } %> 
                         </ul>
                     </div>
                 </div>
-            <% } %>         
+            <% } %>
         </div>    
     </div>
     <div class="sidebar">

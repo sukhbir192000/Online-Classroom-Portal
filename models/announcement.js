@@ -9,7 +9,11 @@ const announcementSchema = new mongoose.Schema({
     content: {
         type: String
     },
-    classSub: classSubSchema
+    classSub: classSubSchema,
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, {
     timestamps: true
 });
