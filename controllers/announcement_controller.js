@@ -57,32 +57,42 @@ module.exports.announcement=async function(req,res){
                 if(req.query.branch!="All"){
                     let courseId=await CourseModel.find({
                         name:req.query.sub
-                    })._id;
+                    });
+                    courseId = courseId[0]._id;
                     let classId=await ClassModel.find({
                         stream:req.query.branch
-                    })._id;
+                    });
+                    classId = classId[0]._id;
                     announcementsList = await AnnouncementsModel.find({
                         postedBy: user._id,
-                        classSub:{
-                            course:courseId,
-                            class:classId,
-                        }
-                    }).populate('classSub.course');
+                        "classSub.course":courseId,
+                        "classSub.class":classId
+                    }).populate('classSub.course')
+                    .populate('classSub.class')
+                    .populate('classSub.group')
+                    .populate('classSub.subGroup');
                 }
                 else{
                     let courseId=await CourseModel.find({
                         name:req.query.sub
-                    })._id;
+                    });
+                    courseId = courseId[0]._id;
                     announcementsList = await AnnouncementsModel.find({
                         postedBy: user._id,
-                        classSub:{
-                            course:courseId
-                        }
-                    }).populate('classSub.course');
+                        "classSub.course": courseId
+                    })
+                    .populate('classSub.course')
+                    .populate('classSub.class')
+                    .populate('classSub.group')
+                    .populate('classSub.subGroup');
                 }
             }
             else{
-                announcementsList = await AnnouncementsModel.find({postedBy: user._id}).populate('classSub.course');
+                announcementsList = await AnnouncementsModel.find({postedBy: user._id})
+                .populate('classSub.course')
+                .populate('classSub.class')
+                .populate('classSub.group')
+                .populate('classSub.subGroup');
             }
         }
         else{
@@ -416,33 +426,33 @@ module.exports.announcementCreate=async function(req,res){
                 }
             }
         }
-        req.flash('success', 'Posted Announcement');
+        req.flash('success', 'Announcement Posted');
         return res.redirect('back')
     }
     catch(err){
         console.log("error while adding to Db announcements :",err);
         return res.redirect('back');    
     }
-    // {
-    //     subject: '5f7474e8ed898e4664816678',
-    //     branch: '5f7439c114b9781df80b3c4f',
-    //     group: '5f746dde33b7d3478095bb02',
-    //     sub_group: 'All',
-    //     title: 'Hello Chlidren',
-    //     message: 'How are you?'
-    //   }
-
-    
 }
+
+module.exports.announcementUpdate=async function(req,res){
+    await AnnouncementsModel.findByIdAndUpdate(req.params.announcementId,{
+        $set: {
+            title: req.body.title,
+            content: req.body.description
+        }
+    });
+    return res.redirect('back');
+};
+
 module.exports.announcementDelete=function(req,res){
-    console.log(req.params.id);
     AnnouncementsModel.findByIdAndDelete(req.params.id,function(err){
         if(err){
             console.log("error while deleting announcement :",err);
             return res.redirect('back');
         }
         else{
-            console.log("deleted Announcement");
+            req.flash('success', 'Announcement Deleted');
             return res.redirect('back');
         }
     })

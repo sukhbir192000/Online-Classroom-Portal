@@ -10,19 +10,15 @@ for(let i=0;i<boxelements.length;i++){
             var savebutton =current_box.children[1].children[0].children[5].children[1].children[0];
             var title = current_box.children[0].children[1];
             var description = current_box.children[1].children[0].children[3];
-            var subject = current_box.children[0].children[0];
             title.contentEditable="false";
-            subject.contentEditable="false";
             description.contentEditable="false";
             title.classList.remove("heading_edit");
-            subject.classList.remove("heading_edit")
             description.classList.remove("content_edit")
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
             savebutton.classList.remove("show");
             title.textContent=arr[0];
             description.textContent=arr[1];
-            subject.textContent=arr[2];
             current_box=null;
             arr=[];
         }
@@ -31,25 +27,21 @@ for(let i=0;i<boxelements.length;i++){
         var savebutton = boxelements[i].children[1].children[0].children[5].children[1].children[0];
         var title = boxelements[i].children[0].children[1];
         var description = boxelements[i].children[1].children[0].children[3];
-        var subject = boxelements[i].children[0].children[0];
         arr.push(title.textContent);
         arr.push(description.textContent);
-        arr.push(subject.textContent);
         title.contentEditable="true";
-        subject.contentEditable="true";
         description.contentEditable="true";
         title.classList.add("heading_edit");
-        subject.classList.add("heading_edit")
         description.classList.add("content_edit")
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
         current_box=boxelements[i];
         savebutton.addEventListener('click',function(e){
-            current_box.children[1].children[0].children[2].children[1].children[1].children[1].setAttribute('value',arr[0]);
-            current_box.children[1].children[0].children[2].children[1].children[1].children[2].setAttribute('value',arr[1]);
-            current_box.children[1].children[0].children[2].children[1].children[1].children[0].setAttribute('value',arr[2]);
-            current_box.children[1].children[0].children[2].children[1].children[1].submit();
+            console.log("hiii");
+            current_box.children[1].children[0].children[5].children[1].children[1].children[1].setAttribute('value',title.textContent);
+            current_box.children[1].children[0].children[5].children[1].children[1].children[2].setAttribute('value',description.textContent);
+            current_box.children[1].children[0].children[5].children[1].children[1].submit();
         })
     })   
 }
@@ -64,19 +56,15 @@ document.addEventListener('click',function(e){
             var deletebutton = current_box.children[1].children[0].children[5].children[0].children[1];
             var title = current_box.children[0].children[1];
             var description = current_box.children[1].children[0].children[3];
-            var subject = current_box.children[0].children[0];
             title.contentEditable="false";
-            subject.contentEditable="false";
             description.contentEditable="false";
             title.classList.remove("heading_edit");
-            subject.classList.remove("heading_edit")
             description.classList.remove("content_edit")
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
             savebutton.classList.remove("show");
             title.textContent=arr[0];
             description.textContent=arr[1];
-            subject.textContent=arr[2];
             current_box=null;
             arr=[];
         }
