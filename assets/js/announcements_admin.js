@@ -125,19 +125,16 @@ addButton.addEventListener('click',function(e){
     })
 })
 subjectForm.addEventListener('change',function(e){
-   
-    // console.log(subjectForm.value);
+    branchForm.selectedIndex=0;
+    groupForm.selectedIndex=0;
+    subGroupForm.selectedIndex=0;
+    groupForm.disabled=true;
+    subGroupForm.disabled=true;
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
     }
     else{
-        branchForm.selectedIndex=0;
-        groupForm.selectedIndex=0;
-        subGroupForm.selectedIndex=0;
         branchForm.disabled=true;
-        groupForm.disabled=true;
-        subGroupForm.disabled=true;
-
     }
     if(subjectForm.value!="All"){
         $.ajax({
@@ -146,7 +143,6 @@ subjectForm.addEventListener('change',function(e){
             cache:false,
             type:"POST",
             success:function(response){
-                console.log(response);
                 branchForm.innerText="";
                 var opt = document.createElement('option');
                 opt.value="All",
@@ -164,15 +160,14 @@ subjectForm.addEventListener('change',function(e){
 })
 // ---------------------
 branchForm.addEventListener('change',function(e){
-    
+    groupForm.selectedIndex=0;
+    subGroupForm.selectedIndex=0;
+    subGroupForm.disabled=true;
     if(branchForm.value!="All"){
         groupForm.disabled=false;
     }
     else{
-        groupForm.selectedIndex=0;
-        subGroupForm.selectedIndex=0;
         groupForm.disabled=true;
-        subGroupForm.disabled=true;
     }
     if(branchForm.value!="All"){
         $.ajax({
@@ -181,7 +176,6 @@ branchForm.addEventListener('change',function(e){
             cache:false,
             type:"POST",
             success:function(response){
-                console.log(response);
                 groupForm.innerText="";
                 var opt = document.createElement('option');
                 opt.value="All",
@@ -198,11 +192,30 @@ branchForm.addEventListener('change',function(e){
     }
 })
 groupForm.addEventListener('change',function(e){
+    subGroupForm.selectedIndex=0;
     if(groupForm.value!="All"){
         subGroupForm.disabled=false;
+        $.ajax({
+            url:"/content/announcements/form/subGroups",
+            data: {course: subjectForm.value,class:branchForm.value,group:groupForm.value},
+            cache:false,
+            type:"POST",
+            success:function(response){
+                subGroupForm.innerText="";
+                var opt = document.createElement('option');
+                opt.value="All",
+                opt.innerText="All",
+                subGroupForm.appendChild(opt);
+                for(let obj of response.data.subGroupList){
+                    var opt = document.createElement('option');
+                    opt.value=obj.id,
+                    opt.innerText=obj.name,
+                    subGroupForm.appendChild(opt);
+                }
+            }
+        })
     }
     else{
-        subGroupForm.selectedIndex=0;
         subGroupForm.disabled=true;
     }
 })

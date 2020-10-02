@@ -2,6 +2,11 @@ const AnnouncementsModel=require('../models/announcement');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
+const SubGroupModel=require('../models/sub-group');
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}  
    
 module.exports.announcement=async function(req,res){
     try{
@@ -9,7 +14,6 @@ module.exports.announcement=async function(req,res){
         
         let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
         var courseList=[];
-        console.log("query: ", req.query);
         if(!req.query.sub || req.query.sub=="All"){
             courseList=courseList.concat(user.courses);
         }
@@ -18,7 +22,6 @@ module.exports.announcement=async function(req,res){
                 let coursefind=await CourseModel.find({
                     name:req.query.sub
                 });
-                // console.log(coursefind);
                 if(coursefind.length!=0){
                     courseList.push(coursefind[0]._id);
                 }
@@ -101,6 +104,22 @@ module.exports.getSubjects=async function(req,res){
 
     }
     if(req.xhr){
+        let mymap = new Map(); 
+
+        subjectList = subjectList.filter(el => { 
+            const val = mymap.get(el.name);
+            if(val) { 
+                if(el.id < val) { 
+                    mymap.delete(el.name); 
+                    mymap.set(el.name, el.id); 
+                    return true; 
+                } else { 
+                    return false; 
+                } 
+            } 
+            mymap.set(el.name, el.id); 
+            return true; 
+        });
         return res.status(200).json({
             data:{
                 subjectsId:subjectList,
@@ -120,15 +139,29 @@ module.exports.getBranches=async function(req,res){
         let branchList = [];
         for(let classSub of user.classSub){
             if(classSub.course == req.body.course){
-                console.log("id: ",classSub.class);
                 var branchElement = await ClassModel.findById(classSub.class);
-                console.log(branchElement);
                 branchList.push({
                     id: classSub.class,
                     name: branchElement.stream
                 })
             }
         }
+        let mymap = new Map(); 
+
+        branchList = branchList.filter(el => { 
+            const val = mymap.get(el.name);
+            if(val) { 
+                if(el.id < val) { 
+                    mymap.delete(el.name); 
+                    mymap.set(el.name, el.id); 
+                    return true; 
+                } else { 
+                    return false; 
+                } 
+            } 
+            mymap.set(el.name, el.id); 
+            return true; 
+        });
         return res.status(200).json({
             data:{
                 branchList:branchList
@@ -144,15 +177,29 @@ module.exports.getGroups=async function(req,res){
         for(let classSub of user.classSub){
             if(classSub.course == req.body.course && req.body.class==classSub.class){
 
-                console.log("id: ",classSub.class);
                 var groupElement = await GroupModel.findById(classSub.group);
-                console.log(groupElement);
                 groupList.push({
                     id: classSub.group,
                     name: groupElement.groupNumber
                 })
             }
         }
+        let mymap = new Map(); 
+
+        groupList = groupList.filter(el => { 
+            const val = mymap.get(el.name);
+            if(val) { 
+                if(el.id < val) { 
+                    mymap.delete(el.name); 
+                    mymap.set(el.name, el.id); 
+                    return true; 
+                } else { 
+                    return false; 
+                } 
+            } 
+            mymap.set(el.name, el.id); 
+            return true; 
+        });
         return res.status(200).json({
             data:{
                 groupList:groupList
@@ -163,8 +210,40 @@ module.exports.getGroups=async function(req,res){
 }
 module.exports.getSubGroups=async function(req,res){
     if(req.xhr){
+        let user = res.locals.user;
+        let subGroupList = [];
+        for(let classSub of user.classSub){
+            if(classSub.course == req.body.course && req.body.class==classSub.class && req.body.group==classSub.group){
+                if(classSub.subGroup){
+                    var subGroupElement = await SubGroupModel.findById(classSub.subGroup);
+                    subGroupList.push({
+                        id: classSub.subGroup,
+                        name: subGroupElement.subGroupNumber
+                    })
+                }
+            }
+        }
+        let mymap = new Map(); 
+
+        subGroupList = subGroupList.filter(el => { 
+            const val = mymap.get(el.name);
+            if(val) { 
+                if(el.id < val) { 
+                    mymap.delete(el.name); 
+                    mymap.set(el.name, el.id); 
+                    return true; 
+                } else { 
+                    return false; 
+                } 
+            } 
+            mymap.set(el.name, el.id); 
+            return true; 
+        });
         return res.status(200).json({
-            
+            data:{
+                subGroupList:subGroupList
+            },
+            message:"Sub-groups Sent"
         });
     }
 }
@@ -176,7 +255,7 @@ module.exports.announcementCreate=async function(req,res){
             title:req.body.title,
             content:req.body.message,
             classSub:{
-                course:"5f6e2a1e78a45c07ec7d6a84",
+                course:,
                 class:"5f6e2a1e78a45c07ec7d6a84",//req.body.branch,
                 
             }
@@ -187,6 +266,14 @@ module.exports.announcementCreate=async function(req,res){
         console.log("error while adding to Db announcements :",err);
         return res.redirect('back');    
     }
+    {
+        subject: '5f7474e8ed898e4664816678',
+        branch: '5f7439c114b9781df80b3c4f',
+        group: '5f746dde33b7d3478095bb02',
+        sub_group: 'All',
+        title: 'Hello Chlidren',
+        message: 'How are you?'
+      }
 
     
 }

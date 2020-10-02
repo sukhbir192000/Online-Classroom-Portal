@@ -10,4 +10,5 @@ Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelet
 Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);
 Router.post('/form/branches',passport.checkAdmin,contentController.getBranches);
 Router.post('/form/groups',passport.checkAdmin,contentController.getGroups);
+Router.post('/form/subGroups',passport.checkAdmin,contentController.getSubGroups);
 module.exports = Router;
