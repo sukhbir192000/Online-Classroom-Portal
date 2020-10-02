@@ -11,3 +11,15 @@
 .footer_content{
     padding: 0.1em 0;
 }
+
+@media(min-width: 767px) and (max-width: 991px){
+    .footer_content{
+        font-size: 0.8em;
+    }
+}
+
+@media(max-width: 767px){
+    .footer_content{
+        font-size: 0.7em;
+    }
+}

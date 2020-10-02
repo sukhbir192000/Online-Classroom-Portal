@@ -48,17 +48,6 @@
     transition: all 0.3s;
 }
 
-.navbar a:active{
-    background-color: white;
-}
-
-.navbar a:active .nav_content{
-    color: #1D3557;
-}
-
-.navbar a:active .nav_icon{
-    color:#1D3557;
-}
 
 #black_screen{
     transition: all 0.3s;
@@ -74,6 +63,19 @@
     opacity:0.5;
     background-color: black;
 }
+
+.navbar a:active{
+    background-color: white;
+}
+
+.navbar a:active .nav_content{
+    color: #1D3557;
+}
+
+.navbar a:active .nav_icon{
+    color:#1D3557;
+}
+
 
 .navbar a:target{
     background-color: #F1FAEE;
@@ -113,7 +115,8 @@
         display: flex;
         flex-direction: column;
         z-index:7;
-        transition: all 0.3s ;  
+        transition: all 0.3s ; 
+        padding-bottom: 8em; 
     }
     .nav_icon{
         padding: 1.1em 0.8em;
@@ -159,6 +162,7 @@
         flex-direction: column;
         z-index:7;
         transition: ease 0.3s ;
+        padding-bottom: 8em;
     }  
     .nav_icon{
         padding: 1.1em 0.8em;
