@@ -1,7 +1,7 @@
 const AnnouncementsModel=require('../models/announcement');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
-
+const GroupModel=require('../models/group');
    
 module.exports.announcement=async function(req,res){
     try{
@@ -137,20 +137,37 @@ module.exports.getBranches=async function(req,res){
         });
     }
 }
-// module.exports.getGroups=async function(req,res){
-//     if(req.xhr){
-//         return res.status(200).json({
+module.exports.getGroups=async function(req,res){
+    if(req.xhr){
+        let user = res.locals.user;
+        let groupList = [];
+        for(let classSub of user.classSub){
+            if(classSub.course == req.body.course && req.body.class==classSub.class){
+
+                console.log("id: ",classSub.class);
+                var groupElement = await GroupModel.findById(classSub.group);
+                console.log(groupElement);
+                groupList.push({
+                    id: classSub.group,
+                    name: groupElement.groupNumber
+                })
+            }
+        }
+        return res.status(200).json({
+            data:{
+                groupList:groupList
+            },
+            message:"Subjects Sent"
+        });
+    }
+}
+module.exports.getSubGroups=async function(req,res){
+    if(req.xhr){
+        return res.status(200).json({
             
-//         });
-//     }
-// }
-// module.exports.getSubGroups=async function(req,res){
-//     if(req.xhr){
-//         return res.status(200).json({
-            
-//         });
-//     }
-// }
+        });
+    }
+}
 module.exports.announcementCreate=async function(req,res){
     console.log(req.body);
     try{
