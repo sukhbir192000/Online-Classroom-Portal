@@ -120,10 +120,11 @@
                     <div class="filter_heading">Branch</div>
                     <div class="filter_content">
                         <ul class="list">
-                            <li>ECE-1st Year</li>
-                            <li>CSE-1st Year</li>
-                            <li>EE-1st Year</li>
-                            <li>CSE-2nd Year</li>
+                            <!-- <% console.log(filterList)%> -->
+                            <li class="filter_branch<% if(filterList.branch=="All"){ %> selected <% } %>" >All </li>
+                            <% for(let course of user.classSub){ %>
+                                <li class="filter_branch<% if(filterList.branch==course.class.name){ %> selected <% } %>" ><%=course.class.name%></li>
+                            <% } %> 
                         </ul>
                     </div>
                 </div>
@@ -170,5 +171,8 @@
     
 <script src="/js/announcements.js"></script>
 <% if(user.isAdmin){ %>
+    <script src="/js/announcement_admin_filter.js"></script>
     <script src="/js/announcements_admin.js"></script>
+<% }else{ %>
+    <script src="/js/announcement_filter.js"></script>
 <% } %>

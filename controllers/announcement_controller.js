@@ -72,18 +72,21 @@ module.exports.announcement=async function(req,res){
         console.log(announcementsList);
         var filterList={
             courseName:"",
-            sort:""
+            sort:"",
+            branch:""
         };
         // console.log(req.query);
         if(req.query.sub||req.query.date){
             filterList.courseName=req.query.sub,
             filterList.sort=req.query.date
+            filterList.branch=req.query.branch
         }
         else{
             filterList.courseName="All",
-            filterList.sort="Latest First"
+            filterList.sort="Latest First",
+            filterList.branch="All"
         }
-        // console.log(filterList);
+        console.log(filterList);
         res.locals.user=await res.locals.user.populate('courses').execPopulate();
         
         return res.render("announcements",{
