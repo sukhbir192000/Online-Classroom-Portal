@@ -53,14 +53,22 @@ module.exports.announcement=async function(req,res){
                         ]
                     }
                 ]
-            });
+            })
             if(announcements.length>0){
                 announcementsList = announcementsList.concat(announcements);
             }
         }
-        announcementsList.sort(function(a,b){
-            return new Date(b.createdAt) - new Date(a.createdAt);
-        });
+        if(req.query.sort=="Oldest First"){
+            announcementsList.sort(function(a,b){
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });   
+        }
+        else{
+            announcementsList.sort(function(a,b){
+                return new Date(a.createdAt) - new Date(b.createdAt);
+            });   
+        }
+        
         var filterList={
             courseName:"",
             sort:""
