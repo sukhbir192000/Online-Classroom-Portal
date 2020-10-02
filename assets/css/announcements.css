@@ -18,7 +18,7 @@ body{
 }
 
 
-/* HEADER */
+/* HEADER
 .header{
     position: sticky;
     top: 0;
@@ -93,9 +93,9 @@ body{
 .profile>div:hover{
     background-color: #1D3557;
     color:white;
-}
+} */
 
-/* NAVIGATION BAR */
+/* NAVIGATION BAR
 .navbar{
     height: 100vh;
     position: fixed;
@@ -194,7 +194,7 @@ body{
 .navbar::-webkit-scrollbar-thumb {
     background-color: rgb(189, 187, 187);    
     border-radius: 20px;        
-}
+} */
 
 
 /* MAIN */
@@ -279,7 +279,7 @@ body{
 .subject{
     font-weight: 600;
     color: #F1FAEE;
-    font-size: 1.4em;
+    font-size: 1.2em;
     overflow-wrap: break-word;
 }
 
@@ -307,10 +307,14 @@ body{
     font-size: 0.95em;
     overflow-wrap: break-word;
 }
-
+.branch_admin, .group_admin, .sub_group_admin{
+    padding-top:0.5em;
+    font-size: 0.9em;
+    overflow-wrap: break-word;
+}
 .date_posted{
     font-size: 0.8em;
-    padding-top:0.5em;
+    padding-top:0.7em;
     font-style: italic;
     overflow-wrap: break-word;
 }
@@ -319,6 +323,9 @@ body{
 }
 .hide{
     display: none;
+}
+.showx{
+    display: flex;
 }
 .buttons{
     display: flex;
@@ -335,13 +342,13 @@ body{
 .edit{
     margin-left:0.2em;
     margin-right:1em;
-    font-size: 1.2em;
+    font-size: 1.4em;
     cursor: pointer;
     visibility: visible;
 }
 
 .delete{
-    font-size: 1.2em;
+    font-size: 1.4em;
     cursor:pointer;
     visibility: visible;
 }
@@ -355,7 +362,7 @@ body{
 .savechanges{
     margin-left:0.2em;
     margin-right:1em;
-    font-size: 1.4em;
+    font-size: 1.6em;
     cursor: pointer;
     visibility: hidden;
 }
@@ -366,34 +373,102 @@ body{
     text-align: left;
     display: flex;
     flex-direction: row;
-    background-color:white; 
-    border: 1px solid black;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
     align-items: center;
     justify-content: center;
     box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
 }
 .add_content{
     padding: 0.5em;
     font-size: 1.1em;
     font-weight: 600;
     text-transform: uppercase;
-    color: #1D3557;
+    color: white;
+    user-select: none;
 }
 .add_icon{
     padding-left:0.5em;
     font-size: 1.1em;
+    color: white;
 }
 .add_admin{
     margin:1em 1.5em;
-    border:1px solid black;
+    border:1px solid #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
     padding: 0.8em;
+    display: none;
+    width:92%;
+}
+select option{
+    max-height:2em;
+}
+#subject{
+    margin-left: 2.9em;
+}
+#branch{
+    margin-left: 3.2em;
+}
+#group{
+    margin-left: 0.37em;
+}
+#sub_group{
+    margin-left: 1.38em;
 }
 input,textarea{
-    width:95%;
+    width:60vw;
     overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+.heading_edit{
+    background-color: #e3d8d8;
+    border:1px black solid;
+    color: black;
+}
+.content_edit{
+    background-color: #efefef;
+    border:1px black solid;
+    color: black;
+}
+.show{
+    visibility: visible;
+}
+.hide{
+    display: none;
+}
+.showx{
+    display: flex;
 }
 
-/* FOOTER */
+
+/* FOOTER
 .footer{
     display: flex;
     flex-direction: row;
@@ -406,7 +481,7 @@ input,textarea{
 } 
 .footer_content{
     padding: 0.1em 0;
-}
+} */
 
 
 
@@ -433,8 +508,10 @@ input,textarea{
      cursor: pointer;        
  }
 .selected{
-    background-color:#d62648;
+    background-color:#1D3557;
     color:white;
+    border-radius: 10px;
+    box-shadow: 0.01em 0.01em 0.5em grey;
 }
 .filters:hover{
     overflow-y: auto;
@@ -488,14 +565,14 @@ li:hover{
     height: auto;
     max-height: 70vh;
     position: fixed;
-    top:10.5em;
+    top:15em;
     right:1em;
     display: flex;
     flex-direction: column;
     z-index:4;
     overflow-y:auto;
     width:24%;
-    padding: 0 1em 0 3em;
+    padding: 0 1em 5em 3em;
     box-sizing: border-box;
     padding-bottom: 3em;
 }
@@ -553,7 +630,7 @@ li:hover{
 
 /* For tablet devices */
 @media(min-width: 767px) and (max-width: 991px){
-    /* HEADER */
+    /* HEADER
     .banner_content{
         font-size: 1em;
     }
@@ -579,12 +656,12 @@ li:hover{
         font-size: 1.5em;
         display: flex;
         padding: 0.2em 1em;
-    }
+    } */
 
-    /* FOOTER */
+    /* FOOTER
     .footer_content{
         font-size: 0.8em;
-    }
+    } */
 
     
     /* FILTERS */
@@ -638,9 +715,12 @@ li:hover{
     .show{
         visibility: visible;
     }
+    input, textarea{
+        width:80vw;
+    }
 
 
-    /* NAVIGATION BAR */
+    /* NAVIGATION BAR
     .navbar{
         width:0;
         overflow: hidden;
@@ -683,7 +763,7 @@ li:hover{
         z-index:5;
         opacity:0.5;
         background-color: black;
-    }
+    } */
 
     /* SIDEBAR */
     .sidebar{
@@ -693,7 +773,7 @@ li:hover{
 
 /* For mobile devices */
 @media(max-width: 767px){
-    /* HEADER */
+    /* HEADER
     .banner_content{
         font-size:0.8em;
     }
@@ -723,10 +803,10 @@ li:hover{
         font-size: 1.5em;
         display: flex;
         padding: 0.2em 0.5em;
-    }
+    } */
 
 
-    /* NAVIGATION BAR */
+    /* NAVIGATION BAR
     .navbar{
         width:0;
         overflow: hidden;
@@ -767,7 +847,7 @@ li:hover{
         opacity:0.5;
         background-color: black;
     }
-    
+     */
 
     /* FILTERS */
     .filters{
@@ -843,12 +923,26 @@ li:hover{
     .date_posted{
         font-size: 0.7em;
     }
+    .add{
+        margin-left: 0.01em;
+    }
+    .add_admin{
+        margin-left: 0.01em;
+        width:89%;
+    }
+    input, textarea{
+        width:80vw;
+    }
+    #subject{
+        margin-top: 0.7em;
+        margin-left: 0;
+    }
     
 
-    /* FOOTER */
+    /* FOOTER
     .footer_content{
         font-size: 0.7em;
-    }
+    } */
 
 
 

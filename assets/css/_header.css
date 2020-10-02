@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
     padding-right: 2em;
 }
 .hamburger_icon{
@@ -26,6 +27,7 @@
     display: flex;
     padding-right:1em;
     padding-top:0.2em;
+    padding-bottom: 0.2em;
     font-size: 1.7em;
     cursor: pointer;
 }
@@ -54,7 +56,7 @@
     visibility: hidden;
     position: fixed;
     top:2.5em;
-    right:3em;
+    right:3.6em;
     width:auto;
     display: flex;
     flex-direction: column;
@@ -135,6 +137,7 @@
     }
     .profile{
         top:2em;
+        right:3.2em;
     }
     .profile>div{
         font-size: 0.9em;

@@ -38,26 +38,25 @@
                             <label for="branch">Branch:</label>
                             <select id="branch" name="branch">
                                 <option value="All">All</option>
-                                <option value="Not All">Not All</option>
                                  <!-- add all branches related to teacher here -->
                             </select><br><br>
                             <label for="group">Class Group:</label>
                             <select id="group" name="group">
                                 <option value="All">All</option>
-                                <option value="Not All">Not All</option>
                                  <!-- add all groups related to teacher here -->
                             </select><br><br>
                             <label for="sub_group">Lab Group:</label>
                             <select id="sub_group" name="sub_group" >
                                 <option value="All">All</option>
-                                <option value="Not All">Not All</option>
                                  <!-- add all subgroups related to teacher here -->
                             </select><br><br>
                             <!-- <label for="title">Title:</label> -->
                             <input type="text" name="title" placeholder="Enter the title" ></textarea><br><br>
                             <!-- <label for="message">Message:</label> -->
                             <textarea name="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
-                            <button type="submit">Submit</button>
+                            <div class="submit_button">
+                                <button type="submit">Submit</button>
+                            </div>
                         </form>
                     </div>
                 <% } %>
@@ -69,7 +68,12 @@
                             <div class="title"><%= announcement.title %></div>
                         </div>
                         <div class="box_content">  
-                            <div class="box_content_details">                    
+                            <div class="box_content_details">
+                                <% if(user.isAdmin){ %>
+                                    <div class="branch_admin"><b>Branch: ECE-1st Year FIX THIS</b></div>
+                                    <div class="group_admin"><b>Class Group: 2 FIX THIS</b></div>
+                                    <div class="sub_group_admin"><b>Lab Group: All FIX THIS</b></div>
+                                <% } %>      
                                 <div class="description"><%= announcement.content %></div>
                                 <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(announcement.createdAt) %></div>
                                 <% if(user.isAdmin){ %>
@@ -111,10 +115,44 @@
                     </ul>
                 </div>
             </div>
-            
-        </div>
-        
-
+            <% if(user.isAdmin){ %>
+                <div class="filter_name">
+                    <div class="filter_heading">Branch</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>ECE-1st Year</li>
+                            <li>CSE-1st Year</li>
+                            <li>EE-1st Year</li>
+                            <li>CSE-2nd Year</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter_name">
+                    <div class="filter_heading">Class Group</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>All</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter_name">
+                    <div class="filter_heading">Lab Group</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>All</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                        </ul>
+                    </div>
+                </div>  
+            <% } %>         
+        </div>    
     </div>
     <div class="sidebar">
         <div class="sidebox">

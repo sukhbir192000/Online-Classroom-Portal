@@ -2,15 +2,21 @@
  let current_box=null,arr=[];
  let boxelements = document.querySelectorAll('.box');
  for(let i=0;i<boxelements.length;i++){
-     var editbutton = boxelements[i].children[1].children[0].children[2].children[0].children[0];
+     var editbutton = boxelements[i].children[1].children[0].children[5].children[0].children[0];
      editbutton.addEventListener('click',function(e){
          if(current_box!=null){
-             var editbutton = current_box.children[1].children[0].children[2].children[0].children[0];
-             var deletebutton = current_box.children[1].children[0].children[2].children[0].children[1];
-             var savebutton =current_box.children[1].children[0].children[2].children[1].children[0];
+             var editbutton = current_box.children[1].children[0].children[5].children[0].children[0];
+             var deletebutton = current_box.children[1].children[0].children[5].children[0].children[1];
+             var savebutton =current_box.children[1].children[0].children[5].children[1].children[0];
              var title = current_box.children[0].children[1];
-             var description = current_box.children[1].children[0].children[0];
+             var description = current_box.children[1].children[0].children[3];
              var subject = current_box.children[0].children[0];
+             title.contentEditable="false";
+             subject.contentEditable="false";
+             description.contentEditable="false";
+             title.classList.remove("heading_edit");
+             subject.classList.remove("heading_edit")
+             description.classList.remove("content_edit")
              deletebutton.classList.remove("hide");
              editbutton.classList.remove("hide");
              savebutton.classList.remove("show");
@@ -20,11 +26,11 @@
              current_box=null;
              arr=[];
          }
-         var editbutton = boxelements[i].children[1].children[0].children[2].children[0].children[0];
-         var deletebutton = boxelements[i].children[1].children[0].children[2].children[0].children[1];
-         var savebutton = boxelements[i].children[1].children[0].children[2].children[1].children[0];
+         var editbutton = boxelements[i].children[1].children[0].children[5].children[0].children[0];
+         var deletebutton = boxelements[i].children[1].children[0].children[5].children[0].children[1];
+         var savebutton = boxelements[i].children[1].children[0].children[5].children[1].children[0];
          var title = boxelements[i].children[0].children[1];
-         var description = boxelements[i].children[1].children[0].children[0];
+         var description = boxelements[i].children[1].children[0].children[3];
          var subject = boxelements[i].children[0].children[0];
          arr.push(title.textContent);
          arr.push(description.textContent);
@@ -32,30 +38,39 @@
          title.contentEditable="true";
          subject.contentEditable="true";
          description.contentEditable="true";
-         // deletebutton.classList.remove("show");
+         title.classList.add("heading_edit");
+         subject.classList.add("heading_edit")
+         description.classList.add("content_edit")
          deletebutton.classList.add("hide");
-         // editbutton.classList.remove("show");
          editbutton.classList.add("hide");
          savebutton.classList.add("show");
          current_box=boxelements[i];
+         savebutton.addEventListener('click',function(e){
+             current_box.children[1].children[0].children[2].children[1].children[1].children[1].setAttribute('value',arr[0]);
+             current_box.children[1].children[0].children[2].children[1].children[1].children[2].setAttribute('value',arr[1]);
+             current_box.children[1].children[0].children[2].children[1].children[1].children[0].setAttribute('value',arr[2]);
+             current_box.children[1].children[0].children[2].children[1].children[1].submit();
+         })
      })   
  }
  
  document.addEventListener('click',function(e){
      if(current_box){
          var rect = current_box.getBoundingClientRect();
-         var savebutton =current_box.children[1].children[0].children[2].children[1].children[0];
+         var savebutton =current_box.children[1].children[0].children[5].children[1].children[0];
          const style = getComputedStyle(savebutton);
          if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height) && style.visibility=='visible'){
-             console.log('activated');
-             var editbutton = current_box.children[1].children[0].children[2].children[0].children[0];
-             var deletebutton = current_box.children[1].children[0].children[2].children[0].children[1];
+             var editbutton = current_box.children[1].children[0].children[5].children[0].children[0];
+             var deletebutton = current_box.children[1].children[0].children[5].children[0].children[1];
              var title = current_box.children[0].children[1];
-             var description = current_box.children[1].children[0].children[0];
+             var description = current_box.children[1].children[0].children[3];
              var subject = current_box.children[0].children[0];
              title.contentEditable="false";
              subject.contentEditable="false";
              description.contentEditable="false";
+             title.classList.remove("heading_edit");
+             subject.classList.remove("heading_edit")
+             description.classList.remove("content_edit")
              deletebutton.classList.remove("hide");
              editbutton.classList.remove("hide");
              savebutton.classList.remove("show");
@@ -66,6 +81,19 @@
              arr=[];
          }
      }
+ })
+ 
+ 
+ document.querySelector(".add").addEventListener('click',function(e){
+     if(document.querySelector(".add_content").textContent == "Cancel"){
+         document.querySelector(".add_content").textContent = "Add";
+         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
+     }
+     else{
+         document.querySelector(".add_content").textContent = "Cancel";
+         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-times'></i>";
+     }
+     document.querySelector(".add_admin").classList.toggle("showx");    
  })
  //----------addannouncement--------------------
 var branchForm=document.getElementById("branch")
