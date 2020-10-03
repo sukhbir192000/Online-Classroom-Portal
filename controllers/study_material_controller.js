@@ -351,90 +351,164 @@ module.exports.getSubGroups=async function(req,res){
     }
 }
 module.exports.studyMaterialCreate=async function(req,res){
-    StudyMaterialsModel.fileUploaded(req, res, (err) => {
-        if(err){
-            console.log("Multer error",err)
+    try{
+        let user=res.locals.user
+        if(req.body.subject=="All"){
+            for(let subjects of user.classSub){
+                let studyMaterial=await StudyMaterialsModel.create({
+                    title: req.body.title,
+                    content: req.body.message,
+                    classSub: subjects,
+                    postedBy: user._id
+                })
+                StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                    if(err){
+                        console.log("Multer error",err)
+                    }
+                    console.log("****",req.file);
+                    if(req.files.length>0){
+                        console.log("Files added");
+                        for(let file of req.files){
+                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                        }
+                    }
+                    studyMaterial.save();
+                    console.log("files: ", req.files);
+                    console.log("body: ", req.body);
+                    
+                })
+            }
+            
         }
-        console.log("files: ", req.files);
-        console.log("body: ", req.body);
-        try{
-            let user=res.locals.user
-            if(req.body.subject=="All"){
-                for(let subjects of user.classSub){
-                    await StudyMaterialsModel.create({
-                        title: req.body.title,
-                        content: req.body.message,
-                        classSub: subjects,
-                        postedBy: user._id
-                    })
+        else{
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                for(let classSubElement of user.classSub){
+                    if(subject==classSubElement.course){
+                        let studyMaterial=await StudyMaterialsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: classSubElement,
+                            postedBy: user._id
+                        })
+                        StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                            if(err){
+                                console.log("Multer error",err)
+                            }
+                            console.log("****",req.file);
+                            if(req.files.length>0){
+                                console.log("Files added");
+                                for(let file of req.files){
+                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                }
+                            }
+                            studyMaterial.save();
+                            console.log("files: ", req.files);
+                            console.log("body: ", req.body);
+                            
+                        })
+                    }
                 }
             }
             else{
-                var subject = req.body.subject;
-                if(req.body.branch=="All"){
+                var branch = req.body.branch;
+                if(req.body.group == "All"){
                     for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course){
-                            await StudyMaterialsModel.create({
+                        if(subject==classSubElement.course && branch==classSubElement.class){
+                            let studyMaterial=await StudyMaterialsModel.create({
                                 title: req.body.title,
                                 content: req.body.message,
                                 classSub: classSubElement,
                                 postedBy: user._id
                             })
+                            StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                                if(err){
+                                    console.log("Multer error",err)
+                                }
+                                console.log("****",req.file);
+                                if(req.files.length>0){
+                                    console.log("Files added");
+                                    for(let file of req.files){
+                                        studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                    }
+                                }
+                                studyMaterial.save();
+                                console.log("files: ", req.files);
+                                console.log("body: ", req.body);
+                                
+                            })
                         }
                     }
                 }
                 else{
-                    var branch = req.body.branch;
-                    if(req.body.group == "All"){
+                    var group = req.body.group;
+                    if(req.body.sub_group == "All"){
                         for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class){
-                                await StudyMaterialsModel.create({
+                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                                let studyMaterial=await StudyMaterialsModel.create({
                                     title: req.body.title,
                                     content: req.body.message,
                                     classSub: classSubElement,
                                     postedBy: user._id
                                 })
+                                StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                                    if(err){
+                                        console.log("Multer error",err)
+                                    }
+                                    console.log("****",req.file);
+                                    if(req.files.length>0){
+                                        console.log("Files added");
+                                        for(let file of req.files){
+                                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                        }
+                                    }
+                                    studyMaterial.save();
+                                    console.log("files: ", req.files);
+                                    console.log("body: ", req.body);
+                                    
+                                })
                             }
                         }
                     }
                     else{
-                        var group = req.body.group;
-                        if(req.body.sub_group == "All"){
-                            for(let classSubElement of user.classSub){
-                                if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                    await StudyMaterialsModel.create({
-                                        title: req.body.title,
-                                        content: req.body.message,
-                                        classSub: classSubElement,
-                                        postedBy: user._id
-                                    })
+                        let studyMaterial=await StudyMaterialsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: {
+                                course: subject,
+                                class: branch,
+                                group: group,
+                                subGroup: req.body.sub_group
+                            },
+                            postedBy: user._id
+                        })
+                        StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                            if(err){
+                                console.log("Multer error",err)
+                            }
+                            console.log("****",req.file);
+                            if(req.files.length>0){
+                                console.log("Files added");
+                                for(let file of req.files){
+                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
                                 }
                             }
-                        }
-                        else{
-                            await StudyMaterialsModel.create({
-                                title: req.body.title,
-                                content: req.body.message,
-                                classSub: {
-                                    course: subject,
-                                    class: branch,
-                                    group: group,
-                                    subGroup: req.body.sub_group
-                                },
-                                postedBy: user._id
-                            })
-                        }
+                            studyMaterial.save();
+                            console.log("files: ", req.files);
+                            console.log("body: ", req.body);
+                            
+                        })
                     }
                 }
             }
-            req.flash('success', 'Study Material Posted');
-            return res.redirect('back')
         }
-        catch(err){
-            console.log("error while adding to Db study materials :",err);
-            return res.redirect('back');    
-        }
-    })
+        req.flash('success', 'Study Material Posted');
+        return res.redirect('back')
+    }
+    catch(err){
+        console.log("error while adding to Db study materials :",err);
+        return res.redirect('back');    
+    }
 }
 
 module.exports.studyMaterialUpdate=async function(req,res){
