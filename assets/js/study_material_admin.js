@@ -177,15 +177,26 @@ document.querySelector(".add").addEventListener('click',function(e){
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
+// ---------------------------------------------------------------------------------------------------------------
 
+function FileListItems (files) {
+    var b = new ClipboardEvent("").clipboardData || new DataTransfer()
+    for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i])
+    return b.files
+  }
+  
+//   var files = [
+//     new File(['content'], 'sample1.txt'),
+//     new File(['abc'], 'sample2.txt')
+//   ];
+  
+  
+//   fileInput.files = new FileListItems(files)
+//   console.log(fileInput.files)
 
 var files_temp = []
 document.querySelector("#file").addEventListener('change',function(e){
-    console.log("Before Submit");
-    console.log(document.getElementById("file"));
-    console.log(document.getElementById("file").files);
-    console.log(document.getElementById("file").value);
-
+    document.getElementById('file').textContent
     var x = document.getElementById("file");
     if(x.files.length>0){
         for(let i=0;i<x.files.length;i++){
@@ -213,24 +224,6 @@ document.querySelector("#file").addEventListener('change',function(e){
     }
 })
 
-document.getElementById("submit_form").addEventListener('click', function(e){
-    e.preventDefault();
-    let i=0;
-    while(i<files_temp.length){
-        if(files_temp[i] == 0){
-            files_temp.splice(i,1);
-        }
-        else{
-            i++;
-        }
-    }
-    document.getElementById("file").setAttribute('files', files_temp);
-    console.log("After Submit");
-    console.log(document.getElementById("file"));
-    console.log(document.getElementById("file").files[0]);
-    console.log(document.getElementById("file").value);
-    // document.getElementById("add_form").submit();
-})
 
 //-----------------------------add study material-----------------------------
 var branchForm=document.getElementById("branch")

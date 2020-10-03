@@ -482,22 +482,22 @@ module.exports.studyMaterialCreate=async function(req,res){
                             },
                             postedBy: user._id
                         })
-                        StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                            if(err){
-                                console.log("Multer error",err)
-                            }
-                            console.log("****",req.files);
-                            if(req.files.length>0){
-                                console.log("Files added");
-                                for(let file of req.files){
-                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                                }
-                            }
-                            studyMaterial.save();
+                        // StudyMaterialsModel.fileUploaded(req, res, (err) => {
+                        //     if(err){
+                        //         console.log("Multer error",err)
+                        //     }
+                            console.log("**hi**",req.file);
+                            // if(req.file){
+                            //     console.log("Files added");
+                            //     for(let file of req.files){
+                            //         studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
+                            //     }
+                            // }
+                            // studyMaterial.save();
                             console.log("files: ", req.files);
                             console.log("body: ", req.body);
                             
-                        })
+                        // })
                     }
                 }
             }
