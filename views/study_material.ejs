@@ -14,67 +14,153 @@
                
             </div>
             <div class="box_layout">
+                <% if(user.isAdmin){ %>
+                    <div class="add">
+                        <div class="add_icon"><i class="fas fa-plus"></i></div>
+                        <div class="add_content">Add </div>
+                    </div>
+                    <div class="add_admin">
+                        <form>
+                            <label for="subject">Subject:</label>
+                            <select id="subject" name="subject">
+                                <option value="All">All</option>
+                                <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
+                                <option value="Embedded Systems">Embedded Systems</option>
+                                <option value="Advanced Communication">Advanced Communication</option>
+                                <option value="Wireless Communication">Wireless Communication</option>
+                            </select><br><br>
+                            <label for="branch">Branch:</label>
+                            <select id="branch" name="branch">
+                                <option value="All">All</option>
+                                <option value="ECE-1st Year">ECE-1st Year</option>
+                                <option value="EE-1st Year">EE-1st Year</option>
+                                <option value="EE-1st Year">EE-1st Year</option>
+                                <option value="ECE-2nd Year">ECE-2nd Year</option>
+                            </select><br><br>
+                            <label for="group">Class Group:</label>
+                            <select id="group" name="group">
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select><br><br>
+                            <label for="sub_group">Lab Group:</label>
+                            <select id="sub_group" name="sub_group" >
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="3">2</option>
+                                <option value="3">3</option>
+                                <option value="3">4</option>
+                                <option value="5">5</option>
+                                <option value="7">6</option>
+                            </select><br><br>
+                            <input type="text" name="title" id="title" placeholder="Enter the title" ></textarea><br><br>
+                            <textarea name="message" id="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
+                            <div class="files">
+                                    <div class="file_names"></div>
+                                    <input type="file" name="files" id="file" multiple>
+                            </div>
+                            <div class="submit_button">
+                                <button type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                <% } %>
                 <div class="box">
                     <div class="box_heading"> 
                         <div class="subject">Computer Architecture</div>
                         <div class="title">Memory Organisation</div>
                     </div>
                     <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description"></div>
+                        <div class="box_content_details">  
+                            <% if(user.isAdmin){ %>  
+                                <div class="branch_admin"><b>Branch: ECE-1st Year</b></div>
+                                <div class="group_admin"><b>Class Group: 2</b></div>
+                                <div class="sub_group_admin"><b>Lab Group: All</b></div> 
+                            <% } %>                
+                            <div class="description">jegjeedbcjhjdjbkjdgchbdjj</div>
                             <div class="date_posted">Posted on 20-09-20</div>
                         </div>
-                        <div class="buttons">
-                            <div class="ppt">COA.ppt</div>
+                        <div class="material">
+                            <a href="Chem PPT.pptx" class="file" download="">
+                                <div class="file_icon "></div>
+                                <div class="file_title">Resume</div>
+                                <% if(user.isAdmin){ %>  
+                                    <div class="file_delete"><i class="fas fa-times"></i></div>
+                                <% } %>   
+                            </a>
+                            <a href="Chem PPT.pptx" class="file" download="">
+                                <div class="file_icon "></div>
+                                <div class="file_title">Resume</div>
+                                <% if(user.isAdmin){ %>  
+                                    <div class="file_delete"><i class="fas fa-times"></i></div>
+                                <% } %>   
+                            </a>
                         </div>
+                        <% if(user.isAdmin){ %>  
+                        <div class="file_box">
+                            <div class="file_names_box"></div>
+                            <input type="file" name="file_box" id="file_box" multiple>
+                        </div>
+                        <div class="buttons">
+                            <div class="buttons_admin">
+                                <div class="edit"><i class="far fa-edit"></i></div>
+                                <div class="delete"><i class="fas fa-trash"></i></div>
+                            </div>
+                            <div class="buttons_admin_save">
+                                <div class="savechanges"><i class="fas fa-save"></i></div>
+                            </div>
+                        </div>
+                        <% } %>   
                     </div>
                 </div>
                 <div class="box">
                     <div class="box_heading"> 
                         <div class="subject">Computer Architecture</div>
-                        <div class="title">Microprogrammed unit</div>
+                        <div class="title">Memory Organisation</div>
                     </div>
                     <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
+                        <div class="box_content_details">  
+                            <% if(user.isAdmin){ %>  
+                                <div class="branch_admin"><b>Branch: ECE-1st Year</b></div>
+                                <div class="group_admin"><b>Class Group: 2</b></div>
+                                <div class="sub_group_admin"><b>Lab Group: All</b></div> 
+                            <% } %>                
+                            <div class="description">jegjeedbcjhjdjbkjdgchbdjj</div>
                             <div class="date_posted">Posted on 20-09-20</div>
                         </div>
-                        <div class="buttons">
-                            <div class="ppt">COA.ppt</div>
+                        <div class="material">
+                            <a href="Chem PPT.pptx" class="file" download="">
+                                <div class="file_icon "></div>
+                                <div class="file_title">Resume</div>
+                                <% if(user.isAdmin){ %>  
+                                    <div class="file_delete"><i class="fas fa-times"></i></div>
+                                <% } %>   
+                            </a>
+                            <a href="Chem PPT.pptx" class="file" download="">
+                                <div class="file_icon "></div>
+                                <div class="file_title">Resume</div>
+                                <% if(user.isAdmin){ %>  
+                                    <div class="file_delete"><i class="fas fa-times"></i></div>
+                                <% } %>   
+                            </a>
                         </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">General Architecture</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        <div class="buttons">
-                            <div class="ppt">COA.ppt</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Arithmetic Operations</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
+                        <% if(user.isAdmin){ %>  
+                        <div class="file_box">
+                            <div class="file_names_box"></div>
+                            <input type="file" name="file_box" id="file_box" multiple>
                         </div>
                         <div class="buttons">
-                            <div class="ppt">COA.ppt</div>
+                            <div class="buttons_admin">
+                                <div class="edit"><i class="far fa-edit"></i></div>
+                                <div class="delete"><i class="fas fa-trash"></i></div>
+                            </div>
+                            <div class="buttons_admin_save">
+                                <div class="savechanges"><i class="fas fa-save"></i></div>
+                            </div>
                         </div>
+                        <% } %>   
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="filters">
@@ -99,9 +185,44 @@
                     </ul>
                 </div>
             </div>
-            
+            <% if(user.isAdmin){ %>
+                <div class="filter_name">
+                    <div class="filter_heading">Branch</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>ECE-1st Year</li>
+                            <li>CSE-1st Year</li>
+                            <li>EE-1st Year</li>
+                            <li>CSE-2nd Year</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter_name">
+                    <div class="filter_heading">Class Group</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>All</li>
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="filter_name">
+                    <div class="filter_heading">Lab Group</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li>All</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>   
         </div>
-
     </div>
 
     
