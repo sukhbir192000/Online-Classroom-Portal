@@ -1,4 +1,4 @@
-let current_box=null,arr=[], links=[], files_temp_box = [],deleted_files=[];
+let current_box=null,arr=[], links=[],deleted_files=[];
 let boxelements = document.querySelectorAll('.box');
 for(let i=0;i<boxelements.length;i++){
     var editbutton = boxelements[i].children[1].children[3].children[0].children[0];
@@ -26,7 +26,7 @@ for(let i=0;i<boxelements.length;i++){
                 fileDeleteButtons.children[j].style.opacity = 1;
                 fileDeleteButtons.children[j].style.pointerEvents = "auto";
             }
-            files_temp_box = [];
+            
             current_box.children[1].children[2].children[0].innerHTML = "";
             current_box=null;
             arr=[];
@@ -72,24 +72,18 @@ for(let i=0;i<boxelements.length;i++){
                     var main = document.createElement("DIV");
                     main.classList.add("file_content");
                     var y = document.createElement("DIV");
-                    var z = document.createElement("DIV");
+                
                     y.textContent = x.files[i].name;
-                    z.innerHTML = "<i class='fas fa-times'></i>"
+                    
                     y.classList.add("file_name");
-                    z.classList.add("file_cross");
+                    
                     main.appendChild(y);
-                    main.appendChild(z);
                     current_box.children[1].children[2].children[0].appendChild(main);
-                    files_temp_box.push(x.files[i]);
+                   
                 }
                 x.value = "";
                 var file_names_box =  current_box.children[1].children[2].children[0];
-                for(let i=0;i<file_names_box.childElementCount;i++){
-                    file_names_box.children[i].children[1].addEventListener('click',function(e){
-                        file_names_box.children[i].style.display = "none";
-                        files_temp_box[i] = 0;
-                    })
-                }
+                
             }
         })
         savebutton.addEventListener('click',function(e){
@@ -102,14 +96,7 @@ for(let i=0;i<boxelements.length;i++){
                     i++;
                 }
             }
-            while(j<files_temp_box.length){
-                if(files_temp_box[i] == 0){
-                    files_temp_box.splice(j,1);
-                }
-                else{
-                    j++;
-                }
-            }
+           
             current_box.children[1].children[3].children[1].children[1].children[0].setAttribute('value',title.textContent);
             current_box.children[1].children[3].children[1].children[1].children[1].setAttribute('value',description.textContent);
             current_box.children[1].children[3].children[1].children[1].children[2].setAttribute('value',deleted_files);
@@ -194,37 +181,48 @@ function FileListItems (files) {
 //   fileInput.files = new FileListItems(files)
 //   console.log(fileInput.files)
 
-var files_temp = []
-document.querySelector("#file").addEventListener('change',function(e){
-    document.getElementById('file').textContent
-    var x = document.getElementById("file");
-    if(x.files.length>0){
-        for(let i=0;i<x.files.length;i++){
-            var main = document.createElement("DIV");
-            main.classList.add("file_content");
-            var y = document.createElement("DIV");
-            var z = document.createElement("DIV");
-            y.textContent = x.files[i].name;
-            z.innerHTML = "<i class='fas fa-times'></i>"
-            y.classList.add("file_name");
-            z.classList.add("file_cross");
-            main.appendChild(y);
-            main.appendChild(z);
-            document.querySelector(".file_names").appendChild(main);
-            files_temp.push(x.files[i]);
-        }
-        x.value = "";
-        var file_names = document.querySelector(".file_names");
-        for(let i=0;i<file_names.childElementCount;i++){
-            file_names.children[i].children[1].addEventListener('click',function(e){
-                file_names.children[i].style.display = "none";
-                files_temp[i] = 0;
-            })
-        }
+// var files_temp = []
+// document.querySelector("#file").addEventListener('change',function(e){
+//     document.getElementById('file').textContent
+//     var x = document.getElementById("file");
+//     if(x.files.length>0){
+//         for(let i=0;i<x.files.length;i++){
+//             var main = document.createElement("DIV");
+//             main.classList.add("file_content");
+//             var y = document.createElement("DIV");
+//             var z = document.createElement("DIV");
+//             y.textContent = x.files[i].name;
+//             z.innerHTML = "<i class='fas fa-times'></i>"
+//             y.classList.add("file_name");
+//             z.classList.add("file_cross");
+//             main.appendChild(y);
+//             main.appendChild(z);
+//             document.querySelector(".file_names").appendChild(main);
+//             files_temp.push(x.files[i]);
+//         }
+//         x.value = "";
+//         var file_names = document.querySelector(".file_names");
+//         for(let i=0;i<file_names.childElementCount;i++){
+//             file_names.children[i].children[1].addEventListener('click',function(e){
+//                 file_names.children[i].style.display = "none";
+//                 files_temp[i] = 0;
+//             })
+//         }
+//     }
+// })
+
+//-----------fake button----------
+document.getElementById('file_button_named').addEventListener('click',function(e){
+    document.getElementById('file').click();
+})
+document.getElementById('file').addEventListener('change',function(e){
+    if(this.files.length>0){
+        document.getElementById('file_button_named').innerHTML="Change Files"
+    }
+    else{
+        document.getElementById('file_button_named').innerHTML="Choose Files"
     }
 })
-
-
 //-----------------------------add study material-----------------------------
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
