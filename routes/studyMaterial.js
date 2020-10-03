@@ -4,7 +4,7 @@ const passport=require('../config/passport-google-oauth2-strategy');
 const contentController=require('../controllers/study_material_controller');
 Router.get('/',contentController.studyMaterial);
 //change to isAdmin
-// Router.post('/create',passport.checkAdmin,contentController.announcementCreate);
+Router.post('/create',passport.checkAdmin,contentController.studyMaterialCreate);
 // // Router.get('/edit/:',passport.checkAuthentication,contentController.announcementEdit);
 // Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelete);
 // Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);

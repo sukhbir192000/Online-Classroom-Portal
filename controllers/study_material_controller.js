@@ -351,38 +351,29 @@ module.exports.getSubGroups=async function(req,res){
     }
 }
 module.exports.studyMaterialCreate=async function(req,res){
-    
-    try{
-        let user=res.locals.user
-        if(req.body.subject=="All"){
-            for(let subjects of user.classSub){
-                await StudyMaterialsModel.create({
-                    title: req.body.title,
-                    content: req.body.message,
-                    classSub: subjects,
-                    postedBy: user._id
-                })
-            }
+    StudyMaterialsModel.fileUploaded(req, res, (err) => {
+        if(err){
+            console.log("Multer error",err)
         }
-        else{
-            var subject = req.body.subject;
-            if(req.body.branch=="All"){
-                for(let classSubElement of user.classSub){
-                    if(subject==classSubElement.course){
-                        await StudyMaterialsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: classSubElement,
-                            postedBy: user._id
-                        })
-                    }
+        console.log("files: ", req.files);
+        console.log("body: ", req.body);
+        try{
+            let user=res.locals.user
+            if(req.body.subject=="All"){
+                for(let subjects of user.classSub){
+                    await StudyMaterialsModel.create({
+                        title: req.body.title,
+                        content: req.body.message,
+                        classSub: subjects,
+                        postedBy: user._id
+                    })
                 }
             }
             else{
-                var branch = req.body.branch;
-                if(req.body.group == "All"){
+                var subject = req.body.subject;
+                if(req.body.branch=="All"){
                     for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course && branch==classSubElement.class){
+                        if(subject==classSubElement.course){
                             await StudyMaterialsModel.create({
                                 title: req.body.title,
                                 content: req.body.message,
@@ -393,10 +384,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                     }
                 }
                 else{
-                    var group = req.body.group;
-                    if(req.body.sub_group == "All"){
+                    var branch = req.body.branch;
+                    if(req.body.group == "All"){
                         for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                            if(subject==classSubElement.course && branch==classSubElement.class){
                                 await StudyMaterialsModel.create({
                                     title: req.body.title,
                                     content: req.body.message,
@@ -407,28 +398,43 @@ module.exports.studyMaterialCreate=async function(req,res){
                         }
                     }
                     else{
-                        await StudyMaterialsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: course,
-                                class: branch,
-                                group: group,
-                                subGroup: req.body.sub_group,
-                                postedBy: user._id
+                        var group = req.body.group;
+                        if(req.body.sub_group == "All"){
+                            for(let classSubElement of user.classSub){
+                                if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                                    await StudyMaterialsModel.create({
+                                        title: req.body.title,
+                                        content: req.body.message,
+                                        classSub: classSubElement,
+                                        postedBy: user._id
+                                    })
+                                }
                             }
-                        })
+                        }
+                        else{
+                            await StudyMaterialsModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: {
+                                    course: subject,
+                                    class: branch,
+                                    group: group,
+                                    subGroup: req.body.sub_group
+                                },
+                                postedBy: user._id
+                            })
+                        }
                     }
                 }
             }
+            req.flash('success', 'Study Material Posted');
+            return res.redirect('back')
         }
-        req.flash('success', 'Study Material Posted');
-        return res.redirect('back')
-    }
-    catch(err){
-        console.log("error while adding to Db study materials :",err);
-        return res.redirect('back');    
-    }
+        catch(err){
+            console.log("error while adding to Db study materials :",err);
+            return res.redirect('back');    
+        }
+    })
 }
 
 module.exports.studyMaterialUpdate=async function(req,res){

@@ -412,12 +412,12 @@ module.exports.announcementCreate=async function(req,res){
                             title: req.body.title,
                             content: req.body.message,
                             classSub: {
-                                course: course,
+                                course: subject,
                                 class: branch,
                                 group: group,
-                                subGroup: req.body.sub_group,
-                                postedBy: user._id
-                            }
+                                subGroup: req.body.sub_group
+                            },
+                            postedBy: user._id
                         })
                     }
                 }
