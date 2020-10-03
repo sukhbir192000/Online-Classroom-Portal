@@ -8,7 +8,7 @@ const contentController=require('../controllers/study_material_controller');
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,'..','/uploads'));
+      cb(null, path.join(__dirname,'..','/uploads/study_material'));
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now());

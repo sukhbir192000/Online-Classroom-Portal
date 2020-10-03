@@ -1,3 +1,4 @@
+const path = require('path');
 const StudyMaterialsModel=require('../models/study-material');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
@@ -361,22 +362,13 @@ module.exports.studyMaterialCreate=async function(req,res){
                     classSub: subjects,
                     postedBy: user._id
                 })
-                StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                    if(err){
-                        console.log("Multer error",err)
+                if(req.files.length>0){
+                    console.log("Files added");
+                    for(let file of req.files){
+                        studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file.filename));
                     }
-                    console.log("****",req.files);
-                    if(req.files.length>0){
-                        console.log("Files added");
-                        for(let file of req.files){
-                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                        }
-                    }
-                    studyMaterial.save();
-                    console.log("files: ", req.files);
-                    console.log("body: ", req.body);
-                    
-                })
+                }
+                studyMaterial.save();
             }
             
         }
@@ -391,22 +383,13 @@ module.exports.studyMaterialCreate=async function(req,res){
                             classSub: classSubElement,
                             postedBy: user._id
                         })
-                        StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                            if(err){
-                                console.log("Multer error",err)
+                        if(req.files.length>0){
+                            console.log("Files added");
+                            for(let file of req.files){
+                                studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file.filename));
                             }
-                            console.log("****",req.files);
-                            if(req.files.length>0){
-                                console.log("Files added");
-                                for(let file of req.files){
-                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                                }
-                            }
-                            studyMaterial.save();
-                            console.log("files: ", req.files);
-                            console.log("body: ", req.body);
-                            
-                        })
+                        }
+                        studyMaterial.save();
                     }
                 }
             }
@@ -421,22 +404,13 @@ module.exports.studyMaterialCreate=async function(req,res){
                                 classSub: classSubElement,
                                 postedBy: user._id
                             })
-                            StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                                if(err){
-                                    console.log("Multer error",err)
+                            if(req.files.length>0){
+                                console.log("Files added");
+                                for(let file of req.files){
+                                    studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file.filename));
                                 }
-                                console.log("****",req.files);
-                                if(req.files.length>0){
-                                    console.log("Files added");
-                                    for(let file of req.files){
-                                        studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                                    }
-                                }
-                                studyMaterial.save();
-                                console.log("files: ", req.files);
-                                console.log("body: ", req.body);
-                                
-                            })
+                            }
+                            studyMaterial.save();
                         }
                     }
                 }
@@ -451,22 +425,13 @@ module.exports.studyMaterialCreate=async function(req,res){
                                     classSub: classSubElement,
                                     postedBy: user._id
                                 })
-                                StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                                    if(err){
-                                        console.log("Multer error",err)
+                                if(req.files.length>0){
+                                    console.log("Files added");
+                                    for(let file of req.files){
+                                        studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file.filename));
                                     }
-                                    console.log("****",req.files);
-                                    if(req.files.length>0){
-                                        console.log("Files added");
-                                        for(let file of req.files){
-                                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                                        }
-                                    }
-                                    studyMaterial.save();
-                                    console.log("files: ", req.files);
-                                    console.log("body: ", req.body);
-                                    
-                                })
+                                }
+                                studyMaterial.save();
                             }
                         }
                     }
@@ -482,22 +447,13 @@ module.exports.studyMaterialCreate=async function(req,res){
                             },
                             postedBy: user._id
                         })
-                        // StudyMaterialsModel.fileUploaded(req, res, (err) => {
-                        //     if(err){
-                        //         console.log("Multer error",err)
-                        //     }
-                            console.log("**hi**",req.file);
-                            // if(req.file){
-                            //     console.log("Files added");
-                            //     for(let file of req.files){
-                            //         studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
-                            //     }
-                            // }
-                            // studyMaterial.save();
-                            console.log("files: ", req.files);
-                            console.log("body: ", req.body);
-                            
-                        // })
+                        if(req.files.length>0){
+                            console.log("Files added");
+                            for(let file of req.files){
+                                studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file.filename));
+                            }
+                        }
+                        studyMaterial.save();
                     }
                 }
             }
