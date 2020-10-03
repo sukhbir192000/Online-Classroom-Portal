@@ -4,10 +4,7 @@ const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
 
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-}  
-   
+
 module.exports.announcement=async function(req,res){
     try{
         let user=res.locals.user;

@@ -4,10 +4,7 @@ const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
 
-// function onlyUnique(value, index, self) {
-//     return self.indexOf(value) === index;
-// }  
-   
+
 module.exports.studyMaterial=async function(req,res){
     try{
         let user=res.locals.user;
@@ -19,19 +16,19 @@ module.exports.studyMaterial=async function(req,res){
             }
             let mymap = new Map();
 
-            courseFilterAdmin = courseFilterAdmin.filter(el => { 
+            courseFilterAdmin = courseFilterAdmin.filter(el => {
                 const val = mymap.get(el.name);
-                if(val) { 
-                    if(el.id < val) { 
-                        mymap.delete(el.name); 
-                        mymap.set(el.name, el.id); 
-                        return true; 
-                    } else { 
-                        return false; 
-                    } 
+                if(val) {
+                    if(el.id < val) {
+                        mymap.delete(el.name);
+                        mymap.set(el.name, el.id);
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } 
-                mymap.set(el.name, el.id); 
-                return true; 
+                mymap.set(el.name, el.id);
+                return true;
             });
         }
         let studyMaterialList=[]; // await StudyMaterialsModel.find({}).sort('-createdAt');
@@ -121,7 +118,6 @@ module.exports.studyMaterial=async function(req,res){
                     ]
                 }).populate('classSub.course');
                 if(material.length>0){
-                    // announcements = await announcements.populate('classSub.course').execPopulate();
                     studyMaterialList = studyMaterialList.concat(material);
                 }
             }
@@ -135,7 +131,7 @@ module.exports.studyMaterial=async function(req,res){
         else{
             studyMaterialList.sort(function(a,b){
                 return new Date(a.createdAt) - new Date(b.createdAt);
-            });   
+            });
         }
         var filterList={
             courseName:"",
@@ -169,18 +165,18 @@ module.exports.studyMaterial=async function(req,res){
         }
         let mymap = new Map();
 
-        branchList = branchList.filter(el => { 
+        branchList = branchList.filter(el => {
             const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
+            if(val) {
+                if(el.id < val) {
+                    mymap.delete(el.name);
+                    mymap.set(el.name, el.id);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            mymap.set(el.name, el.id);
             return true; 
         });
         return res.render("study_material",{
@@ -189,7 +185,7 @@ module.exports.studyMaterial=async function(req,res){
             filterList:filterList,
             courseFilters:courseFilterAdmin,
             branchList: branchList
-        });  
+        });
     }
     catch(err){
         console.log("error :",err);
@@ -199,7 +195,7 @@ module.exports.studyMaterial=async function(req,res){
 
 module.exports.getSubjects=async function(req,res){
     var subjectList=[];
-  
+
     for(let classSubElement of res.locals.user.classSub){
         let course=await CourseModel.findById(classSubElement.course);
         let id=classSubElement.course;
@@ -221,7 +217,7 @@ module.exports.getSubjects=async function(req,res){
                     mymap.delete(el.name); 
                     mymap.set(el.name, el.id); 
                     return true; 
-                } else { 
+                } else {
                     return false; 
                 } 
             } 
@@ -354,107 +350,107 @@ module.exports.getSubGroups=async function(req,res){
         });
     }
 }
-// module.exports.announcementCreate=async function(req,res){
+module.exports.studyMaterialCreate=async function(req,res){
     
-//     try{
-//         let user=res.locals.user
-//         if(req.body.subject=="All"){
-//             for(let subjects of user.classSub){
-//                 await StudyMaterialsModel.create({
-//                     title: req.body.title,
-//                     content: req.body.message,
-//                     classSub: subjects,
-//                     postedBy: user._id
-//                 })
-//             }
-//         }
-//         else{
-//             var subject = req.body.subject;
-//             if(req.body.branch=="All"){
-//                 for(let classSubElement of user.classSub){
-//                     if(subject==classSubElement.course){
-//                         await StudyMaterialsModel.create({
-//                             title: req.body.title,
-//                             content: req.body.message,
-//                             classSub: classSubElement,
-//                             postedBy: user._id
-//                         })
-//                     }
-//                 }
-//             }
-//             else{
-//                 var branch = req.body.branch;
-//                 if(req.body.group == "All"){
-//                     for(let classSubElement of user.classSub){
-//                         if(subject==classSubElement.course && branch==classSubElement.class){
-//                             await StudyMaterialsModel.create({
-//                                 title: req.body.title,
-//                                 content: req.body.message,
-//                                 classSub: classSubElement,
-//                                 postedBy: user._id
-//                             })
-//                         }
-//                     }
-//                 }
-//                 else{
-//                     var group = req.body.group;
-//                     if(req.body.sub_group == "All"){
-//                         for(let classSubElement of user.classSub){
-//                             if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-//                                 await StudyMaterialsModel.create({
-//                                     title: req.body.title,
-//                                     content: req.body.message,
-//                                     classSub: classSubElement,
-//                                     postedBy: user._id
-//                                 })
-//                             }
-//                         }
-//                     }
-//                     else{
-//                         await StudyMaterialsModel.create({
-//                             title: req.body.title,
-//                             content: req.body.message,
-//                             classSub: {
-//                                 course: course,
-//                                 class: branch,
-//                                 group: group,
-//                                 subGroup: req.body.sub_group,
-//                                 postedBy: user._id
-//                             }
-//                         })
-//                     }
-//                 }
-//             }
-//         }
-//         req.flash('success', 'Announcement Posted');
-//         return res.redirect('back')
-//     }
-//     catch(err){
-//         console.log("error while adding to Db announcements :",err);
-//         return res.redirect('back');    
-//     }
-// }
+    try{
+        let user=res.locals.user
+        if(req.body.subject=="All"){
+            for(let subjects of user.classSub){
+                await StudyMaterialsModel.create({
+                    title: req.body.title,
+                    content: req.body.message,
+                    classSub: subjects,
+                    postedBy: user._id
+                })
+            }
+        }
+        else{
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                for(let classSubElement of user.classSub){
+                    if(subject==classSubElement.course){
+                        await StudyMaterialsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: classSubElement,
+                            postedBy: user._id
+                        })
+                    }
+                }
+            }
+            else{
+                var branch = req.body.branch;
+                if(req.body.group == "All"){
+                    for(let classSubElement of user.classSub){
+                        if(subject==classSubElement.course && branch==classSubElement.class){
+                            await StudyMaterialsModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: classSubElement,
+                                postedBy: user._id
+                            })
+                        }
+                    }
+                }
+                else{
+                    var group = req.body.group;
+                    if(req.body.sub_group == "All"){
+                        for(let classSubElement of user.classSub){
+                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                                await StudyMaterialsModel.create({
+                                    title: req.body.title,
+                                    content: req.body.message,
+                                    classSub: classSubElement,
+                                    postedBy: user._id
+                                })
+                            }
+                        }
+                    }
+                    else{
+                        await StudyMaterialsModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: {
+                                course: course,
+                                class: branch,
+                                group: group,
+                                subGroup: req.body.sub_group,
+                                postedBy: user._id
+                            }
+                        })
+                    }
+                }
+            }
+        }
+        req.flash('success', 'Study Material Posted');
+        return res.redirect('back')
+    }
+    catch(err){
+        console.log("error while adding to Db study materials :",err);
+        return res.redirect('back');    
+    }
+}
 
-// module.exports.announcementUpdate=async function(req,res){
-//     await StudyMaterialsModel.findByIdAndUpdate(req.params.announcementId,{
-//         $set: {
-//             title: req.body.title,
-//             content: req.body.description
-//         }
-//     });
-//     return res.redirect('back');
-// };
+module.exports.studyMaterialUpdate=async function(req,res){
+    await StudyMaterialsModel.findByIdAndUpdate(req.params.studyMaterialId,{
+        $set: {
+            title: req.body.title,
+            content: req.body.description
+        }
+    });
+    return res.redirect('back');
+};
 
-// module.exports.announcementDelete=function(req,res){
-//     StudyMaterialsModel.findByIdAndDelete(req.params.id,function(err){
-//         if(err){
-//             console.log("error while deleting announcement :",err);
-//             return res.redirect('back');
-//         }
-//         else{
-//             req.flash('success', 'Announcement Deleted');
-//             return res.redirect('back');
-//         }
-//     })
+module.exports.studyMaterialDelete=function(req,res){
+    StudyMaterialsModel.findByIdAndDelete(req.params.id,function(err){
+        if(err){
+            console.log("error while deleting study material :",err);
+            return res.redirect('back');
+        }
+        else{
+            req.flash('success', 'Study Material Deleted');
+            return res.redirect('back');
+        }
+    })
     
-// }
+}
