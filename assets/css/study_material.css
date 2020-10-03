@@ -47,6 +47,9 @@ body{
     display: flex;
     padding-right:1em;
     padding-top:0.2em;
+    /*--------------------------------------------------------------------------------------*/
+    padding-bottom: 0.2em;
+    /*--------------------------------------------------------------------------------------*/
     cursor: pointer;
     font-size: 1.7em;
 }
@@ -74,7 +77,7 @@ body{
     visibility: hidden;
     position: fixed;
     top:2.5em;
-    right:3em;
+    right:3.6em;
     width:auto;
     display: flex;
     flex-direction: column;
@@ -241,7 +244,7 @@ body{
     font-size: 1em;
     border:2px solid grey;
     visibility: hidden;
-    align-items: flex-end;
+    align-items: center;
     box-shadow: 0.01px 0.01px 5px 0;
     cursor: pointer;
 }
@@ -300,12 +303,22 @@ body{
     flex-direction: column;
     width:100%;
 }
-.deadline{
-    font-weight: 550;
-    font-size: 1em;
-    font-style: italic;
+/* ----------------------------------------------------------------------------------- */
+.branch_admin, .group_admin, .sub_group_admin{
+    padding-top:0.5em;
+    font-size: 0.9em;
     overflow-wrap: break-word;
 }
+.material{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    /* border: 1px solid black; */
+}
+/* ----------------------------------------------------------------------------------- */
+
 .description{
     padding-top:0.5em;
     font-size: 0.95em;
@@ -317,31 +330,254 @@ body{
     font-style: italic;
     overflow-wrap: break-word;
 }
-.buttons{
-    padding-top:0.5em;
+
+/* --------------------------------------------------------------------------------------- */
+.file{
+    height:50px;
+    width:200px;
+    background-color: #f2f2f2;
+    border:2px solid grey;
+    margin:0.5em 2em 0.5em 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
 }
-.ppt{
-    height:40px;
-    width:200px;
-    background-color: rgb(217, 219, 223);
-    margin-right:2em;
+.file_icon{
+    font-size:3.2em;
+    margin-top: 2.8px;
 }
-.buttons>div>a{
-    padding:0.1em 0.5em;
-    color: gray;
+.color_word{
+    color:#2962ff;
 }
+.color_ppt{
+    color:#d04524;
+}
+.color_pdf{
+    color:#940000
+}
+.color_image{
+    color: #132a6b;
+}
+.color_excel{
+    color:#1d6d43
+}
+.color_file{
+    color: #e0a918;
+}
+.color_video{
+    color: #3da4ed;
+}
+.color_audio{
+    color: #f79200;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+.file_title{
+    padding:0 0.4em;
+    /* border:1px solid black; */
+    width:150px;
+    height:auto;
+    max-height: 2.4em;
+    align-self: center;
+    /* vertical-align: middle; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap;  */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.file:hover .file_title{
+    font-weight: 600;
+}
+/* --------------------------------------------------------------------------------------- */
 
-.buttons>div>a:hover{
-    color:black;
-}
 .show{
     visibility: visible;
 }
+/*--------------------------------------------------------------------------------------*/
+.hide{
+    display: none;
+}
+.showx{
+    display: flex;
+}
+.selected{
+    background-color:#1D3557;
+    color:white;
+    border-radius: 10px;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.buttons_admin{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* width:100%; */
+    /* background-color: black; */
+}
+.edit{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.4em;
+    cursor: pointer;
+    visibility: visible;
+}
 
+.delete{
+    font-size: 1.4em;
+    cursor:pointer;
+    visibility: visible;
+}
+.buttons_admin_save{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+}
+.savechanges{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.6em;
+    cursor: pointer;
+    visibility: hidden;
+}
 
+.add{
+    margin:1em 1.5em;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
+
+.add_admin{
+    margin:1em 1.5em;
+    border:2px solid  #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    padding: 0.8em;
+    display: none;
+    width:92%;
+}
+
+select option{
+    max-height:2em;
+}
+#subject{
+    margin-left: 2.9em;
+}
+#branch{
+    margin-left: 3.2em;
+}
+#group{
+    margin-left: 0.37em;
+}
+#sub_group{
+    margin-left: 1.38em;
+}
+
+input,textarea{
+    width:60vw;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+.heading_edit{
+    background-color: #e3d8d8;
+    border:1px black solid;
+    color: black;
+}
+.content_edit{
+    background-color: #efefef;
+    border:1px black solid;
+    color: black;
+}
+.hide{
+    display: none;
+}
+/*--------------------------------------------------------------------------------------*/
+
+.file_delete{
+    opacity:0.5;
+    font-size:1.7em;
+    padding-right:0.2em;
+    color:rgb(39, 37, 37);
+    display: none;
+}
+.show_delete{
+    display: flex !important; 
+}
+.file_delete:hover{
+    opacity:1;
+}
+.file_box{
+    display: none;
+    margin: 0.5em 0;
+    flex-direction: column;
+}
+.file_content{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0.5em;
+}
+.file_name{
+    padding-right:0.5em;
+}
+.file_cross{
+    cursor: pointer;
+    opacity: 0.7;
+}
 /* FOOTER */
 .footer{
     display: flex;
@@ -416,7 +652,14 @@ li:hover{
     padding:0;
     margin:0;
 }
-
+/* ---------------------------------------------------------------------- */
+.show{
+    visibility: visible;
+}
+/* ---------------------------------------------------------------------- */
+.show_delete{
+    display: flex !important; 
+}
 
 
 /* For tablet devices */
@@ -505,6 +748,12 @@ li:hover{
     .show{
         visibility: visible;
     }
+    
+    /* ------------------------------------------------------------------------------ */
+    input, textarea{
+        width:80vw;
+    }
+    /* ------------------------------------------------------------------------------ */
 
 
     /* NAVIGATION BAR */
@@ -578,6 +827,7 @@ li:hover{
     }
     .profile{
         top:2em;
+        right: 3.2em;
     }
     .profile>div{
         font-size: 0.9em;
@@ -681,7 +931,7 @@ li:hover{
         font-size: 1.3em;
         padding-left:1.3em;
     }
-    .ppt{
+    .file{
         width: 150px;
     }
     .filters_small{
@@ -691,9 +941,6 @@ li:hover{
         font-size:1em;
     }
     .title{
-        font-size: 0.8em;
-    }
-    .deadline{
         font-size: 0.8em;
     }
     .description{
@@ -709,6 +956,22 @@ li:hover{
         font-size: 2.5vw;
         padding-right:0.1em;
     }
+    /* ------------------------------------------------------------------------- */
+    .add{
+        margin-left: 0.01em;
+    }
+    .add_admin{
+        margin-left: 0.01em;
+        width:89%;
+    }
+    input, textarea{
+        width:80vw;
+    }
+    #subject{
+        margin-top: 0.7em;
+        margin-left: 0;
+    }
+    /* -------------------------------------------------------------------------- */
 
     /* FOOTER */
     .footer_content{
