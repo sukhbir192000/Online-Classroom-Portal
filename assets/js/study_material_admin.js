@@ -181,6 +181,11 @@ document.querySelector(".add").addEventListener('click',function(e){
 
 var files_temp = []
 document.querySelector("#file").addEventListener('change',function(e){
+    console.log("Before Submit");
+    console.log(document.getElementById("file"));
+    console.log(document.getElementById("file").files);
+    console.log(document.getElementById("file").value);
+
     var x = document.getElementById("file");
     if(x.files.length>0){
         for(let i=0;i<x.files.length;i++){
@@ -219,9 +224,12 @@ document.getElementById("submit_form").addEventListener('click', function(e){
             i++;
         }
     }
-    console.log(files_temp);
-    document.getElementById("file").setAttribute("value", files_temp);
-    document.getElementById("add_form").submit();
+    document.getElementById("file").setAttribute('files', files_temp);
+    console.log("After Submit");
+    console.log(document.getElementById("file"));
+    console.log(document.getElementById("file").files[0]);
+    console.log(document.getElementById("file").value);
+    // document.getElementById("add_form").submit();
 })
 
 //-----------------------------add study material-----------------------------

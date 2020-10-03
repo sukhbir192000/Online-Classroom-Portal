@@ -365,11 +365,11 @@ module.exports.studyMaterialCreate=async function(req,res){
                     if(err){
                         console.log("Multer error",err)
                     }
-                    console.log("****",req.file);
+                    console.log("****",req.files);
                     if(req.files.length>0){
                         console.log("Files added");
                         for(let file of req.files){
-                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
                         }
                     }
                     studyMaterial.save();
@@ -395,11 +395,11 @@ module.exports.studyMaterialCreate=async function(req,res){
                             if(err){
                                 console.log("Multer error",err)
                             }
-                            console.log("****",req.file);
+                            console.log("****",req.files);
                             if(req.files.length>0){
                                 console.log("Files added");
                                 for(let file of req.files){
-                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
                                 }
                             }
                             studyMaterial.save();
@@ -425,11 +425,11 @@ module.exports.studyMaterialCreate=async function(req,res){
                                 if(err){
                                     console.log("Multer error",err)
                                 }
-                                console.log("****",req.file);
+                                console.log("****",req.files);
                                 if(req.files.length>0){
                                     console.log("Files added");
                                     for(let file of req.files){
-                                        studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                        studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
                                     }
                                 }
                                 studyMaterial.save();
@@ -455,11 +455,11 @@ module.exports.studyMaterialCreate=async function(req,res){
                                     if(err){
                                         console.log("Multer error",err)
                                     }
-                                    console.log("****",req.file);
+                                    console.log("****",req.files);
                                     if(req.files.length>0){
                                         console.log("Files added");
                                         for(let file of req.files){
-                                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                            studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
                                         }
                                     }
                                     studyMaterial.save();
@@ -486,11 +486,11 @@ module.exports.studyMaterialCreate=async function(req,res){
                             if(err){
                                 console.log("Multer error",err)
                             }
-                            console.log("****",req.file);
+                            console.log("****",req.files);
                             if(req.files.length>0){
                                 console.log("Files added");
                                 for(let file of req.files){
-                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+req.file.filename);
+                                    studyMaterial.files.push(StudyMaterialsModel.filePath+'/'+file.filename);
                                 }
                             }
                             studyMaterial.save();
