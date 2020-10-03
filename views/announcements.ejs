@@ -1,5 +1,4 @@
 <link rel="stylesheet" type="text/css" href="/css/announcements.css">    
-    
     <div class="main">
         <%- include('navbar') %>
 
@@ -14,14 +13,7 @@
                 </div>
                
             </div>
-            <!-- delete this later -->
-            <!-- <% if(user.isAdmin){ %>
-            <form method="Post" action="/content/announcements/create">
-                <input type="text" name="title">
-                <input type="text" name="content">
-                <button type="submit">Submit</button>
-            </form>
-            <% } %> -->
+            
             <div class="box_layout">
                 <% if(user.isAdmin){ %>
                     <div class="add" id="addButton">

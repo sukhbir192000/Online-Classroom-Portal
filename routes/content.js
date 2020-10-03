@@ -3,7 +3,7 @@ const Router=express.Router();
 const passport=require('../config/passport-google-oauth2-strategy');
 const contentController=require('../controllers/content');
 Router.use('/announcements',require('./announcements'));
-Router.get('/studymaterial',contentController.studyMaterial);
+Router.use('/studymaterial',require('./studyMaterial'));
 Router.get('/recordedlectures',contentController.recordedLectures);
 Router.use('/assignments',require('./assignments'));
 Router.get('/timetable',contentController.timeTable);
