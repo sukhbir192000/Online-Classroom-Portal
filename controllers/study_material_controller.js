@@ -484,18 +484,46 @@ module.exports.studyMaterialCreate=async function(req,res){
 }
 
 module.exports.studyMaterialUpdate=async function(req,res){
-    await StudyMaterialsModel.findByIdAndUpdate(req.params.studyMaterialId,{
-        $set: {
-            title: req.body.title,
-            content: req.body.description
+    try{
+        // console.log(req.body);
+        let studyMaterial=await StudyMaterialsModel.findById(req.params.studyMaterialId);
+        studyMaterial.title=req.body.title;
+        studyMaterial.content=req.body.description;
+        let delete_files=(req.body.after_delete_files).split(',');
+        
+     
+        for(let i=0;i<delete_files.length;i++){
+            // console.log(delete_files[i]);
+            let pathTry=new URL(delete_files[i]);
+            let pathName=pathTry.pathname
+            pathName=path.normalize(pathName);
+            delete_files[i]=pathName;
+            
         }
-    });
-    return res.redirect('back');
+        console.log(delete_files);
+        for(let i=0;i<studyMaterial.files.length;i++){
+         
+            if(delete_files.includes(studyMaterial.files[i].url)){
+                fs.unlinkSync(path.join(__dirname,'..',studyMaterial.files[i].url));
+                studyMaterial.files.splice(i,1);
+                i--;
+                console.log("edited array")
+            }
+            
+        }
+        studyMaterial.save();
+        return res.redirect('back');
+    }  
+    catch(err){
+        console.log("error while updating study material:",err);
+        return res.redirect('back');
+    }
 };
 
 module.exports.studyMaterialDelete=async function(req,res){
     var studyMaterial = await StudyMaterialsModel.findById(req.params.id);
     for(let file of studyMaterial.files){
+        
         fs.unlinkSync(path.join(__dirname,'..',file.url));
     }
     await StudyMaterialsModel.findByIdAndDelete(studyMaterial._id);

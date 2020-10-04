@@ -88,7 +88,7 @@
                                         <a href="/content/studymaterial/delete/<%=studyMaterial._id%>"><div class="delete"><i class="fas fa-trash"></i></div></a>                                    </div>
                                     <div class="buttons_admin_save">
                                         <div class="savechanges"><i class="fas fa-save"></i></div>
-                                        <form id="invisible_form" action="#">
+                                        <form id="invisible_form" method="POST" action="/content/studymaterial/update/<%=studyMaterial._id%>">
                                             <input type="hidden" name="title" >
                                             <input type="hidden" name="description">
                                             <input type="hidden" name="after_delete_files">

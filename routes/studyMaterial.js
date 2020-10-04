@@ -24,11 +24,7 @@ var fields = [
 Router.get('/',contentController.studyMaterial);
 //change to isAdmin
 Router.post('/create',passport.checkAdmin, upload.fields(fields),contentController.studyMaterialCreate);
-// // Router.get('/edit/:',passport.checkAuthentication,contentController.announcementEdit);
+
 Router.get('/delete/:id',passport.checkAdmin,contentController.studyMaterialDelete);
-// Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);
-// Router.post('/form/branches',passport.checkAdmin,contentController.getBranches);
-// Router.post('/form/groups',passport.checkAdmin,contentController.getGroups);
-// Router.post('/form/subGroups',passport.checkAdmin,contentController.getSubGroups);
-// Router.post('/update/:announcementId',passport.checkAdmin,contentController.announcementUpdate);
+Router.post('/update/:studyMaterialId',passport.checkAdmin,contentController.studyMaterialUpdate);
 module.exports = Router;
