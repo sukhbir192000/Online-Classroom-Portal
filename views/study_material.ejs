@@ -52,109 +52,54 @@
                         </form>
                     </div>
                 <% } %>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Memory Organisation</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">  
+                <% for(let studyMaterial of studyMaterials){ %>
+                    <div class="box">
+                        <div class="box_heading"> 
+                            <div class="subject"><%= studyMaterial.classSub.course.name %></div>
+                            <div class="title"><%= studyMaterial.title %></div>
+                        </div>
+                        <div class="box_content">  
+                            <div class="box_content_details">  
+                                <% if(user.isAdmin){ %>  
+                                    <div class="branch_admin"><b>Branch: <%= studyMaterial.classSub.class.stream %></b></div>
+                                    <div class="group_admin"><% if(studyMaterial.classSub.group){ %><b>Class Group: <%= studyMaterial.classSub.group.groupNumber %></b><% } %></div>
+                                    <div class="sub_group_admin"><% if(studyMaterial.classSub.subGroup){ %><b>Lab Group: <%= studyMaterial.classSub.subGroup.subGroupNumber %></b><% } %></div> 
+                                <% } %>                
+                                <div class="description"><%= studyMaterial.content %></div>
+                                <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(studyMaterial.createdAt) %></div>
+                            </div>
+                            <!-- multer vali files -->
+                            <div class="material">
+                                <% for(let file of studyMaterial.files){ %>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                    <% if(user.isAdmin){ %>  
+                                        <div class="file_delete"><i class="fas fa-times"></i></div>
+                                    <% } %> 
+                                </a>
+                                <% } %>
+                                
+                            </div>
                             <% if(user.isAdmin){ %>  
-                                <div class="branch_admin"><b>Branch: ECE-1st Year</b></div>
-                                <div class="group_admin"><b>Class Group: 2</b></div>
-                                <div class="sub_group_admin"><b>Lab Group: All</b></div> 
-                            <% } %>                
-                            <div class="description">jegjeedbcjhjdjbkjdgchbdjj</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        <div class="material">
-                            <a href="Chem PPT.pptx" class="file_inside" download="">
-                                <div class="file_icon "></div>
-                                <div class="file_title">Resume</div>
-                                <% if(user.isAdmin){ %>  
-                                    <div class="file_delete"><i class="fas fa-times"></i></div>
-                                <% } %> 
-                            </a>
-                            <a href="https.docx" class="file_inside" download="" id="abcdef">
-                                <div class="file_icon "></div>
-                                <div class="file_title">Resume ResumeResumeResumeResume</div>
-                                <% if(user.isAdmin){ %>  
-                                    <div class="file_delete"><i class="fas fa-times"></i></div>
-                                <% } %> 
-                            </a>
-                        </div>
-                        <% if(user.isAdmin){ %>  
-                            <div class="buttons">
-                                <div class="buttons_admin">
-                                    <div class="edit"><i class="far fa-edit"></i></div>
-                                    <div class="delete"><i class="fas fa-trash"></i></div>
+                                <div class="buttons">
+                                    <div class="buttons_admin">
+                                        <div class="edit"><i class="far fa-edit"></i></div>
+                                        <div class="delete"><i class="fas fa-trash"></i></div>
+                                    </div>
+                                    <div class="buttons_admin_save">
+                                        <div class="savechanges"><i class="fas fa-save"></i></div>
+                                        <form id="invisible_form" action="#">
+                                            <input type="hidden" name="title" >
+                                            <input type="hidden" name="description">
+                                            <input type="hidden" name="after_delete_files">
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="buttons_admin_save">
-                                    <div class="savechanges"><i class="fas fa-save"></i></div>
-                                    <form id="invisible_form" action="#">
-                                        <input type="hidden" name="title" >
-                                        <input type="hidden" name="description">
-                                        <input type="hidden" name="after_delete_files">
-                                    </form>
-                                </div>
-                            </div>
-                        <% } %>   
+                            <% } %>   
+                        </div>
                     </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Memory Organisation</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">  
-                            <% if(user.isAdmin){ %>  
-                                <div class="branch_admin"><b>Branch: ECE-1st Year</b></div>
-                                <div class="group_admin"><b>Class Group: 2</b></div>
-                                <div class="sub_group_admin"><b>Lab Group: All</b></div> 
-                            <% } %>                
-                            <div class="description">jegjeedbcjhjdjbkjdgchbdjj</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        <div class="material">
-                            <a href="Chem PPT.pptx" class="file" download="">
-                                <div class="file_icon "></div>
-                                <div class="file_title">Resume</div>
-                                <% if(user.isAdmin){ %>  
-                                    <div class="file_delete"><i class="fas fa-times"></i></div>
-                                <% } %>   
-                            </a>
-                            <a href="Chem PPT.pptx" class="file" download="">
-                                <div class="file_icon "></div>
-                                <div class="file_title">Resume</div>
-                                <% if(user.isAdmin){ %>  
-                                    <div class="file_delete"><i class="fas fa-times"></i></div>
-                                <% } %>   
-                            </a>
-                        </div>
-                        <% if(user.isAdmin){ %>  
-                        <div class="file_box">
-                            <div class="file_names_box"></div>
-                            <input type="file" name="file_box" id="file_box" multiple>
-                        </div>
-                        <div class="buttons">
-                            <div class="buttons_admin">
-                                <div class="edit"><i class="far fa-edit"></i></div>
-                                <div class="delete"><i class="fas fa-trash"></i></div>
-                            </div>
-                            <div class="buttons_admin_save">
-                                <div class="savechanges"><i class="fas fa-save"></i></div>
-                                <form id="invisible_form" action="#">
-                                    <input type="hidden" name="title" >
-                                    <input type="hidden" name="description">
-                                    <input type="hidden" name="after_delete_files">
-                                    <input type="hidden" name="add_new_files">
-                                </form>
-                            </div>
-                        </div>
-                        <% } %>   
-                    </div>
-                </div>
+                <% } %>
             </div>
         </div>
         <div class="filters">
@@ -162,11 +107,16 @@
                 <div class="filter_heading">Subjects:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>All </li>
-                        <li>Computer Architecture and Organisation</li>
-                        <li>Embedded Systems</li>
-                        <li>Wireless Communication</li>
-                        <li>Advanced Communication</li>
+                        <li class="filter_subject<% if(filterList.courseName=="All"){ %> selected <% } %>" >All </li>
+                        <% if(user.isAdmin){ %>
+                            <% for(let course of courseFilters){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
+                        <% }else{ %>
+                            <% for(let course of user.courses){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -174,8 +124,8 @@
                 <div class="filter_heading">Date:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>Ascending</li>
-                        <li>Descending</li>
+                        <li class="filter_sort<% if(filterList.sort=="Oldest First"){ %> selected <% } %>" >Oldest First</li>
+                        <li class="filter_sort<% if(filterList.sort=="Latest First"){ %> selected <% } %>" >Latest First</li>
                     </ul>
                 </div>
             </div>
@@ -184,39 +134,15 @@
                     <div class="filter_heading">Branch</div>
                     <div class="filter_content">
                         <ul class="list">
-                            <li>ECE-1st Year</li>
-                            <li>CSE-1st Year</li>
-                            <li>EE-1st Year</li>
-                            <li>CSE-2nd Year</li>
+                            <li class="filter_branch<% if(filterList.branch=="All"){ %> selected <% } %>" >All </li>
+                            <% for(let branch of branchList){ %>
+                                <li class="filter_branch<% if(filterList.branch==branch.stream){ %> selected <% } %>" ><%=branch.stream%></li>
+                            <% } %> 
                         </ul>
                     </div>
                 </div>
-                <div class="filter_name">
-                    <div class="filter_heading">Class Group</div>
-                    <div class="filter_content">
-                        <ul class="list">
-                            <li>All</li>
-                            <li>1</li>
-                            <li>2</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="filter_name">
-                    <div class="filter_heading">Lab Group</div>
-                    <div class="filter_content">
-                        <ul class="list">
-                            <li>All</li>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
-                            <li>6</li>
-                        </ul>
-                    </div>
-                </div>
-            <% } %>   
-        </div>
+            <% } %>
+        </div>   
     </div>
 
     

@@ -366,7 +366,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                 if(req.files){
                     console.log("Files added");
                     for(let file of req.files){
-                        studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file[0].filename));
+                        studyMaterial.files.push({
+                            url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
+                            name:file[0].originalname
+                        });
                     }
                 }
                 studyMaterial.save();
@@ -386,7 +389,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                         if(req.files){
                             console.log("Files added");
                             for(let file of req.files){
-                                studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file[0].filename));
+                                studyMaterial.files.push({
+                                    url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
+                                    name:file[0].originalname
+                                });
                             }
                         }
                         studyMaterial.save();
@@ -407,7 +413,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                             if(req.files){
                                 console.log("Files added");
                                 for(let file of req.files){
-                                    studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file[0].filename));
+                                    studyMaterial.files.push({
+                                        url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
+                                        name:file[0].originalname
+                                    });
                                 }
                             }
                             studyMaterial.save();
@@ -428,7 +437,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                                 if(req.files){
                                     console.log("Files added");
                                     for(let file of req.files){
-                                        studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file[0].filename));
+                                        studyMaterial.files.push({
+                                            url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
+                                            name:file[0].originalname
+                                        });
                                     }
                                 }
                                 studyMaterial.save();
@@ -450,7 +462,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                         if(req.files){
                             console.log("Files added");
                             for(let file of req.files){
-                                studyMaterial.files.push(path.join(__dirname,'..','/uploads/study_material/',file[0].filename));
+                                studyMaterial.files.push({
+                                    url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
+                                    name:file[0].originalname
+                                });
                             }
                         }
                         studyMaterial.save();
@@ -480,7 +495,7 @@ module.exports.studyMaterialUpdate=async function(req,res){
 module.exports.studyMaterialDelete=async function(req,res){
     var studyMaterial = await StudyMaterialsModel.findById(req.params.id);
     for(let file of studyMaterial.files){
-        fs.unlinkSync(path.join(__dirname,'..',file));
+        fs.unlinkSync(path.join(__dirname,'..',file.url));
     }
     await StudyMaterialsModel.findByIdAndDelete(studyMaterial._id);
     req.flash('success', 'Study Material Deleted');

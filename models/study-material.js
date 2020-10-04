@@ -19,7 +19,13 @@ const studyMaterialSchema = new mongoose.Schema({
     },
     files:[
         {
-            type:String
+            url:{
+                type:String
+            },
+            name:{
+                type:String
+            }
+            
         }
     ]
 }, {
