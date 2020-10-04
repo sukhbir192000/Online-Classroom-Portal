@@ -5,6 +5,7 @@ const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
+const FileModel=require('../models/file');
 
 
 module.exports.studyMaterial=async function(req,res){
@@ -356,6 +357,7 @@ module.exports.studyMaterialCreate=async function(req,res){
     try{
         let user=res.locals.user
         console.log(req.files);
+        let count = 0;
         if(req.body.subject=="All"){
             for(let subjects of user.classSub){
                 let studyMaterial=await StudyMaterialsModel.create({
@@ -364,6 +366,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                     classSub: subjects,
                     postedBy: user._id
                 })
+                count++;
                 if(req.files){
                     console.log("Files added");
                     for(let file in req.files){
@@ -387,6 +390,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                             classSub: classSubElement,
                             postedBy: user._id
                         })
+                        count++;
                         if(req.files){
                             console.log("Files added");
                             for(let file in req.files){
@@ -411,6 +415,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                                 classSub: classSubElement,
                                 postedBy: user._id
                             })
+                            count++;
                             if(req.files){
                                 console.log("Files added");
                                 for(let file in req.files){
@@ -435,6 +440,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                                     classSub: classSubElement,
                                     postedBy: user._id
                                 })
+                                count++;
                                 if(req.files){
                                     console.log("Files added");
                                     for(let file in req.files){
@@ -460,6 +466,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                             },
                             postedBy: user._id
                         })
+                        count++;
                         if(req.files){
                             console.log("Files added");
                             for(let file in req.files){
@@ -474,8 +481,16 @@ module.exports.studyMaterialCreate=async function(req,res){
                 }
             }
         }
+        if(req.files){
+            for(let file in req.files){
+                await FileModel.create({
+                    url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                    timesUsed: count
+                });
+            }
+        }
         req.flash('success', 'Study Material Posted');
-        return res.redirect('back')
+        return res.redirect('back');
     }
     catch(err){
         console.log("error while adding to Db study materials :",err);
@@ -504,7 +519,15 @@ module.exports.studyMaterialUpdate=async function(req,res){
         for(let i=0;i<studyMaterial.files.length;i++){
          
             if(delete_files.includes(studyMaterial.files[i].url)){
-                fs.unlinkSync(path.join(__dirname,'..',studyMaterial.files[i].url));
+                var fileElement = await FileModel.findOne({url: studyMaterial.files[i].url});
+                if(fileElement.timesUsed>1){
+                    fileElement.timesUsed--;
+                    fileElement.save();
+                }
+                else{
+                    fs.unlinkSync(path.join(__dirname,'..',studyMaterial.files[i].url));
+                    await FileModel.findByIdAndDelete(fileElement._id);
+                }
                 studyMaterial.files.splice(i,1);
                 i--;
                 console.log("edited array")
@@ -523,8 +546,15 @@ module.exports.studyMaterialUpdate=async function(req,res){
 module.exports.studyMaterialDelete=async function(req,res){
     var studyMaterial = await StudyMaterialsModel.findById(req.params.id);
     for(let file of studyMaterial.files){
-        
-        fs.unlinkSync(path.join(__dirname,'..',file.url));
+        var fileElement = await FileModel.findOne({url: file.url});
+        if(fileElement.timesUsed>1){
+            fileElement.timesUsed--;
+            fileElement.save();
+        }
+        else{
+            fs.unlinkSync(path.join(__dirname,'..',file.url));
+            await FileModel.findByIdAndDelete(fileElement._id);
+        }
     }
     await StudyMaterialsModel.findByIdAndDelete(studyMaterial._id);
     req.flash('success', 'Study Material Deleted');
