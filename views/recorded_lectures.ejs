@@ -15,6 +15,57 @@
                
             </div>
             <div class="box_layout">
+                <% if(user.isAdmin){ %>
+                    <div class="add">
+                        <div class="add_icon"><i class="fas fa-plus"></i></div>
+                        <div class="add_content">Add </div>
+                    </div>
+                    <div class="add_admin">
+                        <form>
+                            <label for="subject">Subject:</label>
+                            <select id="subject" name="subject">
+                                <option value="All">All</option>
+                                <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
+                                <option value="Embedded Systems">Embedded Systems</option>
+                                <option value="Advanced Communication">Advanced Communication</option>
+                                <option value="Wireless Communication">Wireless Communication</option>
+                            </select><br><br>
+                            <label for="branch">Branch:</label>
+                            <select id="branch" name="branch">
+                                <option value="All">All</option>
+                                <option value="ECE-1st Year">ECE-1st Year</option>
+                                <option value="EE-1st Year">EE-1st Year</option>
+                                <option value="EE-1st Year">EE-1st Year</option>
+                                <option value="ECE-2nd Year">ECE-2nd Year</option>
+                            </select><br><br>
+                            <label for="group">Class Group:</label>
+                            <select id="group" name="group">
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select><br><br>
+                            <label for="sub_group">Lab Group:</label>
+                            <select id="sub_group" name="sub_group" >
+                                <option value="All">All</option>
+                                <option value="1">1</option>
+                                <option value="3">2</option>
+                                <option value="3">3</option>
+                                <option value="3">4</option>
+                                <option value="5">5</option>
+                                <option value="7">6</option>
+                            </select><br><br>
+                            <label>Date of lecture:</label>
+                            <input class="date_lecture" type="date" id="lecture_date" placeholder="Date of lecture" required="true"><br><br>
+                            <input type=text name="lecture_link" id="lecture_link" placeholder="Link of the lecture" ><br><br>
+                            <input type="text" name="title" id="lecture_title" placeholder="Title of lecture" ></textarea><br><br>
+                            <textarea name="lecture_references" id="lecture_references" placeholder="Book/video references" rows="3"></textarea><br><br>
+                            <textarea name="message" id="lecture_message" placeholder="Other description" rows="4" ></textarea><br><br>
+                            <div class="submit_button">
+                                <button type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                <% } %>
                 <div class="box">
                     <div class="box_heading"> 
                         <div class="subject">Computer Architecture</div>
@@ -23,39 +74,33 @@
                     <div class="box_content">  
                         <div class="box_content_details">                    
                             <div class="deadline">Recorded on 29-09-20</div>
-                            <a class="link" href="https://www.google.com">https://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.com</a>
-                            <div class="description"></div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Memory Organisation</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="deadline">Recorded on 29-09-20</div>
+                            <% if(user.isAdmin){ %>
+                                <div class="branch_admin">Branch: ECE-1st Year</div>
+                                <div class="group_admin">Class Group: 2</div>
+                                <div class="sub_group_admin">Lab Group: All</div>
+                            <% } %>
                             <a class="link" href="https://www.google.com">https://www.google.com</a>
+                            <div class="references">References: Morris Mano chap 6</div>
                             <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
                             <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Memory Organisation</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="deadline">Recorded on 29-09-20</div>
-                            <a class="link" href="https://www.google.com">https://www.google.com</a>
-                            <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
+                            <% if(user.isAdmin){ %>
+                                <div class="buttons">
+                                    <div class="buttons_admin">
+                                        <div class="edit"><i class="far fa-edit"></i></div>
+                                        <div class="delete"><i class="fas fa-trash"></i></div>
+                                    </div>
+                                    <div class="buttons_admin_save">
+                                        <div class="savechanges"><i class="fas fa-save"></i></div>
+                                        <form id="invisible_form" action="#">
+                                            <input type="hidden" name="title" >
+                                            <input type="hidden" name="description">
+                                            <input type="hidden" name="references">
+                                            <input type="hidden" name="link">
+                                        </form>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>     
                     </div>
                 </div>
             </div>
@@ -65,7 +110,7 @@
                 <div class="filter_heading">Subjects:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>All </li>
+                        <li class="selected">All </li>
                         <li>Computer Architecture and Organisation</li>
                         <li>Embedded Systems</li>
                         <li>Wireless Communication</li>
@@ -77,15 +122,91 @@
                 <div class="filter_heading">Date:</div>
                 <div class="filter_content">
                     <ul class="list">
-                        <li>Ascending</li>
+                        <li class="selected">Ascending</li>
                         <li>Descending</li>
                     </ul>
                 </div>
             </div>
-            
         </div>
-
+        <% if(user.isAdmin){ %>
+            <div class="filter_name">
+                <div class="filter_heading">Branch</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">ECE-1st Year</li>
+                        <li>CSE-1st Year</li>
+                        <li>EE-1st Year</li>
+                        <li>CSE-2nd Year</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter_name">
+                <div class="filter_heading">Class Group</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">All</li>
+                        <li>1</li>
+                        <li>2</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter_name">
+                <div class="filter_heading">Lab Group</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">All</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter_name">
+                <div class="filter_heading">Branch</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">ECE-1st Year</li>
+                        <li>CSE-1st Year</li>
+                        <li>EE-1st Year</li>
+                        <li>CSE-2nd Year</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter_name">
+                <div class="filter_heading">Class Group</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">All</li>
+                        <li>1</li>
+                        <li>2</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter_name">
+                <div class="filter_heading">Lab Group</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="selected">All</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                    </ul>
+                </div>
+            </div>
+        <% } %>
     </div>
 
     
-    <script src="scripts/recorded_lectures.js"></script>
+<script src="scripts/recorded_lectures.js"></script>
+<% if(user.isAdmin){ %>
+    <!-- <script src="/js/announcement_admin_filter.js"></script> -->
+    <script src="/js/recorded_lectures_admin.js"></script>
+<% }else{ %>
+    <!-- <script src="/js/announcement_filter.js"></script> -->
+<% } %>

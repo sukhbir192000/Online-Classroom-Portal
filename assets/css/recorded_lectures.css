@@ -299,18 +299,23 @@ body{
     width:100%;
 }
 .deadline{
-    font-weight: 550;
+    /* font-weight: 550; */
     font-size: 1em;
     font-style: italic;
     overflow-wrap: break-word;
 }
+.references{
+    font-weight: bold;
+    overflow-wrap: break-word;
+    margin-top:0.5em;
+}
 .description{
-    padding-top:0.5em;
+    margin-top:0.5em;
     font-size: 0.95em;
     overflow-wrap: break-word;
 }
 .link{
-    padding-top:0.5em;
+    margin-top:0.5em;
     font-size: 1.1em;
     overflow-wrap: break-word;
     color: blue;
@@ -324,6 +329,159 @@ body{
 .show{
     visibility: visible;
 }
+.hide{
+    display: none;
+}
+.selected{
+    background-color:#1D3557;
+    color:white;
+    border-radius: 10px;
+    box-shadow: 0.01em 0.01em 0.5em grey;
+}
+.branch_admin, .group_admin, .sub_group_admin{
+    font-weight: bold;
+    padding-top:0.5em;
+    font-size: 0.9em;
+    overflow-wrap: break-word;
+}
+.add{
+    margin:1em 1.5em;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
+
+.add_admin{
+    margin:1em 1.5em;
+    border:2px solid  #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    padding: 0.8em;
+    display: none;
+    width:92%;
+}
+
+select option{
+    max-height:2em;
+}
+#subject{
+    margin-left: 4em;
+}
+#branch{
+    margin-left: 4.25em;
+}
+#group{
+    margin-left: 1.4em
+}
+#sub_group{
+    margin-left: 2.5em;
+}
+
+input,textarea{
+    width:60vw;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.date_lecture{
+    margin-left:0.4em;
+    width:auto;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.buttons_admin{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* width:100%; */
+    /* background-color: black; */
+}
+.edit{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.4em;
+    cursor: pointer;
+    visibility: visible;
+}
+
+.delete{
+    font-size: 1.4em;
+    cursor:pointer;
+    visibility: visible;
+}
+.buttons_admin_save{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+}
+.savechanges{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.6em;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.heading_edit{
+    background-color: #e3d8d8;
+    border:1px black solid;
+    color: black;
+}
+.content_edit{
+    background-color: #efefef;
+    border:1px black solid;
+    color: black;
+}
+
 
 
 /* FOOTER */
@@ -401,7 +559,9 @@ li:hover{
     padding:0;
     margin:0;
 }
-
+.show{
+    visibility: visible;
+}
 
 
 
@@ -492,6 +652,9 @@ li:hover{
     }
     .show{
         visibility: visible;
+    }
+    input, textarea{
+        width:80vw;
     }
 
 
@@ -695,6 +858,20 @@ li:hover{
     }
     .date_posted{
         font-size: 0.7em;
+    }
+    .add{
+        margin-left: 0.01em;
+    }
+    .add_admin{
+        margin-left: 0.01em;
+        width:89%;
+    }
+    input, textarea{
+        width:75vw;
+    }
+    #subject{
+        margin-top: 0.7em;
+        margin-left: 0;
     }
     
 
