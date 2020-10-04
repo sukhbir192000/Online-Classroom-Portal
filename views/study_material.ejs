@@ -112,7 +112,7 @@
                                 <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
                             <% } %>
                         <% }else{ %>
-                            <% for(let course of user.courses){ %>
+                            <% for(let course of courseList){ %>
                                 <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
                             <% } %>
                         <% } %>

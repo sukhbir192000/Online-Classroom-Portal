@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const path = require('path');
 const classSubSchema = require('./class-sub');
 
 const recordedLectureSchema = new mongoose.Schema({
@@ -9,7 +8,11 @@ const recordedLectureSchema = new mongoose.Schema({
     content: {
         type: String
     },
-    classSub: [classSubSchema]
+    classSub: classSubSchema,
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, {
     timestamps: true
 });

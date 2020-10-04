@@ -182,10 +182,16 @@ module.exports.studyMaterial=async function(req,res){
             mymap.set(el.name, el.id);
             return true; 
         });
+        var courses = [];
+        for(let course of user.courses){
+            let  courseObject = await CourseModel.findById(course);
+            courses.push(courseObject);
+        }
         return res.render("study_material",{
             title:"Study Material",
             studyMaterials:studyMaterialList,
             filterList:filterList,
+            courseList: courses,
             courseFilters:courseFilterAdmin,
             branchList: branchList
         });

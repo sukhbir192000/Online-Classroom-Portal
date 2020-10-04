@@ -1,11 +1,11 @@
-const AnnouncementsModel=require('../models/announcement');
+const RecordedLecturesModel=require('../models/recorded-lecture');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
 
 
-module.exports.announcement=async function(req,res){
+module.exports.recordedLecture=async function(req,res){
     try{
         let user=res.locals.user;
         let courseFilterAdmin = []
@@ -31,7 +31,7 @@ module.exports.announcement=async function(req,res){
                 return true; 
             });
         }
-        let announcementsList=[]; // await AnnouncementsModel.find({}).sort('-createdAt');
+        let recordedLecturesList=[];
         var courseList=[];
         if(!req.query.sub || req.query.sub=="All"){
             courseList=courseList.concat(user.courses);
@@ -60,7 +60,7 @@ module.exports.announcement=async function(req,res){
                         stream:req.query.branch
                     });
                     classId = classId[0]._id;
-                    announcementsList = await AnnouncementsModel.find({
+                    recordedLecturesList = await RecordedLecturesModel.find({
                         postedBy: user._id,
                         "classSub.course":courseId,
                         "classSub.class":classId
@@ -74,7 +74,7 @@ module.exports.announcement=async function(req,res){
                         name:req.query.sub
                     });
                     courseId = courseId[0]._id;
-                    announcementsList = await AnnouncementsModel.find({
+                    recordedLecturesList = await RecordedLecturesModel.find({
                         postedBy: user._id,
                         "classSub.course": courseId
                     })
@@ -85,7 +85,7 @@ module.exports.announcement=async function(req,res){
                 }
             }
             else{
-                announcementsList = await AnnouncementsModel.find({postedBy: user._id})
+                recordedLecturesList = await RecordedLecturesModel.find({postedBy: user._id})
                 .populate('classSub.course')
                 .populate('classSub.class')
                 .populate('classSub.group')
@@ -95,7 +95,7 @@ module.exports.announcement=async function(req,res){
         else{
             for(let course of courseList){
 
-                let announcements=await AnnouncementsModel.find({
+                let recordedLectures=await RecordedLecturesModel.find({
                     $and: [
                         {
                             "classSub.course":course,
@@ -117,20 +117,19 @@ module.exports.announcement=async function(req,res){
                         }
                     ]
                 }).populate('classSub.course');
-                if(announcements.length>0){
-                    // announcements = await announcements.populate('classSub.course').execPopulate();
-                    announcementsList = announcementsList.concat(announcements);
+                if(recordedLectures.length>0){
+                    recordedLecturesList = recordedLecturesList.concat(announcements);
                 }
             }
         }
         
         if(!req.query.date || req.query.date=="Latest First"){
-            announcementsList.sort(function(a,b){
+            recordedLecturesList.sort(function(a,b){
                 return new Date(b.createdAt) - new Date(a.createdAt);
             });
         }
         else{
-            announcementsList.sort(function(a,b){
+            recordedLecturesList.sort(function(a,b){
                 return new Date(a.createdAt) - new Date(b.createdAt);
             });   
         }
@@ -150,7 +149,6 @@ module.exports.announcement=async function(req,res){
             filterList.sort="Latest First",
             filterList.branch="All"
         }
-        // res.locals.user=await res.locals.user.populate('courses').execPopulate();
         branchList=[]
         if(req.query.sub && req.query.sub!="All"){
             for(let classSubElement of user.classSub){
@@ -185,9 +183,9 @@ module.exports.announcement=async function(req,res){
             let  courseObject = await CourseModel.findById(course);
             courses.push(courseObject);
         }
-        return res.render("announcements",{
-            title:"Announcements",
-            announcements:announcementsList,
+        return res.render("recorded_lectures",{
+            title:"Recorded Lectures",
+            recordedLectures:recordedLecturesList,
             filterList:filterList,
             courseList: courses,
             courseFilters:courseFilterAdmin,
@@ -357,13 +355,13 @@ module.exports.getSubGroups=async function(req,res){
         });
     }
 }
-module.exports.announcementCreate=async function(req,res){
+module.exports.recordedLectureCreate=async function(req,res){
     
     try{
         let user=res.locals.user
         if(req.body.subject=="All"){
             for(let subjects of user.classSub){
-                await AnnouncementsModel.create({
+                await RecordedLecturesModel.create({
                     title: req.body.title,
                     content: req.body.message,
                     classSub: subjects,
@@ -376,7 +374,7 @@ module.exports.announcementCreate=async function(req,res){
             if(req.body.branch=="All"){
                 for(let classSubElement of user.classSub){
                     if(subject==classSubElement.course){
-                        await AnnouncementsModel.create({
+                        await RecordedLecturesModel.create({
                             title: req.body.title,
                             content: req.body.message,
                             classSub: classSubElement,
@@ -390,7 +388,7 @@ module.exports.announcementCreate=async function(req,res){
                 if(req.body.group == "All"){
                     for(let classSubElement of user.classSub){
                         if(subject==classSubElement.course && branch==classSubElement.class){
-                            await AnnouncementsModel.create({
+                            await RecordedLecturesModel.create({
                                 title: req.body.title,
                                 content: req.body.message,
                                 classSub: classSubElement,
@@ -404,7 +402,7 @@ module.exports.announcementCreate=async function(req,res){
                     if(req.body.sub_group == "All"){
                         for(let classSubElement of user.classSub){
                             if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                await AnnouncementsModel.create({
+                                await RecordedLecturesModel.create({
                                     title: req.body.title,
                                     content: req.body.message,
                                     classSub: classSubElement,
@@ -414,7 +412,7 @@ module.exports.announcementCreate=async function(req,res){
                         }
                     }
                     else{
-                        await AnnouncementsModel.create({
+                        await RecordedLecturesModel.create({
                             title: req.body.title,
                             content: req.body.message,
                             classSub: {
@@ -429,17 +427,17 @@ module.exports.announcementCreate=async function(req,res){
                 }
             }
         }
-        req.flash('success', 'Announcement Posted');
+        req.flash('success', 'Recorded Lecture Posted');
         return res.redirect('back')
     }
     catch(err){
-        console.log("error while adding to Db announcements :",err);
+        console.log("error while adding to Db Recorded Lectures :",err);
         return res.redirect('back');    
     }
 }
 
-module.exports.announcementUpdate=async function(req,res){
-    await AnnouncementsModel.findByIdAndUpdate(req.params.announcementId,{
+module.exports.recordedLectureUpdate=async function(req,res){
+    await RecordedLecturesModel.findByIdAndUpdate(req.params.recordedLectureId,{
         $set: {
             title: req.body.title,
             content: req.body.description
@@ -448,14 +446,14 @@ module.exports.announcementUpdate=async function(req,res){
     return res.redirect('back');
 };
 
-module.exports.announcementDelete=function(req,res){
-    AnnouncementsModel.findByIdAndDelete(req.params.id,function(err){
+module.exports.recordedLectureDelete=function(req,res){
+    RecordedLecturesModel.findByIdAndDelete(req.params.id,function(err){
         if(err){
-            console.log("error while deleting announcement :",err);
+            console.log("error while deleting recorded lecture :",err);
             return res.redirect('back');
         }
         else{
-            req.flash('success', 'Announcement Deleted');
+            req.flash('success', 'Recorded Lecture Deleted');
             return res.redirect('back');
         }
     })

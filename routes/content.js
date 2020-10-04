@@ -4,7 +4,7 @@ const passport=require('../config/passport-google-oauth2-strategy');
 const contentController=require('../controllers/content');
 Router.use('/announcements',require('./announcements'));
 Router.use('/studymaterial',require('./studyMaterial'));
-Router.get('/recordedlectures',contentController.recordedLectures);
+Router.get('/recordedlectures',require('./recordedLectures'));
 Router.use('/assignments',require('./assignments'));
 Router.get('/timetable',contentController.timeTable);
 Router.get('/doubts',contentController.doubts);
