@@ -1,12 +1,12 @@
 let current_box=null,arr=[], links=[],deleted_files=[];
 let boxelements = document.querySelectorAll('.box');
 for(let i=0;i<boxelements.length;i++){
-    var editbutton = boxelements[i].children[1].children[3].children[0].children[0];
+    var editbutton = boxelements[i].children[1].children[2].children[0].children[0];
     editbutton.addEventListener('click',function(e){
         if(current_box!=null){
-            var editbutton = current_box.children[1].children[3].children[0].children[0];
-            var deletebutton = current_box.children[1].children[3].children[0].children[1];
-            var savebutton =current_box.children[1].children[3].children[1].children[0];
+            var editbutton = current_box.children[1].children[2].children[0].children[0];
+            var deletebutton = current_box.children[1].children[2].children[0].children[1];
+            var savebutton =current_box.children[1].children[2].children[1].children[0];
             var title = current_box.children[0].children[1];
             var description = current_box.children[1].children[0].children[3];
             title.contentEditable="false";
@@ -26,16 +26,15 @@ for(let i=0;i<boxelements.length;i++){
                 fileDeleteButtons.children[j].style.opacity = 1;
                 fileDeleteButtons.children[j].style.pointerEvents = "auto";
             }
-            
             current_box.children[1].children[2].children[0].innerHTML = "";
             current_box=null;
             arr=[];
             links=[];
             deleted_files = [];
         }
-        var editbutton = boxelements[i].children[1].children[3].children[0].children[0];
-        var deletebutton = boxelements[i].children[1].children[3].children[0].children[1];
-        var savebutton = boxelements[i].children[1].children[3].children[1].children[0];
+        var editbutton = boxelements[i].children[1].children[2].children[0].children[0];
+        var deletebutton = boxelements[i].children[1].children[2].children[0].children[1];
+        var savebutton = boxelements[i].children[1].children[2].children[1].children[0];
         var title = boxelements[i].children[0].children[1];
         var description = boxelements[i].children[1].children[0].children[3];
         arr.push(title.textContent);
@@ -52,56 +51,22 @@ for(let i=0;i<boxelements.length;i++){
         for(let j=0;j<fileDeleteButtons.childElementCount;j++){
             fileDeleteButtons.children[j].removeAttribute("download");
             links.push(fileDeleteButtons.children[j].href);
-            deleted_files.push(fileDeleteButtons.children[j].href);
             fileDeleteButtons.children[j].href= "#/";
             fileDeleteButtons.children[j].children[2].style.cursor = "pointer";
             fileDeleteButtons.children[j].children[2].classList.add("show_delete");
             current_box.children[1].children[2].classList.add("show_delete");
             fileDeleteButtons.children[j].children[2].addEventListener("click",function(e){
-                deleted_files[j] = 0;
+                deleted_files.push(links[j]);
                 fileDeleteButtons.children[j].children[2].classList.remove("show_delete");
                 fileDeleteButtons.children[j].style.pointerEvents = "none";
                 fileDeleteButtons.children[j].style.opacity = 0.5;
             });
         }
-
-        current_box.children[1].children[2].children[1].addEventListener('change',function(e){
-            var x = this;
-            if(x.files.length>0){
-                for(let i=0;i<x.files.length;i++){
-                    var main = document.createElement("DIV");
-                    main.classList.add("file_content");
-                    var y = document.createElement("DIV");
-                
-                    y.textContent = x.files[i].name;
-                    
-                    y.classList.add("file_name");
-                    
-                    main.appendChild(y);
-                    current_box.children[1].children[2].children[0].appendChild(main);
-                   
-                }
-                x.value = "";
-                var file_names_box =  current_box.children[1].children[2].children[0];
-                
-            }
-        })
         savebutton.addEventListener('click',function(e){
-            let i=0, j=0;
-            while(i<deleted_files.length){
-                if(deleted_files[i] == 0){
-                    deleted_files.splice(i,1);
-                }
-                else{
-                    i++;
-                }
-            }
-           
-            current_box.children[1].children[3].children[1].children[1].children[0].setAttribute('value',title.textContent);
-            current_box.children[1].children[3].children[1].children[1].children[1].setAttribute('value',description.textContent);
-            current_box.children[1].children[3].children[1].children[1].children[2].setAttribute('value',deleted_files);
-            current_box.children[1].children[3].children[1].children[1].children[3].setAttribute('value',files_temp_box);
-            current_box.children[1].children[3].children[1].children[1].submit();
+            current_box.children[1].children[2].children[1].children[1].children[0].setAttribute('value',title.textContent);
+            current_box.children[1].children[2].children[1].children[1].children[1].setAttribute('value',description.textContent);
+            current_box.children[1].children[2].children[1].children[1].children[2].setAttribute('value',deleted_files);
+            current_box.children[1].children[2].children[1].children[1].submit();
         })
     })   
 }
@@ -112,11 +77,11 @@ for(let i=0;i<boxelements.length;i++){
 document.addEventListener('click',function(e){
     if(current_box){
         var rect = current_box.getBoundingClientRect();
-        var savebutton =current_box.children[1].children[3].children[1].children[0];
+        var savebutton =current_box.children[1].children[2].children[1].children[0];
         const style = getComputedStyle(savebutton);
         if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height) && style.visibility=='visible'){
-            var editbutton = current_box.children[1].children[3].children[0].children[0];
-            var deletebutton = current_box.children[1].children[3].children[0].children[1];
+            var editbutton = current_box.children[1].children[2].children[0].children[0];
+            var deletebutton = current_box.children[1].children[2].children[0].children[1];
             var title = current_box.children[0].children[1];
             var description = current_box.children[1].children[0].children[3];
             title.contentEditable="false";
@@ -135,8 +100,6 @@ document.addEventListener('click',function(e){
                 fileDeleteButtons.children[j].style.opacity = 1;
                 fileDeleteButtons.children[j].style.pointerEvents = "auto";
             }
-            files_temp_box = [];
-            current_box.children[1].children[2].children[0].innerHTML = "";
             title.textContent=arr[0];
             description.textContent=arr[1];
             subject.textContent=arr[2];
@@ -153,10 +116,20 @@ document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-        files_temp = [];
         document.getElementById("title").value="";
         document.getElementById("message").value="";
-        document.querySelector(".file_names").innerHTML = "";
+        document.querySelector("#file_names").innerHTML = "";
+        document.getElementById("file_inputs").innerHTML = "";
+        var newInput = document.createElement("input");
+        newInput.name = 'file0';
+        newInput.className = "file";
+        newInput.type = "file";
+        newInput.style.display = "none";
+        document.getElementById("file_inputs").appendChild(newInput);
+        var newButton = document.createElement("button");
+        newButton.id = "new_files_button";
+        newButton.textContent = "Add files";
+        document.getElementById("file_inputs").appendChild(newButton);
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -164,65 +137,58 @@ document.querySelector(".add").addEventListener('click',function(e){
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
-// ---------------------------------------------------------------------------------------------------------------
 
-function FileListItems (files) {
-    var b = new ClipboardEvent("").clipboardData || new DataTransfer()
-    for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i])
-    return b.files
-  }
-  
-//   var files = [
-//     new File(['content'], 'sample1.txt'),
-//     new File(['abc'], 'sample2.txt')
-//   ];
-  
-  
-//   fileInput.files = new FileListItems(files)
-//   console.log(fileInput.files)
-
-// var files_temp = []
-// document.querySelector("#file").addEventListener('change',function(e){
-//     document.getElementById('file').textContent
-//     var x = document.getElementById("file");
-//     if(x.files.length>0){
-//         for(let i=0;i<x.files.length;i++){
-//             var main = document.createElement("DIV");
-//             main.classList.add("file_content");
-//             var y = document.createElement("DIV");
-//             var z = document.createElement("DIV");
-//             y.textContent = x.files[i].name;
-//             z.innerHTML = "<i class='fas fa-times'></i>"
-//             y.classList.add("file_name");
-//             z.classList.add("file_cross");
-//             main.appendChild(y);
-//             main.appendChild(z);
-//             document.querySelector(".file_names").appendChild(main);
-//             files_temp.push(x.files[i]);
-//         }
-//         x.value = "";
-//         var file_names = document.querySelector(".file_names");
-//         for(let i=0;i<file_names.childElementCount;i++){
-//             file_names.children[i].children[1].addEventListener('click',function(e){
-//                 file_names.children[i].style.display = "none";
-//                 files_temp[i] = 0;
-//             })
-//         }
-//     }
-// })
-
-//-----------fake button----------
-document.getElementById('file_button_named').addEventListener('click',function(e){
-    document.getElementById('file').click();
+availableFiles = ['file1', 'file2', 'file3', 'file4','file5', 'file6', 'file7', 'file8', 'file9']
+document.getElementById("add_files_button").addEventListener('click',function(e){
+    var inputList = document.getElementsByClassName("file");
+    var lastElement = inputList[inputList.length-1];
+    lastElement.click();
+    lastElement.addEventListener('change',function(e){
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("file_content");
+        newDiv.id = lastElement.getAttribute("name");
+        var newDiv_title = document.createElement("DIV");
+        var newDiv_icon = document.createElement("DIV");  
+        newDiv_title.textContent = lastElement.files[0].name;
+        newDiv_icon.innerHTML = "<i class='fas fa-times'></i>"
+        newDiv_title.classList.add("file_name");
+        newDiv_icon.classList.add("file_cross");
+        newDiv.id = lastElement.getAttribute("name");
+        newDiv.appendChild(newDiv_title);
+        newDiv.appendChild(newDiv_icon);
+        document.getElementById("file_names").appendChild(newDiv);
+        if(availableFiles.length!=0){
+            var newInput = document.createElement("input");
+            newInput.name = availableFiles[0];
+            newInput.className = "file";
+            newInput.type = "file";
+            newInput.style.display = "none";
+            document.getElementById("file_inputs").appendChild(newInput);
+            availableFiles.splice(0,1);
+        }
+        else{
+            document.getElementById("add_files_button").style.display = "none";
+        }
+        newDiv_icon.addEventListener('click',function(e){
+            var id = newDiv.id;
+            document.getElementsByName(id)[0].remove();
+            newDiv.remove();
+            availableFiles.push(id);
+            document.getElementById("add_files_button").style.display = "flex";
+            if(availableFiles.length == 1 && document.getElementById("add_files_button").style.display == "none"){
+                var newInput = document.createElement("input");
+                newInput.name = availableFiles[0];
+                newInput.className = "file";
+                newInput.type = "file";
+                newInput.style.display = "none";
+                document.getElementById("file_inputs").appendChild(newInput);
+                availableFiles.splice(0,1);
+            }
+        })
+    })                
 })
-document.getElementById('file').addEventListener('change',function(e){
-    if(this.files.length>0){
-        document.getElementById('file_button_named').innerHTML="Change Files"
-    }
-    else{
-        document.getElementById('file_button_named').innerHTML="Choose Files"
-    }
-})
+
+
 //-----------------------------add study material-----------------------------
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
