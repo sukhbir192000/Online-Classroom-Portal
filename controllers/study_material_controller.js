@@ -355,6 +355,7 @@ module.exports.getSubGroups=async function(req,res){
 module.exports.studyMaterialCreate=async function(req,res){
     try{
         let user=res.locals.user
+        console.log(req.files);
         if(req.body.subject=="All"){
             for(let subjects of user.classSub){
                 let studyMaterial=await StudyMaterialsModel.create({
@@ -365,10 +366,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                 })
                 if(req.files){
                     console.log("Files added");
-                    for(let file of req.files){
+                    for(let file in req.files){
                         studyMaterial.files.push({
-                            url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
-                            name:file[0].originalname
+                            url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                            name:req.files[file][0].originalname
                         });
                     }
                 }
@@ -388,10 +389,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                         })
                         if(req.files){
                             console.log("Files added");
-                            for(let file of req.files){
+                            for(let file in req.files){
                                 studyMaterial.files.push({
-                                    url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
-                                    name:file[0].originalname
+                                    url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                                    name:req.files[file][0].originalname
                                 });
                             }
                         }
@@ -412,10 +413,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                             })
                             if(req.files){
                                 console.log("Files added");
-                                for(let file of req.files){
+                                for(let file in req.files){
                                     studyMaterial.files.push({
-                                        url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
-                                        name:file[0].originalname
+                                        url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                                        name:req.files[file][0].originalname
                                     });
                                 }
                             }
@@ -436,10 +437,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                                 })
                                 if(req.files){
                                     console.log("Files added");
-                                    for(let file of req.files){
+                                    for(let file in req.files){
                                         studyMaterial.files.push({
-                                            url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
-                                            name:file[0].originalname
+                                            url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                                            name:req.files[file][0].originalname
                                         });
                                     }
                                 }
@@ -461,10 +462,10 @@ module.exports.studyMaterialCreate=async function(req,res){
                         })
                         if(req.files){
                             console.log("Files added");
-                            for(let file of req.files){
+                            for(let file in req.files){
                                 studyMaterial.files.push({
-                                    url:path.join(__dirname,'..','/uploads/study_material/',file[0].filename),
-                                    name:file[0].originalname
+                                    url:StudyMaterialsModel.filePath+req.files[file][0].filename,
+                                    name:req.files[file][0].originalname
                                 });
                             }
                         }

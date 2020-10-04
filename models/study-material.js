@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // const multer=require('multer');
 const path = require('path');
 const { stringify } = require('querystring');
-const file_path=path.join('/uploads/studyMaterial');
+const file_path=path.join('/uploads/study_material/');
 const classSubSchema = require('./class-sub');
 
 const studyMaterialSchema = new mongoose.Schema({
@@ -42,7 +42,7 @@ const studyMaterialSchema = new mongoose.Schema({
 // studyMaterialSchema.statics.fileUploaded=multer({
 //     storage:storage
 // }).single('files');
-// studyMaterialSchema.statics.filePath=file_path;
+studyMaterialSchema.statics.filePath=file_path;
 
 
 const StudyMaterial = mongoose.model('Study Material', studyMaterialSchema);

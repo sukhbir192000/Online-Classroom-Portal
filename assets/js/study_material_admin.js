@@ -139,11 +139,16 @@ document.querySelector(".add").addEventListener('click',function(e){
 })
 
 availableFiles = ['file1', 'file2', 'file3', 'file4','file5', 'file6', 'file7', 'file8', 'file9']
+eventListenerPresent = [false,false,false,false,false,false,false,false,false,false]
 document.getElementById("add_files_button").addEventListener('click',function(e){
     var inputList = document.getElementsByClassName("file");
     var lastElement = inputList[inputList.length-1];
     lastElement.click();
+    let index = lastElement.name.substr(-1);
+    if(eventListenerPresent[parseInt(index)]) return;
+    eventListenerPresent[parseInt(index)] = true;
     lastElement.addEventListener('change',function(e){
+        var inputList = document.getElementsByClassName("file");
         var newDiv = document.createElement("div");
         newDiv.classList.add("file_content");
         newDiv.id = lastElement.getAttribute("name");
@@ -174,6 +179,7 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
             document.getElementsByName(id)[0].remove();
             newDiv.remove();
             availableFiles.push(id);
+            eventListenerPresent[parseInt(id.substr(-1))] = false;
             document.getElementById("add_files_button").style.display = "flex";
             if(availableFiles.length == 1 && document.getElementById("add_files_button").style.display == "none"){
                 var newInput = document.createElement("input");
@@ -185,7 +191,7 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
                 availableFiles.splice(0,1);
             }
         })
-    })                
+    })
 })
 
 
