@@ -11,18 +11,21 @@ let storage = multer.diskStorage({
       cb(null, path.join(__dirname,'..','/uploads/study_material'));
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now());
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 var upload = multer({
     storage:storage
 });
+var fields = [
+  {name: "file0"},{name: "file1"},{name: "file2"},{name: "file3"},{name: "file4"},{name: "file5"},{name: "file6"},{name: "file7"},{name: "file8"},{name: "file9"},
+]
 
 Router.get('/',contentController.studyMaterial);
 //change to isAdmin
-Router.post('/create',passport.checkAdmin, upload.array('files'),contentController.studyMaterialCreate);
+Router.post('/create',passport.checkAdmin, upload.fields(fields),contentController.studyMaterialCreate);
 // // Router.get('/edit/:',passport.checkAuthentication,contentController.announcementEdit);
-// Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelete);
+Router.get('/delete/:id',passport.checkAdmin,contentController.studyMaterialDelete);
 // Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);
 // Router.post('/form/branches',passport.checkAdmin,contentController.getBranches);
 // Router.post('/form/groups',passport.checkAdmin,contentController.getGroups);
