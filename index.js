@@ -52,7 +52,7 @@ app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(flashMiddleware.setFlash);
 app.use('/',require('./routes'));
-app.use('/uploads/study_material', express.static('./uploads/study_materials'));
+app.use('/uploads/study_material', express.static('./uploads/study_material'));
 
 
 
