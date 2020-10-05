@@ -448,10 +448,14 @@ module.exports.recordedLectureCreate=async function(req,res){
 }
 
 module.exports.recordedLectureUpdate=async function(req,res){
+    console.log(req.body);
     await RecordedLecturesModel.findByIdAndUpdate(req.params.recordedLectureId,{
         $set: {
             title: req.body.title,
-            content: req.body.description
+            content: req.body.description,
+            link:req.body.link,
+            references:req.body.references
+
         }
     });
     return res.redirect('back');

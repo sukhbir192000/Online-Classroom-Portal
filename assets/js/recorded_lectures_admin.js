@@ -61,10 +61,10 @@ for(let i=0;i<boxelements.length;i++){
         savebutton.classList.add("show");
         current_box=boxelements[i];
         savebutton.addEventListener('click',function(e){
-            current_box.children[1].children[0].children[8].children[1].children[1].children[0].setAttribute('value',arr[0]);
-            current_box.children[1].children[0].children[8].children[1].children[1].children[1].setAttribute('value',arr[1]);
-            current_box.children[1].children[0].children[8].children[1].children[1].children[2].setAttribute('value',arr[2]);
-            current_box.children[1].children[0].children[8].children[1].children[1].children[3].setAttribute('value',arr[3]);
+            current_box.children[1].children[0].children[8].children[1].children[1].children[0].setAttribute('value',title.textContent);
+            current_box.children[1].children[0].children[8].children[1].children[1].children[1].setAttribute('value',description.textContent);
+            current_box.children[1].children[0].children[8].children[1].children[1].children[2].setAttribute('value',references.textContent);
+            current_box.children[1].children[0].children[8].children[1].children[1].children[3].setAttribute('value',link.textContent);
             current_box.children[1].children[0].children[8].children[1].children[1].submit();
         })
      })   
