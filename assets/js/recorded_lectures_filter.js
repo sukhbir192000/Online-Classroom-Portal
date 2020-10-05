@@ -4,7 +4,7 @@ for(let filterElement of filterSubject){
         var subjectQuery=filterElement.innerText;
         
         var sortQuery=document.querySelectorAll(".filter_sort.selected")[0].innerText;
-        window.location.href="/content/recordedlecture/?sub="+subjectQuery+"&date="+sortQuery;
+        window.location.href="/content/recordedlectures/?sub="+subjectQuery+"&date="+sortQuery;
     });
 }
 var filterSort=document.getElementsByClassName('filter_sort');
@@ -13,6 +13,6 @@ for(let filterElement of filterSort){
         var sortQuery=filterElement.innerText;
         var subjectQuery=document.querySelectorAll(".filter_subject.selected")[0].innerText;
 
-        window.location.href="/content/recordedlecture/?sub="+subjectQuery+"&date="+sortQuery;
+        window.location.href="/content/recordedlectures/?sub="+subjectQuery+"&date="+sortQuery;
     });
 }

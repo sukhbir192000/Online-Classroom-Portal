@@ -4,7 +4,7 @@ for(let filterElement of filterSubject){
         var subjectQuery=filterElement.innerText;
         var classQuery=document.querySelectorAll(".filter_branch.selected")[0].innerText;
         var sortQuery=document.querySelectorAll(".filter_sort.selected")[0].innerText;
-        window.location.href="/content/announcements/?sub="+subjectQuery+"&date="+sortQuery+"&branch=All";
+        window.location.href="/content/recordedlectures/?sub="+subjectQuery+"&date="+sortQuery+"&branch=All";
     });
 }
 var filterSort=document.getElementsByClassName('filter_sort');
@@ -14,7 +14,7 @@ for(let filterElement of filterSort){
         var classQuery=document.querySelectorAll(".filter_branch.selected")[0].innerText;
         var subjectQuery=document.querySelectorAll(".filter_subject.selected")[0].innerText;
 
-        window.location.href="/content/announcements/?sub="+subjectQuery+"&date="+sortQuery+"&branch="+classQuery;
+        window.location.href="/content/recordedlectures/?sub="+subjectQuery+"&date="+sortQuery+"&branch="+classQuery;
     });
 }
 var filterBranch=document.getElementsByClassName('filter_branch');
@@ -23,6 +23,6 @@ for(let filterElement of filterBranch){
         var subjectQuery=document.querySelectorAll(".filter_subject.selected")[0].innerText;
         var classQuery=filterElement.innerText;
         var sortQuery=document.querySelectorAll(".filter_sort.selected")[0].innerText;
-        window.location.href="/content/announcements/?sub="+subjectQuery+"&date="+sortQuery+"&branch="+classQuery;
+        window.location.href="/content/recordedlectures/?sub="+subjectQuery+"&date="+sortQuery+"&branch="+classQuery;
     });
 }
