@@ -358,6 +358,7 @@ module.exports.getSubGroups=async function(req,res){
 module.exports.recordedLectureCreate=async function(req,res){
     
     try{
+        console.log(req.body);
         let user=res.locals.user
         if(req.body.subject=="All"){
             for(let subjects of user.classSub){
@@ -365,7 +366,9 @@ module.exports.recordedLectureCreate=async function(req,res){
                     title: req.body.title,
                     content: req.body.message,
                     classSub: subjects,
-                    postedBy: user._id
+                    postedBy: user._id,
+                    link: req.body.lecture_link,
+                    references: req.body.lecture_references
                 })
             }
         }
@@ -378,7 +381,9 @@ module.exports.recordedLectureCreate=async function(req,res){
                             title: req.body.title,
                             content: req.body.message,
                             classSub: classSubElement,
-                            postedBy: user._id
+                            postedBy: user._id,
+                            link: req.body.lecture_link,
+                            references: req.body.lecture_references
                         })
                     }
                 }
@@ -392,7 +397,9 @@ module.exports.recordedLectureCreate=async function(req,res){
                                 title: req.body.title,
                                 content: req.body.message,
                                 classSub: classSubElement,
-                                postedBy: user._id
+                                postedBy: user._id,
+                                link: req.body.lecture_link,
+                                references: req.body.lecture_references
                             })
                         }
                     }
@@ -406,7 +413,9 @@ module.exports.recordedLectureCreate=async function(req,res){
                                     title: req.body.title,
                                     content: req.body.message,
                                     classSub: classSubElement,
-                                    postedBy: user._id
+                                    postedBy: user._id,
+                                    link: req.body.lecture_link,
+                                    references: req.body.lecture_references
                                 })
                             }
                         }
@@ -421,7 +430,9 @@ module.exports.recordedLectureCreate=async function(req,res){
                                 group: group,
                                 subGroup: req.body.sub_group
                             },
-                            postedBy: user._id
+                            postedBy: user._id,
+                            link: req.body.lecture_link,
+                            references: req.body.lecture_references
                         })
                     }
                 }

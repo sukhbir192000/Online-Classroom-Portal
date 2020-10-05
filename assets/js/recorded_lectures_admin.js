@@ -115,6 +115,13 @@ document.querySelector(".add").addEventListener('click',function(e){
         document.getElementById("lecture_date").value="";
         document.getElementById("lecture_link").value="";
         document.getElementById("lecture_references").value="";
+        branchForm.disabled=true;
+        groupForm.disabled=true;
+        subGroupForm.disabled=true;
+        subjectForm.selectedIndex=0;
+        branchForm.selectedIndex=0;
+        groupForm.selectedIndex=0;
+        subGroupForm.selectedIndex=0;
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -122,7 +129,35 @@ document.querySelector(".add").addEventListener('click',function(e){
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
-
+//----------addlecture--------------------
+var branchForm=document.getElementById("branch")
+branchForm.disabled=true;
+var groupForm=document.getElementById("group")
+groupForm.disabled=true;
+var subGroupForm=document.getElementById("sub_group")
+subGroupForm.disabled=true;
+var subjectForm=document.getElementById("subject");
+var addButton=document.getElementById("addButton");
+addButton.addEventListener('click',function(e){
+    $.ajax({
+        url:"/content/announcements/form/subjects",
+        cache:false,
+        type:"GET",
+        success:function(response){
+            subjectForm.innerText="";
+            var opt = document.createElement('option');
+            opt.value="All",
+            opt.innerText="All",
+            subjectForm.appendChild(opt);
+            for(let obj of response.data.subjectsId){
+                var opt = document.createElement('option');
+                opt.value=obj.id,
+                opt.innerText=obj.name,
+                subjectForm.appendChild(opt);
+            }
+        }
+    })
+})
 subjectForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
     groupForm.selectedIndex=0;

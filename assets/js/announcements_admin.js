@@ -76,6 +76,8 @@ document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
+        document.getElementById("announcement_title").value="";
+        document.getElementById("announcement_message").value="";
         branchForm.disabled=true;
         groupForm.disabled=true;
         subGroupForm.disabled=true;

@@ -8,7 +8,16 @@ const recordedLectureSchema = new mongoose.Schema({
     content: {
         type: String
     },
+    references: {
+        type: String
+    },
     classSub: classSubSchema,
+    link: {
+        type: String
+    },
+    recordedOn: {
+        type: Date
+    },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
