@@ -466,7 +466,15 @@ input,textarea{
 .showx{
     display: flex;
 }
+.description[contentEditable=true]:empty:not(:focus):before{
+    content:attr(description-text);
+    color:gray;
+}
 
+.title[contentEditable=true]:empty:not(:focus):before{
+    content:attr(title-text);
+    color:gray;
+}
 
 /* FOOTER
 .footer{

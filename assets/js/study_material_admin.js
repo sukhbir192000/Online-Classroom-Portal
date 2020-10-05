@@ -40,7 +40,9 @@ for(let i=0;i<boxelements.length;i++){
         arr.push(title.textContent);
         arr.push(description.textContent);
         title.contentEditable="true";
+        title.setAttribute("title-text","Enter title")
         description.contentEditable="true";
+        description.setAttribute("description-text", "Enter description");
         title.classList.add("heading_edit");
         description.classList.add("content_edit")
         deletebutton.classList.add("hide");

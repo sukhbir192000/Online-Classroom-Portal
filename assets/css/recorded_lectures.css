@@ -481,7 +481,29 @@ input,textarea{
     border:1px black solid;
     color: black;
 }
+.description[contentEditable=true]:empty:not(:focus):before{
+    content:attr(description-text);
+    color:gray;
+}
 
+.title[contentEditable=true]:empty:not(:focus):before{
+    content:attr(title-text);
+    color:gray;
+}
+
+.references[contentEditable=true]:empty:not(:focus):before{
+    content:attr(references-text);
+    color:gray;
+    font-weight: 200;
+}
+
+.link[contentEditable=true]:empty:not(:focus):before{
+    content:attr(link-text);
+    color:gray;
+}
+a{
+    text-decoration: none;
+}
 
 
 /* FOOTER */

@@ -40,22 +40,19 @@ for(let i=0;i<boxelements.length;i++){
         arr.push(description.textContent);
         arr.push(references.textContent);
         arr.push(link.textContent);
-        if(title.textContent!=""){
-            title.contentEditable="true";
-            title.classList.add("heading_edit");
-        }
-        if(description.textContent!=""){
-            description.contentEditable="true";
-            description.classList.add("content_edit")
-        }
-        if(references.textContent!=""){
-            references.contentEditable="true";
-            references.classList.add("content_edit")
-        }
-        if(link.textContent!=""){
-            link.contentEditable="true";
-            link.classList.add("content_edit")
-        }
+        title.contentEditable="true";
+        title.setAttribute("title-text","Enter title")
+        title.classList.add("heading_edit");
+        description.contentEditable="true";
+        description.setAttribute("description-text", "Enter description");
+        description.classList.add("content_edit")
+        references.contentEditable="true";
+        references.setAttribute("references-text","Enter book/video references");
+        references.classList.add("content_edit")
+        link.contentEditable="true";
+        link.setAttribute("link-text","Enter link of lecture");
+        link.classList.add("content_edit")
+        link.classList.add("content_edit")
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
@@ -129,6 +126,22 @@ document.querySelector(".add").addEventListener('click',function(e){
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
+
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("lecture_date").setAttribute("max", today);
+
 //----------addlecture--------------------
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
