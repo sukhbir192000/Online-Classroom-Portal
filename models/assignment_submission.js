@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // const multer=require('multer');
 const path = require('path');
-const file_path=path.join('/uploads/assignmentSubmissions/');
+const file_path=path.join('/uploads/assignment/');
 const classSubSchema = require('./class-sub');
 
 const assignmentSubmissionSchema = new mongoose.Schema({
