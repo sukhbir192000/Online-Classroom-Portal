@@ -154,6 +154,122 @@
 .buttons>div>a:hover{
     color:black;
 }
+.add{
+    margin:1em 1.5em;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
+
+.add_admin{
+    margin:1em 1.5em;
+    border:2px solid  #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    padding: 0.8em;
+    display: none;
+    width:92%;
+}
+
+select option{
+    max-height:2em;
+}
+#subject{
+    margin-left: 2.9em;
+}
+#branch{
+    margin-left: 3.2em;
+}
+#group{
+    margin-left: 0.37em;
+}
+#sub_group{
+    margin-left: 1.38em;
+}
+
+input,textarea{
+    width:60vw;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+.heading_edit{
+    background-color: #e3d8d8;
+    border:1px black solid;
+    color: black;
+}
+.content_edit{
+    background-color: #efefef;
+    border:1px black solid;
+    color: black;
+}
+.hide{
+    display: none;
+}
+#lecture_deadline{
+    width:auto;
+    overflow-y: auto;
+    margin-left: 2.4em;
+}
+.file_content{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0.5em;
+}
+.file_name{
+    padding-right:0.5em;
+}
+.file_cross{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.show{
+    visibility: visible;
+}
 
 
 
@@ -280,6 +396,10 @@ li:hover{
     .show{
         visibility: visible;
     }
+    input, textarea{
+        width:80vw;
+
+    }
 
 
     /* NAVIGATION BAR */
@@ -371,6 +491,20 @@ li:hover{
     }
     .show{
         visibility: visible;
+    }
+    .add{
+        margin-left: 0.01em;
+    }
+    .add_admin{
+        margin-left: 0.01em;
+        width:89%;
+    }
+    input, textarea{
+        width:77vw;
+    }
+    #subject{
+        margin-top: 0.7em;
+        margin-left: 0;
     }
 
     
