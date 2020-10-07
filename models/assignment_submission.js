@@ -5,7 +5,10 @@ const file_path=path.join('/uploads/assignment/');
 const classSubSchema = require('./class-sub');
 
 const assignmentSubmissionSchema = new mongoose.Schema({
-    
+    turnedIn: {
+        type: Boolean,
+        default: false
+    },
     classSub: classSubSchema,
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const classSubSchema = require('./class-sub');
 
 const timetableSchema = new mongoose.Schema({
+    startingTime: {
+        type: Date
+    },
     date:{
         type: Date
     },

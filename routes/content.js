@@ -6,6 +6,6 @@ Router.use('/announcements',require('./announcements'));
 Router.use('/studymaterial',require('./studyMaterial'));
 Router.use('/recordedlectures',require('./recordedLectures'));
 Router.use('/assignments',require('./assignments'));
-Router.get('/timetable',contentController.timeTable);
+Router.use('/timetable',require('./timetable'));
 Router.get('/doubts',contentController.doubts);
 module.exports=Router;
