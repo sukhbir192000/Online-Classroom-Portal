@@ -455,6 +455,12 @@ a{
     padding: 0 1em 0 3em;
     box-sizing: border-box;
 }
+.selected{
+    background-color:#1D3557;
+    color:white;
+    border-radius: 10px;
+    box-shadow: 0.01em 0.01em 0.5em grey;
+}
 .filters:hover{
     overflow-y: auto;
 }
