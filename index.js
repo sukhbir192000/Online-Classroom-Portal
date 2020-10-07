@@ -53,6 +53,7 @@ app.use(flash());
 app.use(flashMiddleware.setFlash);
 app.use('/',require('./routes'));
 app.use('/uploads/study_material', express.static('./uploads/study_material'));
+app.use('/uploads/assignment', express.static('./uploads/assignment'));
 
 
 

@@ -204,6 +204,7 @@ module.exports.assignment=async function(req,res){
 
 
 module.exports.assignmentCreate=async function(req,res){
+    console.log(req.body);
     try{
         let user=res.locals.user
         console.log(req.files);
@@ -214,7 +215,9 @@ module.exports.assignmentCreate=async function(req,res){
                     title: req.body.title,
                     content: req.body.message,
                     classSub: subjects,
-                    postedBy: user._id
+                    postedBy: user._id,
+                    weightage:req.body.weightage,
+                    deadline:req.body.lecture_deadline
                 })
                 count++;
                 if(req.files){
@@ -238,7 +241,9 @@ module.exports.assignmentCreate=async function(req,res){
                             title: req.body.title,
                             content: req.body.message,
                             classSub: classSubElement,
-                            postedBy: user._id
+                            postedBy: user._id,
+                            weightage:req.body.weightage,
+                            deadline:req.body.lecture_deadline
                         })
                         count++;
                         if(req.files){
@@ -263,7 +268,9 @@ module.exports.assignmentCreate=async function(req,res){
                                 title: req.body.title,
                                 content: req.body.message,
                                 classSub: classSubElement,
-                                postedBy: user._id
+                                postedBy: user._id,
+                                weightage:req.body.weightage,
+                                deadline:req.body.lecture_deadline
                             })
                             count++;
                             if(req.files){
@@ -288,7 +295,10 @@ module.exports.assignmentCreate=async function(req,res){
                                     title: req.body.title,
                                     content: req.body.message,
                                     classSub: classSubElement,
-                                    postedBy: user._id
+                                    postedBy: user._id,
+                                    weightage:req.body.weightage,
+                                    deadline:req.body.lecture_deadline
+                                    
                                 })
                                 count++;
                                 if(req.files){
@@ -314,7 +324,9 @@ module.exports.assignmentCreate=async function(req,res){
                                 group: group,
                                 subGroup: req.body.sub_group
                             },
-                            postedBy: user._id
+                            postedBy: user._id,
+                            weightage:req.body.weightage,
+                            deadline:req.body.lecture_deadline
                         })
                         count++;
                         if(req.files){

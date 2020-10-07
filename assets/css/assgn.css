@@ -218,6 +218,11 @@ input,textarea{
     overflow-y: auto;
     font-family: Helvetica, Arial, sans-serif;
 }
+input.weightageStyle{
+    width:4em !important;
+    height:1.6em;
+    margin-left:3.9em;
+}
 .submit_button{
     display: flex;
     flex-direction: row;
