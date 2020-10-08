@@ -25,43 +25,46 @@ document.addEventListener('mouseup',function(e){
 
 
 (function(){
-    materialClass = document.querySelector(".material");
-    for(let j=0;j<materialClass.childElementCount;j++){
-        // console.log(materialClass.children[j].href);
-        let extension = materialClass.children[j].href.split('.').pop().toLowerCase();
-        if( extension == 'pptx' || extension == 'ppt' || extension == 'pptm'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-powerpoint'></i>";
-            materialClass.children[j].children[0].classList.add("color_ppt");
-        }
-        else if(extension == 'docx' || extension == 'doc' || extension == 'docm'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-word'></i>";
-            materialClass.children[j].children[0].classList.add("color_word");
-        }
-        else if(extension == 'pdf'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-pdf'></i>";
-            materialClass.children[j].children[0].classList.add("color_pdf");
-        }
-        else if(extension == 'jpg' || extension == 'png' || extension == 'jpeg' || extension == 'gif' || extension == 'tiff'|| extension == 'psd'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-image'></i>";
-            materialClass.children[j].children[0].classList.add("color_image");
-        }
-        else if(extension == 'xlsx' || extension == 'xlsm' || extension == 'xlsb' || extension == 'xls' || extension == 'xml'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-excel'></i>";
-            materialClass.children[j].children[0].classList.add("color_excel"); 
-        }
-        else if(extension == 'mp4' || extension == 'mpeg-4' || extension == 'mov' || extension == 'wmv' || extension == 'flv' || extension == 'avi'){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-video'></i>";
-            materialClass.children[j].children[0].classList.add("color_video"); 
-        }
-        else if(extension == 'pcm' || extension == 'wav' || extension == 'mp3' || extension == 'wma' ){
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-audio'></i>";
-            materialClass.children[j].children[0].classList.add("color_audio"); 
-        }
-        else{
-            materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-alt'></i>";
-            materialClass.children[j].children[0].classList.add("color_file");
+    materialClassAll = document.querySelectorAll(".material");
+    for(let materialClass of materialClassAll){
+        for(let j=0;j<materialClass.childElementCount;j++){
+            // console.log(materialClass.children[j].href);
+            let extension = materialClass.children[j].href.split('.').pop().toLowerCase();
+            if( extension == 'pptx' || extension == 'ppt' || extension == 'pptm'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-powerpoint'></i>";
+                materialClass.children[j].children[0].classList.add("color_ppt");
+            }
+            else if(extension == 'docx' || extension == 'doc' || extension == 'docm'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-word'></i>";
+                materialClass.children[j].children[0].classList.add("color_word");
+            }
+            else if(extension == 'pdf'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-pdf'></i>";
+                materialClass.children[j].children[0].classList.add("color_pdf");
+            }
+            else if(extension == 'jpg' || extension == 'png' || extension == 'jpeg' || extension == 'gif' || extension == 'tiff'|| extension == 'psd'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-image'></i>";
+                materialClass.children[j].children[0].classList.add("color_image");
+            }
+            else if(extension == 'xlsx' || extension == 'xlsm' || extension == 'xlsb' || extension == 'xls' || extension == 'xml'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-excel'></i>";
+                materialClass.children[j].children[0].classList.add("color_excel"); 
+            }
+            else if(extension == 'mp4' || extension == 'mpeg-4' || extension == 'mov' || extension == 'wmv' || extension == 'flv' || extension == 'avi'){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-video'></i>";
+                materialClass.children[j].children[0].classList.add("color_video"); 
+            }
+            else if(extension == 'pcm' || extension == 'wav' || extension == 'mp3' || extension == 'wma' ){
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-audio'></i>";
+                materialClass.children[j].children[0].classList.add("color_audio"); 
+            }
+            else{
+                materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-alt'></i>";
+                materialClass.children[j].children[0].classList.add("color_file");
+            }
         }
     }
+    
 
 })();
 
@@ -108,40 +111,39 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
     }
     eventListenerPresent = true;
     document.getElementById("file0").addEventListener('change',function(e){
-        let filedata = new FormData();
-        console.log(filedata);
-        filedata.append("files", this.files[0], this.files[0].name);
+        let filedata = new FormData(this.parentElement);
         $.ajax({
             url: window.location.pathname + "/addfile",
             data: filedata,
             cache: false,
             type: "POST",
+            processData: false,
+            contentType: false,
             success: function(response){
-                console.log(response);
+                for(let j=0;j<response.urlArray.length;j++){
+                    var newDiv = document.createElement("a");
+                    newDiv.classList.add("file_inside")
+                    var fileIcon = document.createElement("div");
+                    fileIcon.classList.add("file_icon");
+                    icon(fileIcon,response.urlArray[j].name.split(".").pop());
+                    var fileName = document.createElement("div");
+                    fileName.classList.add("file_title");
+                    fileName.textContent = response.urlArray[j].name;
+                    var fileDelete = document.createElement("div");
+                    fileDelete.innerHTML = "<i class='fas fa-times'></i>";
+                    fileDelete.classList.add("file_delete");
+                    newDiv.appendChild(fileIcon);
+                    newDiv.appendChild(fileName);
+                    newDiv.appendChild(fileDelete);
+                    newDiv.href = response.urlArray[j].url;
+                    newDiv.download = "download";
+                    document.querySelector(".files_added").appendChild(newDiv);
+                    fileDelete.addEventListener('click',function(e){
+                        this.parentNode.remove();
+                    })
+                }
             }
         })
-
-
-        for(let j=0;j<this.files.length;j++){
-            var newDiv = document.createElement("div");
-            newDiv.classList.add("file_inside")
-            var fileIcon = document.createElement("div");
-            fileIcon.classList.add("file_icon");
-            icon(fileIcon,this.value.split(".").pop());
-            var fileName = document.createElement("div");
-            fileName.classList.add("file_title");
-            fileName.textContent = this.files[j].name;
-            var fileDelete = document.createElement("div");
-            fileDelete.innerHTML = "<i class='fas fa-times'></i>";
-            fileDelete.classList.add("file_delete");
-            newDiv.appendChild(fileIcon);
-            newDiv.appendChild(fileName);
-            newDiv.appendChild(fileDelete);
-            document.querySelector(".files_added").appendChild(newDiv);
-            fileDelete.addEventListener('click',function(e){
-                this.parentNode.remove();
-            })
-        }
     })
 })
 

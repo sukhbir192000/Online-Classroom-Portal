@@ -31,9 +31,23 @@
                 
                 <!-- User Submissions -->
                 <div class="work_added">Your Submissions</div>
-                <div class="files_added"></div>
+                <div class="files_added material">
+                    <% for(let file of submission.files){ %>
+                        <a href="<%= file.url %>" class="file_inside" download="download">
+                            <!-- <div class="file_inside"> -->
+                                <div class="file_icon"></div>
+                                <div class="file_title"><%= file.name %></div>
+                                <div class="file_delete">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            <!-- </div> -->
+                        </a>
+                    <% } %>
+                </div>
                 <div class="input_button">
-                    <input type="file" name="files" id="file0" class="files" multiple >
+                    <form id="inputform" enctype="multipart/form-data">
+                        <input type="file" name="files" id="file0" class="files" multiple >
+                    </form>
                     <button type="button" id="add_files_button">Add files</button>
                 </div>
             </div>
