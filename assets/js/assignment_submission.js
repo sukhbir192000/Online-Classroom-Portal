@@ -121,8 +121,10 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
             contentType: false,
             success: function(response){
                 for(let j=0;j<response.urlArray.length;j++){
-                    var newDiv = document.createElement("a");
-                    newDiv.classList.add("file_inside")
+                    var newDiv = document.createElement("div");
+                    newDiv.classList.add("file_inside");
+                    var newAnchor = document.createElement("a");
+                    newAnchor.classList.add("anchor_inside");
                     var fileIcon = document.createElement("div");
                     fileIcon.classList.add("file_icon");
                     icon(fileIcon,response.urlArray[j].name.split(".").pop());
@@ -132,11 +134,12 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
                     var fileDelete = document.createElement("div");
                     fileDelete.innerHTML = "<i class='fas fa-times'></i>";
                     fileDelete.classList.add("file_delete");
-                    newDiv.appendChild(fileIcon);
-                    newDiv.appendChild(fileName);
+                    newAnchor.appendChild(fileIcon);
+                    newAnchor.appendChild(fileName);
+                    newDiv.appendChild(newAnchor);
                     newDiv.appendChild(fileDelete);
-                    newDiv.href = response.urlArray[j].url;
-                    newDiv.download = "download";
+                    newAnchor.href = response.urlArray[j].url;
+                    newAnchor.download = "download";
                     document.querySelector(".files_added").appendChild(newDiv);
                     
                     fileDelete.addEventListener('click',function(e){

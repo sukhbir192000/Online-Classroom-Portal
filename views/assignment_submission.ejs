@@ -33,16 +33,19 @@
                 <div class="work_added">Your Submissions</div>
                 <div class="files_added material">
                     <% for(let file of submission.files){ %>
-                        
-                        <a href="<%= file.url %>" class="file_inside" download="download">
+                        <!-- --------------------------------------------------------------------------------------------------------- -->
+                        <div class="file_inside">
+                            <a href="<%= file.url %>" class="anchor_inside" download="download">
                             <!-- <div class="file_inside"> -->
                                 <div class="file_icon"></div>
                                 <div class="file_title"><%= file.name %></div>
-                                <div class="file_delete">
-                                    <i class="fas fa-times"></i>
-                                </div>
+                            </a>
+                            <div class="file_delete">
+                                <i class="fas fa-times"></i>
+                            </div>
                             <!-- </div> -->
-                        </a>
+                        </div>
+                        <!-- ---------------------------------------------------------------------------------------------------------- -->
                     <% } %>
                 </div>
                 <div class="input_button">
