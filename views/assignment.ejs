@@ -87,8 +87,14 @@
                                     </a>
                                 <% } %>    
                             </div>
+                            <% if (user.isAdmin){ %>
+                                <a href="/viewsubmissions/<%=assignment.id%>" class="view_submissions"> View Submissions</a>
+                            <% }else{ %>
+                                <a href="/assignmentsubmissions/<%=assignment.id%>" class="view_submissions"> Add Submission</a>
+                            <% } %>
                             <% if(user.isAdmin){ %>
-                                <a href="/assignmentsubmissions/<%=assignment.id%>" class="view_submissions"> View Submissions</a>
+        
+                                
                                 <div class="buttons">
                                     <div class="buttons_admin">
                                         <div class="edit"><i class="far fa-edit"></i></div>
