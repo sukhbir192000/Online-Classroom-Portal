@@ -13,30 +13,20 @@
                 <div class="subject"><%= assignment.classSub.course.name %></div>
                 <div class="title_submit"> 
                     <div class="title"><%= assignment.title %></div>
-                    <button type="button" class="submit_button">Submit</button>
+                    <button type="button" class="submit_button"><% if(!submission.turnedIn){ %>Submit<% }else{ %>Unsubmit<%}%></button>
                 </div>
-                <div class="graded">Not graded yet</div>
+                <div class="graded"><% if(submission.marksAlloted){ %><%=submission.marksAlloted%><% }else{ %>Not graded yet<%}%></div>
                 <div class="line"></div>
-                <div class="deadline">Due on October 10,2020, 5:00PM</div>
-                <div class="description">This assignment is to be done on white pages.</div>
-                <div class="date_posted">Posted on October 7,2020</div>
+                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %><</div>
+                <div class="description"><%= assignment.content %></div>
+                <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.createdAt) %></div>
                 <div class="material">
-                    <a href="Chem PPT.pptx" class="file_inside" download="">
-                        <div class="file_icon "></div>
-                        <div class="file_title">Resume</div>
-                    </a>
-                    <a href="Chem PPT.docx" class="file_inside" download="">
-                        <div class="file_icon "></div>
-                        <div class="file_title">Resume</div>
-                    </a>
-                    <a href="Chem PPT.pptx" class="file_inside" download="">
-                        <div class="file_icon "></div>
-                        <div class="file_title">Resume</div>
-                    </a>
-                    <a href="Chem PPT.docx" class="file_inside" download="">
-                        <div class="file_icon "></div>
-                        <div class="file_title">Resume</div>
-                    </a>
+                    <% for(let file of assignment.files){ %>
+                        <a href="<%= file.url %>" class="file_inside" download="download">
+                            <div class="file_icon "></div>
+                            <div class="file_title"><%= file.name %></div>
+                        </a>
+                    <% } %> 
                 </div>
                 <!-- User Submissions -->
                 <div class="work_added">Your Submissions</div>
