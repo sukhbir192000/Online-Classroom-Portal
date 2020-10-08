@@ -10,10 +10,10 @@
 
         <div class="main_content">
             <div class="main_data">
-                <div class="subject">Computer Architecture and Organisation</div>
+                <div class="subject"><%= assignment.classSub.course.name %></div>
                 <div class="title_submit"> 
-                    <div class="title">Assignment-4</div>
-                    <button type="submit" class="submit_button">Submit</button>
+                    <div class="title"><%= assignment.title %></div>
+                    <button type="button" class="submit_button">Submit</button>
                 </div>
                 <div class="graded">Not graded yet</div>
                 <div class="line"></div>
@@ -38,6 +38,7 @@
                         <div class="file_title">Resume</div>
                     </a>
                 </div>
+                <!-- User Submissions -->
                 <div class="work_added">Your Submissions</div>
                 <div class="files_added"></div>
                 <div class="input_button">

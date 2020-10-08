@@ -9,7 +9,6 @@ const assignmentSubmissionSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    classSub: classSubSchema,
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
