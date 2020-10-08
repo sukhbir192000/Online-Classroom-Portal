@@ -108,6 +108,20 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
     }
     eventListenerPresent = true;
     document.getElementById("file0").addEventListener('change',function(e){
+        let filedata = new FormData();
+        console.log(filedata);
+        filedata.append("files", this.files[0], this.files[0].name);
+        $.ajax({
+            url: window.location.pathname + "/addfile",
+            data: filedata,
+            cache: false,
+            type: "POST",
+            success: function(response){
+                console.log(response);
+            }
+        })
+
+
         for(let j=0;j<this.files.length;j++){
             var newDiv = document.createElement("div");
             newDiv.classList.add("file_inside")

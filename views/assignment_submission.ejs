@@ -17,7 +17,7 @@
                 </div>
                 <div class="graded"><% if(submission.marksAlloted){ %><%=submission.marksAlloted%><% }else{ %>Not graded yet<%}%></div>
                 <div class="line"></div>
-                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %><</div>
+                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div>
                 <div class="description"><%= assignment.content %></div>
                 <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.createdAt) %></div>
                 <div class="material">

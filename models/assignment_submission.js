@@ -37,5 +37,5 @@ const assignmentSubmissionSchema = new mongoose.Schema({
 });
 
 assignmentSubmissionSchema.statics.filePath=file_path;
-const assignmentSubmissionModel = mongoose.model('Assignment Submissions', assignmentSubmissionSchema);
+const assignmentSubmissionModel = mongoose.model('Assignment Submission', assignmentSubmissionSchema);
 module.exports = assignmentSubmissionModel;

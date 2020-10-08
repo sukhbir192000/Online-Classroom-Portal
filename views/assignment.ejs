@@ -43,7 +43,7 @@
                             </select><br><br><label name="deadline_lecture">Deadline: </label>
                             <input type="datetime-local" name="lecture_deadline" id="lecture_deadline" required="true"><br><br>
                             <label for="weightage_input">Marks:</label>
-                            <input id="weightage_input" type="number" name="weightage" class="weightageStyle"><br><br>
+                            <input id="weightage_input" type="number" name="weightage" class="weightageStyle" min=0><br><br>
                             <input type="text" name="title" id="title" placeholder="Enter the title" ></textarea><br><br>
                             <textarea name="message" id="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
                             <div class="files">
@@ -88,9 +88,9 @@
                                 <% } %>    
                             </div>
                             <% if (user.isAdmin){ %>
-                                <a href="/viewsubmissions/<%=assignment.id%>" class="view_submissions"> View Submissions</a>
+                                <a href="/content/viewsubmissions/<%=assignment._id%>" class="view_submissions"> View Submissions</a>
                             <% }else{ %>
-                                <a href="/assignmentsubmissions/<%=assignment.id%>" class="view_submissions"> Add Submission</a>
+                                <a href="/content/assignmentsubmissions/<%=assignment._id%>" class="view_submissions"> Add Submission</a>
                             <% } %>
                             <% if(user.isAdmin){ %>
         

@@ -2,3 +2,18 @@ Bugs:
 - Filter scrolling on announcement page
 - alignment of input fields in add area not correct in tablet mode
 - Sidebar alignment in user and admin mode
+
+Assignments
+- Show weightage in contents
+- add deadline and weightage in edit
+- Add (marks reset)
+- Edit
+- Filters (submitted, sort by deadline)
+- Add submission(file added ajax, submit button ajax, file delete ajax)
+- View submission
+
+BAAD KE KAAM:
+- Remove Coding ninajs product in login
+- Make ajax urls common
+- pagination
+- delete getSubjects etc from all controllers except assignment_controller

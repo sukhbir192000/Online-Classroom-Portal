@@ -20,9 +20,9 @@ var upload = multer({
 // var fields = [
 //   {name: "file0"},{name: "file1"},{name: "file2"},{name: "file3"},{name: "file4"},{name: "file5"},{name: "file6"},{name: "file7"},{name: "file8"},{name: "file9"},
 // ]
-
+Router.post('/:assignmentId/addfile', upload.array('files'),contentController.assignmentSubmissionCreate);
 Router.get('/:assignmentId',contentController.assignmentSubmission);
 //ajax calls
-Router.post('/create/:assignmentId', upload.array(),contentController.assignmentSubmissionCreate);
-Router.post('/update/:assignmentId',contentController.assignmentSubmissionUpdate);
+
+Router.post('/:assignmentId/update',contentController.assignmentSubmissionUpdate);
 module.exports = Router;
