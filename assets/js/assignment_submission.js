@@ -138,8 +138,21 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
                     newDiv.href = response.urlArray[j].url;
                     newDiv.download = "download";
                     document.querySelector(".files_added").appendChild(newDiv);
+                    
                     fileDelete.addEventListener('click',function(e){
-                        this.parentNode.remove();
+                        let containerElement=this.parentNode;
+                        $.ajax({
+                            url:window.location.pathname + "/delete",
+                            type:"POST",
+                            cache: false,
+                            data:{
+                                url:this.parentNode.href
+                            },
+                            success:function(response){
+                                containerElement.remove();   
+                            }
+                        });
+                        
                     })
                 }
             }
@@ -147,7 +160,36 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
     })
 })
 
+let crossAddArray=document.querySelector(".files_added");
+for(let file of crossAddArray.children){
+    let fileDelete=file.children[2];
+    fileDelete.addEventListener('click',function(e){
+        console.log(this.parentNode);
+        let containerElement=this.parentNode;
+        $.ajax({
+            
+            url:window.location.pathname + "/delete",
+            type:"POST",
+            cache: false,
+            data:{
+                url:this.parentNode.href
+            },
+            success:function(response){
+                containerElement.remove();   
+            }
+        });
+        
+    })
+}
 document.querySelector(".submit_button").addEventListener('click',function(e){
+    $.ajax({
+        url:window.location.pathname + "/submit",
+        type:"GET",
+        success:function(response){
+            console.log(response);
+        }
+
+    })
     if(this.textContent == "Submit"){
         var material = document.querySelector(".files_added");
         for(let i=0;i<material.childElementCount;i++){
@@ -167,5 +209,17 @@ document.querySelector(".submit_button").addEventListener('click',function(e){
         this.textContent = "Submit";
     }
 })
+
+var submitButton=document.getElementsByClassName('submit_button')[0];
+if(submitButton.textContent != "Submit"){
+    var material = document.querySelector(".files_added");
+    for(let i=0;i<material.childElementCount;i++){
+        material.children[i].children[2].style.display ="none";
+    }
+    document.getElementById("add_files_button").style.pointerEvents = "none";
+    document.getElementById("add_files_button").style.display = "none";
+    submitButton.textContent = "Unsubmit";       
+}
+
 
 

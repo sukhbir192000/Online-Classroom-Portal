@@ -107,3 +107,53 @@ module.exports.assignmentSubmissionUpdate=async function(req,res){
     }
 };
 
+module.exports.assignmentSubmissionSubmit=async function(req,res){
+    try{
+        let submission = await AssignmentSubmissionModel.findOne({
+            postedBy:res.locals.user,
+            assignmentId:req.params.assignmentId
+        }); 
+        submission.turnedIn=!submission.turnedIn;
+        submission.save();
+        return res.status('200').json({
+            message:"Toggled status"
+        })
+    }
+    catch(err){
+        console.log(err);
+        return res.status('404').json({
+            message:"Page not found"
+        })
+
+    }
+    
+    
+}
+
+module.exports.assignmentSubmissionDelete=async function(req,res){
+    console.log(req.body.url);
+    try{
+        let submission = await AssignmentSubmissionModel.findOne({
+            postedBy:res.locals.user,
+            assignmentId:req.params.assignmentId
+        }); 
+        for(let i=0;i<submission.files.length;i++){
+            if(submission.files[i].url==req.body.url){
+                fs.unlinkSync(path.join(__dirname,'..',submission.files[i].url));
+                submission.files.splice(i,1);
+                console.log("Found and deleted file");
+                break;
+            }
+        }
+        submission.save();
+        return res.status('200').json({
+            message:"Deleted file"
+        })
+    }
+    catch(err){
+        console.log(err);
+        return res.status('404').json({
+            message:"Page not found"
+        })
+    }
+}

@@ -24,4 +24,6 @@ Router.get('/:assignmentId',contentController.assignmentSubmission);
 //ajax calls
 Router.post('/:assignmentId/addfile', upload.array('files'),contentController.assignmentSubmissionCreate);
 Router.post('/:assignmentId/update',contentController.assignmentSubmissionUpdate);
+Router.get('/:assignmentId/submit',contentController.assignmentSubmissionSubmit);
+Router.post('/:assignmentId/delete',contentController.assignmentSubmissionDelete);
 module.exports = Router;

@@ -9,8 +9,10 @@ Assignments
 - Add (marks reset)
 - Edit
 - Filters (submitted, sort by deadline)
-- Add submission(submit button ajax, file delete ajax)
+- Add submission(file delete ajax)
+- fix files removal (both studymaterial and submission)
 - View submission
+-add download and href in ejs and js
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login
