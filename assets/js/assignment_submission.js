@@ -149,7 +149,7 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
                             type:"POST",
                             cache: false,
                             data:{
-                                url:this.parentNode.href
+                                url:this.parentNode.children[0].href
                             },
                             success:function(response){
                                 containerElement.remove();   
@@ -165,7 +165,7 @@ document.getElementById("add_files_button").addEventListener('click',function(e)
 
 let crossAddArray=document.querySelector(".files_added");
 for(let file of crossAddArray.children){
-    let fileDelete=file.children[2];
+    let fileDelete=file.children[1];
     fileDelete.addEventListener('click',function(e){
         console.log(this.parentNode);
         let containerElement=this.parentNode;
@@ -175,7 +175,7 @@ for(let file of crossAddArray.children){
             type:"POST",
             cache: false,
             data:{
-                url:this.parentNode.href
+                url:this.parentNode.children[0].href
             },
             success:function(response){
                 containerElement.remove();   
@@ -196,7 +196,7 @@ document.querySelector(".submit_button").addEventListener('click',function(e){
     if(this.textContent == "Submit"){
         var material = document.querySelector(".files_added");
         for(let i=0;i<material.childElementCount;i++){
-            material.children[i].children[2].style.display ="none";
+            material.children[i].children[1].style.display ="none";
         }
         document.getElementById("add_files_button").style.pointerEvents = "none";
         document.getElementById("add_files_button").style.display = "none";
@@ -205,7 +205,7 @@ document.querySelector(".submit_button").addEventListener('click',function(e){
     else{
         var material = document.querySelector(".files_added");
         for(let i=0;i<material.childElementCount;i++){
-            material.children[i].children[2].style.display ="flex";
+            material.children[i].children[1].style.display ="flex";
         }
         document.getElementById("add_files_button").style.pointerEvents = "auto";
         document.getElementById("add_files_button").style.display = "flex";
@@ -217,7 +217,7 @@ var submitButton=document.getElementsByClassName('submit_button')[0];
 if(submitButton.textContent != "Submit"){
     var material = document.querySelector(".files_added");
     for(let i=0;i<material.childElementCount;i++){
-        material.children[i].children[2].style.display ="none";
+        material.children[i].children[1].style.display ="none";
     }
     document.getElementById("add_files_button").style.pointerEvents = "none";
     document.getElementById("add_files_button").style.display = "none";
