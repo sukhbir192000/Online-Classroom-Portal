@@ -31,21 +31,50 @@
                 <!-- User Submissions -->
                 <div class="work_added">Submissions</div>
                 <div id="submissions_container">
+                    
                     <div class="submission">
-                        <div><div><i class="fas fa-caret-right"></i></div>18105018</div>
-                        <div>Sukhbir Singh SSSSSSSSSSSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSSSSSSSSSSSS</div>
-                        <div>10/10/2020 4:59:37pm</div>
+                        <div class="submission_content">
+                            <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
+                            <div>Puneet Singh</div>
+                            <div>10/10/2020 4:59:37pm</div>
+                        </div>
+                        <div class="submission_files" >
+                            <% for(let file of assignment.files){ %>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                </a>
+                            <% } %> 
+                        </div>
                     </div>
                     <div class="submission">
-                        <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
-                        <div>Puneet Singh</div>
-                        <div>10/10/2020 4:59:37pm</div>
+                        <div class="submission_content">
+                            <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
+                            <div>Puneet Singh</div>
+                            <div>10/10/2020 4:59:37pm</div>
+                        </div>
+                        <div class="submission_files" >
+                            <% for(let file of assignment.files){ %>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                </a>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                </a>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                </a>
+                                <a href="<%= file.url %>" class="file_inside" download="download">
+                                    <div class="file_icon "></div>
+                                    <div class="file_title"><%= file.name %></div>
+                                </a>
+                            <% } %> 
+                        </div>
                     </div>
-                    <div class="submission">
-                        
-                        <div><div><i class="fas fa-caret-right"></i></div>18105105</div>
-                        <div>Mehak</div>
-                        <div>10/10/2020 4:59:37pm</div>
+                   
                     </div>
                 </div>
             </div>
@@ -56,4 +85,4 @@
     </div>
 
 </div>
-<script src="/js/view_submission"></script>    
+<script src="/js/view_submission.js"></script>    

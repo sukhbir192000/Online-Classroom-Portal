@@ -514,6 +514,9 @@ module.exports.studyMaterialUpdate=async function(req,res){
         
      
         for(let i=0;i<delete_files.length;i++){
+            if(delete_files[i]==""){
+                continue;
+            }
             // console.log(delete_files[i]);
             let pathTry=new URL(delete_files[i]);
             let pathName=pathTry.pathname

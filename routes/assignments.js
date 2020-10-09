@@ -26,5 +26,5 @@ Router.get('/',contentController.assignment);
 Router.post('/create',passport.checkAdmin, upload.fields(fields),contentController.assignmentCreate);
 
 Router.get('/delete/:id',passport.checkAdmin,contentController.assignmentDelete);
-Router.post('/update/:assignmentId',passport.checkAdmin,contentController.assignmentDelete);
+Router.post('/update/:assignmentId',passport.checkAdmin,contentController.assignmentUpdate);
 module.exports = Router;
