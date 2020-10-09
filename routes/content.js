@@ -8,5 +8,6 @@ Router.use('/recordedlectures',require('./recordedLectures'));
 Router.use('/assignments',require('./assignments'));
 Router.use('/timetable',require('./timetable'));
 Router.use('/assignmentsubmissions',require('./assignmentSubmission'));
+Router.use('/viewsubmissions',passport.checkAdmin,require('./assignmentViewSubmission'));
 Router.get('/doubts',contentController.doubts);
 module.exports=Router;

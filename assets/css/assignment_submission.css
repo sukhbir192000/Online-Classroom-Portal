@@ -433,9 +433,44 @@ a{
 .show{
     visibility: visible;
 }
-
-
-
+#submissions_container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.8em;
+}
+.submission{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #737373;
+    padding: 0.4em;
+}
+.submission:nth-child(2n+1){
+    background-color: #F1FAEE;
+    
+}
+.submission div{
+    width: 25%;
+    overflow-wrap: break-word;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.submission div:nth-child(2){
+    width: 50%;
+}
+.submission div:nth-child(1){
+    justify-content: flex-start;
+    padding-left: 0.5em;
+    box-sizing: border-box;
+}
+.submission>div>div{
+    font-size: 1.25em;
+}
 
 
 /* For tablet devices */

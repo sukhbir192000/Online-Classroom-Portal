@@ -114,6 +114,7 @@ module.exports.assignmentSubmissionSubmit=async function(req,res){
             assignmentId:req.params.assignmentId
         }); 
         submission.turnedIn=!submission.turnedIn;
+        submission.submittedAt = new Date(Date.now());
         submission.save();
         return res.status('200').json({
             message:"Toggled status"

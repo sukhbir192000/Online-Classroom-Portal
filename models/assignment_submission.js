@@ -9,6 +9,9 @@ const assignmentSubmissionSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    submittedAt: {
+        type:Date
+    },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

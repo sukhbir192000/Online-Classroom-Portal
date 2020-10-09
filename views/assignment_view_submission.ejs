@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="/css/assignment_submission.css">
+    
+    
+<div>   
+    <div class="main">
+        <%- include('navbar') %>
+
+
+        <div id="black_screen"></div>
+
+        <div class="main_content">
+            <div class="main_data">
+                <div class="subject"><%= assignment.classSub.course.name %></div>
+                <div class="title_submit"> 
+                    <div class="title"><%= assignment.title %></div>
+                </div>
+                <div class="graded"><%= assignment.weightage %> points</div>
+                <div class="line"></div>
+                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div>
+                <div class="description"><%= assignment.content %></div>
+                <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.createdAt) %></div>
+                <div class="material">
+                    <% for(let file of assignment.files){ %>
+                        <a href="<%= file.url %>" class="file_inside" download="download">
+                            <div class="file_icon "></div>
+                            <div class="file_title"><%= file.name %></div>
+                        </a>
+                    <% } %> 
+                </div>
+                
+                <!-- User Submissions -->
+                <div class="work_added">Submissions</div>
+                <div id="submissions_container">
+                    <div class="submission">
+                        <div><div><i class="fas fa-caret-right"></i></div>18105018</div>
+                        <div>Sukhbir Singh SSSSSSSSSSSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSSSSSSSSSSSSSSSSS</div>
+                        <div>10/10/2020 4:59:37pm</div>
+                    </div>
+                    <div class="submission">
+                        <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
+                        <div>Puneet Singh</div>
+                        <div>10/10/2020 4:59:37pm</div>
+                    </div>
+                    <div class="submission">
+                        
+                        <div><div><i class="fas fa-caret-right"></i></div>18105105</div>
+                        <div>Mehak</div>
+                        <div>10/10/2020 4:59:37pm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+</div>
+<script src="/js/view_submission"></script>    
