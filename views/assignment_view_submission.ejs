@@ -31,50 +31,30 @@
                 <!-- User Submissions -->
                 <div class="work_added">Submissions</div>
                 <div id="submissions_container">
-                    
-                    <div class="submission">
-                        <div class="submission_content">
-                            <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
-                            <div>Puneet Singh</div>
-                            <div>10/10/2020 4:59:37pm</div>
+                    <% for(let submission of submissionList){ %>
+                        <div class="submission <% if(submission.submittedAt>assignment.deadline){ %>late_submitted<% } %>">
+                            <div class="submission_content">
+                                <div><div><i class="fas fa-caret-right"></i></div><%= submission.postedBy.sid %></div>
+                                <div><%= submission.postedBy.name %></div>
+                                <div><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(submission.submittedAt)%></div>
+                            </div>
+                            <div class="submission_files" >
+                                <% for(let file of submission.files){ %>
+                                    <a href="<%= file.url %>" class="file_inside" download="download">
+                                        <div class="file_icon "></div>
+                                        <div class="file_title"><%= file.name %></div>
+                                    </a>
+                                <% } %> 
+                            </div>
+                            <div class="submission_grading">
+                                <form>
+                                    <input type="number" min=0 max=<%= assignment.weightage %>>
+                                    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                                    <button type="submit">Grade</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="submission_files" >
-                            <% for(let file of assignment.files){ %>
-                                <a href="<%= file.url %>" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title"><%= file.name %></div>
-                                </a>
-                            <% } %> 
-                        </div>
-                    </div>
-                    <div class="submission">
-                        <div class="submission_content">
-                            <div><div><i class="fas fa-caret-right"></i></div>18105096</div>
-                            <div>Puneet Singh</div>
-                            <div>10/10/2020 4:59:37pm</div>
-                        </div>
-                        <div class="submission_files" >
-                            <% for(let file of assignment.files){ %>
-                                <a href="<%= file.url %>" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title"><%= file.name %></div>
-                                </a>
-                                <a href="<%= file.url %>" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title"><%= file.name %></div>
-                                </a>
-                                <a href="<%= file.url %>" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title"><%= file.name %></div>
-                                </a>
-                                <a href="<%= file.url %>" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title"><%= file.name %></div>
-                                </a>
-                            <% } %> 
-                        </div>
-                    </div>
-                   
+                    <% } %>
                     </div>
                 </div>
             </div>

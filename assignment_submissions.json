@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "5f7f3a62e962254ce83e4469"
+  },
+  "turnedIn": false,
+  "postedBy": {
+    "$oid": "5f74792327236520ccdb278f"
+  },
+  "assignmentId": {
+    "$oid": "5f7ef810ab53e14618a52739"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f7f41e1ab0d19466cf13bf1"
+      },
+      "url": "\\uploads\\assignment\\files-1602175457118.ppt",
+      "name": "Unit 1.ppt"
+    },
+    {
+      "_id": {
+        "$oid": "5f7f4279c1ecf610fcab4ad8"
+      },
+      "url": "\\uploads\\assignment\\files-1602175608957.ppt",
+      "name": "Unit 1.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-08T16:12:18.344Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T18:32:32.746Z"
+  },
+  "__v": 20,
+  "submittedAt": {
+    "$date": "2020-10-09T18:32:32.741Z"
+  }
+},{
+  "_id": {
+    "$oid": "5f80590bfd33250cf0a271ff"
+  },
+  "turnedIn": true,
+  "postedBy": {
+    "$oid": "5f74792327236520ccdb278f"
+  },
+  "assignmentId": {
+    "$oid": "5f7d8517a78378471c66ed68"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f80ad2ec4ea564b48bd2610"
+      },
+      "url": "\\uploads\\assignment\\files-1602268462190.ppt",
+      "name": "Unit 1.ppt"
+    },
+    {
+      "_id": {
+        "$oid": "5f80ad30c4ea564b48bd2611"
+      },
+      "url": "\\uploads\\assignment\\files-1602268464975.ppt",
+      "name": "Microprogrammed CU.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-09T12:35:23.930Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T18:34:27.198Z"
+  },
+  "__v": 2,
+  "submittedAt": {
+    "$date": "2020-10-09T18:34:27.196Z"
+  }
+}]

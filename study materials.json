@@ -1,0 +1,157 @@
+[{
+  "_id": {
+    "$oid": "5f80b8ce55f08b48988bb0bc"
+  },
+  "title": "ser",
+  "content": "e",
+  "classSub": {
+    "_id": {
+      "$oid": "5f80b8ce55f08b48988bb0bd"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f80b8ce55f08b48988bb0be"
+      },
+      "url": "\\uploads\\study_material\\file0-1602271436769.ppt",
+      "name": "Unit 1.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-09T19:23:58.624Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T19:23:58.729Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "5f80b8ce55f08b48988bb0bf"
+  },
+  "title": "ser",
+  "content": "e",
+  "classSub": {
+    "_id": {
+      "$oid": "5f80b8ce55f08b48988bb0c0"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746e30817e1b2f48bc5ac1"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f80b8ce55f08b48988bb0c1"
+      },
+      "url": "\\uploads\\study_material\\file0-1602271436769.ppt",
+      "name": "Unit 1.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-09T19:23:58.730Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T19:23:58.794Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "5f80b8ce55f08b48988bb0c2"
+  },
+  "title": "ser",
+  "content": "e",
+  "classSub": {
+    "_id": {
+      "$oid": "5f80b8ce55f08b48988bb0c3"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f80b8ce55f08b48988bb0c4"
+      },
+      "url": "\\uploads\\study_material\\file0-1602271436769.ppt",
+      "name": "Unit 1.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-09T19:23:58.794Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T19:23:58.814Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "5f80b8ce55f08b48988bb0c5"
+  },
+  "title": "ser",
+  "content": "e",
+  "classSub": {
+    "_id": {
+      "$oid": "5f80b8ce55f08b48988bb0c6"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f80b8ce55f08b48988bb0c7"
+      },
+      "url": "\\uploads\\study_material\\file0-1602271436769.ppt",
+      "name": "Unit 1.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-09T19:23:58.814Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-09T19:23:58.872Z"
+  },
+  "__v": 1
+}]

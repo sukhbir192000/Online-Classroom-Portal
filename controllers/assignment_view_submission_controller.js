@@ -14,8 +14,9 @@ module.exports.viewSubmission=async function(req,res){
         let assignment=await AssignmentModel.findById(req.params.assignmentId)
         .populate('classSub.course');
         let submissionList=await AssignmentSubmissionModel.find({
-            assignmentId:req.params.assignmentId
-        });
+            assignmentId:req.params.assignmentId,
+            turnedIn:true
+        }).populate('postedBy');
         return res.render('assignment_view_submission',{
             title:"Submission",
             assignment:assignment,

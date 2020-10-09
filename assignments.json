@@ -1,0 +1,147 @@
+[{
+  "_id": {
+    "$oid": "5f7d8517a78378471c66ed68"
+  },
+  "title": "Test",
+  "content": "Test",
+  "classSub": {
+    "_id": {
+      "$oid": "5f7d8517a78378471c66ed69"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde661"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "weightage": 10,
+  "deadline": {
+    "$date": "2020-10-09T11:30:00Z"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f7d8517a78378471c66ed6a"
+      },
+      "url": "\\uploads\\assignment\\file0-1602061590975.ppt",
+      "name": "Microprogrammed CU.ppt"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-07T09:06:31.033Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-07T09:06:31.482Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "5f7ef810ab53e14618a52739"
+  },
+  "title": "This is the Title",
+  "content": "And here is the content",
+  "classSub": {
+    "_id": {
+      "$oid": "5f7ef810ab53e14618a5273a"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "weightage": 10,
+  "deadline": {
+    "$date": "2020-10-11T11:30:00Z"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f7ef810ab53e14618a5273b"
+      },
+      "url": "\\uploads\\assignment\\file0-1602156559897.ppt",
+      "name": "Unit 1.ppt"
+    },
+    {
+      "_id": {
+        "$oid": "5f7ef810ab53e14618a5273c"
+      },
+      "url": "\\uploads\\assignment\\file1-1602156560015.pdf",
+      "name": "tut1.pdf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-08T11:29:20.116Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-08T11:29:20.214Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "5f7ef810ab53e14618a5273d"
+  },
+  "title": "This is the Title",
+  "content": "And here is the content",
+  "classSub": {
+    "_id": {
+      "$oid": "5f7ef810ab53e14618a5273e"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746e30817e1b2f48bc5ac1"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "weightage": 10,
+  "deadline": {
+    "$date": "2020-10-11T11:30:00Z"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5f7ef810ab53e14618a5273f"
+      },
+      "url": "\\uploads\\assignment\\file0-1602156559897.ppt",
+      "name": "Unit 1.ppt"
+    },
+    {
+      "_id": {
+        "$oid": "5f7ef810ab53e14618a52740"
+      },
+      "url": "\\uploads\\assignment\\file1-1602156560015.pdf",
+      "name": "tut1.pdf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-10-08T11:29:20.214Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-08T11:29:20.246Z"
+  },
+  "__v": 1
+}]

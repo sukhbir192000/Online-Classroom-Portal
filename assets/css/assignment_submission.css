@@ -506,6 +506,9 @@ a{
 .submission_content i{
     transition:0.3s
 }
+.late_submitted{
+    color: red;
+}
 
 
 /* For tablet devices */

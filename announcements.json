@@ -1,0 +1,316 @@
+[{
+  "_id": {
+    "$oid": "5f7738446e28661bcc4b3eee"
+  },
+  "title": "Testing Flash",
+  "content": "It will work very well...i just know",
+  "classSub": {
+    "_id": {
+      "$oid": "5f7738446e28661bcc4b3eef"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde661"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-02T14:25:08.795Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-02T14:25:08.795Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7738446e28661bcc4b3ef0"
+  },
+  "title": "Testing Flash",
+  "content": "It will work very well...i just know",
+  "classSub": {
+    "_id": {
+      "$oid": "5f7738446e28661bcc4b3ef1"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde662"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-02T14:25:08.804Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-02T14:25:08.804Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f773aad1d012018c0e4bc42"
+  },
+  "title": "Test 3",
+  "content": "Content",
+  "classSub": {
+    "_id": {
+      "$oid": "5f773aad1d012018c0e4bc43"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-02T14:35:25.418Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-02T14:35:25.418Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f773dc3a43d74363c4dd792"
+  },
+  "title": "Is this the real life",
+  "content": "or is this just a fantasy...pata ni",
+  "classSub": {
+    "_id": {
+      "$oid": "5f773dc3a43d74363c4dd793"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-02T14:48:35.950Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-02T18:19:17.943Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f78a0d5e1a94e143cc8000d"
+  },
+  "title": "Check Course",
+  "content": "Test",
+  "classSub": {
+    "_id": {
+      "$oid": "5f78a0d5e1a94e143cc8000e"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-03T16:03:33.376Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-03T16:03:33.376Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f78a262d2ea03431cd460ab"
+  },
+  "title": "Its enough now",
+  "content": "You have to work correctly",
+  "classSub": {
+    "_id": {
+      "$oid": "5f78a262d2ea03431cd460ac"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde661"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-03T16:10:10.566Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-03T16:10:10.566Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f79b13ff4880207448a9a24"
+  },
+  "title": "raev",
+  "content": "argbaerb a",
+  "classSub": {
+    "_id": {
+      "$oid": "5f79b13ff4880207448a9a25"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-04T11:25:51.116Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-04T11:25:51.116Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f79b13ff4880207448a9a26"
+  },
+  "title": "raev",
+  "content": "argbaerb a",
+  "classSub": {
+    "_id": {
+      "$oid": "5f79b13ff4880207448a9a27"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746e30817e1b2f48bc5ac1"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-04T11:25:51.120Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-04T11:25:51.120Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f79b13ff4880207448a9a28"
+  },
+  "title": "raev",
+  "content": "argbaerb a",
+  "classSub": {
+    "_id": {
+      "$oid": "5f79b13ff4880207448a9a29"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde661"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-04T11:25:51.123Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-04T11:25:51.123Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f79b13ff4880207448a9a2a"
+  },
+  "title": "raev",
+  "content": "argbaerb a",
+  "classSub": {
+    "_id": {
+      "$oid": "5f79b13ff4880207448a9a2b"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde662"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "createdAt": {
+    "$date": "2020-10-04T11:25:51.135Z"
+  },
+  "updatedAt": {
+    "$date": "2020-10-04T11:25:51.135Z"
+  },
+  "__v": 0
+}]

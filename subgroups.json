@@ -1,0 +1,181 @@
+[{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520e9"
+  },
+  "student": [],
+  "subGroupNumber": 1,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520ea"
+  },
+  "student": [],
+  "subGroupNumber": 2,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520eb"
+  },
+  "student": [],
+  "subGroupNumber": 3,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520ec"
+  },
+  "student": [],
+  "subGroupNumber": 4,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520ed"
+  },
+  "student": [],
+  "subGroupNumber": 5,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747249dad6ac05b08520ee"
+  },
+  "student": [],
+  "subGroupNumber": 6,
+  "class": {
+    "$oid": "5f743a0a63f86a1918ec43a8"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad1"
+  },
+  "student": [],
+  "subGroupNumber": 1,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad2"
+  },
+  "student": [],
+  "subGroupNumber": 2,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad3"
+  },
+  "student": [],
+  "subGroupNumber": 3,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad4"
+  },
+  "student": [],
+  "subGroupNumber": 4,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad5"
+  },
+  "student": [],
+  "subGroupNumber": 5,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74727626296b4a88fffad6"
+  },
+  "student": [],
+  "subGroupNumber": 6,
+  "class": {
+    "$oid": "5f7439e0ac79e333b4949e71"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde661"
+  },
+  "student": [],
+  "subGroupNumber": 1,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde662"
+  },
+  "student": [],
+  "subGroupNumber": 2,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde663"
+  },
+  "student": [],
+  "subGroupNumber": 3,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde664"
+  },
+  "student": [],
+  "subGroupNumber": 4,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde665"
+  },
+  "student": [],
+  "subGroupNumber": 5,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f74729102517e1314bde666"
+  },
+  "student": [],
+  "subGroupNumber": 6,
+  "class": {
+    "$oid": "5f7439c114b9781df80b3c4f"
+  },
+  "__v": 0
+}]

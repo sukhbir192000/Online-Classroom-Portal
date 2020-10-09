@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "5f7474e8ed898e4664816678"
+  },
+  "students": [],
+  "code": "ECN-103",
+  "name": "Digital Design",
+  "credits": 4,
+  "sem": 2,
+  "createdAt": {
+    "$date": "2020-09-30T12:07:04.666Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:07:04.666Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f747590198ace273c0e73d1"
+  },
+  "students": [],
+  "code": "ECN-104",
+  "name": "Analog Electronics-1",
+  "credits": 4,
+  "sem": 2,
+  "createdAt": {
+    "$date": "2020-09-30T12:09:52.875Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:09:52.875Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7475caa90e272bc082dd5e"
+  },
+  "students": [],
+  "code": "CSN-102",
+  "name": "Data Structures",
+  "credits": 4,
+  "sem": 2,
+  "createdAt": {
+    "$date": "2020-09-30T12:10:50.324Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:10:50.324Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7476040454a14aa8e00707"
+  },
+  "students": [],
+  "code": "CSN-205",
+  "name": "Operating Systems",
+  "credits": 4,
+  "sem": 3,
+  "createdAt": {
+    "$date": "2020-09-30T12:11:48.471Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:11:48.471Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7476468f8a4d168cc52cb9"
+  },
+  "students": [],
+  "code": "EE-201",
+  "name": "Motor",
+  "credits": 4,
+  "sem": 3,
+  "createdAt": {
+    "$date": "2020-09-30T12:12:54.511Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:12:54.511Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7476665fe95336a08673c0"
+  },
+  "students": [],
+  "code": "EE-204",
+  "name": "Transformer",
+  "credits": 4,
+  "sem": 3,
+  "createdAt": {
+    "$date": "2020-09-30T12:13:26.185Z"
+  },
+  "updatedAt": {
+    "$date": "2020-09-30T12:13:26.185Z"
+  },
+  "__v": 0
+}]

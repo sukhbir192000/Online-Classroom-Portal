@@ -7,7 +7,7 @@ document.addEventListener('mouseup',function(e){
     else if(e.x<rect.left || e.x>(rect.left+rect.width) || e.y<rect.top || e.y>(rect.top+rect.height) ){
         document.querySelector(".profile").classList.remove("show");
     }
- });
+});
 
 
 document.addEventListener('mouseup',function(e){
