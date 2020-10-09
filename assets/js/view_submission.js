@@ -71,10 +71,11 @@ document.addEventListener('mouseup',function(e){
 
 var files_container=document.querySelectorAll('.submission');
 for(let file_container of files_container){
-   
-    file_container.addEventListener('click',function(e){
-        this.children[0].children[0].children[0].children[0].classList.toggle('rotate_arrow');
-        this.children[1].classList.toggle('submission_files_show');
+
+    file_container.children[0].addEventListener('click',function(e){
+        this.parentNode.children[0].children[0].children[0].children[0].classList.toggle('rotate_arrow');
+        this.parentNode.children[1].classList.toggle('submission_files_show');
+        this.parentNode.children[2].classList.toggle('submission_files_show');
     })
 }
 (function(){
