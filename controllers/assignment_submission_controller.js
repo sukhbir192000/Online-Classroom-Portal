@@ -131,14 +131,17 @@ module.exports.assignmentSubmissionSubmit=async function(req,res){
 }
 
 module.exports.assignmentSubmissionDelete=async function(req,res){
-    console.log(req.body.url);
+   
     try{
+        let pathTry=new URL(req.body.url);
+        let pathName=pathTry.pathname
+        pathName=path.normalize(pathName)
         let submission = await AssignmentSubmissionModel.findOne({
             postedBy:res.locals.user,
             assignmentId:req.params.assignmentId
         }); 
         for(let i=0;i<submission.files.length;i++){
-            if(submission.files[i].url==req.body.url){
+            if(submission.files[i].url==pathName){
                 fs.unlinkSync(path.join(__dirname,'..',submission.files[i].url));
                 submission.files.splice(i,1);
                 console.log("Found and deleted file");

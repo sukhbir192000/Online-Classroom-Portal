@@ -28,7 +28,8 @@ document.addEventListener('mouseup',function(e){
     materialClassAll = document.querySelectorAll(".material");
     for(let materialClass of materialClassAll){
         for(let j=0;j<materialClass.childElementCount;j++){
-            // console.log(materialClass.children[j].href);
+            console.log("hi",materialClass.children[j].href);
+
             let extension = materialClass.children[j].href.split('.').pop().toLowerCase();
             if( extension == 'pptx' || extension == 'ppt' || extension == 'pptm'){
                 materialClass.children[j].children[0].innerHTML = "<i class='fas fa-file-powerpoint'></i>";
@@ -68,6 +69,13 @@ document.addEventListener('mouseup',function(e){
 
 })();
 
+(function(){
+    materialClassAll = document.querySelectorAll(".files_added .file_inside");
+    for(let files of materialClassAll){
+        let extension = files.children[0].href.split('.').pop().toLowerCase();
+        icon(files.children[0].children[0],extension);
+    }
+})()
 function icon(fileIcon, extension){
     if( extension == 'pptx' || extension == 'ppt' || extension == 'pptm'){
         fileIcon.innerHTML = "<i class='fas fa-file-powerpoint'></i>";
@@ -178,6 +186,7 @@ for(let file of crossAddArray.children){
                 url:this.parentNode.children[0].href
             },
             success:function(response){
+                
                 containerElement.remove();   
             }
         });

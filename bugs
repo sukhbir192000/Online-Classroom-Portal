@@ -9,7 +9,7 @@ Assignments
 - Add (marks reset)
 - Edit
 - Filters (submitted, sort by deadline)
-- Add submission(file delete ajax)
+- Add submission(teacher's comments)
 - fix files removal (both studymaterial and submission)
 - View submission
 -add download and href in ejs and js
