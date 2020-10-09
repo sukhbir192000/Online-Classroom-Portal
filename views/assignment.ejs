@@ -140,6 +140,8 @@
                     <ul class="list">
                         <li class="filter_sort<% if(filterList.sort=="Oldest First"){ %> selected <% } %>" >Oldest First</li>
                         <li class="filter_sort<% if(filterList.sort=="Latest First"){ %> selected <% } %>" >Latest First</li>
+                        <li class="filter_sort<% if(filterList.sort=="Deadline First"){ %> selected <% } %>" >Deadline First</li>
+                        <li class="filter_sort<% if(filterList.sort=="Deadline Last"){ %> selected <% } %>" >Deadline Last</li>
                     </ul>
                 </div>
             </div>
@@ -152,6 +154,17 @@
                             <% for(let branch of branchList){ %>
                                 <li class="filter_branch<% if(filterList.branch==branch.stream){ %> selected <% } %>" ><%=branch.stream%></li>
                             <% } %> 
+                        </ul>
+                    </div>
+                </div>
+            <% }else{ %>
+                <div class="filter_name">
+                    <div class="filter_heading">Status</div>
+                    <div class="filter_content">
+                        <ul class="list">
+                            <li class="filter_status<% if(filterList.status=="All"){ %> selected <% } %>">All</li>
+                            <li class="filter_status<% if(filterList.status=="Submitted"){ %> selected <% } %>">Submitted</li>
+                            <li class="filter_status<% if(filterList.status=="Pending"){ %> selected <% } %>">Pending</li>
                         </ul>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const AssignmentModel=require('../models/assignment');
+const AssignmentSubmissionModel=require('../models/assignment_submission');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
@@ -131,6 +132,16 @@ module.exports.assignment=async function(req,res){
                 return new Date(b.createdAt) - new Date(a.createdAt);
             });
         }
+        else if(req.query.date=="Deadline First"){
+            assignmentList.sort(function(a,b){
+                return new Date(a.deadline) - new Date(b.deadline);
+            });
+        }
+        else if(req.query.date=="Deadline Last"){
+            assignmentList.sort(function(a,b){
+                return new Date(b.deadline) - new Date(a.deadline);
+            });
+        }
         else{
             assignmentList.sort(function(a,b){
                 return new Date(a.createdAt) - new Date(b.createdAt);
@@ -139,18 +150,21 @@ module.exports.assignment=async function(req,res){
         var filterList={
             courseName:"",
             sort:"",
-            branch:""
+            branch:"",
+            status:""
         };
         // console.log(req.query);
         if(req.query.sub||req.query.date){
-            filterList.courseName=req.query.sub,
-            filterList.sort=req.query.date
-            filterList.branch=req.query.branch
+            filterList.courseName=req.query.sub;
+            filterList.sort=req.query.date;
+            filterList.branch=req.query.branch;
+            filterList.status=req.query.status;
         }
         else{
-            filterList.courseName="All",
-            filterList.sort="Latest First",
-            filterList.branch="All"
+            filterList.courseName="All";
+            filterList.sort="Latest First";
+            filterList.branch="All";
+            filterList.status="All";
         }
         // res.locals.user=await res.locals.user.populate('courses').execPopulate();
         branchList=[]
@@ -187,6 +201,29 @@ module.exports.assignment=async function(req,res){
             let  courseObject = await CourseModel.findById(course);
             courses.push(courseObject);
         }
+        if(req.query.status && req.query.status!="All"){
+            let check = false;
+            if(req.query.status=="Submitted") check = true;
+            for(let i=0;i<assignmentList.length;i++){
+                submission = await AssignmentSubmissionModel.findOne({
+                    assignmentId: assignmentList[i]._id,
+                    postedBy: user._id
+                });
+                if(!submission || submission.turnedIn==false){
+                    if(check){
+                        assignmentList.splice(i,1);
+                        i--;
+                    }
+                }
+                else{
+                    if(!check){
+                        assignmentList.splice(i,1);
+                        i--;
+                    }
+                }
+            }
+        }
+        
         return res.render("assignment",{
             title:"Assignment",
             assignments:assignmentList,
