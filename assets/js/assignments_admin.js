@@ -10,6 +10,10 @@ for(let i=0;i<boxelements.length;i++){
             var title = current_box.children[0].children[1];
             var points = current_box.children[0].children[2].children[1];
             var description = current_box.children[1].children[0].children[4];
+            var deadline_content = current_box.children[1].children[0].children[0].children[1];
+            var deadline_input = current_box.children[1].children[0].children[0].children[2];
+            deadline_content.style.display = "flex";
+            deadline_input.style.display = "none";
             title.contentEditable="false";
             points.contentEditable = "false"
             description.contentEditable="false";
@@ -22,6 +26,7 @@ for(let i=0;i<boxelements.length;i++){
             title.textContent=arr[0];
             description.textContent=arr[1];
             points.textContent = arr[2];
+            deadline_content.textContent = arr[3];
             current_box.children[1].children[2].style.pointerEvents = "auto"
             fileDeleteButtons = current_box.children[1].children[1];
             current_box.children[1].children[2].classList.remove("show_delete");
@@ -44,9 +49,14 @@ for(let i=0;i<boxelements.length;i++){
         var title = boxelements[i].children[0].children[1];
         var points = boxelements[i].children[0].children[2].children[1];
         var description = boxelements[i].children[1].children[0].children[4];
+        var deadline_content = boxelements[i].children[1].children[0].children[0].children[1];
+        var deadline_input = boxelements[i].children[1].children[0].children[0].children[2];
         arr.push(title.textContent);
         arr.push(description.textContent);
         arr.push(points.textContent);
+        arr.push(deadline_content.textContent);
+        deadline_content.style.display = "none";
+        deadline_input.style.display = "flex";
         title.contentEditable="true";
         points.contentEditable="true";
         description.contentEditable="true";
@@ -80,6 +90,7 @@ for(let i=0;i<boxelements.length;i++){
             current_box.children[1].children[3].children[1].children[1].children[1].setAttribute('value',description.textContent);
             current_box.children[1].children[3].children[1].children[1].children[2].setAttribute('value',deleted_files);
             current_box.children[1].children[3].children[1].children[1].children[3].setAttribute('value',points.textContent);
+            current_box.children[1].children[3].children[1].children[1].children[4].setAttribute('value',deadline_input.value);
             current_box.children[1].children[3].children[1].children[1].submit();
         })
     })   
@@ -99,6 +110,10 @@ document.addEventListener('click',function(e){
             var title = current_box.children[0].children[1];
             var points = current_box.children[0].children[2].children[1];
             var description = current_box.children[1].children[0].children[4];
+            var deadline_content = current_box.children[1].children[0].children[0].children[1];
+            var deadline_input = current_box.children[1].children[0].children[0].children[2];
+            deadline_content.style.display = "flex";
+            deadline_input.style.display = "none";
             title.contentEditable="false";
             points.contentEditable="false";
             description.contentEditable="false";
@@ -121,6 +136,7 @@ document.addEventListener('click',function(e){
             title.textContent=arr[0];
             description.textContent=arr[1];
             points.textContent=arr[2];
+            deadline_content.textContent = arr[3];
             current_box=null;
             arr=[];
             links=[];
@@ -145,6 +161,7 @@ document.addEventListener('click',function(e){
         document.getElementById("lecture_deadline").value="";
         document.querySelector("#file_names").innerHTML = "";
         document.getElementById("file_inputs").innerHTML = "";
+        document.getElementById("weightage_input").value = "";
         var newInput = document.createElement("input");
         newInput.name = 'file0';
         newInput.className = "file";

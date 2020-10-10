@@ -358,11 +358,11 @@ body{
     max-height: 2.4em;
     align-self: center;
     /* vertical-align: middle; */
-    overflow: hidden;
-    text-overflow: ellipsis;
     /* white-space: nowrap;  */
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .color_word{
     color:#2962ff;

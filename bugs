@@ -4,8 +4,6 @@ Bugs:
 - Sidebar alignment in user and admin mode
 
 Assignments
-- add deadline in edit
-- Add (marks reset on cancel)
 - Edit
 - View submission
 - add download and href in ejs and js
@@ -13,7 +11,8 @@ Assignments
 -file name too long gets chopped off
 
 BACKEND
-- Added another field to hidden form of assgn (points)
+- Added another field to hidden form of assgn (points & deadline)
+- set value of input deadline ad current deadline
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login
