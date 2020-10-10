@@ -8,16 +8,20 @@ for(let i=0;i<boxelements.length;i++){
             var deletebutton = current_box.children[1].children[3].children[0].children[1];
             var savebutton =current_box.children[1].children[3].children[1].children[0];
             var title = current_box.children[0].children[1];
+            var points = current_box.children[0].children[2].children[1];
             var description = current_box.children[1].children[0].children[4];
             title.contentEditable="false";
+            points.contentEditable = "false"
             description.contentEditable="false";
             title.classList.remove("heading_edit");
+            points.classList.remove("heading_edit");
             description.classList.remove("content_edit")
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
             savebutton.classList.remove("show");
             title.textContent=arr[0];
             description.textContent=arr[1];
+            points.textContent = arr[2];
             current_box.children[1].children[2].style.pointerEvents = "auto"
             fileDeleteButtons = current_box.children[1].children[1];
             current_box.children[1].children[2].classList.remove("show_delete");
@@ -38,13 +42,17 @@ for(let i=0;i<boxelements.length;i++){
         var deletebutton = boxelements[i].children[1].children[3].children[0].children[1];
         var savebutton = boxelements[i].children[1].children[3].children[1].children[0];
         var title = boxelements[i].children[0].children[1];
+        var points = boxelements[i].children[0].children[2].children[1];
         var description = boxelements[i].children[1].children[0].children[4];
         arr.push(title.textContent);
         arr.push(description.textContent);
+        arr.push(points.textContent);
         title.contentEditable="true";
+        points.contentEditable="true";
         description.contentEditable="true";
         title.classList.add("heading_edit");
         title.setAttribute("title-text","Enter title");
+        points.classList.add("heading_edit");
         description.classList.add("content_edit");
         description.setAttribute("description-text", "Enter description");
         deletebutton.classList.add("hide");
@@ -71,6 +79,7 @@ for(let i=0;i<boxelements.length;i++){
             current_box.children[1].children[3].children[1].children[1].children[0].setAttribute('value',title.textContent);
             current_box.children[1].children[3].children[1].children[1].children[1].setAttribute('value',description.textContent);
             current_box.children[1].children[3].children[1].children[1].children[2].setAttribute('value',deleted_files);
+            current_box.children[1].children[3].children[1].children[1].children[3].setAttribute('value',points.textContent);
             current_box.children[1].children[3].children[1].children[1].submit();
         })
     })   
@@ -88,10 +97,13 @@ document.addEventListener('click',function(e){
             var editbutton = current_box.children[1].children[3].children[0].children[0];
             var deletebutton = current_box.children[1].children[3].children[0].children[1];
             var title = current_box.children[0].children[1];
+            var points = current_box.children[0].children[2].children[1];
             var description = current_box.children[1].children[0].children[4];
             title.contentEditable="false";
+            points.contentEditable="false";
             description.contentEditable="false";
             title.classList.remove("heading_edit");
+            points.classList.remove("heading_edit");
             description.classList.remove("content_edit")
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
@@ -108,7 +120,7 @@ document.addEventListener('click',function(e){
             }
             title.textContent=arr[0];
             description.textContent=arr[1];
-            subject.textContent=arr[2];
+            points.textContent=arr[2];
             current_box=null;
             arr=[];
             links=[];

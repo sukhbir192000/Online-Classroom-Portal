@@ -4,13 +4,14 @@ Bugs:
 - Sidebar alignment in user and admin mode
 
 Assignments
-- Show weightage in contents
-- add deadline and weightage in edit
+- add deadline in edit
 - Add (marks reset on cancel)
 - Edit
-- Add submission(teacher's comments)
 - View submission
 - add download and href in ejs and js
+
+BACKEND
+- Added another field to hidden form of assgn (points)
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login

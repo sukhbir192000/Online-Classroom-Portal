@@ -64,6 +64,12 @@
                         <div class="box_heading"> 
                             <div class="subject"><%= assignment.classSub.course.name %></div>
                             <div class="title"><%= assignment.title %></div>
+                            <!-- ------------------------------------------------------------------------------------- -->
+                            <div class="points">
+                                <div class="points_heading">Total points:</div>
+                                <div class="points_content">10</div>
+                            </div>
+                            <!-- ------------------------------------------------------------------------------------- -->
                         </div>
                         <div class="box_content">  
                             <div class="box_content_details">                    
@@ -105,6 +111,7 @@
                                             <input type="hidden" name="title" >
                                             <input type="hidden" name="description">
                                             <input type="hidden" name="after_delete_files">
+                                            <input type="hidden" name="points">
                                         </form>
                                     </div>
                                 </div>
