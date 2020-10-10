@@ -47,14 +47,18 @@
                                 <% } %> 
                             </div>
                             <div class="submission_grading">
-                                <form>
+                                <form method="POST">
                                     <div>
                                         <label for="marks">Marks:</label>
-                                        <input type="number" name="marks" min=0 max=<%= assignment.weightage %> required> /<%= assignment.weightage %>
+                                        <input type="number" name="marks" min=0 max=<%= assignment.weightage %> value="<%=submission.marksAlloted%>" required> /<%= assignment.weightage %>
+                                        <input type="hidden" name="id" value=<%=submission._id%>>
+                                       
                                     </div>
-                                    <textarea name="comment" id="comment" rows="5" placeholder="Comments"></textarea>
+                                    <textarea name="comment" id="comment" rows="5" placeholder="Comments"><%= submission.comment %></textarea>
                                     <button type="submit">Grade</button>
+                                    <button type="button" class="edit_grades">Edit Grades</button>
                                 </form>
+                                
                             </div>
                         </div>
                     <% } %>
@@ -68,4 +72,5 @@
     </div>
 
 </div>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <script src="/js/view_submission.js"></script>    
