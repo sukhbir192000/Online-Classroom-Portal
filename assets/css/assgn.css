@@ -542,9 +542,7 @@ li:hover{
     /* HEADER */
     
     /* FOOTER */
-    .footer_content{
-        font-size: 0.8em;
-    }
+    
 
     
     /* FILTERS */
@@ -708,7 +706,9 @@ li:hover{
         margin-top: 0.7em;
         margin-left: 0;
     }
-
+    .subject_label{
+        display: block;
+    }
     
 
     /* FOOTER */

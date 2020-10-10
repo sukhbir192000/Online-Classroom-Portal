@@ -983,6 +983,9 @@ li:hover{
         margin-top: 0.7em;
         margin-left: 0;
     }
+    .subject_label{
+        display: block;
+    }
     /* -------------------------------------------------------------------------- */
 
     /* FOOTER */

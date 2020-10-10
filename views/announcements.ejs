@@ -1,4 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/announcements.css">    
+<% if(user.isAdmin){ %>
+    <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
+<% } %>
     <div class="main">
         <%- include('navbar') %>
 
@@ -22,7 +25,7 @@
                     </div>
                     <div class="add_admin">
                         <form method="POST" action="/content/announcements/create">
-                            <label for="subject">Subject:</label>
+                            <label for="subject" class="subject_label">Subject:</label>
                             <select id="subject" name="subject">
                                 <option value="All">All</option>
                                 <!-- add all subjects related to teacher here -->

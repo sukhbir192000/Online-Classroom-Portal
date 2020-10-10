@@ -1,5 +1,9 @@
 
 <link rel="stylesheet" type="text/css" href="/css/assgn.css">
+<% if(user.isAdmin){ %>
+    <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
+<% } %>
+
 <div>
     <div class="main">
         <%- include('navbar') %>
@@ -23,7 +27,7 @@
                     </div>
                     <div class="add_admin">
                         <form id="add_form" action="/content/assignments/create" method="POST" enctype="multipart/form-data">
-                            <label for="subject">Subject:</label>
+                            <label for="subject" class="subject_label">Subject:</label>
                             <select id="subject" name="subject">
                                 <option value="All">All</option>
                             </select><br><br>
