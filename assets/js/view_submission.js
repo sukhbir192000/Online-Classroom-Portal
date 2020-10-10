@@ -88,7 +88,70 @@ for(let file_container of files_container){
         }
         
     }
-})()
+})();
+//----------grading section--------------------
+(function(){
+    let forms=document.querySelectorAll('.submission_grading form');
+    for(let formElement of forms){
+        formElement.children[3].style.display="none";
+        formElement.children[formElement.children.length-2].addEventListener('click',function(e){
+            e.preventDefault();
+            // console.log("hi");
+            // console.log(this.parentNode.children[0].children[1])
+            
+            this.parentNode.children[3].style.display="flex"
+            this.style.display="none";
+            this.innerText="Regrade";
+            // let filedata=new FormData(this.parentElement);
+            // console.log(this.parentNode);
+            if(this.parentNode.children[0].children[1].value==""){
+                alert('Marks field cannot be empty');
+                return;
+            }
+            
+            $.ajax({
+                url:window.location.pathname +"/grade/"+this.parentNode.children[0].children[2].value,
+                type:"POST",
+                data:$(this.parentNode).serialize(),
+                success:function(response){
+                    console.log("response");
+                }
+            })
+            this.parentNode.children[0].children[1].disabled="true";
+            this.parentNode.children[1].disabled="true"
+        
+            
+        })
+    }
+})();
+(function(){
+    let editGradeButtons=document.querySelectorAll('.edit_grades');
+    for(let buttonElement of editGradeButtons){
+        buttonElement.addEventListener('click',function(e){
+            console.log("enable");
+            this.parentNode.children[0].children[1].removeAttribute('disabled')
+            this.parentNode.children[1].removeAttribute('disabled')
+            this.parentNode.children[2].style.display="flex"
+            this.style.display="none";
+            
+        })
+    }
+})();
+(function(){
+    let forms=document.querySelectorAll('.submission_grading form');
+    for(let formElement of forms){
+        console.log("hi2",formElement.children[0].children[1].value);
+        if(formElement.children[0].children[1].value!=""){
+        
+            formElement.children[0].children[1].disabled="true";
+            formElement.children[1].disabled="true"
+            formElement.children[3].style.display="flex"
+            formElement.children[2].style.display="none";
+            formElement.children[2].innerText="Regrade"
+        }
+    }
+})();
+//----------------------------------------------
 function icon(fileIcon, extension){
     if( extension == 'pptx' || extension == 'ppt' || extension == 'pptm'){
         fileIcon.innerHTML = "<i class='fas fa-file-powerpoint'></i>";

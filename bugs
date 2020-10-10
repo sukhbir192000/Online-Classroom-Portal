@@ -11,6 +11,8 @@ Assignments
 - Add submission(teacher's comments)
 - View submission
 - add download and href in ejs and js
+-delete all student submissions
+-file name too long gets chopped off
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login

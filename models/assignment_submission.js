@@ -34,6 +34,9 @@ const assignmentSubmissionSchema = new mongoose.Schema({
     },
     marksAlloted:{
         type:Number
+    },
+    comment:{
+        type:String
     }
 }, {
     timestamps: true
