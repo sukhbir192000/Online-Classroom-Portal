@@ -449,8 +449,8 @@ li:hover{
         color:black;
         height:auto;
         max-height: 70vh;
-        position: fixed;
-        top:7.8em;
+        position: absolute;
+        top:3.3em;
         right:8vw;
         display: flex;
         flex-direction: column;
@@ -628,8 +628,8 @@ li:hover{
         color:black;
         height:auto;
         max-height: 70vh;
-        position: fixed;
-        top:7em;
+        position: absolute;
+        top:3em;
         right:8vw;
         display: flex;
         flex-direction: column;
