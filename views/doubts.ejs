@@ -1,0 +1,151 @@
+<link rel="stylesheet" type="text/css" href="/css/doubts.css">
+<% if(user.isAdmin){ %>
+    <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
+<% } %>   
+<div class="main">
+    <%- include('navbar') %>
+
+    <div id="black_screen"></div>
+
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading"> Doubts</div>
+            <div class="filters_small">
+                <div>Filters</div>
+                <div><i class="fa fa-filter"></i></div>
+            </div>
+            
+        </div>
+        <div class="box_layout">
+            <% if(!user.isAdmin){ %>
+                <div class="add">
+                    <div class="add_icon"><i class="fas fa-plus"></i></div>
+                    <div class="add_content">Add </div>
+                </div>
+                <div class="add_admin">
+                    <form>
+                        <label for="subject">Subject:</label>
+                        <select id="subject" name="subject">
+                            <option value="All">All</option>
+                            <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
+                            <option value="Embedded Systems">Embedded Systems</option>
+                            <option value="Advanced Communication">Advanced Communication</option>
+                            <option value="Wireless Communication">Wireless Communication</option>
+                        </select><br><br>
+                        <label for="doubt_type">Type of doubt:</label>
+                        <select id="doubt_type" name="doubt_type">
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                        </select><br><br>
+                        <input type="text" name="title" id="title" placeholder="Enter the title" ><br><br>
+                        <textarea name="message" id="message" placeholder="Enter the message" rows="5" ></textarea><br><br>
+                        <div class="files">
+                            <div id="file_names"></div>
+                            <div id="file_inputs">
+                                <input type=file name="file0" class="file" style="display: none;">
+                                <button id="add_files_button" type="button">Add file</button>
+                            </div>
+                        </div>
+                        <div class="submit_button">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+            <div class="box">
+                <div class="box_heading"> 
+                    <div class="subject">Computer Architecture</div>
+                    <div class="title">Tutorial Sheet-4</div>
+                </div>
+                <div class="box_content">  
+                    <div class="box_content_details">                    
+                        <div class="description">I am a new doubt!! Please answer me</div>
+                        <div class="date_posted">Posted on 20-09-20</div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment_heading">DISCUSSION</div>
+                        <div class="comment_content">
+                                <div class="reply">
+                                    <div class="reply_user">
+                                        <div class="student_name">Mehak</div>
+                                        <div class="date_uploaded">Sept 10</div>
+                                    </div>
+                                    <div class="reply_content"> This is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubt</div>
+                                    <div class="reply_button">Reply</div>
+                                    <div class="reply" style="display: none;">
+                                        <div class="next_reply">
+                                            <input type="text" name="input_reply" placeholder="Reply">
+                                            <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reply">
+                                    <div class="reply_user">
+                                        <div class="student_name">Sukhbir Singh</div>
+                                        <div class="date_uploaded">Sept 10</div>
+                                    </div>
+                                    <div class="reply_content"> This is not a valid doubt</div>
+                                    <div class="reply_button">View replies</div>
+                                    <div class="reply" style="display: none;">
+                                        <div class="reply_user">
+                                            <div class="student_name">Mehak</div>
+                                            <div class="date_uploaded">Sept 10</div>
+                                        </div>
+                                        <div class="reply_content"> This is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubt</div>
+                                        <div class="reply_button">Reply</div>
+                                        <div class="reply" style="display: none;">
+                                            <div class="next_reply">
+                                                <input type="text" name="input_reply" placeholder="Reply">
+                                                <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                            </div>
+                                        </div>
+                                        <div class="next_reply">
+                                            <input type="text" name="input_reply" placeholder="Reply">
+                                            <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="reply">
+                                    <div class="next_reply">
+                                        <input type="text" name="input_reply" placeholder="Reply">
+                                        <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="filters">
+        <div class="filter_name">
+            <div class="filter_heading">Subjects:</div>
+            <div class="filter_content">
+                <ul class="list">
+                    <li>All </li>
+                    <li>Computer Architecture and Organisation</li>
+                    <li>Embedded Systems</li>
+                    <li>Wireless Communication</li>
+                    <li>Advanced Communication</li>
+                </ul>
+            </div>
+        </div>
+        <div class="filter_name">
+            <div class="filter_heading">Date:</div>
+            <div class="filter_content">
+                <ul class="list">
+                    <li>Ascending</li>
+                    <li>Descending</li>
+                </ul>
+            </div>
+        </div>            
+    </div>
+
+</div>
+
+
+<script src="/js/doubts.js"></script>
