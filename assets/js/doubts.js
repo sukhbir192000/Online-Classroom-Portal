@@ -41,69 +41,7 @@ document.addEventListener('mouseup',function(e){
     }
  });
 
-var replyButtonFunction = function(){
-    var x = document.querySelectorAll(".reply_button");
-    for(let i=0;i<x.length;i++){
-        x[i].addEventListener("click",function(e){
-            x[i].parentNode.children[3].style.display = "flex";
-            x[i].style.display = "none";
-        })
-    }
-}
-replyButtonFunction();
 
-
-var nextReplyFunction = function(){
-    var y = document.querySelectorAll(".next_reply");
-    for(let i=0;i<y.length;i++){
-        y[i].children[1].addEventListener("click",function(e){
-            if(this.parentNode.children[0].value != ""){
-                // if(this.parentNode.parentNode.childElementCount==1){
-                //     this.parentNode.parentNode.parentNode.children[2].textContent = "View Replies";
-                // }
-                let newDiv = document.createElement("div");
-                newDiv.classList.add("reply_user");
-                let studentName = document.createElement("div");
-                studentName.classList.add("student_name");
-                studentName.textContent = "Anonymous";
-                let dateUploaded = document.createElement("div");
-                dateUploaded.classList.add("date_uploaded");
-                dateUploaded.textContent = "Oct 15";
-                newDiv.appendChild(studentName);
-                newDiv.appendChild(dateUploaded);
-                let replyContent = document.createElement("div");
-                replyContent.classList.add("reply_content");
-                replyContent.textContent=this.parentNode.children[0].value;
-                let replyButton = document.createElement("div");
-                replyButton.classList.add("reply_button");
-                replyButton.textContent = "Reply";
-                let reply = document.createElement("div");
-                reply.classList.add("reply");
-                reply.style.display = "none";
-                nextReply = document.createElement("div");
-                nextReply.classList.add("next_reply");
-                inputDiv = document.createElement("input");
-                inputDiv.type = "text";
-                inputDiv.className = "input_reply";
-                inputDiv.placeholder="Reply";
-                inputIcon = document.createElement("div");
-                inputIcon.classList.add("input_icon");
-                inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
-                nextReply.appendChild(inputDiv);
-                nextReply.appendChild(inputIcon);
-                reply.appendChild(nextReply);
-                this.parentNode.parentNode.prepend(reply);
-                this.parentNode.parentNode.prepend(replyButton);
-                this.parentNode.parentNode.prepend(replyContent);
-                this.parentNode.parentNode.prepend(newDiv);
-                this.parentNode.children[0].value="";
-                replyButtonFunction();
-                nextReplyFunction();
-            }
-        })
-    }
-}
-nextReplyFunction();
 
 document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
@@ -200,3 +138,118 @@ function inputFormInitialise(){
     })
 }
 
+
+
+
+
+
+
+// --------------------------------REPLY BACK AND VIEW REPLIES-----------------------
+
+var replyButtonFunction = function(){
+    var x = document.querySelectorAll(".reply_button");
+    for(let i=0;i<x.length;i++){
+        x[i].children[0].addEventListener("click",function(e){
+            if(x[i].parentNode.children[3].children[1]){
+                x[i].parentNode.children[3].children[1].style.display = "flex";
+            }
+            this.style.display = "none";
+        })
+        x[i].children[1].addEventListener("click",function(e){
+            x[i].parentNode.children[3].children[0].style.display = "flex";
+            this.style.display = "none";
+        })
+    }
+}
+replyButtonFunction();
+
+var cancelIconFunction = function(){
+    var x = document.querySelectorAll(".cancel_icon");
+    for(let i=0;i<x.length;i++){
+        x[i].addEventListener("click",function(e){
+            x[i].parentNode.style.display = "none";
+            x[i].parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+        })
+    }
+}
+cancelIconFunction();
+
+
+
+var nextReplyFunction = function(){
+    var y = document.querySelectorAll(".next_reply");
+    for(let i=0;i<y.length;i++){
+        y[i].children[1].addEventListener("click",function(e){
+            if(y[i].children[0].value != ""){
+                let replyBack = document.createElement("div");
+                replyBack.classList.add("reply_back")
+                let replyUser = document.createElement("div");
+                replyUser.classList.add("reply_user");
+                let studentName = document.createElement("div");
+                studentName.classList.add("student_name");
+                studentName.textContent = "Anonymous";
+                let dateUploaded = document.createElement("div");
+                dateUploaded.classList.add("date_uploaded");
+                dateUploaded.textContent = "Oct 15";
+                replyUser.appendChild(studentName);
+                replyUser.appendChild(dateUploaded);
+                let replyContent = document.createElement("div");
+                replyContent.classList.add("reply_content");
+                replyContent.textContent=this.parentNode.children[0].value;
+                let replyButton = document.createElement("div");
+                replyButton.classList.add("reply_button");
+                let viewRepliesButton = document.createElement("div");
+                viewRepliesButton.classList.add("view_replies_button");
+                viewRepliesButton.textContent = "View Replies(0)";
+                let replyBackButton = document.createElement("div");
+                replyBackButton.classList.add("reply_back_button");
+                replyBackButton.textContent= "Reply";
+                replyButton.appendChild(viewRepliesButton);
+                replyButton.appendChild(replyBackButton);
+                let reply = document.createElement("div");
+                reply.classList.add("reply");
+                nextReply = document.createElement("div");
+                nextReply.classList.add("next_reply");
+                inputDiv = document.createElement("input");
+                inputDiv.type = "text";
+                inputDiv.className = "input_reply";
+                inputDiv.placeholder="Reply";
+                inputIcon = document.createElement("div");
+                inputIcon.classList.add("input_icon");
+                inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
+                cancelIcon = document.createElement("div");
+                cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
+                cancelIcon.classList.add("cancel_icon");
+                nextReply.appendChild(inputDiv);
+                nextReply.appendChild(inputIcon);
+                nextReply.appendChild(cancelIcon);
+                nextReply.style.display = "none";
+                reply.appendChild(nextReply);
+                replyBack.appendChild(replyUser);
+                replyBack.appendChild(replyContent);
+                replyBack.appendChild(replyButton);
+                replyBack.appendChild(reply);
+                y[i].children[0].value = "";
+                y[i].parentNode.appendChild(replyBack);
+                y[i].parentNode.children[1].children[3].children[0].children[2].addEventListener("click",function(e){
+                    this.parentNode.style.display = "none";
+                    this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+                })
+                y[i].parentNode.children[1].children[2].children[0].addEventListener("click",function(e){
+                    if(this.parentNode.parentNode.children[3].children[1]){
+                        this.parentNode.parentNode.children[3].children[1].style.display = "flex";
+                    }
+                    this.style.display = "none";
+                })
+                y[i].parentNode.children[1].children[2].children[1].addEventListener("click",function(e){
+                    if(this.parentNode.parentNode.children[3].children[0]){
+                        this.parentNode.parentNode.children[3].children[0].style.display = "flex";
+                    }
+                    this.style.display = "none";
+                })
+                nextReplyFunction();
+            }
+        })
+    }
+}
+nextReplyFunction();

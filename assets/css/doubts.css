@@ -401,9 +401,7 @@ body{
     align-items: center;
     
 }
-.reply_user>div{
-    padding-bottom: 0.4em;
-}
+
 .student_name{
     font-size: 0.9em;
     /* padding-right: 1em; */
@@ -421,43 +419,61 @@ body{
     overflow-wrap: break-word;
 }
 .reply_button{
+    display: flex;
+    flex-direction: row;
+}
+.view_replies_button{
     color:blue;
     font-size: 0.7em;
     width: fit-content;
     border:none;
     cursor: pointer;
-    margin-bottom: 0.5em;
+    /* margin-bottom: 0.5em; */
+    margin-right:1em;
 }
-.reply_button:hover{
+.reply_back_button{
+    color:blue;
+    font-size: 0.7em;
+    width: fit-content;
+    border:none;
+    cursor: pointer;
+    /* margin-bottom: 0.5em; */
+}
+.reply_back_button:hover{
     text-decoration: underline;
 }
-.reply {
-    margin-left: 2em;
-    margin-bottom:0.5em;
+.view_replies_button:hover{
+    text-decoration: underline;
+}
+.reply .reply {
+    margin-left: 3em;
+    /* margin-bottom:0.5em; */
+}
+.reply_back{
+    display: flex;
+    flex-direction: column;
 }
 .next_reply{
     display: flex;
     flex-direction: row;
+    margin-bottom: 0.5em;
     /* width:100%; */
 }
 .input_icon{
     color:gray;
     font-size: 1.4em;
-    /* width:2em; */
+    margin-left:0.3em;
+    margin-right:0.2em;
+    cursor: pointer;
+}
+.cancel_icon{
+    color:gray;
+    font-size: 1.4em;
     margin-left:0.3em;
     margin-right:1em;
     cursor: pointer;
 }
-/* input{
-    
-    margin-bottom: 1em;
-    min-width:50%;
-    width:100%;
-    background-color:rgb(189, 187, 187);
-}
-input:focus{
-    background-color: white;
-} */
+
 
 .comment_content::-webkit-scrollbar{
     width:8px;
