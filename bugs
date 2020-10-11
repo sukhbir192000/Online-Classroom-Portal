@@ -9,6 +9,7 @@ Assignments
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
 - set value of input deadline ad current deadline
+- remove marks and comments if assignment is unsubmitted
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login
