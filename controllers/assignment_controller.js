@@ -460,6 +460,14 @@ module.exports.assignmentDelete=async function(req,res){
             await FileModel.findByIdAndDelete(fileElement._id);
         }
     }
+    var submissions = await AssignmentSubmissionModel.find({assignmentId: assignment._id});
+    for(let submission of submissions){
+        for(let i=0;i<submission.files.length;i++){
+            fs.unlinkSync(path.join(__dirname,'..',submission.files[i].url));
+            console.log("Found and deleted file");
+        }
+        await AssignmentSubmissionModel.findByIdAndRemove(submission._id);
+    }
     await AssignmentModel.findByIdAndDelete(assignment._id);
     req.flash('success', 'Assignment Deleted');
     return res.redirect('back');
