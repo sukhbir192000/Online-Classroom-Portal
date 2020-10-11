@@ -1,178 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes/ Tests</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/f6bdc44dbc.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/quizzes.css">
-   
-</head>
-<body>
-    <header class="header">
-        <div class="welcome_user bgcolor_welcome_user">
-            <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div>
-            <div class="welcome_user_heading">
-                <div class="welcome_user_content color_white">
-                    Welcome User!
-                </div>
-                <div class="profile_icon"><i class="fa fa-user-circle color_white"></i></div>
-            </div>
-        </div>
-        <div class="banner bgcolor_banner">
-            <div class="banner_content color_white">
-                Computer Architecture class going on!
+<link rel="stylesheet" type="text/css" href="/css/quizzes.css">
+<% if(!user.isAdmin){ %>
+    <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
+<% } %>   
+    
+<div class="main">
+    <%- include('navbar') %>
+
+    <div id="black_screen"></div>
+
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading"> Quizzes/ Tests</div>
+            <div class="filters_small">
+                <div>Filters</div>
+                <div><i class="fa fa-filter"></i></div>
             </div>
             
         </div>
-        <div class="profile" id="profile">
-            <div>My profile</div>
-            <div>Logout</div>
-        </div>
-
-    </header>
-
-    
-    
-    
-    <div class="main">
-        <div class="navbar bgcolor_welcome_user">
-            <a id="announcements" href="announcements/html#announcements">
-                <div class="nav_icon "><i class="fa fa-bell fa-2x fa-fw "></i> </div>
-                <div class="nav_content">Announcements</div>
-            </a>
-            <a id="study_material" href="study_material.html#study_material">
-                <div class="nav_icon"><i class="fa fa-book fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Study Material</div>
-            </a>
-            <a id="recorded_lectures" href="recorded_lectures.html#recorded_lectures">
-                <div class="nav_icon"><i class="fa fa-video-camera fa-2x fa-fw"></i></div>
-                <div class="nav_content">Recorded lectures</div>
-            </a>
-            <a id="assgn" href="assgn.html#assgn">
-                <div class="nav_icon"><i class="fa fa-pencil-alt fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Assignments</div>
-            </a>
-            <a id="quizzes" href="quizzes.html#quizzes">
-                <div class="nav_icon"><i class="fas fa-brain fa-2x fa-fw"></i></div>
-                <div class="nav_content">Quizzes/ Tests</div>
-            </a>
-            <a id="time_table" href="time_table.html#time_table">
-                <div class="nav_icon"><i class="fa fa-calendar fa-2x fa-fw "></i> </div>
-                <div class="nav_content">Time-table</div>
-            </a>
-            <a id="doubts" href="doubts.html#doubts">
-                <div class="nav_icon"><i class="fa fa-question-circle fa-2x fa-fw"></i> </div>
-                <div class="nav_content">Doubts</div>
-            </a>
-            <div>
-                <div class="nav_icon"></div>
-                <div class="nav_content"></div>
-            </div>
-            
-        </div>
-
-        <div id="black_screen"></div>
-
-        <div class="main_content">
-            <div class="main_heading">
-                <div class="heading"> Quizzes/ Tests</div>
-                <div class="filters_small">
-                    <div>Filters</div>
-                    <div><i class="fa fa-filter"></i></div>
+        <div class="box_layout">
+            <% if(!user.isAdmin){ %>
+                <div class="add" id="addButton">
+                    <div class="add_icon"><i class="fas fa-plus"></i></div>
+                    <div class="add_content">Add </div>
                 </div>
-               
-            </div>
-            <div class="box_layout">
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Quiz-1</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                            <a class="link" href="https://www.google.com">https://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.com</a>
-                            <div class="description"></div>
-                            <div class="date_posted">Posted on 20-09-20</div>
+                <div class="add_admin">
+                    <form method="POST" action="/content/recordedlectures/create">
+                        <label for="subject" class="subject_label">Subject:</label>
+                        <select id="subject" name="subject">
+                            <option value="All">All</option>
+                            
+                        </select><br><br>
+                        <label for="branch">Branch:</label>
+                        <select id="branch" name="branch">
+                            <option value="All">All</option>
+                        </select><br><br>
+                        <label for="group">Class Group:</label>
+                        <select id="group" name="group">
+                            <option value="All">All</option>
+                        </select><br><br>
+                        <label for="sub_group">Lab Group:</label>
+                        <select id="sub_group" name="sub_group" >
+                            <option value="All">All</option>
+                        </select><br><br>
+                        <label>Date of lecture:</label>
+                        <input class="date_lecture" type="date" id="lecture_date" placeholder="Date of lecture" ><br><br>
+                        <input type=text name="lecture_link" id="lecture_link" placeholder="Link of the lecture" ><br><br>
+                        <input type="text" name="title" id="lecture_title" placeholder="Title of lecture" ></textarea><br><br>
+                        <textarea name="lecture_references" id="lecture_references" placeholder="Book/video references" rows="3"></textarea><br><br>
+                        <textarea name="message" id="lecture_message" placeholder="Other description" rows="4" ></textarea><br><br>
+                        <div class="submit_button">
+                            <button type="submit">Submit</button>
                         </div>
+                    </form>
+                </div>
+            <% } %>
+            <div class="box">
+                <div class="box_heading"> 
+                    <div class="subject">Computer Architecture</div>
+                    <div class="title">Quiz-1</div>
+                </div>
+                <div class="box_content">  
+                    <div class="box_content_details">                    
+                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
+                        <a class="link" href="https://www.google.com">https://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.com</a>
+                        <div class="description"></div>
+                        <div class="date_posted">Posted on 20-09-20</div>
                     </div>
                 </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Quiz-2</div>
-                    </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                            <a class="link" href="https://www.google.com">https://www.google.com</a>
-                            <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
-                        
-                    </div>
+            </div>
+            <div class="box">
+                <div class="box_heading"> 
+                    <div class="subject">Computer Architecture</div>
+                    <div class="title">Quiz-2</div>
                 </div>
-                <div class="box">
-                    <div class="box_heading"> 
-                        <div class="subject">Computer Architecture</div>
-                        <div class="title">Quiz-3</div>
+                <div class="box_content">  
+                    <div class="box_content_details">                    
+                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
+                        <a class="link" href="https://www.google.com">https://www.google.com</a>
+                        <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
+                        <div class="date_posted">Posted on 20-09-20</div>
                     </div>
-                    <div class="box_content">  
-                        <div class="box_content_details">                    
-                            <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                            <a class="link" href="https://www.google.com">https://www.google.com</a>
-                            <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
-                            <div class="date_posted">Posted on 20-09-20</div>
-                        </div>
+                    
+                </div>
+            </div>
+            <div class="box">
+                <div class="box_heading"> 
+                    <div class="subject">Computer Architecture</div>
+                    <div class="title">Quiz-3</div>
+                </div>
+                <div class="box_content">  
+                    <div class="box_content_details">                    
+                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
+                        <a class="link" href="https://www.google.com">https://www.google.com</a>
+                        <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
+                        <div class="date_posted">Posted on 20-09-20</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="filters">
-            <div class="filter_name">
-                <div class="filter_heading">Subjects:</div>
-                <div class="filter_content">
-                    <ul class="list">
-                        <li>All </li>
-                        <li>Computer Architecture and Organisation</li>
-                        <li>Embedded Systems</li>
-                        <li>Wireless Communication</li>
-                        <li>Advanced Communication</li>
-                    </ul>
-                </div>
+    </div>
+    <div class="filters">
+        <div class="filter_name">
+            <div class="filter_heading">Subjects:</div>
+            <div class="filter_content">
+                <ul class="list">
+                    <li>All </li>
+                    <li>Computer Architecture and Organisation</li>
+                    <li>Embedded Systems</li>
+                    <li>Wireless Communication</li>
+                    <li>Advanced Communication</li>
+                </ul>
             </div>
-            <div class="filter_name">
-                <div class="filter_heading">Date:</div>
-                <div class="filter_content">
-                    <ul class="list">
-                        <li>Ascending</li>
-                        <li>Descending</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="filter_name">
-                <div class="filter_heading">Status:</div>
-                <div class="filter_content">
-                    <ul class="list">
-                        <li>All</li>
-                        <li>Pending</li>
-                        <li>Submitted</li>
-                    </ul>
-                </div>
-            </div>
-            
         </div>
-
+        <div class="filter_name">
+            <div class="filter_heading">Date:</div>
+            <div class="filter_content">
+                <ul class="list">
+                    <li>Ascending</li>
+                    <li>Descending</li>
+                </ul>
+            </div>
+        </div>
+        <div class="filter_name">
+            <div class="filter_heading">Status:</div>
+            <div class="filter_content">
+                <ul class="list">
+                    <li>All</li>
+                    <li>Pending</li>
+                    <li>Submitted</li>
+                </ul>
+            </div>
+        </div>
+        
     </div>
 
-    
-    <footer class="footer bgcolor_welcome_user">
-        <div class="footer_content color_white">
-            Copyrights reserved &copy;
-        </div>
-    </footer>
-    <script src="scripts/quizzes.js"></script>
-</body>
-</html>
+</div>
+
+<script src="/js/quizzes.js"></script>
+<% if(user.isAdmin){ %>
+    <!-- <script src="/js/quizzes_admin_filter.js"></script> -->
+    <script src="/js/quizzes_admin.js"></script>
+<% }else{ %>
+    <!-- <script src="/js/quizzes_filter.js"></script> -->
+<% } %>
