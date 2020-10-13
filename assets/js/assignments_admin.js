@@ -37,7 +37,7 @@ for(let i=0;i<boxelements.length;i++){
                 fileDeleteButtons.children[j].style.opacity = 1;
                 fileDeleteButtons.children[j].style.pointerEvents = "auto";
             }
-            current_box.children[1].children[2].children[0].innerHTML = "";
+            // current_box.children[1].children[2].children[0].innerHTML = "";
             current_box=null;
             arr=[];
             links=[];

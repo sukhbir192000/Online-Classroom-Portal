@@ -399,16 +399,16 @@ select option{
     max-height:2em;
 }
 #subject{
-    margin-left: 4em;
+    margin-left: 6em;
 }
 #branch{
-    margin-left: 4.25em;
+    margin-left: 6.25em;
 }
 #group{
-    margin-left: 1.4em
+    margin-left: 3.5em
 }
 #sub_group{
-    margin-left: 2.5em;
+    margin-left: 4.5em;
 }
 
 input,textarea{
@@ -416,9 +416,17 @@ input,textarea{
     overflow-y: auto;
     font-family: Helvetica, Arial, sans-serif;
 }
-.date_lecture{
-    margin-left:0.4em;
+.quiz_date{
+    /* margin-left:0.4em; */
     width:auto;
+}
+.quiz_time{
+    margin-left:1.75em;
+    width:5em;
+    height:24px;
+}
+.duration{
+    display: block;
 }
 .submit_button{
     display: flex;
