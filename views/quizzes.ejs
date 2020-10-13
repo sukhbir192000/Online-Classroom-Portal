@@ -45,10 +45,10 @@
                         <label>Quiz date and time:</label>
                         <input class="quiz_date" type="datetime-local" id="date_quiz" placeholder="Quiz date" ><br><br>
                         <label >Duration of quiz:</label>
-                        <input class="quiz_time" type="number" name="time_quiz" id="time_quiz" min="0">
+                        <input class="quiz_time" type="number" name="time_quiz" id="time_quiz" min="0" >
                         <label class="duration">(in minutes)</label><br>
                         <input type=text name="quiz_link" id="quiz_link" placeholder="Link for the quiz" ><br><br>
-                        <input type="text" name="title" id="quiz_title" placeholder="Title of quiz" ></textarea><br><br>
+                        <input type="text" name="quiz_title" id="quiz_title" placeholder="Title of quiz" ></textarea><br><br>
                         <textarea name="instructions" id="quiz_instructions" placeholder="Other Instructions" rows="4" ></textarea><br><br>
                         <div class="submit_button">
                             <button type="submit">Submit</button>
@@ -63,39 +63,41 @@
                 </div>
                 <div class="box_content">  
                     <div class="box_content_details">                    
-                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                        <a class="link" href="https://www.google.com">https://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.comhttps://www.google.com</a>
-                        <div class="description"></div>
+                        <div class="deadline">
+                            <div class="deadline_heading">Live on </div>
+                            <div class="deadline_content">Oct 20,2020, 5:00PM</div>
+                            <input type="datetime-local" class="deadline_input" style="display: none;" value="2018-06-12T19:30">
+                        </div>    
+                        <div class="duration_quiz">
+                            <div class="duration_heading">Duration (in minutes):</div>
+                            <div class="duration_content">10</div>
+                        </div>
+                        <% if(user.isAdmin){ %>
+                            <div class="branch_admin">Branch: ECE</div>
+                            <div class="group_admin">Class Group: 2</div>
+                            <div class="sub_group_admin">Lab Group:4</div>
+                        <% } %>
+                        <a class="link" target="_blank" href="https://www.google.com">https://www.google.com</a>
+                        <div class="description">This is the description</div>
                         <div class="date_posted">Posted on 20-09-20</div>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box_heading"> 
-                    <div class="subject">Computer Architecture</div>
-                    <div class="title">Quiz-2</div>
-                </div>
-                <div class="box_content">  
-                    <div class="box_content_details">                    
-                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                        <a class="link" href="https://www.google.com">https://www.google.com</a>
-                        <div class="description">This has to be attached with a suitable diagram. jkebgcuheb dcjebcge bcjebcuhhebdcjjekc</div>
-                        <div class="date_posted">Posted on 20-09-20</div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="box">
-                <div class="box_heading"> 
-                    <div class="subject">Computer Architecture</div>
-                    <div class="title">Quiz-3</div>
-                </div>
-                <div class="box_content">  
-                    <div class="box_content_details">                    
-                        <div class="deadline">Due on 29-09-20, 5:00PM</div>
-                        <a class="link" href="https://www.google.com">https://www.google.com</a>
-                        <div class="description">This has to be attached with a suitable diagram.jkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekcjkebgcuhebdcjebcgebcjebcuhhebdcjjekc</div>
-                        <div class="date_posted">Posted on 20-09-20</div>
+                        <% if(user.isAdmin){ %>
+                            <div class="buttons">
+                                <div class="buttons_admin">
+                                    <div class="edit"><i class="far fa-edit"></i></div>
+                                    <a href="#"><div class="delete"><i class="fas fa-trash"></i></div></a>
+                                </div>
+                                <div class="buttons_admin_save">
+                                    <div class="savechanges"><i class="fas fa-save"></i></div>
+                                    <form method="POST" id="invisible_form" action="#">
+                                        <input type="hidden" name="title" >
+                                        <input type="hidden" name="description">
+                                        <input type="hidden" name="link">
+                                        <input type="hidden" name="duration">
+                                        <input type="hidden" name="deadline">
+                                    </form>
+                                </div>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
