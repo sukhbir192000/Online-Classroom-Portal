@@ -13,6 +13,10 @@ const doubtSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    postedFor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     isPrivate: {
         type: Boolean,
         default: false
