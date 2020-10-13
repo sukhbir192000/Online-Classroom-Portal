@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/css/quizzes.css">
-<% if(!user.isAdmin){ %>
+<% if(user.isAdmin){ %>
     <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
 <% } %>   
     
@@ -18,17 +18,17 @@
             
         </div>
         <div class="box_layout">
-            <% if(!user.isAdmin){ %>
+            <% if(user.isAdmin){ %>
                 <div class="add" id="addButton">
                     <div class="add_icon"><i class="fas fa-plus"></i></div>
                     <div class="add_content">Add </div>
                 </div>
                 <div class="add_admin">
-                    <form method="POST" action="/content/recordedlectures/create">
+                    <form method="POST" action="#">
                         <label for="subject" class="subject_label">Subject:</label>
                         <select id="subject" name="subject">
-                            <option value="All">All</option>
-                            
+                            <option value="Embedded Systems">Embedded Systems</option>
+                            <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
                         </select><br><br>
                         <label for="branch">Branch:</label>
                         <select id="branch" name="branch">
@@ -42,12 +42,14 @@
                         <select id="sub_group" name="sub_group" >
                             <option value="All">All</option>
                         </select><br><br>
-                        <label>Date of lecture:</label>
-                        <input class="date_lecture" type="date" id="lecture_date" placeholder="Date of lecture" ><br><br>
-                        <input type=text name="lecture_link" id="lecture_link" placeholder="Link of the lecture" ><br><br>
-                        <input type="text" name="title" id="lecture_title" placeholder="Title of lecture" ></textarea><br><br>
-                        <textarea name="lecture_references" id="lecture_references" placeholder="Book/video references" rows="3"></textarea><br><br>
-                        <textarea name="message" id="lecture_message" placeholder="Other description" rows="4" ></textarea><br><br>
+                        <label>Quiz date and time:</label>
+                        <input class="quiz_date" type="datetime-local" id="date_quiz" placeholder="Quiz date" ><br><br>
+                        <label >Duration of quiz:</label>
+                        <input class="quiz_time" type="number" name="time_quiz" id="time_quiz" min="0">
+                        <label class="duration">(in minutes)</label><br>
+                        <input type=text name="quiz_link" id="quiz_link" placeholder="Link for the quiz" ><br><br>
+                        <input type="text" name="title" id="quiz_title" placeholder="Title of quiz" ></textarea><br><br>
+                        <textarea name="instructions" id="quiz_instructions" placeholder="Other Instructions" rows="4" ></textarea><br><br>
                         <div class="submit_button">
                             <button type="submit">Submit</button>
                         </div>
