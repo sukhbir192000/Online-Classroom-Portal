@@ -525,9 +525,10 @@ input,textarea{
 }
 .content_edit{
     background-color: #efefef;
-    border:1px black solid;
+    border-bottom:1px gray solid;
     color: black;
 }
+
 .hide{
     display: none;
 }
