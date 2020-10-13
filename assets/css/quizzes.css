@@ -315,18 +315,45 @@ body{
     width:100%;
 }
 .deadline{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+.deadline_heading{
+    margin-right: 0.5em;
     font-weight: 550;
     font-size: 1em;
     font-style: italic;
     overflow-wrap: break-word;
 }
+.deadline_content{
+    font-weight: 550;
+    font-size: 1em;
+    font-style: italic;
+    overflow-wrap: break-word;
+}
+.duration_quiz{
+    display: flex;
+    flex-direction: row;
+}
+.duration_heading{
+    font-size: 1em;
+    overflow-wrap: break-word;
+    margin-right: 0.2em;
+}
+.duration_content{
+    font-size: 1em;
+    overflow-wrap: break-word;
+    padding: 0 0.4em;
+}
 .description{
-    padding-top:0.5em;
+    margin-top:0.5em;
     font-size: 0.95em;
     overflow-wrap: break-word;
 }
 .link{
-    padding-top:0.5em;
+    margin-top:0.5em;
     font-size: 1.1em;
     overflow-wrap: break-word;
     color: blue;
@@ -336,6 +363,9 @@ body{
     padding-top:0.5em;
     font-style: italic;
     overflow-wrap: break-word;
+}
+.deadline_input{
+    width: fit-content;
 }
 .show{
     visibility: visible;
@@ -448,7 +478,79 @@ input,textarea{
 .showx{
     display: flex;
 }
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.buttons_admin{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* width:100%; */
+    /* background-color: black; */
+}
+.edit{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.4em;
+    cursor: pointer;
+    visibility: visible;
+}
 
+.delete{
+    font-size: 1.4em;
+    cursor:pointer;
+    visibility: visible;
+}
+.buttons_admin_save{
+    margin-top:0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+}
+.savechanges{
+    margin-left:0.2em;
+    margin-right:1em;
+    font-size: 1.6em;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.heading_edit{
+    background-color: #e3d8d8;
+    border:1px black solid;
+    color: black;
+}
+.content_edit{
+    background-color: #efefef;
+    border-bottom:1px gray solid;
+    color: black;
+}
+
+.hide{
+    display: none;
+}
+.showx{
+    display: flex;
+}
+.show{
+    visibility: visible;
+}
+.description[contentEditable=true]:empty:not(:focus):before{
+    content:attr(description-text);
+    color:gray;
+}
+
+.title[contentEditable=true]:empty:not(:focus):before{
+    content:attr(title-text);
+    color:gray;
+}
+.link[contentEditable=true]:empty:not(:focus):before{
+    content:attr(link-text);
+    color:gray;
+}
 
 /* FILTERS */
 .filters{
@@ -507,6 +609,7 @@ li:hover{
     padding:0;
     margin:0;
 }
+
 
 
 
@@ -598,6 +701,9 @@ li:hover{
     }
     .show{
         visibility: visible;
+    }
+    input, textarea{
+        width:80vw;
     }
 
 
@@ -786,6 +892,12 @@ li:hover{
     .deadline{
         font-size: 0.8em;
     }
+    .duration_heading{
+        font-size: 0.8em;
+    }
+    .duration_content{
+        font-size: 0.8em;
+    }
     .description{
         font-size: 0.8em;        
     }
@@ -794,6 +906,23 @@ li:hover{
     }
     .date_posted{
         font-size: 0.7em;
+    }
+    .add{
+        margin-left: 0.01em;
+    }
+    .add_admin{
+        margin-left: 0.01em;
+        width:89%;
+    }
+    input, textarea{
+        width:75vw;
+    }
+    #subject{
+        margin-top: 0.7em;
+        margin-left: 0;
+    }
+    .subject_label{
+        display: block;
     }
     
     
