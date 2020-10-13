@@ -5,11 +5,12 @@ Assignments
 - View submission
 - add download and href in ejs and js
 - file name too long gets chopped off
+- edit to edit is problem
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
-- set value of input deadline ad current deadline
-- remove marks and comments if assignment is unsubmitted
+- set value of input deadline as current deadline in edit mode
+- remove unsubmitted if graded from backend
 
 BAAD KE KAAM:
 - Remove Coding ninajs product in login

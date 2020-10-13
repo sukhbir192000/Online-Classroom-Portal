@@ -80,7 +80,7 @@
                                 <div class="deadline">
                                     <div class="deadline_heading">Due on </div>
                                     <div class="deadline_content"><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div>
-                                    <input type="datetime-local" class="deadline_input" style="display: none;">
+                                    <input type="datetime-local" class="deadline_input" style="display: none;" value="2018-06-12T19:30">
                                 </div>                   
                                 <!-- <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div> -->
                                 <% if(user.isAdmin){ %>
