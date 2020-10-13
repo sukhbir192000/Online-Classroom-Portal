@@ -3,8 +3,8 @@ const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
-
-
+const ReplyModel=require('../models/reply');
+const UserModel=require('../models/user');
 module.exports.doubts=async function(req,res){
     try{
         let user=res.locals.user;
@@ -68,6 +68,7 @@ module.exports.doubts=async function(req,res){
                     .populate('classSub.class')
                     .populate('replies');
                     
+                    
                 }
                 else{
                     let courseId=await CourseModel.find({
@@ -130,7 +131,7 @@ module.exports.doubts=async function(req,res){
                 }).populate('classSub.course')
                 .populate('replies');
                 if(doubts.length>0){
-                    doubtsList = doubtsList.concat(announcements);
+                    doubtsList = doubtsList.concat(doubts);
                 }
             }
         }
@@ -195,6 +196,7 @@ module.exports.doubts=async function(req,res){
             let  courseObject = await CourseModel.findById(course);
             courses.push(courseObject);
         }
+        console.log(doubtsList);
         return res.render("doubts",{
             title:"Doubts",
             doubts:doubtsList,
@@ -211,89 +213,53 @@ module.exports.doubts=async function(req,res){
 }
 
 module.exports.doubtCreate=async function(req,res){
-    
     try{
         console.log(req.body);
         let user=res.locals.user
-        if(req.body.subject=="All"){
-            for(let subjects of user.classSub){
-                await DoubtsModel.create({
-                    title: req.body.title,
-                    content: req.body.message,
-                    classSub: subjects,
-                    postedBy: user._id,
-                    link: req.body.lecture_link,
-                    references: req.body.lecture_references
-                })
-            }
+        var subject = req.body.subject;
+        let privateCheck;
+        if(req.body.isPrivate=="on"){
+            privateCheck=true;
         }
         else{
-            var subject = req.body.subject;
-            if(req.body.branch=="All"){
-                for(let classSubElement of user.classSub){
-                    if(subject==classSubElement.course){
-                        await DoubtsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: classSubElement,
-                            postedBy: user._id,
-                            link: req.body.lecture_link,
-                            references: req.body.lecture_references
-                        })
-                    }
-                }
-            }
-            else{
-                var branch = req.body.branch;
-                if(req.body.group == "All"){
-                    for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course && branch==classSubElement.class){
-                            await DoubtsModel.create({
-                                title: req.body.title,
-                                content: req.body.message,
-                                classSub: classSubElement,
-                                postedBy: user._id,
-                                link: req.body.lecture_link,
-                                references: req.body.lecture_references
-                            })
-                        }
-                    }
-                }
-                else{
-                    var group = req.body.group;
-                    if(req.body.sub_group == "All"){
-                        for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                await DoubtsModel.create({
-                                    title: req.body.title,
-                                    content: req.body.message,
-                                    classSub: classSubElement,
-                                    postedBy: user._id,
-                                    link: req.body.lecture_link,
-                                    references: req.body.lecture_references
-                                })
-                            }
-                        }
-                    }
-                    else{
-                        await DoubtsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: subject,
-                                class: branch,
-                                group: group,
-                                subGroup: req.body.sub_group
-                            },
-                            postedBy: user._id,
-                            link: req.body.lecture_link,
-                            references: req.body.lecture_references
-                        })
-                    }
-                }
-            }
+            privateCheck=false;
         }
-        req.flash('success', 'Recorded Lecture Posted');
+        
+        let teachers=(await CourseModel.findById(subject)).teachers;
+        let teachersList=teachers.filter(async function(teacherId){
+            let conditionTeacher=false;
+            let teacher=await UserModel.findById(teacherId);
+            if((
+                    teacher.classSub.class==user.classs
+                )&&(
+                    (!teacher.classSub.group)||(
+                        (teacher.classSub.group==user.group)&&(
+                            (!teacher.classSub.subGroup)||(teacher.classSub.subGroup==user.subGroup)
+                        )
+                    )
+            )){
+                conditionTeacher=true;
+            }
+            return conditionTeacher;
+        })
+
+        await DoubtsModel.create({
+            title: req.body.title,
+            content: req.body.message,
+            classSub: {
+                course: subject,
+                class: user.class,
+                group: user.group,
+                subGroup: user.subGroup
+            },
+            isPrivate:privateCheck,
+            postedBy: user._id,
+            postedFor:teachersList
+          
+        })
+    
+    
+        req.flash('success', 'Doubt Posted');
         return res.redirect('back')
     }
     catch(err){
@@ -302,30 +268,3 @@ module.exports.doubtCreate=async function(req,res){
     }
 }
 
-module.exports.doubtUpdate=async function(req,res){
-    console.log(req.body);
-    await DoubtsModel.findByIdAndUpdate(req.params.doubtId,{
-        $set: {
-            title: req.body.title,
-            content: req.body.description,
-            link:req.body.link,
-            references:req.body.references
-
-        }
-    });
-    return res.redirect('back');
-};
-
-module.exports.doubtDelete=function(req,res){
-    DoubtsModel.findByIdAndDelete(req.params.id,function(err){
-        if(err){
-            console.log("error while deleting recorded lecture :",err);
-            return res.redirect('back');
-        }
-        else{
-            req.flash('success', 'Recorded Lecture Deleted');
-            return res.redirect('back');
-        }
-    })
-    
-}

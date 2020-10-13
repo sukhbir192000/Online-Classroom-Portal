@@ -18,6 +18,10 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
+    teachers:[{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+    }],
     sem: {
         type: Number,
         required: true,

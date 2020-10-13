@@ -23,20 +23,20 @@
                     <div class="add_content">Add </div>
                 </div>
                 <div class="add_admin">
-                    <form>
+                    <form action="/content/doubts/create" method="POST" enctype="multipart/form-data">
                         <label for="subject">Subject:</label>
-                        <select id="subject" name="subject">
-                            <option value="All">All</option>
-                            <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
-                            <option value="Embedded Systems">Embedded Systems</option>
-                            <option value="Advanced Communication">Advanced Communication</option>
-                            <option value="Wireless Communication">Wireless Communication</option>
+                        <select  id="subject" name="subject" required>
+                            <option value="" disabled selected>--Select an option--</option>
+                            <% for(let course of courseList){ %>
+                                <option value="<%=course._id%>"><%= course.name %></option>
+                            <% } %>
+                           
                         </select><br><br>
-                        <label for="doubt_type">Type of doubt:</label>
-                        <select id="doubt_type" name="doubt_type">
+                        
+                        <!-- <select id="doubt_type" name="doubt_type">
                             <option value="Public">Public</option>
                             <option value="Private">Private</option>
-                        </select><br><br>
+                        </select><br><br> -->
                         <input type="text" name="title" id="title" placeholder="Enter the title" ><br><br>
                         <textarea name="message" id="message" placeholder="Enter the message" rows="5" ></textarea><br><br>
                         <div class="files">
@@ -45,6 +45,10 @@
                                 <input type=file name="file0" class="file" style="display: none;">
                                 <button id="add_files_button" type="button">Add file</button>
                             </div>
+                        </div>
+                        <div id="checkbox_container">
+                            <input name="isPrivate" type="checkbox" id="doubt_type">
+                            <label for="doubt_type">Post as private doubt</label>
                         </div>
                         <div class="submit_button">
                             <button type="submit">Submit</button>
@@ -67,7 +71,7 @@
                         <div class="comment_content">
                             <div class="reply">
                                 <div class="next_reply">
-                                    <input type="text" name="input_reply" placeholder="Reply">
+                                    <input class="reply_input" type="text" name="input_reply" placeholder="Reply">
                                     <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
                                 </div>
                             </div>
@@ -84,7 +88,7 @@
 
                                 <div class="reply" >
                                     <div class="next_reply" style="display: none;">
-                                        <input type="text" class="input_reply" name="input_reply" placeholder="Reply">
+                                        <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
                                         <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
                                         <div class="cancel_icon"><i class="fas fa-times"></i></div>
                                     </div>
@@ -102,7 +106,7 @@
                                 </div>
                                 <div class="reply" >
                                     <div class="next_reply" style="display: none;">
-                                        <input type="text" name="input_reply" placeholder="Reply">
+                                        <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
                                         <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
                                         <div class="cancel_icon"><i class="fas fa-times"></i></div>
                                     </div>
@@ -144,11 +148,15 @@
             <div class="filter_heading">Subjects:</div>
             <div class="filter_content">
                 <ul class="list">
-                    <li>All </li>
-                    <li>Computer Architecture and Organisation</li>
-                    <li>Embedded Systems</li>
-                    <li>Wireless Communication</li>
-                    <li>Advanced Communication</li>
+                    <% if(user.isAdmin){ %>
+                        <% for(let course of courseFilters){ %>
+                            <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                        <% } %>
+                    <% }else{ %>
+                        <% for(let course of courseList){ %>
+                            <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                        <% } %>
+                    <% } %>
                 </ul>
             </div>
         </div>

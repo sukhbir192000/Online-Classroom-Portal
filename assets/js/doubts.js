@@ -47,13 +47,7 @@ document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-        // branchForm.disabled=true;
-        // groupForm.disabled=true;
-        // subGroupForm.disabled=true;
-        // subjectForm.selectedIndex=0;
-        // branchForm.selectedIndex=0;
-        // groupForm.selectedIndex=0;
-        // subGroupForm.selectedIndex=0;
+        document.querySelectorAll('#subject')[0].selectedIndex=0;
         document.getElementById("title").value="";
         document.getElementById("message").value="";
         document.querySelector("#file_names").innerHTML = "";
@@ -212,7 +206,8 @@ var nextReplyFunction = function(){
                 nextReply.classList.add("next_reply");
                 inputDiv = document.createElement("input");
                 inputDiv.type = "text";
-                inputDiv.className = "input_reply";
+                inputDiv.className="reply_input";
+                inputDiv.name = "input_reply";
                 inputDiv.placeholder="Reply";
                 inputIcon = document.createElement("div");
                 inputIcon.classList.add("input_icon");
