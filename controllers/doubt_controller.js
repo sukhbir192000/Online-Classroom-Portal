@@ -66,7 +66,8 @@ module.exports.doubts=async function(req,res){
                         "classSub.class":classId
                     }).populate('classSub.course')
                     .populate('classSub.class')
-                    .populate('replies');
+                    .populate('replies')
+                    .populate('postedBy');
                     
                     
                 }
@@ -81,7 +82,8 @@ module.exports.doubts=async function(req,res){
                     })
                     .populate('classSub.course')
                     .populate('classSub.class')
-                    .populate('replies');
+                    .populate('replies')
+                    .populate('postedBy');
                     
                 }
             }
@@ -89,7 +91,8 @@ module.exports.doubts=async function(req,res){
                 doubtsList = await DoubtsModel.find({postedFor: user._id})
                 .populate('classSub.course')
                 .populate('classSub.class')
-                .populate('replies');
+                .populate('replies')
+                .populate('postedBy');
                
             }
         }
@@ -129,7 +132,8 @@ module.exports.doubts=async function(req,res){
                         }
                     ]
                 }).populate('classSub.course')
-                .populate('replies');
+                .populate('replies')
+                .populate('postedBy');
                 if(doubts.length>0){
                     doubtsList = doubtsList.concat(doubts);
                 }
@@ -268,3 +272,28 @@ module.exports.doubtCreate=async function(req,res){
     }
 }
 
+module.exports.replyCreate=async function(req,res){
+    try{
+        // console.log("hi");
+        if(req.xhr){
+            let doubt=await DoubtsModel.findById(req.body.doubtId);
+            let newReply=await ReplyModel.create({
+                content:req.body.content,
+                postedBy:res.locals.user._id,
+
+            })
+            doubt.replies.push(newReply._id);
+            doubt.save();
+            return res.status(200).json({
+                msg:"added reply",
+                user:res.locals.user.name 
+            })
+        }
+    }
+    catch(err){
+        console.log("Error while creating reply");
+        return res.status(400).json({
+            msg:"file not found"
+        })
+    }
+}

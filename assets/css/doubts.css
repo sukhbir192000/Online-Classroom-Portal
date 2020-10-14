@@ -615,6 +615,19 @@ textarea{
     outline:none;
 }
 
+/* .textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: both;
+    min-height: 1em;
+    line-height: 20px;
+}
+
+.textarea[contenteditable]:empty::before {
+    content: "Reply";
+    color: gray;
+} */
 /* FILTERS */
 .filters{
     height:auto;

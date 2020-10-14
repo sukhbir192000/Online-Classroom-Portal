@@ -56,62 +56,36 @@
                     </form>
                 </div>
             <% } %>
-            <div class="box">
-                <div class="box_heading"> 
-                    <div class="subject">Computer Architecture</div>
-                    <div class="title">Tutorial Sheet-4</div>
-                    <div class="posted_by">Posted by Mehak</div>
-                </div>
-                <div class="box_content">  
-                    <div class="box_content_details">                    
-                        <div class="description">I am a new doubt!! Please answer me</div>
-                        <div class="date_posted">Posted on 20-09-20</div>
+            <% for(let doubt of doubts){ %>
+                <div class="box">
+                    <div class="box_heading"> 
+                        <div class="subject"><%= doubt.classSub.course.name %></div>
+                        <div class="title"><%= doubt.title %></div>
+                        <div class="posted_by">Posted by <%= doubt.postedBy.name %></div>
                     </div>
-                    <div class="comments">
-                        <div class="comment_heading">DISCUSSION</div>
-                        <div class="comment_content">
-                            <div class="reply">
-                                <div class="next_reply">
-                                    <input class="reply_input" type="text" name="input_reply" placeholder="Reply">
-                                    <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
-                                </div>
-                            </div>
-                            <div class="reply">
-                                <div class="reply_user">
-                                    <div class="student_name">Mehak</div>
-                                    <div class="date_uploaded">Sept 10</div>
-                                </div>
-                                <div class="reply_content"> This is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubt</div>
-                                <div class="reply_button">
-                                    <div class="view_replies_button">View Replies(0)</div>
-                                    <div class="reply_back_button">Reply</div>
+                    <div class="box_content">  
+                        <div class="box_content_details">                    
+                            <div class="description"><%= doubt.content %></div>
+                            <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(doubt.createdAt) %></div>
+                        </div>
+
+                        <!-- Add Files HERE -->
+
+                        <!--  ----------------------------  -->
+                        <div class="comments">
+                            <div class="comment_heading">DISCUSSION</div>
+                            <div class="comment_content">
+                                <div class="reply">
+                                    <div class="next_reply">
+                                        <input class="reply_input" type="text" name="input_reply" placeholder="Reply">
+                                        <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                        <input type="hidden" value="<%=doubt._id%>">
+                                    </div>
                                 </div>
 
-                                <div class="reply" >
-                                    <div class="next_reply" style="display: none;">
-                                        <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
-                                        <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
-                                        <div class="cancel_icon"><i class="fas fa-times"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="reply">
-                                <div class="reply_user">
-                                    <div class="student_name">Sukhbir Singh</div>
-                                    <div class="date_uploaded">Sept 10</div>
-                                </div>
-                                <div class="reply_content"> This is not a valid doubt</div>
-                                <div class="reply_button">
-                                    <div class="view_replies_button">View Replies(1)</div>
-                                    <div class="reply_back_button">Reply</div>
-                                </div>
-                                <div class="reply" >
-                                    <div class="next_reply" style="display: none;">
-                                        <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
-                                        <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
-                                        <div class="cancel_icon"><i class="fas fa-times"></i></div>
-                                    </div>
-                                    <div class="reply_back" style="display: none;">
+                                <!-- Show Comments -->
+                                <% for(let reply of doubt.replies){ %>
+                                    <div class="reply">
                                         <div class="reply_user">
                                             <div class="student_name">Mehak</div>
                                             <div class="date_uploaded">Sept 10</div>
@@ -121,27 +95,24 @@
                                             <div class="view_replies_button">View Replies(0)</div>
                                             <div class="reply_back_button">Reply</div>
                                         </div>
+
                                         <div class="reply" >
                                             <div class="next_reply" style="display: none;">
-                                                <input type="text" name="input_reply" placeholder="Reply">
+                                                <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
                                                 <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
                                                 <div class="cancel_icon"><i class="fas fa-times"></i></div>
                                             </div>
                                         </div>
                                     </div>
+                                <% } %>
                                     
-                                    
-                                </div>
-                                
                             </div>
-                                
+                            
                         </div>
                         
                     </div>
-                    
                 </div>
-            </div>
-
+            <% } %>
         </div>
     </div>
     <div class="filters">
@@ -176,3 +147,6 @@
 
 
 <script src="/js/doubts.js"></script>
+<% if(!user.isAdmin){ %>
+    <script src="/js/doubts_student.js"></script>
+<% } %>

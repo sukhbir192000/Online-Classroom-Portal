@@ -21,5 +21,6 @@ var fields = [
 ]
 Router.get('/',contentController.doubts);
 Router.post('/create',upload.fields(fields),contentController.doubtCreate);
+Router.post('/createReply',contentController.replyCreate);
 
 module.exports = Router;

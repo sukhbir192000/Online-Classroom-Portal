@@ -43,94 +43,6 @@ document.addEventListener('mouseup',function(e){
 
 
 
-document.querySelector(".add").addEventListener('click',function(e){
-    if(document.querySelector(".add_content").textContent == "Cancel"){
-        document.querySelector(".add_content").textContent = "Add";
-        document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-        document.querySelectorAll('#subject')[0].selectedIndex=0;
-        document.getElementById("title").value="";
-        document.getElementById("message").value="";
-        document.querySelector("#file_names").innerHTML = "";
-        document.getElementById("file_inputs").innerHTML = "";
-        var newInput = document.createElement("input");
-        newInput.name = 'file0';
-        newInput.className = "file";
-        newInput.type = "file";
-        newInput.style.display = "none";
-        document.getElementById("file_inputs").appendChild(newInput);
-        var newButton = document.createElement("button");
-        newButton.id = "add_files_button";
-        newButton.textContent = "Add file";
-        newButton.type = 'button';
-        document.getElementById("file_inputs").appendChild(newButton);
-        availableFiles = ['file1', 'file2', 'file3', 'file4','file5', 'file6', 'file7', 'file8', 'file9']
-        eventListenerPresent = [false,false,false,false,false,false,false,false,false,false]
-    }
-    else{
-        document.querySelector(".add_content").textContent = "Cancel";
-        document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-times'></i>";
-        inputFormInitialise();
-    }
-    document.querySelector(".add_admin").classList.toggle("showx");
-})
-
-availableFiles = ['file1', 'file2', 'file3', 'file4','file5', 'file6', 'file7', 'file8', 'file9']
-eventListenerPresent = [false,false,false,false,false,false,false,false,false,false]
-function inputFormInitialise(){
-    document.getElementById("add_files_button").addEventListener('click',function(e){
-        var inputList = document.getElementsByClassName("file");
-        var lastElement = inputList[inputList.length-1];
-        lastElement.click();
-        let index = lastElement.name.substr(-1);
-        if(eventListenerPresent[parseInt(index)]) return;
-        eventListenerPresent[parseInt(index)] = true;
-        lastElement.addEventListener('change',function(e){
-            var inputList = document.getElementsByClassName("file");
-            var newDiv = document.createElement("div");
-            newDiv.classList.add("file_content");
-            newDiv.id = lastElement.getAttribute("name");
-            var newDiv_title = document.createElement("DIV");
-            var newDiv_icon = document.createElement("DIV");  
-            newDiv_title.textContent = lastElement.files[0].name;
-            newDiv_icon.innerHTML = "<i class='fas fa-times'></i>"
-            newDiv_title.classList.add("file_name");
-            newDiv_icon.classList.add("file_cross");
-            newDiv.id = lastElement.getAttribute("name");
-            newDiv.appendChild(newDiv_title);
-            newDiv.appendChild(newDiv_icon);
-            document.getElementById("file_names").appendChild(newDiv);
-            if(availableFiles.length!=0){
-                var newInput = document.createElement("input");
-                newInput.name = availableFiles[0];
-                newInput.className = "file";
-                newInput.type = "file";
-                newInput.style.display = "none";
-                document.getElementById("file_inputs").appendChild(newInput);
-                availableFiles.splice(0,1);
-            }
-            else{
-                document.getElementById("add_files_button").style.display = "none";
-            }
-            newDiv_icon.addEventListener('click',function(e){
-                var id = newDiv.id;
-                document.getElementsByName(id)[0].remove();
-                newDiv.remove();
-                availableFiles.push(id);
-                eventListenerPresent[parseInt(id.substr(-1))] = false;
-                document.getElementById("add_files_button").style.display = "flex";
-                if(availableFiles.length == 1 && document.getElementById("add_files_button").style.display == "none"){
-                    var newInput = document.createElement("input");
-                    newInput.name = availableFiles[0];
-                    newInput.className = "file";
-                    newInput.type = "file";
-                    newInput.style.display = "none";
-                    document.getElementById("file_inputs").appendChild(newInput);
-                    availableFiles.splice(0,1);
-                }
-            })
-        })
-    })
-}
 
 
 
@@ -171,78 +83,109 @@ cancelIconFunction();
 
 
 var nextReplyFunction = function(){
+
     var y = document.querySelectorAll(".next_reply");
+
     for(let i=0;i<y.length;i++){
+        
+        y[i].children[0].addEventListener('keydown',function(e){
+            
+            
+            if(e.key=="Enter" &&e.shiftKey==false){
+                console.log(this.ShiftPressed);
+                this.parentNode.children[1].click();
+            }
+            
+        })
+       
         y[i].children[1].addEventListener("click",function(e){
+            
             if(y[i].children[0].value != ""){
-                let replyBack = document.createElement("div");
-                replyBack.classList.add("reply_back")
-                let replyUser = document.createElement("div");
-                replyUser.classList.add("reply_user");
-                let studentName = document.createElement("div");
-                studentName.classList.add("student_name");
-                studentName.textContent = "Anonymous";
-                let dateUploaded = document.createElement("div");
-                dateUploaded.classList.add("date_uploaded");
-                dateUploaded.textContent = "Oct 15";
-                replyUser.appendChild(studentName);
-                replyUser.appendChild(dateUploaded);
-                let replyContent = document.createElement("div");
-                replyContent.classList.add("reply_content");
-                replyContent.textContent=this.parentNode.children[0].value;
-                let replyButton = document.createElement("div");
-                replyButton.classList.add("reply_button");
-                let viewRepliesButton = document.createElement("div");
-                viewRepliesButton.classList.add("view_replies_button");
-                viewRepliesButton.textContent = "View Replies(0)";
-                let replyBackButton = document.createElement("div");
-                replyBackButton.classList.add("reply_back_button");
-                replyBackButton.textContent= "Reply";
-                replyButton.appendChild(viewRepliesButton);
-                replyButton.appendChild(replyBackButton);
-                let reply = document.createElement("div");
-                reply.classList.add("reply");
-                nextReply = document.createElement("div");
-                nextReply.classList.add("next_reply");
-                inputDiv = document.createElement("input");
-                inputDiv.type = "text";
-                inputDiv.className="reply_input";
-                inputDiv.name = "input_reply";
-                inputDiv.placeholder="Reply";
-                inputIcon = document.createElement("div");
-                inputIcon.classList.add("input_icon");
-                inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
-                cancelIcon = document.createElement("div");
-                cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
-                cancelIcon.classList.add("cancel_icon");
-                nextReply.appendChild(inputDiv);
-                nextReply.appendChild(inputIcon);
-                nextReply.appendChild(cancelIcon);
-                nextReply.style.display = "none";
-                reply.appendChild(nextReply);
-                replyBack.appendChild(replyUser);
-                replyBack.appendChild(replyContent);
-                replyBack.appendChild(replyButton);
-                replyBack.appendChild(reply);
-                y[i].children[0].value = "";
-                y[i].parentNode.appendChild(replyBack);
-                y[i].parentNode.children[1].children[3].children[0].children[2].addEventListener("click",function(e){
-                    this.parentNode.style.display = "none";
-                    this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
-                })
-                y[i].parentNode.children[1].children[2].children[0].addEventListener("click",function(e){
-                    if(this.parentNode.parentNode.children[3].children[1]){
-                        this.parentNode.parentNode.children[3].children[1].style.display = "flex";
+                let doubtId=this.parentNode.children[2].value;
+                // console.log(this.parentNode.children[0]);
+                console.log("hi");
+                $.ajax({
+                    url:"/content/doubts/createReply",
+                    type:"POST",
+                    data:{
+                        doubtId:doubtId,
+                        content:this.parentNode.children[0].value,
+                        
+                    },
+                    success:function(response){
+                        let replyBack = document.createElement("div");
+                        replyBack.classList.add("reply_back")
+                        let replyUser = document.createElement("div");
+                        replyUser.classList.add("reply_user");
+                        let studentName = document.createElement("div");
+                        studentName.classList.add("student_name");
+                        studentName.textContent = response.user;
+                        let dateUploaded = document.createElement("div");
+                        dateUploaded.classList.add("date_uploaded");
+                        dateUploaded.textContent = "Oct 15";
+                        replyUser.appendChild(studentName);
+                        replyUser.appendChild(dateUploaded);
+                        let replyContent = document.createElement("div");
+                        replyContent.classList.add("reply_content");
+                        replyContent.textContent=y[i].children[0].value;
+                        let replyButton = document.createElement("div");
+                        replyButton.classList.add("reply_button");
+                        let viewRepliesButton = document.createElement("div");
+                        viewRepliesButton.classList.add("view_replies_button");
+                        viewRepliesButton.textContent = "View Replies(0)";
+                        let replyBackButton = document.createElement("div");
+                        replyBackButton.classList.add("reply_back_button");
+                        replyBackButton.textContent= "Reply";
+                        replyButton.appendChild(viewRepliesButton);
+                        replyButton.appendChild(replyBackButton);
+                        let reply = document.createElement("div");
+                        reply.classList.add("reply");
+                        nextReply = document.createElement("div");
+                        nextReply.classList.add("next_reply");
+                        inputDiv = document.createElement("input");
+                        inputDiv.type = "text";
+                        inputDiv.className="reply_input";
+                        inputDiv.name = "input_reply";
+                        inputDiv.placeholder="Reply";
+                        inputIcon = document.createElement("div");
+                        inputIcon.classList.add("input_icon");
+                        inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
+                        cancelIcon = document.createElement("div");
+                        cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
+                        cancelIcon.classList.add("cancel_icon");
+                        nextReply.appendChild(inputDiv);
+                        nextReply.appendChild(inputIcon);
+                        nextReply.appendChild(cancelIcon);
+                        nextReply.style.display = "none";
+                        
+                        reply.appendChild(nextReply);
+                        replyBack.appendChild(replyUser);
+                        replyBack.appendChild(replyContent);
+                        replyBack.appendChild(replyButton);
+                        replyBack.appendChild(reply);
+                        y[i].children[0].value = "";
+                        y[i].parentNode.appendChild(replyBack);
+                        y[i].parentNode.children[1].children[3].children[0].children[2].addEventListener("click",function(e){
+                            this.parentNode.style.display = "none";
+                            this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+                        })
+                        y[i].parentNode.children[1].children[2].children[0].addEventListener("click",function(e){
+                            if(this.parentNode.parentNode.children[3].children[1]){
+                                this.parentNode.parentNode.children[3].children[1].style.display = "flex";
+                            }
+                            this.style.display = "none";
+                        })
+                        y[i].parentNode.children[1].children[2].children[1].addEventListener("click",function(e){
+                            if(this.parentNode.parentNode.children[3].children[0]){
+                                this.parentNode.parentNode.children[3].children[0].style.display = "flex";
+                            }
+                            this.style.display = "none";
+                        })
+                        nextReplyFunction();
                     }
-                    this.style.display = "none";
+        
                 })
-                y[i].parentNode.children[1].children[2].children[1].addEventListener("click",function(e){
-                    if(this.parentNode.parentNode.children[3].children[0]){
-                        this.parentNode.parentNode.children[3].children[0].style.display = "flex";
-                    }
-                    this.style.display = "none";
-                })
-                nextReplyFunction();
+               
             }
         })
     }
