@@ -384,7 +384,7 @@ input[type="checkbox"]{
 .comments{
     display: flex;
     flex-direction: column;
-    margin-top: 1.5em;
+    margin-top: 0.5em;
     width: 98%;
     /* background-color: yellow; */
     padding: 0.5em;
@@ -614,7 +614,74 @@ textarea{
 .reply_input:focus{
     outline:none;
 }
-
+.material{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    /* border: 1px solid black; */
+}
+.file_inside{
+    height:50px;
+    width:200px;
+    background-color: #f2f2f2;
+    border:2px solid grey;
+    margin:0.5em 2em 0.5em 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+.file_icon{
+    font-size:3.2em;
+}
+.color_word{
+    color:#2962ff;
+}
+.color_ppt{
+    color:#d04524;
+}
+.color_pdf{
+    color:#940000
+}
+.color_image{
+    color: #132a6b;
+}
+.color_excel{
+    color:#1d6d43
+}
+.color_file{
+    color: #e0a918;
+}
+.color_video{
+    color: #3da4ed;
+}
+.color_audio{
+    color: #f79200;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+.file_title{
+    padding:0 0.4em;
+    /* border:1px solid black; */
+    width:150px;
+    height:auto;
+    max-height: 2.4em;
+    align-self: center;
+    /* vertical-align: middle; */
+    /* white-space: nowrap;  */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.file:hover .file_title{
+    font-weight: 600;
+}
 /* .textarea {
     display: block;
     width: 100%;
