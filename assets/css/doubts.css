@@ -313,6 +313,13 @@ body{
     color: #F1FAEE;
     overflow-wrap: break-word;
 }
+.posted_by{
+    padding-top:0.5em;
+    font-size: 0.9em;
+    color: #F1FAEE;
+    overflow-wrap: break-word;
+    font-style: italic;
+}
 .box_content{
     display: flex;
     flex-direction: column;
@@ -941,6 +948,9 @@ li:hover{
     }
     .title{
         font-size: 0.8em;
+    }
+    .posted_by{
+        font-size:0.7em;
     }
     /* .deadline{
         font-size: 0.8em;
