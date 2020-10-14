@@ -421,7 +421,6 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: row;
     align-items: center;
-    
 }
 
 .student_name{
@@ -440,6 +439,7 @@ input[type="checkbox"]{
     font-size: 0.9em;
     overflow-wrap: break-word;
     white-space: pre;
+    margin: 0.1em 0;
 }
 .reply_button{
     display: flex;
@@ -1079,6 +1079,13 @@ li:hover{
     }
     #subject{
         margin-top: 0.7em;
+        margin-left: 0;
+    }
+    .reply_user{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .date_uploaded{
         margin-left: 0;
     }
     
