@@ -52,50 +52,163 @@ document.addEventListener('mouseup',function(e){
 
 // --------------------------------REPLY BACK AND VIEW REPLIES-----------------------
 
-var replyButtonFunction = function(){
-    var x = document.querySelectorAll(".reply_button");
-    for(let i=0;i<x.length;i++){
-        x[i].children[0].addEventListener("click",function(e){
-            $.ajax({
-                url: "/content/doubts/viewReplies/" + x[i].parentNode.children[3].children[0].children[2].value,
-                type:"GET",
-                success: function(response){
+// var replyButtonFunction = function(){
+//     var x = document.querySelectorAll(".reply_button");
+//     for(let i=0;i<x.length;i++){
+//         x[i].children[0].addEventListener("click",function(e){
+//             $.ajax({
+//                 url: "/content/doubts/viewReplies/" + x[i].parentNode.children[3].children[0].children[2].value,
+//                 type:"GET",
+//                 success: function(response){
                     
-                }
-            })
-            if(x[i].parentNode.children[3].children[1]){
-                x[i].parentNode.children[3].children[1].style.display = "flex";
-            }
-            this.style.display = "none";
-        })
-        x[i].children[1].addEventListener("click",function(e){
-            x[i].parentNode.children[3].children[0].style.display = "flex";
-            this.style.display = "none";
-        })
-    }
-}
-replyButtonFunction();
+//                 }
+//             })
+//             if(x[i].parentNode.children[3].children[1]){
+//                 x[i].parentNode.children[3].children[1].style.display = "flex";
+//             }
+//             this.style.display = "none";
+//         })
+//         x[i].children[1].addEventListener("click",function(e){
+//             x[i].parentNode.children[3].children[0].style.display = "flex";
+//             this.style.display = "none";
+//         })
+//     }
+// }
+// replyButtonFunction();
 
-var cancelIconFunction = function(){
-    var x = document.querySelectorAll(".cancel_icon");
-    for(let i=0;i<x.length;i++){
-        x[i].addEventListener("click",function(e){
-            x[i].parentNode.style.display = "none";
-            x[i].parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
-            x[i].parentNode.children[0].value="";
+var replyButtonFunction = function(a){
+    a.children[0].addEventListener("click",function(e){
+        $.ajax({
+            url: "/content/doubts/viewReplies/" + a.parentNode.children[3].children[0].children[2].value,
+            type:"GET",
+            success: function(response){
+                
+            }
         })
-    }
+        if(a.parentNode.children[3].children[1]){
+            a.parentNode.children[3].children[1].style.display = "flex";
+        }
+        this.style.display = "none";
+    })
+    a.children[1].addEventListener("click",function(e){
+        a.parentNode.children[3].children[0].style.display = "flex";
+        this.style.display = "none";
+    })
 }
-cancelIconFunction();
+
+var x = document.querySelectorAll(".reply_button");
+for(let i=0;i<x.length;i++){
+    replyButtonFunction(x[i]);
+}
+
+
+var cancelIconFunction = function(a){
+    a.addEventListener("click",function(e){
+        a.parentNode.style.display = "none";
+        a.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+        a.parentNode.children[0].value="";
+    })
+}
+
+var y = document.querySelectorAll(".cancel_icon");
+for(let i=0;i<y.length;i++){
+    cancelIconFunction(y[i]);
+}
+
+// var cancelIconFunction = function(){
+//     var x = document.querySelectorAll(".cancel_icon");
+//     for(let i=0;i<x.length;i++){
+//         x[i].addEventListener("click",function(e){
+//             x[i].parentNode.style.display = "none";
+//             x[i].parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+//             x[i].parentNode.children[0].value="";
+//         })
+//     }
+// }
+// cancelIconFunction();
+
+var createReplyFunction = function(response,a){
+    let replyBack = document.createElement("div");
+    replyBack.classList.add("reply")
+    let replyUser = document.createElement("div");
+    replyUser.classList.add("reply_user");
+    let studentName = document.createElement("div");
+    studentName.classList.add("student_name");
+    studentName.textContent = response.user;
+    let dateUploaded = document.createElement("div");
+    dateUploaded.classList.add("date_uploaded");
+    dateUploaded.textContent = "Oct 15";
+    replyUser.appendChild(studentName);
+    replyUser.appendChild(dateUploaded);
+    let replyContent = document.createElement("div");
+    replyContent.classList.add("reply_content");
+    replyContent.textContent=a.children[0].value;
+    let replyButton = document.createElement("div");
+    replyButton.classList.add("reply_button");
+    let viewRepliesButton = document.createElement("div");
+    viewRepliesButton.classList.add("view_replies_button");
+    viewRepliesButton.textContent = "View Replies(0)";
+    let replyBackButton = document.createElement("div");
+    replyBackButton.classList.add("reply_back_button");
+    replyBackButton.textContent= "Reply";
+    replyButton.appendChild(viewRepliesButton);
+    replyButton.appendChild(replyBackButton);
+    let reply = document.createElement("div");
+    reply.classList.add("reply");
+    nextReply = document.createElement("div");
+    nextReply.classList.add("next_reply");
+    inputDiv = document.createElement("input");
+    inputDiv.type = "text";
+    inputDiv.className="reply_input";
+    inputDiv.name = "input_reply";
+    inputDiv.placeholder="Reply";
+    inputIcon = document.createElement("div");
+    inputIcon.classList.add("input_icon");
+    inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
+    cancelIcon = document.createElement("div");
+    cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
+    cancelIcon.classList.add("cancel_icon");
+    let hiddenInput=document.createElement('input');
+    hiddenInput.type="hidden";
+    hiddenInput.value=response.commentId
+    nextReply.appendChild(inputDiv);
+    nextReply.appendChild(inputIcon);
+    nextReply.appendChild(hiddenInput);
+    nextReply.appendChild(cancelIcon);
+    nextReply.style.display = "none";
+    reply.appendChild(nextReply);
+    replyBack.appendChild(replyUser);
+    replyBack.appendChild(replyContent);
+    replyBack.appendChild(replyButton);
+    replyBack.appendChild(reply);
+    a.children[0].value = "";
+    a.parentNode.parentNode.appendChild(replyBack);
+    cancelIconFunction(cancelIcon);
+    // cancelIcon.addEventListener("click",function(e){
+    //     this.parentNode.style.display = "none";
+    //     this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
+    //     this.parentNode.parentNode.children[0].value="";
+    // })
+    replyButtonFunction(replyButton);
+    // viewRepliesButton.addEventListener("click", function(e){
+    //     if(this.parentNode.parentNode.children[3].children[1]){
+    //         this.parentNode.parentNode.children[3].children[1].style.display = "flex";
+    //     }
+    //     this.style.display = "none";
+    // })
+    // replyBackButton.addEventListener("click", function(e){
+    //     this.parentNode.parentNode.children[3].children[0].style.display = "flex";
+    //     this.style.display = "none";
+    // })
+    nextReplyFunction(nextReply);
+}
 
 var nextReplyFunction = function(a){
         a.children[0].addEventListener('keydown',function(e){ 
             if(e.key=="Enter" &&e.shiftKey==false){
                 this.parentNode.children[1].click();
-            }
-            
+            }   
         })
-       
         a.children[1].addEventListener("click",function(e){
             
             if(a.children[0].value != ""){
@@ -109,78 +222,7 @@ var nextReplyFunction = function(a){
                         
                     },
                     success:function(response){
-                        let replyBack = document.createElement("div");
-                        replyBack.classList.add("reply")
-                        let replyUser = document.createElement("div");
-                        replyUser.classList.add("reply_user");
-                        let studentName = document.createElement("div");
-                        studentName.classList.add("student_name");
-                        studentName.textContent = response.user;
-                        let dateUploaded = document.createElement("div");
-                        dateUploaded.classList.add("date_uploaded");
-                        dateUploaded.textContent = "Oct 15";
-                        replyUser.appendChild(studentName);
-                        replyUser.appendChild(dateUploaded);
-                        let replyContent = document.createElement("div");
-                        replyContent.classList.add("reply_content");
-                        replyContent.textContent=a.children[0].value;
-                        let replyButton = document.createElement("div");
-                        replyButton.classList.add("reply_button");
-                        let viewRepliesButton = document.createElement("div");
-                        viewRepliesButton.classList.add("view_replies_button");
-                        viewRepliesButton.textContent = "View Replies(0)";
-                        let replyBackButton = document.createElement("div");
-                        replyBackButton.classList.add("reply_back_button");
-                        replyBackButton.textContent= "Reply";
-                        replyButton.appendChild(viewRepliesButton);
-                        replyButton.appendChild(replyBackButton);
-                        let reply = document.createElement("div");
-                        reply.classList.add("reply");
-                        nextReply = document.createElement("div");
-                        nextReply.classList.add("next_reply");
-                        inputDiv = document.createElement("input");
-                        inputDiv.type = "text";
-                        inputDiv.className="reply_input";
-                        inputDiv.name = "input_reply";
-                        inputDiv.placeholder="Reply";
-                        inputIcon = document.createElement("div");
-                        inputIcon.classList.add("input_icon");
-                        inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
-                        cancelIcon = document.createElement("div");
-                        cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
-                        cancelIcon.classList.add("cancel_icon");
-                        let hiddenInput=document.createElement('input');
-                        hiddenInput.type="hidden";
-                        hiddenInput.value=response.commentId
-                        nextReply.appendChild(inputDiv);
-                        nextReply.appendChild(inputIcon);
-                        nextReply.appendChild(hiddenInput);
-                        nextReply.appendChild(cancelIcon);
-                        nextReply.style.display = "none";
-                        reply.appendChild(nextReply);
-                        replyBack.appendChild(replyUser);
-                        replyBack.appendChild(replyContent);
-                        replyBack.appendChild(replyButton);
-                        replyBack.appendChild(reply);
-                        a.children[0].value = "";
-                        a.parentNode.parentNode.appendChild(replyBack);
-                        cancelIcon.addEventListener("click",function(e){
-                            this.parentNode.style.display = "none";
-                            this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
-                            this.parentNode.parentNode.children[0].value="";
-                        })
-                        viewRepliesButton.addEventListener("click", function(e){
-                            if(this.parentNode.parentNode.children[3].children[1]){
-                                this.parentNode.parentNode.children[3].children[1].style.display = "flex";
-                            }
-                            this.style.display = "none";
-                        })
-                        replyBackButton.addEventListener("click", function(e){
-                            this.parentNode.parentNode.children[3].children[0].style.display = "flex";
-                            this.style.display = "none";
-                        })
-                        replyButtonFunction();
-                        nextReplyFunction(nextReply);
+                        createReplyFunction(response, a);
                     }
                 })
                
