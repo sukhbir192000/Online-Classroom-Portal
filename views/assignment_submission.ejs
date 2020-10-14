@@ -17,12 +17,12 @@
                 </div>
                 <div class="graded"><% if(submission.marksAlloted){ %><%=submission.marksAlloted%>/<%= assignment.weightage %><% }else{ %>Not graded yet<%}%></div>
                 <div class="line"></div>
-                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div>
+                <div class="deadline">Due on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.deadline) %></div>
                 <!-- -------------------------------------------------------------------------------- -->
                 <div class="points">Total points: <%= assignment.weightage %></div>
                 <!-- -------------------------------------------------------------------------------- -->
                 <div class="description"><%= assignment.content %></div>
-                <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.createdAt) %></div>
+                <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(assignment.createdAt) %></div>
                 <div class="material">
                     <% for(let file of assignment.files){ %>
                         <a href="<%= file.url %>" class="file_inside" download="download">

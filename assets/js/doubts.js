@@ -82,7 +82,9 @@ var replyButtonFunction = function(a){
             url: "/content/doubts/viewReplies/" + a.parentNode.children[3].children[0].children[2].value,
             type:"GET",
             success: function(response){
-                
+                for(let responseItem of response.replyList){
+                    createReplyFunction(responseItem,a.parentNode.children[3].children[0]);
+                }
             }
         })
         if(a.parentNode.children[3].children[1]){
@@ -137,17 +139,17 @@ var createReplyFunction = function(response,a){
     studentName.textContent = response.user;
     let dateUploaded = document.createElement("div");
     dateUploaded.classList.add("date_uploaded");
-    dateUploaded.textContent = "Oct 15";
+    dateUploaded.textContent = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(new Date(response.postedAt));
     replyUser.appendChild(studentName);
     replyUser.appendChild(dateUploaded);
     let replyContent = document.createElement("div");
     replyContent.classList.add("reply_content");
-    replyContent.textContent=a.children[0].value;
+    replyContent.textContent=response.content;
     let replyButton = document.createElement("div");
     replyButton.classList.add("reply_button");
     let viewRepliesButton = document.createElement("div");
     viewRepliesButton.classList.add("view_replies_button");
-    viewRepliesButton.textContent = "View Replies(0)";
+    viewRepliesButton.textContent = "View Replies("+response.childCount+")";
     let replyBackButton = document.createElement("div");
     replyBackButton.classList.add("reply_back_button");
     replyBackButton.textContent= "Reply";
@@ -182,7 +184,9 @@ var createReplyFunction = function(response,a){
     replyBack.appendChild(replyButton);
     replyBack.appendChild(reply);
     a.children[0].value = "";
+    
     a.parentNode.parentNode.appendChild(replyBack);
+    
     cancelIconFunction(cancelIcon);
     // cancelIcon.addEventListener("click",function(e){
     //     this.parentNode.style.display = "none";
@@ -219,6 +223,7 @@ var nextReplyFunction = function(a){
                     data:{
                         doubtId:doubtId,
                         content:a.children[0].value,
+                        
                         
                     },
                     success:function(response){

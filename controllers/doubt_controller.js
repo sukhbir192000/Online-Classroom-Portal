@@ -316,7 +316,10 @@ module.exports.replyCreate=async function(req,res){
             return res.status(200).json({
                 msg:"added reply",
                 user:res.locals.user.name,
-                commentId:newReply._id
+                commentId:newReply._id,
+                content:req.body.content,
+                childCount:0,
+                postedAt:newReply.createdAt
             })
         }
     }
@@ -331,15 +334,33 @@ module.exports.replyCreate=async function(req,res){
 module.exports.replyView=async function(req,res){
     try{
         if(req.xhr){
-            let paerntReply = await ReplyModel.findById(req.params.replyId).populate('replies');
-            let replyList = paerntReply.replies;
+            let parentReply = await ReplyModel.findById(req.params.replyId)
+            .populate({
+                path:'replies',
+                populate: {
+                    path: 'postedBy'
+                }
+            })
+            let replies = parentReply.replies;
+            let replyList=[]
+            console.log("replies :",replies);
+            for(let reply of replies){
+                let customReply={};
+                customReply.commentId=reply._id;
+                customReply.content=reply.content;
+                customReply.user=reply.postedBy.name;
+                customReply.childCount=reply.replies.length;
+                customReply.postedAt=reply.createdAt
+                replyList.push(customReply);
+            }
+            // console.log(replyList);
             return res.status(200).json({
                 replyList: replyList
             });
         }
     }
     catch(err){
-        console.log("Error while getting replies");
+        console.log("Error while viewing replies");
         return res.status(400).json({
             msg:"file not found"
         })
