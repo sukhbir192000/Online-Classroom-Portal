@@ -27,9 +27,9 @@ for(let i=0;i<boxelements.length;i++){
             description.textContent=arr[1];
             points.textContent = arr[2];
             deadline_content.textContent = arr[3];
-            current_box.children[1].children[2].style.pointerEvents = "auto"
+            current_box.children[1].children[2].style.display = "flex"
             fileDeleteButtons = current_box.children[1].children[1];
-            current_box.children[1].children[2].classList.remove("show_delete");
+            // current_box.children[1].children[2].classList.remove("show_delete");
             for(let j=0;j<fileDeleteButtons.childElementCount;j++){
                 fileDeleteButtons.children[j].setAttribute("download","download");
                 fileDeleteButtons.children[j].href = links[j];
@@ -69,7 +69,7 @@ for(let i=0;i<boxelements.length;i++){
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
         current_box=boxelements[i];
-        current_box.children[1].children[2].style.pointerEvents = "none"
+        current_box.children[1].children[2].style.display = "none"
         fileDeleteButtons = current_box.children[1].children[1];
         for(let j=0;j<fileDeleteButtons.childElementCount;j++){
             fileDeleteButtons.children[j].removeAttribute("download");
@@ -77,7 +77,7 @@ for(let i=0;i<boxelements.length;i++){
             fileDeleteButtons.children[j].href= "#/";
             fileDeleteButtons.children[j].children[2].style.cursor = "pointer";
             fileDeleteButtons.children[j].children[2].classList.add("show_delete");
-            current_box.children[1].children[2].classList.add("show_delete");
+            // current_box.children[1].children[2].classList.add("show_delete");
             fileDeleteButtons.children[j].children[2].addEventListener("click",function(e){
                 deleted_files.push(links[j]);
                 fileDeleteButtons.children[j].children[2].classList.remove("show_delete");
@@ -123,9 +123,9 @@ document.addEventListener('click',function(e){
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
             savebutton.classList.remove("show");
-            current_box.children[1].children[2].style.pointerEvents = "auto"
+            current_box.children[1].children[2].style.display = "flex"
             fileDeleteButtons = current_box.children[1].children[1];
-            current_box.children[1].children[2].classList.remove("show_delete");
+            // current_box.children[1].children[2].classList.remove("show_delete");
             for(let j=0;j<fileDeleteButtons.childElementCount;j++){
                 fileDeleteButtons.children[j].setAttribute("download","download");
                 fileDeleteButtons.children[j].href = links[j];

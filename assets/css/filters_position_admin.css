@@ -1,6 +1,14 @@
 .filters{
     top:15.2em;
 }
-.sidebar{
-    top:15.2em;
+
+@media(min-width: 767px) and (max-width: 991px){
+    .filters{
+        top:3.3em;
+    }
+}
+@media(max-width: 767px){
+    .filters{
+        top:3.3em;
+    }
 }
