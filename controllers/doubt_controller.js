@@ -282,11 +282,20 @@ module.exports.replyCreate=async function(req,res){
                 postedBy:res.locals.user._id,
 
             })
-            doubt.replies.push(newReply._id);
-            doubt.save();
+
+            if(doubt){   
+                doubt.replies.push(newReply._id);
+                doubt.save();
+            }
+            else{
+                let parentComment=await ReplyModel.findById(req.body.doubtId);
+                parentComment.replies.push(newReply._id);
+                parentComment.save();
+            }
             return res.status(200).json({
                 msg:"added reply",
-                user:res.locals.user.name 
+                user:res.locals.user.name,
+                commentId:newReply._id
             })
         }
     }

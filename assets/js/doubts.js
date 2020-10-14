@@ -103,7 +103,7 @@ var nextReplyFunction = function(a){
                     },
                     success:function(response){
                         let replyBack = document.createElement("div");
-                        replyBack.classList.add("reply_back")
+                        replyBack.classList.add("reply")
                         let replyUser = document.createElement("div");
                         replyUser.classList.add("reply_user");
                         let studentName = document.createElement("div");
@@ -142,8 +142,12 @@ var nextReplyFunction = function(a){
                         cancelIcon = document.createElement("div");
                         cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
                         cancelIcon.classList.add("cancel_icon");
+                        let hiddenInput=document.createElement('input');
+                        hiddenInput.type="hidden";
+                        hiddenInput.value=response.commentId
                         nextReply.appendChild(inputDiv);
                         nextReply.appendChild(inputIcon);
+                        nextReply.appendChild(hiddenInput);
                         nextReply.appendChild(cancelIcon);
                         nextReply.style.display = "none";
                         reply.appendChild(nextReply);
@@ -152,7 +156,7 @@ var nextReplyFunction = function(a){
                         replyBack.appendChild(replyButton);
                         replyBack.appendChild(reply);
                         a.children[0].value = "";
-                        a.parentNode.appendChild(replyBack);
+                        a.parentNode.parentNode.appendChild(replyBack);
                         cancelIcon.addEventListener("click",function(e){
                             this.parentNode.style.display = "none";
                             this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
