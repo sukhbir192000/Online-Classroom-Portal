@@ -121,19 +121,29 @@ document.addEventListener('mouseup',function(e){
 
 var replyButtonFunction = function(a){
     a.children[0].addEventListener("click",function(e){
-        $.ajax({
-            url: "/content/doubts/viewReplies/" + a.parentNode.children[3].children[0].children[2].value,
-            type:"GET",
-            success: function(response){
-                for(let responseItem of response.replyList){
-                    createReplyFunction(responseItem,a.parentNode.children[3].children[0]);
+        // console.log(this.textContent.split('(').pop());
+        if(this.textContent.split(' ')[0] == "View"){
+            $.ajax({
+                url: "/content/doubts/viewReplies/" + a.parentNode.children[3].children[0].children[2].value,
+                type:"GET",
+                success: function(response){
+                    for(let responseItem of response.replyList){
+                        createReplyFunction(responseItem,a.parentNode.children[3].children[0]);
+                    }
                 }
+            })
+            if(a.parentNode.children[3].children[1]){
+                a.parentNode.children[3].children[1].style.display = "flex";
             }
-        })
-        if(a.parentNode.children[3].children[1]){
-            a.parentNode.children[3].children[1].style.display = "flex";
+            this.textContent = "Hide Replies("+this.textContent.split('(').pop();
         }
-        this.style.display = "none";
+        else{
+            let i=4;
+            while(this.parentNode.parentNode.children[i]!=null){
+                this.parentNode.parentNode.removeChild(this.parentNode.parentNode.children[i]);
+            }
+            this.textContent = "View Replies("+this.textContent.split('(').pop();
+        }
     })
     a.children[1].addEventListener("click",function(e){
         a.parentNode.children[3].children[0].style.display = "flex";
@@ -193,6 +203,11 @@ var createReplyFunction = function(response,a){
     let viewRepliesButton = document.createElement("div");
     viewRepliesButton.classList.add("view_replies_button");
     viewRepliesButton.textContent = "View Replies("+response.childCount+")";
+    // -----------------------------------------------------------------------------------------------
+    if(response.childCount=="0"){
+        viewRepliesButton.style.display="none";
+    }
+    // --------------------------------------------------------------------------------------------------
     let replyBackButton = document.createElement("div");
     replyBackButton.classList.add("reply_back_button");
     replyBackButton.textContent= "Reply";
@@ -202,11 +217,17 @@ var createReplyFunction = function(response,a){
     reply.classList.add("reply");
     nextReply = document.createElement("div");
     nextReply.classList.add("next_reply");
-    inputDiv = document.createElement("input");
-    inputDiv.type = "text";
-    inputDiv.className="reply_input";
-    inputDiv.name = "input_reply";
-    inputDiv.placeholder="Reply";
+    // inputDiv = document.createElement("input");
+    // inputDiv.type = "text";
+    // inputDiv.className="reply_input";
+    // inputDiv.name = "input_reply";
+    // inputDiv.placeholder="Reply";
+    inputDiv = document.createElement("div");
+    inputDiv.classList.add("comment_text");
+    inputDiv.role = "textbox";
+    inputDiv.ariaMultiline = "true";
+    inputDiv.contentEditable = "true";
+
     inputIcon = document.createElement("div");
     inputIcon.classList.add("input_icon");
     inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
@@ -226,10 +247,8 @@ var createReplyFunction = function(response,a){
     replyBack.appendChild(replyContent);
     replyBack.appendChild(replyButton);
     replyBack.appendChild(reply);
-    a.children[0].value = "";
-    
+    a.children[0].textContent = "";
     a.parentNode.parentNode.appendChild(replyBack);
-    
     cancelIconFunction(cancelIcon);
     // cancelIcon.addEventListener("click",function(e){
     //     this.parentNode.style.display = "none";
@@ -252,20 +271,20 @@ var createReplyFunction = function(response,a){
 
 var nextReplyFunction = function(a){
         a.children[0].addEventListener('keydown',function(e){ 
-            if(e.key=="Enter" &&e.shiftKey==false){
+            if(e.key=="Enter" && e.shiftKey==false){
                 this.parentNode.children[1].click();
             }   
         })
         a.children[1].addEventListener("click",function(e){
             
-            if(a.children[0].value != ""){
+            if(a.children[0].textContent != ""){
                 let doubtId=a.children[2].value;
                 $.ajax({
                     url:"/content/doubts/createReply",
                     type:"POST",
                     data:{
                         doubtId:doubtId,
-                        content:a.children[0].value,
+                        content:a.children[0].textContent,
                         
                         
                     },
