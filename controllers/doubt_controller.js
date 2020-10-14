@@ -66,7 +66,12 @@ module.exports.doubts=async function(req,res){
                         "classSub.class":classId
                     }).populate('classSub.course')
                     .populate('classSub.class')
-                    .populate('replies')
+                    .populate({
+                        path:'replies',
+                        populate: {
+                            path: 'postedBy'
+                        }
+                    })
                     .populate('postedBy');
                     
                     
@@ -82,7 +87,12 @@ module.exports.doubts=async function(req,res){
                     })
                     .populate('classSub.course')
                     .populate('classSub.class')
-                    .populate('replies')
+                    .populate({
+                        path:'replies',
+                        populate: {
+                            path: 'postedBy'
+                        }
+                    })
                     .populate('postedBy');
                     
                 }
@@ -91,7 +101,12 @@ module.exports.doubts=async function(req,res){
                 doubtsList = await DoubtsModel.find({postedFor: user._id})
                 .populate('classSub.course')
                 .populate('classSub.class')
-                .populate('replies')
+                .populate({
+                    path:'replies',
+                    populate: {
+                        path: 'postedBy'
+                    }
+                })
                 .populate('postedBy');
                
             }
@@ -132,8 +147,14 @@ module.exports.doubts=async function(req,res){
                         }
                     ]
                 }).populate('classSub.course')
-                .populate('replies')
+                .populate({
+                    path:'replies',
+                    populate: {
+                        path: 'postedBy'
+                    }
+                })
                 .populate('postedBy');
+
                 if(doubts.length>0){
                     doubtsList = doubtsList.concat(doubts);
                 }
@@ -200,7 +221,6 @@ module.exports.doubts=async function(req,res){
             let  courseObject = await CourseModel.findById(course);
             courses.push(courseObject);
         }
-        console.log(doubtsList);
         return res.render("doubts",{
             title:"Doubts",
             doubts:doubtsList,
@@ -288,6 +308,7 @@ module.exports.replyCreate=async function(req,res){
                 doubt.save();
             }
             else{
+                console.log(req.body.doubtId);
                 let parentComment=await ReplyModel.findById(req.body.doubtId);
                 parentComment.replies.push(newReply._id);
                 parentComment.save();
@@ -301,6 +322,24 @@ module.exports.replyCreate=async function(req,res){
     }
     catch(err){
         console.log("Error while creating reply");
+        return res.status(400).json({
+            msg:"file not found"
+        })
+    }
+}
+
+module.exports.replyView=async function(req,res){
+    try{
+        if(req.xhr){
+            let paerntReply = await (await ReplyModel.findById(req.params.replyId)).populated('replies');
+            let replyList = paerntReply.replies;
+            return res.status(200).json({
+                replyList: replyList
+            });
+        }
+    }
+    catch(err){
+        console.log("Error while getting replies");
         return res.status(400).json({
             msg:"file not found"
         })

@@ -56,6 +56,13 @@ var replyButtonFunction = function(){
     var x = document.querySelectorAll(".reply_button");
     for(let i=0;i<x.length;i++){
         x[i].children[0].addEventListener("click",function(e){
+            $.ajax({
+                url: "/content/doubts/viewReplies/" + x[i].parentNode.children[3].children[0].children[2].value,
+                type:"GET",
+                success: function(response){
+                    
+                }
+            })
             if(x[i].parentNode.children[3].children[1]){
                 x[i].parentNode.children[3].children[1].style.display = "flex";
             }
@@ -186,113 +193,3 @@ var y = document.querySelectorAll(".next_reply");
 for(let i=0;i<y.length;i++){
     nextReplyFunction(y[i]);
 }
-
-// var nextReplyFunction = function(){
-
-//     var y = document.querySelectorAll(".next_reply");
-
-//     for(let i=0;i<y.length;i++){
-        
-//         y[i].children[0].addEventListener('keydown',function(e){
-            
-            
-//             if(e.key=="Enter" &&e.shiftKey==false){
-//                 console.log(this.ShiftPressed);
-//                 this.parentNode.children[1].click();
-//             }
-            
-//         })
-       
-//         y[i].children[1].addEventListener("click",function(e){
-            
-//             if(y[i].children[0].value != ""){
-//                 let doubtId=this.parentNode.children[2].value;
-//                 // console.log(this.parentNode.children[0]);
-//                 console.log("hi");
-//                 $.ajax({
-//                     url:"/content/doubts/createReply",
-//                     type:"POST",
-//                     data:{
-//                         doubtId:doubtId,
-//                         content:this.parentNode.children[0].value,
-                        
-//                     },
-//                     success:function(response){
-//                         let replyBack = document.createElement("div");
-//                         replyBack.classList.add("reply_back")
-//                         let replyUser = document.createElement("div");
-//                         replyUser.classList.add("reply_user");
-//                         let studentName = document.createElement("div");
-//                         studentName.classList.add("student_name");
-//                         studentName.textContent = response.user;
-//                         let dateUploaded = document.createElement("div");
-//                         dateUploaded.classList.add("date_uploaded");
-//                         dateUploaded.textContent = "Oct 15";
-//                         replyUser.appendChild(studentName);
-//                         replyUser.appendChild(dateUploaded);
-//                         let replyContent = document.createElement("div");
-//                         replyContent.classList.add("reply_content");
-//                         replyContent.textContent=y[i].children[0].value;
-//                         let replyButton = document.createElement("div");
-//                         replyButton.classList.add("reply_button");
-//                         let viewRepliesButton = document.createElement("div");
-//                         viewRepliesButton.classList.add("view_replies_button");
-//                         viewRepliesButton.textContent = "View Replies(0)";
-//                         let replyBackButton = document.createElement("div");
-//                         replyBackButton.classList.add("reply_back_button");
-//                         replyBackButton.textContent= "Reply";
-//                         replyButton.appendChild(viewRepliesButton);
-//                         replyButton.appendChild(replyBackButton);
-//                         let reply = document.createElement("div");
-//                         reply.classList.add("reply");
-//                         nextReply = document.createElement("div");
-//                         nextReply.classList.add("next_reply");
-//                         inputDiv = document.createElement("input");
-//                         inputDiv.type = "text";
-//                         inputDiv.className="reply_input";
-//                         inputDiv.name = "input_reply";
-//                         inputDiv.placeholder="Reply";
-//                         inputIcon = document.createElement("div");
-//                         inputIcon.classList.add("input_icon");
-//                         inputIcon.innerHTML = "<i class='fas fa-caret-square-right'></i> ";
-//                         cancelIcon = document.createElement("div");
-//                         cancelIcon.innerHTML = "<i class='fas fa-times'></i>";
-//                         cancelIcon.classList.add("cancel_icon");
-//                         nextReply.appendChild(inputDiv);
-//                         nextReply.appendChild(inputIcon);
-//                         nextReply.appendChild(cancelIcon);
-//                         nextReply.style.display = "none";
-                        
-//                         reply.appendChild(nextReply);
-//                         replyBack.appendChild(replyUser);
-//                         replyBack.appendChild(replyContent);
-//                         replyBack.appendChild(replyButton);
-//                         replyBack.appendChild(reply);
-//                         y[i].children[0].value = "";
-//                         y[i].parentNode.appendChild(replyBack);
-//                         y[i].parentNode.children[1].children[3].children[0].children[2].addEventListener("click",function(e){
-//                             this.parentNode.style.display = "none";
-//                             this.parentNode.parentNode.parentNode.children[2].children[1].style.display = "flex";
-//                         })
-//                         y[i].parentNode.children[1].children[2].children[0].addEventListener("click",function(e){
-//                             if(this.parentNode.parentNode.children[3].children[1]){
-//                                 this.parentNode.parentNode.children[3].children[1].style.display = "flex";
-//                             }
-//                             this.style.display = "none";
-//                         })
-//                         y[i].parentNode.children[1].children[2].children[1].addEventListener("click",function(e){
-//                             if(this.parentNode.parentNode.children[3].children[0]){
-//                                 this.parentNode.parentNode.children[3].children[0].style.display = "flex";
-//                             }
-//                             this.style.display = "none";
-//                         })
-//                         nextReplyFunction();
-//                     }
-        
-//                 })
-               
-//             }
-//         })
-//     }
-// }
-// nextReplyFunction();

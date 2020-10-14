@@ -87,12 +87,12 @@
                                 <% for(let reply of doubt.replies){ %>
                                     <div class="reply">
                                         <div class="reply_user">
-                                            <div class="student_name">Mehak</div>
-                                            <div class="date_uploaded">Sept 10</div>
+                                            <div class="student_name"><%= reply.postedBy.name %></div>
+                                            <div class="date_uploaded"><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(reply.createdAt) %></div>
                                         </div>
-                                        <div class="reply_content"> This is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubtThis is not a valid doubt</div>
+                                        <div class="reply_content"><%= reply.content %></div>
                                         <div class="reply_button">
-                                            <div class="view_replies_button">View Replies(0)</div>
+                                            <div class="view_replies_button">View Replies(<%= reply.replies.length %>)</div>
                                             <div class="reply_back_button">Reply</div>
                                         </div>
 
@@ -100,6 +100,7 @@
                                             <div class="next_reply" style="display: none;">
                                                 <input type="text" class="reply_input" name="input_reply" placeholder="Reply">
                                                 <div class="input_icon"> <i class="fas fa-caret-square-right"></i> </div>
+                                                <input type="hidden" value="<%=reply._id%>">
                                                 <div class="cancel_icon"><i class="fas fa-times"></i></div>
                                             </div>
                                         </div>
