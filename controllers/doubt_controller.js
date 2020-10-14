@@ -331,7 +331,7 @@ module.exports.replyCreate=async function(req,res){
 module.exports.replyView=async function(req,res){
     try{
         if(req.xhr){
-            let paerntReply = await (await ReplyModel.findById(req.params.replyId)).populated('replies');
+            let paerntReply = await ReplyModel.findById(req.params.replyId).populate('replies');
             let replyList = paerntReply.replies;
             return res.status(200).json({
                 replyList: replyList
