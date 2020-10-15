@@ -127,6 +127,10 @@ var replyButtonFunction = function(a){
                 url: "/content/doubts/viewReplies/" + a.parentNode.children[3].children[0].children[2].value,
                 type:"GET",
                 success: function(response){
+                    let i=4;
+                    while(a.parentNode.children[i]!=null){
+                        a.parentNode.removeChild(a.parentNode.children[i]);
+                    }
                     for(let responseItem of response.replyList){
                         createReplyFunction(responseItem,a.parentNode.children[3].children[0]);
                     }
@@ -289,6 +293,13 @@ var nextReplyFunction = function(a){
                         
                     },
                     success:function(response){
+                        var matches = a.parentNode.parentNode.children[2].children[0].innerText.match(/(\d+)/);
+                        if(a.parentNode.parentNode.children[2].children[0].innerText.split(" ")[0]=="View"){
+                            a.parentNode.parentNode.children[2].children[0].innerText = "View Replies("+(parseInt(matches[0])+1)+")";
+                        }
+                        else{
+                            a.parentNode.parentNode.children[2].children[0].innerText = "Hide Replies("+(parseInt(matches[0])+1)+")";
+                        }
                         createReplyFunction(response, a);
                     }
                 })
