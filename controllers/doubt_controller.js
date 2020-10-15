@@ -171,21 +171,30 @@ module.exports.doubts=async function(req,res){
                 return new Date(a.createdAt) - new Date(b.createdAt);
             });   
         }
+        if(req.query.doubts && req.query.doubts!="All"){
+            doubtsList.filter(element=>{
+                return element.postedBy._id==res.locals.user._id
+            })
+            
+        }
         var filterList={
             courseName:"",
             sort:"",
-            branch:""
+            branch:"",
+            doubts:""
         };
         // console.log(req.query);
         if(req.query.sub||req.query.date){
             filterList.courseName=req.query.sub,
             filterList.sort=req.query.date
             filterList.branch=req.query.branch
+            filterList.doubts=req.query.doubts
         }
         else{
             filterList.courseName="All",
             filterList.sort="Latest First",
             filterList.branch="All"
+            filterList.doubts="All"
         }
         branchList=[]
         if(req.query.sub && req.query.sub!="All"){
@@ -221,6 +230,7 @@ module.exports.doubts=async function(req,res){
             let  courseObject = await CourseModel.findById(course);
             courses.push(courseObject);
         }
+        
         return res.render("doubts",{
             title:"Doubts",
             doubts:doubtsList,
@@ -238,7 +248,7 @@ module.exports.doubts=async function(req,res){
 
 module.exports.doubtCreate=async function(req,res){
     try{
-        console.log(req.body);
+        
         let user=res.locals.user
         var subject = req.body.subject;
         let privateCheck;
@@ -267,7 +277,7 @@ module.exports.doubtCreate=async function(req,res){
             return conditionTeacher;
         })
 
-        await DoubtsModel.create({
+        let doubtElement=await DoubtsModel.create({
             title: req.body.title,
             content: req.body.message,
             classSub: {
@@ -281,7 +291,16 @@ module.exports.doubtCreate=async function(req,res){
             postedFor:teachersList
           
         })
-    
+        console.log(doubtElement)
+        if(req.files){
+            for(let file in req.files){
+                doubtElement.files.push({
+                    url:DoubtsModel.filePath+req.files[file][0].filename,
+                    name:req.files[file][0].originalname
+                });
+            }
+        }
+        doubtElement.save();
     
         req.flash('success', 'Doubt Posted');
         return res.redirect('back')
