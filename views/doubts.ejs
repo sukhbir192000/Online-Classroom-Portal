@@ -71,11 +71,15 @@
 
                         <!-- Add Files HERE -->
                         <!-- -------------------------------------THEEK KRO-------------------------------------------------- -->
-                        <div class="material">  
-                                <a href="#" class="file_inside" download="download">
-                                    <div class="file_icon "></div>
-                                    <div class="file_title">Resume</div>
-                                </a>
+                        <div class="material">
+                            <% for(let file of doubt.files){ %>
+                            <a href="<%= file.url %>" class="file_inside" download="download">
+                                <div class="file_icon "></div>
+                                <div class="file_title"><%= file.name %></div>
+                                
+                            </a>
+                            <% } %>
+                            
                         </div>
                         <!-- ---------------------------------------------------------------------------------------------------- -->
                         <!--  ----------------------------  -->
@@ -129,6 +133,7 @@
             <div class="filter_heading">Subjects:</div>
             <div class="filter_content">
                 <ul class="list">
+                    <li class="filter_subject<% if(filterList.courseName=="All"){ %> selected <% } %>" >All </li>
                     <% if(user.isAdmin){ %>
                         <% for(let course of courseFilters){ %>
                             <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
@@ -145,17 +150,44 @@
             <div class="filter_heading">Date:</div>
             <div class="filter_content">
                 <ul class="list">
-                    <li>Ascending</li>
-                    <li>Descending</li>
+                    <li class="filter_sort<% if(filterList.sort=="Oldest First"){ %> selected <% } %>" >Oldest First</li>
+                    <li class="filter_sort<% if(filterList.sort=="Latest First"){ %> selected <% } %>" >Latest First</li>
                 </ul>
             </div>
-        </div>            
-    </div>
+        </div>
+        <% if(user.isAdmin){ %>
+            <div class="filter_name">
+                <div class="filter_heading">Branch</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="filter_branch<% if(filterList.branch=="All"){ %> selected <% } %>" >All </li>
+                        <% for(let branch of branchList){ %>
+                            <li class="filter_branch<% if(filterList.branch==branch.stream){ %> selected <% } %>" ><%=branch.stream%></li>
+                        <% } %> 
+                    </ul>
+                </div>
+            </div>
+        <% }else{ %>
+            <div class="filter_name">
+                <div class="filter_heading">Doubts:</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="filter_doubts<% if(filterList.doubts=="All"){ %> selected <% } %>" >All</li>
+                        <li class="filter_doubts<% if(filterList.doubts=="Personal"){ %> selected <% } %>" >Personal</li>
+                    </ul>
+                </div>
+            </div>
+        <% } %>
+    </div>  
 
 </div>
 
 
 <script src="/js/doubts.js"></script>
-<% if(!user.isAdmin){ %>
+<% if(user.isAdmin){ %>
+   
+    <script src="/js/doubt_filter_admin.js"></script>
+<% }else{ %>
+    <script src="/js/doubt_filter.js"></script>
     <script src="/js/doubts_student.js"></script>
 <% } %>

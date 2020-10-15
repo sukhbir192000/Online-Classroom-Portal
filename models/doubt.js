@@ -19,6 +19,17 @@ const doubtSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    files:[
+        {
+            url:{
+                type:String
+            },
+            name:{
+                type:String
+            }
+            
+        }
+    ],  
     postedFor:[
         {
             type:mongoose.Schema.Types.ObjectId,
