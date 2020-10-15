@@ -13,7 +13,7 @@
                 <div class="subject"><%= assignment.classSub.course.name %></div>
                 <div class="title_submit"> 
                     <div class="title"><%= assignment.title %></div>
-                    <button type="button" class="submit_button <% if(submission.marksAlloted!=''){ %>hide<% } %>"><% if(!submission.turnedIn){ %>Submit<% }else{ %>Unsubmit<%}%></button>
+                    <button type="button" class="submit_button <% if(submission.marksAlloted && submission.marksAlloted!=''){ %>hide<% } %>"><% if(!submission.turnedIn){ %>Submit<% }else{ %>Unsubmit<%}%></button>
                 </div>
                 <div class="graded"><% if(submission.marksAlloted){ %><%=submission.marksAlloted%>/<%= assignment.weightage %><% }else{ %>Not graded yet<%}%></div>
                 <div class="line"></div>
