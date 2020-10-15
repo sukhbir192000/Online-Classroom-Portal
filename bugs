@@ -5,7 +5,9 @@ Assignments
 - View submission
 - add download and href in ejs and js
 - file name too long gets chopped off
-- edit to edit is problem
+
+DOUBT
+- Edit material part ejs(static hai abhi)
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
