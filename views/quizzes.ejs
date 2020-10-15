@@ -24,11 +24,10 @@
                     <div class="add_content">Add </div>
                 </div>
                 <div class="add_admin">
-                    <form method="POST" action="#">
+                    <form method="POST" action="/content/quizzes/create">
                         <label for="subject" class="subject_label">Subject:</label>
                         <select id="subject" name="subject">
-                            <option value="Embedded Systems">Embedded Systems</option>
-                            <option value="Computer Architecture and Organisation">Computer Architecture and Organisation</option>
+                            <option value="All">All</option>
                         </select><br><br>
                         <label for="branch">Branch:</label>
                         <select id="branch" name="branch">
@@ -43,7 +42,7 @@
                             <option value="All">All</option>
                         </select><br><br>
                         <label>Quiz date and time:</label>
-                        <input class="quiz_date" type="datetime-local" id="date_quiz" placeholder="Quiz date" ><br><br>
+                        <input class="quiz_date" name="quiz_date" type="datetime-local" id="date_quiz" placeholder="Quiz date" ><br><br>
                         <label >Duration of quiz:</label>
                         <input class="quiz_time" type="number" name="time_quiz" id="time_quiz" min="0" >
                         <label class="duration">(in minutes)</label><br>
@@ -56,51 +55,53 @@
                     </form>
                 </div>
             <% } %>
-            <div class="box">
-                <div class="box_heading"> 
-                    <div class="subject">Computer Architecture</div>
-                    <div class="title">Quiz-1</div>
-                </div>
-                <div class="box_content">  
-                    <div class="box_content_details">                    
-                        <div class="deadline">
-                            <div class="deadline_heading">Live on </div>
-                            <div class="deadline_content">Oct 20,2020, 5:00PM</div>
-                            <input type="datetime-local" class="deadline_input" style="display: none;" value="2018-06-12T19:30">
-                        </div>    
-                        <div class="duration_quiz">
-                            <div class="duration_heading">Duration (in minutes):</div>
-                            <div class="duration_content">10</div>
-                        </div>
-                        <% if(user.isAdmin){ %>
-                            <div class="branch_admin">Branch: ECE</div>
-                            <div class="group_admin">Class Group: 2</div>
-                            <div class="sub_group_admin">Lab Group:4</div>
-                        <% } %>
-                        <a class="link" target="_blank" href="https://www.google.com">https://www.google.com</a>
-                        <div class="description">This is the description</div>
-                        <div class="date_posted">Posted on 20-09-20</div>
-                        <% if(user.isAdmin){ %>
-                            <div class="buttons">
-                                <div class="buttons_admin">
-                                    <div class="edit"><i class="far fa-edit"></i></div>
-                                    <a href="#"><div class="delete"><i class="fas fa-trash"></i></div></a>
-                                </div>
-                                <div class="buttons_admin_save">
-                                    <div class="savechanges"><i class="fas fa-save"></i></div>
-                                    <form method="POST" id="invisible_form" action="#">
-                                        <input type="hidden" name="title" >
-                                        <input type="hidden" name="description">
-                                        <input type="hidden" name="link">
-                                        <input type="hidden" name="duration">
-                                        <input type="hidden" name="deadline">
-                                    </form>
-                                </div>
+            <% for(let quiz of quizzes){ %>
+                <div class="box">
+                    <div class="box_heading"> 
+                        <div class="subject"><%= quiz.classSub.course.name %></div>
+                        <div class="title"><%= quiz.title %></div>
+                    </div>
+                    <div class="box_content">  
+                        <div class="box_content_details">                    
+                            <div class="deadline">
+                                <div class="deadline_heading">Live on </div>
+                                <div class="deadline_content"><%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(quiz.dateTime) %></div>
+                                <input type="datetime-local" class="deadline_input" style="display: none;" value="2018-06-12T19:30">
+                            </div>    
+                            <div class="duration_quiz">
+                                <div class="duration_heading">Duration (in minutes):</div>
+                                <div class="duration_content"><%= quiz.duration %></div>
                             </div>
-                        <% } %>
+                            <% if(user.isAdmin){ %>
+                                <div class="branch_admin">Branch: <%= quiz.classSub.class.stream %></div>
+                                <div class="group_admin"><% if(quiz.classSub.group){ %>Class Group: <%= quiz.classSub.group.groupNumber %><% } %></div>
+                                <div class="sub_group_admin"><% if(quiz.classSub.subGroup){ %>Lab Group: <%= quiz.classSub.subGroup.subGroupNumber %><% } %></div>
+                            <% } %>
+                            <a class="link" target="_blank" href="<%= quiz.link %>"><%= quiz.link %></a>
+                            <div class="description"><%= quiz.content %></div>
+                            <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(quiz.createdAt) %></div>
+                            <% if(user.isAdmin){ %>
+                                <div class="buttons">
+                                    <div class="buttons_admin">
+                                        <div class="edit"><i class="far fa-edit"></i></div>
+                                        <a href="/content/quizzes/delete/<%=quiz._id%>"><div class="delete"><i class="fas fa-trash"></i></div></a>
+                                    </div>
+                                    <div class="buttons_admin_save">
+                                        <div class="savechanges"><i class="fas fa-save"></i></div>
+                                        <form method="POST" id="invisible_form" action="/content/quizzes/update/<%=quiz._id%>">
+                                            <input type="hidden" name="title" >
+                                            <input type="hidden" name="description">
+                                            <input type="hidden" name="link">
+                                            <input type="hidden" name="duration">
+                                            <input type="hidden" name="deadline">
+                                        </form>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% } %>
         </div>
     </div>
     <div class="filters">
@@ -108,11 +109,16 @@
             <div class="filter_heading">Subjects:</div>
             <div class="filter_content">
                 <ul class="list">
-                    <li>All </li>
-                    <li>Computer Architecture and Organisation</li>
-                    <li>Embedded Systems</li>
-                    <li>Wireless Communication</li>
-                    <li>Advanced Communication</li>
+                    <li class="filter_subject<% if(filterList.courseName=="All"){ %> selected <% } %>" >All </li>
+                        <% if(user.isAdmin){ %>
+                            <% for(let course of courseFilters){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
+                        <% }else{ %>
+                            <% for(let course of courseList){ %>
+                                <li class="filter_subject<% if(filterList.courseName==course.name){ %> selected <% } %>" ><%=course.name%></li>
+                            <% } %>
+                        <% } %>
                 </ul>
             </div>
         </div>
@@ -120,22 +126,24 @@
             <div class="filter_heading">Date:</div>
             <div class="filter_content">
                 <ul class="list">
-                    <li>Ascending</li>
-                    <li>Descending</li>
+                    <li class="filter_sort<% if(filterList.sort=="Oldest First"){ %> selected <% } %>" >Oldest First</li>
+                    <li class="filter_sort<% if(filterList.sort=="Latest First"){ %> selected <% } %>" >Latest First</li>
                 </ul>
             </div>
         </div>
-        <div class="filter_name">
-            <div class="filter_heading">Status:</div>
-            <div class="filter_content">
-                <ul class="list">
-                    <li>All</li>
-                    <li>Pending</li>
-                    <li>Submitted</li>
-                </ul>
+        <% if(user.isAdmin){ %>
+            <div class="filter_name">
+                <div class="filter_heading">Branch</div>
+                <div class="filter_content">
+                    <ul class="list">
+                        <li class="filter_branch<% if(filterList.branch=="All"){ %> selected <% } %>" >All </li>
+                        <% for(let branch of branchList){ %>
+                            <li class="filter_branch<% if(filterList.branch==branch.stream){ %> selected <% } %>" ><%=branch.stream%></li>
+                        <% } %> 
+                    </ul>
+                </div>
             </div>
-        </div>
-        
+        <% } %>
     </div>
 
 </div>

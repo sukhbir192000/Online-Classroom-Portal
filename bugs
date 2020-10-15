@@ -11,7 +11,7 @@ DOUBT
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
-- set value of input deadline as current deadline in edit mode
+- set value of input deadline as current deadline in edit mode (ASSIGNMENT AND QUIZ)
 - remove unsubmitted if graded from backend
 
 BAAD KE KAAM:

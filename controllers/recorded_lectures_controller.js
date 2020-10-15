@@ -118,7 +118,7 @@ module.exports.recordedLecture=async function(req,res){
                     ]
                 }).populate('classSub.course');
                 if(recordedLectures.length>0){
-                    recordedLecturesList = recordedLecturesList.concat(announcements);
+                    recordedLecturesList = recordedLecturesList.concat(recordedLectures);
                 }
             }
         }
@@ -197,164 +197,7 @@ module.exports.recordedLecture=async function(req,res){
         return res.redirect('back');
     }
 }
-module.exports.getSubjects=async function(req,res){
-    var subjectList=[];
-  
-    for(let classSubElement of res.locals.user.classSub){
-        let course=await CourseModel.findById(classSubElement.course);
-        let id=classSubElement.course;
-        var obj={
-            name:course.name,
-            id:id
-        };
-        
-        subjectList.push(obj)
 
-    }
-    if(req.xhr){
-        let mymap = new Map(); 
-
-        subjectList = subjectList.filter(el => { 
-            const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
-            return true; 
-        });
-        return res.status(200).json({
-            data:{
-                subjectsId:subjectList,
-            
-            },
-            message:"Subjects Sent"
-        });
-    }
-    else{
-        return res.send("hi");
-    }
-}
-
-module.exports.getBranches=async function(req,res){
-    if(req.xhr){
-        let user = res.locals.user;
-        let branchList = [];
-        for(let classSub of user.classSub){
-            if(classSub.course == req.body.course){
-                var branchElement = await ClassModel.findById(classSub.class);
-                branchList.push({
-                    id: classSub.class,
-                    name: branchElement.stream
-                })
-            }
-        }
-        let mymap = new Map(); 
-
-        branchList = branchList.filter(el => { 
-            const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
-            return true; 
-        });
-        return res.status(200).json({
-            data:{
-                branchList:branchList
-            },
-            message:"Subjects Sent"
-        });
-    }
-}
-module.exports.getGroups=async function(req,res){
-    if(req.xhr){
-        let user = res.locals.user;
-        let groupList = [];
-        for(let classSub of user.classSub){
-            if(classSub.course == req.body.course && req.body.class==classSub.class){
-
-                var groupElement = await GroupModel.findById(classSub.group);
-                groupList.push({
-                    id: classSub.group,
-                    name: groupElement.groupNumber
-                })
-            }
-        }
-        let mymap = new Map(); 
-
-        groupList = groupList.filter(el => { 
-            const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
-            return true; 
-        });
-        return res.status(200).json({
-            data:{
-                groupList:groupList
-            },
-            message:"Subjects Sent"
-        });
-    }
-}
-module.exports.getSubGroups=async function(req,res){
-    if(req.xhr){
-        let user = res.locals.user;
-        let subGroupList = [];
-        for(let classSub of user.classSub){
-            if(classSub.course == req.body.course && req.body.class==classSub.class && req.body.group==classSub.group){
-                if(classSub.subGroup){
-                    var subGroupElement = await SubGroupModel.findById(classSub.subGroup);
-                    subGroupList.push({
-                        id: classSub.subGroup,
-                        name: subGroupElement.subGroupNumber
-                    })
-                }
-            }
-        }
-        let mymap = new Map(); 
-
-        subGroupList = subGroupList.filter(el => { 
-            const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
-            return true; 
-        });
-        return res.status(200).json({
-            data:{
-                subGroupList:subGroupList
-            },
-            message:"Sub-groups Sent"
-        });
-    }
-}
 module.exports.recordedLectureCreate=async function(req,res){
     
     try{
@@ -366,6 +209,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                     title: req.body.title,
                     content: req.body.message,
                     classSub: subjects,
+                    recordedOn: req.body.lecture_date,
                     postedBy: user._id,
                     link: req.body.lecture_link,
                     references: req.body.lecture_references
@@ -381,6 +225,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                             title: req.body.title,
                             content: req.body.message,
                             classSub: classSubElement,
+                            recordedOn: req.body.lecture_date,
                             postedBy: user._id,
                             link: req.body.lecture_link,
                             references: req.body.lecture_references
@@ -397,6 +242,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                                 title: req.body.title,
                                 content: req.body.message,
                                 classSub: classSubElement,
+                                recordedOn: req.body.lecture_date,
                                 postedBy: user._id,
                                 link: req.body.lecture_link,
                                 references: req.body.lecture_references
@@ -413,6 +259,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                                     title: req.body.title,
                                     content: req.body.message,
                                     classSub: classSubElement,
+                                    recordedOn: req.body.lecture_date,
                                     postedBy: user._id,
                                     link: req.body.lecture_link,
                                     references: req.body.lecture_references
@@ -430,6 +277,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                                 group: group,
                                 subGroup: req.body.sub_group
                             },
+                            recordedOn: req.body.lecture_date,
                             postedBy: user._id,
                             link: req.body.lecture_link,
                             references: req.body.lecture_references
