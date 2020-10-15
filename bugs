@@ -19,3 +19,6 @@ BAAD KE KAAM:
 - Make ajax urls common
 - pagination
 - delete getSubjects etc from all controllers except assignment_controller
+
+- add backlog field to user schema and make additions accordingly in controllers
+- add isActive field to class-sub schema and make additions accordingly in controllers
