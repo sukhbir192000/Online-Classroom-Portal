@@ -1,22 +1,38 @@
 let week_shift_div = document.getElementById('week_shift');
 let offset = 0;
 let inProcess = false;
+let daysRow=document.getElementsByClassName('table_row')[0];
+let startDate=new Date(document.getElementById("starting_date").value);
+function setDates(){
+    
+    for(let i=0;i<7;i++){
+        daysRow.children[i+1].children[0].innerText= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'numeric', day: '2-digit'}).format(startDate);
+        startDate.setDate(startDate.getDate()+1);
+    }
+    startDate.setDate(startDate.getDate()-7);
+}
+setDates();
 week_shift_div.children[0].addEventListener('click', function(e){
-    offset--;
+    
     if(!inProcess){
+        
+        offset--;
         inProcess = true;
         $.ajax({
             url: "/content/timetable/?offset="+offset,
             cache: false,
             type: "GET",
             success: function(response){
-                console.log(response);
+                startDate.setDate(startDate.getDate()-7);
+                setDates();
+                // console.log(response);
                 let container = document.getElementsByClassName("timetable_content_container")[0];
                 let container_parent = container.parentNode;
                 container.style.marginRight = "-100%";
                 setTimeout(function(){
                     container.parentNode.removeChild(container.parentNode.children[1]);
                     inProcess = false;
+                    
                 }, 400)
                 let new_container = document.createElement('div');
                 for(let i=0;i<9;i++){
@@ -39,7 +55,9 @@ week_shift_div.children[0].addEventListener('click', function(e){
                 setTimeout(function(){
                     new_container.style.marginRight = "0";
                     new_container.style.marginLeft = "0";
+                    
                 }, 100);
+                
             }
         })
     }
@@ -47,14 +65,17 @@ week_shift_div.children[0].addEventListener('click', function(e){
 })
 
 week_shift_div.children[1].addEventListener('click', function(e){
-    offset++;
+    
     if(!inProcess){
+        offset++;
         inProcess = true;
         $.ajax({
             url: "/content/timetable/?offset="+offset,
             cache: false,
             type: "GET",
             success: function(response){
+                startDate.setDate(startDate.getDate()+7);
+                setDates();
                 console.log(response);
                 let container = document.getElementsByClassName("timetable_content_container")[0];
                 let container_parent = container.parentNode;
@@ -62,6 +83,7 @@ week_shift_div.children[1].addEventListener('click', function(e){
                 setTimeout(function(){
                     container.parentNode.removeChild(container.parentNode.children[0]);
                     inProcess = false;
+               
                 }, 400)
                 let new_container = document.createElement('div');
                 for(let i=0;i<9;i++){
@@ -84,7 +106,9 @@ week_shift_div.children[1].addEventListener('click', function(e){
                 setTimeout(function(){
                     new_container.style.marginRight = "0";
                     new_container.style.marginLeft = "0";
+                    
                 }, 100);
+                
             }
         })
     }

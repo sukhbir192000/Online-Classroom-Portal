@@ -16,14 +16,14 @@
         <div class="box_layout">
             <div class="table">
                 <div class="table_row">
-                    <div class="table_column table_heading"></div>
-                    <div class="table_column table_heading">MONDAY</div>
-                    <div class="table_column table_heading">TUESDAY</div>
-                    <div class="table_column table_heading">WEDNESDAY</div>
-                    <div class="table_column table_heading">THURSDAY</div>
-                    <div class="table_column table_heading">FRIDAY</div>
-                    <div class="table_column table_heading">SATURDAY</div>
-                    <div class="table_column table_heading">SUNDAY</div>
+                    <div class="table_column table_heading"><input id="starting_date" value="<%=startingDate%>"type="hidden"></div>
+                    <div class="table_column table_heading">MONDAY<span></span></div>
+                    <div class="table_column table_heading">TUESDAY<span></span></div>
+                    <div class="table_column table_heading">WEDNESDAY<span></span></div>
+                    <div class="table_column table_heading">THURSDAY<span></span></div>
+                    <div class="table_column table_heading">FRIDAY<span></span></div>
+                    <div class="table_column table_heading">SATURDAY<span></span></div>
+                    <div class="table_column table_heading">SUNDAY<span></span></div>
                 </div>
                 <div style="display: flex; flex-direction: row; width:100%">
                     <div class="timetable_content_container">
@@ -31,7 +31,7 @@
                             <div class="table_row" id="row<%=i+1%>">
                                 <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
                                 <% for(let j=0;j<7;j++){%>
-                                    <div class="table_column"><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
+                                    <div class="table_column" <%if(timetableItems[j][8+i]){%>id="<%=timetableItems[j][8+i]._id%>"<%}%> ><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
                                 <% } %>
                             </div>
                         <% } %>
@@ -48,7 +48,9 @@
 
 </div>
 
-<script src="/js/time_table.js"></script>
+
 <% if(user.isAdmin){ %>
     <script src="/js/time_table_admin.js"></script>
-<% } %>
+<% }else{ %>
+    <script src="/js/time_table.js"></script>
+<%}%>
