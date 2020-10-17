@@ -76,7 +76,6 @@ module.exports.timetable = async function(req, res) {
             for(let i=0;i<7;i++){
                 let date = new Date(startingDate);
                 date.setDate(date.getDate() + i);
-                console.log(date, "   ", startingDate);
                 let items = await TimetableModel.find({
                     "date": date,
                     "teacher": user._id
@@ -92,7 +91,6 @@ module.exports.timetable = async function(req, res) {
             }
             timetableItems[i] = newDayItems;
         }
-        console.log(timetableItems);
         if(req.xhr){
             return res.status(200).json({
                 timetableItems: timetableItems,

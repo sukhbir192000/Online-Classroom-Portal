@@ -9,6 +9,10 @@
         <div class="main_heading">
             <div class="heading"> Time Table</div>
         </div>
+        <div id="week_shift">
+            <div>Previous Week</div>
+            <div>Next week</div>
+        </div>
         <div class="box_layout">
             <div class="table">
                 <div class="table_row">
@@ -21,17 +25,18 @@
                     <div class="table_column table_heading">SATURDAY</div>
                     <div class="table_column table_heading">SUNDAY</div>
                 </div>
-                <% for(let i=0;i<9;i++){ %>
-                    <div class="table_row" id="row<%=i+1%>">
-                        <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
-                        <% for(let j=0;j<7;j++){%>
-                            <!-- <%console.log(timetableItems[j][8+i])%> -->
-                            <div class="table_column"><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
-                            
-                            
+                <div style="display: flex; flex-direction: row; width:100%">
+                    <div class="timetable_content_container">
+                        <% for(let i=0;i<9;i++){ %>
+                            <div class="table_row" id="row<%=i+1%>">
+                                <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
+                                <% for(let j=0;j<7;j++){%>
+                                    <div class="table_column"><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
+                                <% } %>
+                            </div>
                         <% } %>
                     </div>
-                <% } %>
+                </div>
                 
             </div>
         </div>
@@ -44,3 +49,6 @@
 </div>
 
 <script src="/js/time_table.js"></script>
+<% if(user.isAdmin){ %>
+    <script src="/js/time_table_admin.js"></script>
+<% } %>

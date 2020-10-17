@@ -244,6 +244,7 @@ body{
     flex-direction: column;
     justify-content: center;
     width:100%;
+    overflow: hidden;
     /* border: 1px solid black; */
 }
 .table_row{
@@ -253,6 +254,7 @@ body{
 }
 .table_column{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -292,6 +294,10 @@ body{
     margin:0;
     background-color: #1D3557;
     color: white;
+}
+.timetable_content_container{
+    transition: all 0.4s;
+    width: 100%;
 }
 
 

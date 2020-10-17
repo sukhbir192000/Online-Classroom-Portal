@@ -1,40 +1,92 @@
-var rows = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var current_div = null;
-for(let i=0;i<rows.length;i++){
-    var row = document.getElementById("row" + rows[i]);
-    for(let j=1;j<row.childElementCount;j++){
-        if(row.children[j].textContent!=""){
-            row.children[j].addEventListener('click',function(e){
-                // var rect =this.getBoundingClientRect();
-                // console.log(rect);
-                if(current_div){
-                    current_div.style.opacity = "1";
-                    current_div = null;
+let week_shift_div = document.getElementById('week_shift');
+let offset = 0;
+let inProcess = false;
+week_shift_div.children[0].addEventListener('click', function(e){
+    offset--;
+    if(!inProcess){
+        inProcess = true;
+        $.ajax({
+            url: "/content/timetable/?offset="+offset,
+            cache: false,
+            type: "GET",
+            success: function(response){
+                console.log(response);
+                let container = document.getElementsByClassName("timetable_content_container")[0];
+                let container_parent = container.parentNode;
+                container.style.marginRight = "-100%";
+                setTimeout(function(){
+                    container.parentNode.removeChild(container.parentNode.children[1]);
+                    inProcess = false;
+                }, 400)
+                let new_container = document.createElement('div');
+                for(let i=0;i<9;i++){
+                    new_container.innerHTML = new_container.innerHTML + `<div class="table_row" id="row${i+1}"></div>`;
+                    let rowDiv = new_container.children[new_container.childElementCount - 1];
+                    rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
+                    for(let j=0;j<7;j++){
+                        if(response.timetableItems[j][8+i]){
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                        }
+                        else{
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
+                        }
+                        
+                    }
                 }
-                var x = this;
-                document.getElementById("info").style.display = "flex";
-                document.getElementById("info").style.top = this.offsetTop+"px";
-                document.getElementById("info").style.left = this.offsetLeft+"px";
-                // var newDiv = document.createElement("div");
-                // newDiv.style.position = "absolute";
-                // newDiv.style.top = this.offsetTop;
-                // newDiv.style.left = this.offsetLeft;
-                // newDiv.textContent = "i am a new div";
-                // this.parentNode.appendChild(newDiv);
-                this.style.opacity = "0.2";
-                current_div = this;
-            })
-        }
+                new_container.classList.add("timetable_content_container");
+                new_container.style.marginLeft = "-100%";
+                container_parent.prepend(new_container);
+                setTimeout(function(){
+                    new_container.style.marginRight = "0";
+                    new_container.style.marginLeft = "0";
+                }, 100);
+            }
+        })
     }
-}
+    
+})
 
-document.addEventListener('click',function(e){
-    if(current_div){
-        var rect = current_div.getBoundingClientRect();
-        if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height)){
-            current_div.style.opacity = "1";
-            document.getElementById("info").style.display = "none";
-            current_div = null;
-        }
+week_shift_div.children[1].addEventListener('click', function(e){
+    offset++;
+    if(!inProcess){
+        inProcess = true;
+        $.ajax({
+            url: "/content/timetable/?offset="+offset,
+            cache: false,
+            type: "GET",
+            success: function(response){
+                console.log(response);
+                let container = document.getElementsByClassName("timetable_content_container")[0];
+                let container_parent = container.parentNode;
+                container.style.marginLeft = "-100%";
+                setTimeout(function(){
+                    container.parentNode.removeChild(container.parentNode.children[0]);
+                    inProcess = false;
+                }, 400)
+                let new_container = document.createElement('div');
+                for(let i=0;i<9;i++){
+                    new_container.innerHTML = new_container.innerHTML + `<div class="table_row" id="row${i+1}"></div>`;
+                    let rowDiv = new_container.children[new_container.childElementCount - 1];
+                    rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
+                    for(let j=0;j<7;j++){
+                        if(response.timetableItems[j][8+i]){
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                        }
+                        else{
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
+                        }
+                        
+                    }
+                }
+                new_container.classList.add("timetable_content_container");
+                new_container.style.marginRight = "-100%";
+                container_parent.appendChild(new_container)
+                setTimeout(function(){
+                    new_container.style.marginRight = "0";
+                    new_container.style.marginLeft = "0";
+                }, 100);
+            }
+        })
     }
+    
 })
