@@ -67,7 +67,7 @@ module.exports.timetable = async function(req, res) {
                             ]
                         }
                     ]
-                }).sort("startingTime");
+                }).populate('classSub.course').sort("startingTime");
                 timetableItems.push(items);
             }
         }
@@ -80,7 +80,7 @@ module.exports.timetable = async function(req, res) {
                 let items = await TimetableModel.find({
                     "date": date,
                     "teacher": user._id
-                }).sort("startingTime");
+                }).populate('classSub.course').sort("startingTime");
                 timetableItems.push(items);
             }
         }

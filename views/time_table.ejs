@@ -21,96 +21,18 @@
                     <div class="table_column table_heading">SATURDAY</div>
                     <div class="table_column table_heading">SUNDAY</div>
                 </div>
-                <div class="table_row" id="row1">
-                    <div class="table_column table_heading">8:00 - 9:00</div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row2">
-                    <div class="table_column table_heading">9:00 - 10:00</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row3">
-                    <div class="table_column table_heading">10:00 - 11:00</div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row4">
-                    <div class="table_column table_heading">11:00 - 12:00</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                </div>
-                <div class="table_row" id="row5">
-                    <div class="table_column table_heading">12:00 - 13:00</div>
-                    <div class="table_column"></div>
-                    <div class="table_column">Computer Architecture and Organisationnehdrfvcjmrdb kjbgdjfcjme,c</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row6">
-                    <div class="table_column table_heading">13:00 - 14:00</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row7">
-                    <div class="table_column table_heading">14:00 - 15:00</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                </div>
-                <div class="table_row" id="row8">
-                    <div class="table_column table_heading">15:00 - 16:00</div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
-                <div class="table_row" id="row9">
-                    <div class="table_column table_heading">16:00 - 17:00</div>
-                    <div class="table_column">Computer Architecture and Organisation</div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                    <div class="table_column"></div>
-                </div>
+                <% for(let i=0;i<9;i++){ %>
+                    <div class="table_row" id="row<%=i+1%>">
+                        <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
+                        <% for(let j=0;j<7;j++){%>
+                            <!-- <%console.log(timetableItems[j][8+i])%> -->
+                            <div class="table_column"><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
+                            
+                            
+                        <% } %>
+                    </div>
+                <% } %>
+                
             </div>
         </div>
         <div id="info">
