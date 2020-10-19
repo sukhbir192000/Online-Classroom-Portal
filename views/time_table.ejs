@@ -10,10 +10,17 @@
             <div class="heading"> Time Table</div>
         </div>
         <div id="week_shift">
-            <div>Previous Week</div>
-            <div>Next week</div>
+            <div class="left_week">
+                <div class="left_week_arrow"><i class="fas fa-angle-left"></i></div>
+                <div class="left_week_content">Previous Week</div>
+            </div>
+            <div class="right_week">
+                <div class="right_week_content">Next Week</div>
+                <div class="right_week_arrow"><i class="fas fa-angle-right"></i></div>
+            </div>
         </div>
         <div class="box_layout">
+            <div class=table_background></div>
             <div class="table">
                 <div class="table_row">
                     <div class="table_column table_heading"><input id="starting_date" value="<%=startingDate%>"type="hidden"></div>
@@ -38,11 +45,18 @@
                     </div>
                 </div>
                 
+                
             </div>
         </div>
         <div id="info">
-            <button type="button" class="cancel_button">Cancel class</button>
-            <button type="button" class="reschedule_button">Reschedule class</button>
+            <div class="subject_name">Computer Architecture and Organization</div>
+            <div class="class_group"><b>Class Group:</b> 2</div>
+            <div class="lab_group"><b>Lab group:</b> All</div>
+            <div class="timings"><b>Time:</b> 2:00PM - 3:00PM</div>
+            <div class="buttons_edit">
+                <button type="button" class="cancel_button">Cancel class</button>
+                <button type="button" class="reschedule_button">Reschedule class</button>
+            </div>
         </div>
     </div>
 

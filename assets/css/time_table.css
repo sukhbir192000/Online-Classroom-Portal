@@ -220,7 +220,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
     /* border:1px solid black; */
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 .heading{
     padding: 1em 2em 0 2em;
@@ -277,30 +277,90 @@ body{
     color:white;
 }
 #info{
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     display: none;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     min-width:12.5%;
+    max-width: 30%;
+    z-index: 15;
+    padding:0.5em;
+    background-color: white;
+    border:1px solid black;
+}
+#info div{
+    margin-bottom: 0.5em;
+}
+.buttons_edit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:100%;
 }
 .cancel_button{
-    margin: 0.5em 0;
+    margin: 0.5em;
     background-color: #1D3557;
     color: white;
+    font-size: 1em;
+    padding:0.2em;
 }
 .reschedule_button{
-    margin:0;
+    margin: 0.5em;
     background-color: #1D3557;
     color: white;
+    font-size: 1em;
+    padding:0.2em;
 }
 .timetable_content_container{
     transition: all 0.4s;
     width: 100%;
 }
-
-
+.table_background{
+    opacity:0.3;
+}
+.font_size_remove{
+    font-size: 0;
+}
+#week_shift{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.left_week{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2.5em;
+    padding:1em 0;
+    cursor: pointer;
+}
+.left_week_arrow{
+    font-size: 1.5em;
+    padding-right: 0.5em;
+}
+.left_week_content{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.right_week{
+    display: flex;
+    flex-direction: row;
+    padding:1em 0;
+    align-items: center;
+    cursor: pointer;
+}
+.right_week_arrow{
+    font-size: 1.5em;
+    padding-left: 0.5em;
+}
+.right_week_content{
+    font-weight: bold;
+    font-size: 1.1em;
+}
 /* FOOTER */
 .footer{
     display: flex;
@@ -315,6 +375,7 @@ body{
 .footer_content{
     padding: 0.1em 0;
 }
+
 
 
 @media(min-width: 991px) and (max-width:1100px){
