@@ -126,31 +126,43 @@ var clickAddFunction = function (a){
     a.addEventListener('click',function(e){
         // var rect =this.getBoundingClientRect();
         // console.log(rect);
-        if(document.getElementById("info").style.display == "none" || document.getElementById("info").style.display == ""){
+        if(a.isActive){
+            if(document.getElementById("info").style.display == "none" || document.getElementById("info").style.display == ""){
+                if(current_div){
+                    current_div.style.opacity = "1";
+                    current_div = null;
+                }
+                var x = this;
+                // var coordinates = window.getBoundingClientRect();
+
+                this.classList.add("font_size_remove");
+                document.getElementById("info").style.display = "flex";
+                document.getElementById("info").style.top = '50%';
+                document.getElementById("info").style.left = '50%';
+                document.getElementById("info").style.transform = 'translate(-50%, -50%)';
+                document.querySelector(".table").style.opacity="0.2";
+                console.log(this.id);
+                // var newDiv = document.createElement("div");
+                // newDiv.style.position = "absolute";
+                // newDiv.style.top = this.offsetTop;
+                // newDiv.style.left = this.offsetLeft;
+                // newDiv.textContent = "i am a new div";
+                // this.parentNode.appendChild(newDiv);
+                // this.style.opacity = "0.2";
+                // this.appendChild(document.getElementById("info"));
+                current_div = this;
+            }
+        }
+        else{
             if(current_div){
                 current_div.style.opacity = "1";
+                document.getElementById("info").style.display = "none";
+                document.querySelector(".table").style.opacity="1";
+                current_div.classList.remove("font_size_remove");
                 current_div = null;
             }
-            var x = this;
-            // var coordinates = window.getBoundingClientRect();
-
-            this.classList.add("font_size_remove");
-            document.getElementById("info").style.display = "flex";
-            document.getElementById("info").style.top = '50%';
-            document.getElementById("info").style.left = '50%';
-            document.getElementById("info").style.transform = 'translate(-50%, -50%)';
-            document.querySelector(".table").style.opacity="0.2";
-            console.log(this.id);
-            // var newDiv = document.createElement("div");
-            // newDiv.style.position = "absolute";
-            // newDiv.style.top = this.offsetTop;
-            // newDiv.style.left = this.offsetLeft;
-            // newDiv.textContent = "i am a new div";
-            // this.parentNode.appendChild(newDiv);
-            // this.style.opacity = "0.2";
-            // this.appendChild(document.getElementById("info"));
-            current_div = this;
         }
+        a.isActive = (!a.isActive);
     })              
 }
 
@@ -160,6 +172,7 @@ var addFunctions = function(){
         var row = document.getElementById("row" + rows[i]);
         for(let j=1;j<row.childElementCount;j++){
             if(row.children[j].textContent!="" ){
+                row.children[j].isActive = true;
                 clickAddFunction(row.children[j]);
             }
         }
@@ -177,6 +190,7 @@ document.addEventListener('click',function(e){
             document.getElementById("info").style.display = "none";
             document.querySelector(".table").style.opacity="1";
             current_div.classList.remove("font_size_remove");
+            current_div.isActive = (!current_div.isActive);
             current_div = null;
         }
     }

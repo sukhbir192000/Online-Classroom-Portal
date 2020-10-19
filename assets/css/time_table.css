@@ -284,11 +284,12 @@ body{
     align-items: flex-start;
     justify-content: center;
     min-width:12.5%;
-    max-width: 30%;
+    max-width: 40%;
     z-index: 15;
     padding:0.5em;
     background-color: white;
-    border:1px solid black;
+    border:5px solid black;
+    box-shadow: 0.1em 0.1em 0.5em;
 }
 #info div{
     margin-bottom: 0.5em;
@@ -446,6 +447,9 @@ body{
     .table_column{
         font-size: 0.8em;
     }
+    #info{
+        max-width: 60%;
+    }
 
 
     /* NAVIGATION BAR */
@@ -589,6 +593,9 @@ body{
         width: 92%;
         padding-right: 0;
     } 
+    #info{
+        max-width: 90%;
+    }
 
     /* FOOTER */
     .footer_content{
