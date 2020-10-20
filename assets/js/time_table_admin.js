@@ -229,3 +229,31 @@ buttonOptions.children[0].addEventListener('click',function(){
     // })
 });
 
+document.querySelector(".add").addEventListener('click',function(e){
+    if(document.querySelector(".add_content").textContent == "Cancel"){
+        document.querySelector(".add_content").textContent = "Add Class";
+        document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>"; 
+        document.getElementById("duration_hr").value = "";
+        document.getElementById("lecture_date").value = "";
+    }
+    else{
+        document.querySelector(".add_content").textContent = "Cancel";
+        document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-times'></i>";  
+        $(document).ready(function() {
+            $('#subject').select2();
+        });  
+        $(document).ready(function() {
+            $('#branch').select2();
+        });  
+        $(document).ready(function() {
+            $('#group').select2();
+        });  
+        $(document).ready(function() {
+            $('#sub_group').select2();
+        });  
+        $(document).ready(function() {
+            $('#slots_available').select2();
+        });     
+    }
+    document.querySelector(".add_admin").classList.toggle("showx");    
+})

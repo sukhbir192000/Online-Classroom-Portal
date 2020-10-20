@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/time_table.css">
    
 <div class="main">
@@ -8,7 +11,58 @@
     <div class="main_content">
         <div class="main_heading">
             <div class="heading"> Time Table</div>
+            <div class="add" id="addButton">
+                <div class="add_icon"><i class="fas fa-plus"></i></div>
+                <div class="add_content">Add Class </div>
+            </div>
         </div>
+        
+        
+        <div class="add_admin">
+            <form id="add_form" action="" method="POST" >
+                <label for="subject" class="subject_label">Subject Code:</label>
+                <select id="subject" name="subject">
+                    <option value="ECN-201">ECN-201</option>
+                </select><br><br>
+                <label for="branch" class="branch_label">Branch:</label>
+                <select id="branch" name="branch">
+                    <option value="ECE">ECE</option>
+                </select><br><br>
+                <label for="group" class="group_label">Class Group:</label>
+                <select id="group" name="group">
+                    <option value="All">All</option>   
+                </select><br><br>
+                <label for="sub_group" class="lab_group_label">Lab Group:</label>
+                <select id="sub_group" name="sub_group" >
+                    <option value="All">All</option>
+                </select><br><br>    
+                <label class="date_label">Date:</label>        
+                <input type="date" name="lecture_date" id="lecture_date"><br><br>
+                <label class="duration_label">Duration (in hours):</label>
+                <input type="number" name="duration_hr" id="duration_hr" min="1"><br><br>    
+                <label class="slots_available_label">Available slots:</label>
+                <select id="slots_available" name="slots_available">
+                    <option val="2:00PM - 3:00PM">2:00PM - 3:00PM</option>
+                </select>
+                <!-- <label name="deadline_lecture">Deadline: </label>
+                <input type="datetime-local" name="lecture_deadline" id="lecture_deadline" required="true"><br><br>
+                <label for="weightage_input">Marks:</label>
+                <input id="weightage_input" type="number" name="weightage" class="weightageStyle" min=0><br><br>
+                <input type="text" name="title" id="title" placeholder="Enter the title" ></textarea><br><br>
+                <textarea name="message" id="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
+                <div class="files">
+                    <div id="file_names"></div>
+                    <div id="file_inputs">
+                        <input type=file name="file0" class="file" style="display: none;">
+                        <button id="add_files_button" type="button">Add file</button>
+                    </div>
+                </div> -->
+                <div class="submit_button">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
         <div id="week_shift">
             <div class="left_week">
                 <div class="left_week_arrow"><i class="fas fa-angle-left"></i></div>

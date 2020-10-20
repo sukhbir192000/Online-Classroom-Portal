@@ -221,6 +221,8 @@ body{
     justify-content: space-between;
     /* border:1px solid black; */
     margin-bottom: 1em;
+    margin-right:4vw;
+    
 }
 .heading{
     padding: 1em 2em 0 2em;
@@ -336,7 +338,7 @@ body{
     flex-direction: row;
     align-items: center;
     margin-right: 2.5em;
-    padding:1em 0;
+    padding: 0.5em 0 1em 0;
     cursor: pointer;
 }
 .left_week_arrow{
@@ -350,7 +352,7 @@ body{
 .right_week{
     display: flex;
     flex-direction: row;
-    padding:1em 0;
+    padding:0.5em 0 1em 0;
     align-items: center;
     cursor: pointer;
 }
@@ -376,8 +378,141 @@ body{
 .footer_content{
     padding: 0.1em 0;
 }
+.add{
+    margin:1.5em 0 1em 0;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
 
+.add_admin{
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    /* width:100%; */
+    margin: 0 4vw;
+    /* margin:1em 1.5em 1em 4em; */
+    border:2px solid  #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    /* padding: 0.8em; */
+    display: none;
+    margin-bottom: 1em;
 
+}
+form{
+    width: 100%;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    font-size: 0.9em;
+    text-overflow: unset;
+}
+.select2-results__options {
+    font-size: 0.9em;
+    height:auto;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    margin-left: 0.1em;
+    margin-right: 1em;
+}
+/* .select2-search--dropdown .select2-search__field{
+    padding:0;
+} */
+.subject_label{
+    margin-right:2.4em;
+}
+.branch_label{
+    margin-right: 5.2em;
+}
+.group_label{
+    margin-right: 2.9em;
+}
+.lab_group_label{
+    margin-right: 3.8em;
+}
+.duration_label{
+    margin-right: 0.3em;
+}
+.date_label{
+    margin-right: 6.5em;
+}
+.slots_available_label{
+    margin-right: 2.2em;
+}
+#subject{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#branch{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#group{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#sub_group{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#lecture_date{
+    width: auto;
+    /* min-width: 10em; */
+}
+#duration_hr{
+    padding:0;
+    height:1.8em;
+    width:5em;
+}
+#slots_available{
+    padding-right: 2em;
+    max-width: 40vw;
+}
 
 @media(min-width: 991px) and (max-width:1100px){
     .table_heading{
