@@ -16,7 +16,7 @@ module.exports.timetable = async function(req, res) {
         // await TimetableModel.create({
         //     startingTime: 11,
         //     date: customDate,
-        //     duration: 60,
+        //     duration: 1,
         //     classSub: {
         //         "course" : "5f7474e8ed898e4664816678",
         //         "class" : "5f7439c114b9781df80b3c4f",
@@ -142,7 +142,6 @@ module.exports.availableSlots=async function(req,res){
     try{
         if(req.xhr){
             let occupiedClasses
-            console.log("request arrived");
             let requiredDate=new Date(req.body.date);
             requiredDate.setHours(1);
             requiredDate.setMinutes(0);
@@ -217,11 +216,9 @@ module.exports.availableSlots=async function(req,res){
             let unoccupiedClasses=[];
             let j=0;
             let breakCondition=false;
-            console.log(occupiedClasses);
+            if(occupiedClasses.length==0) breakCondition = true;
             for(let i=8;i<17;i++){
-                console.log(i);
                 if(breakCondition){
-                    console.log("hi");
                     if(17-i>=req.body.duration){
                         unoccupiedClasses.push(i);
                     }
@@ -249,10 +246,10 @@ module.exports.availableSlots=async function(req,res){
                 }
             
             }
-            console.log(unoccupiedClasses);
             return res.status(200).json({
-                message:"Received response"
-            })
+                message:"Received response",
+                unoccupiedClasses: unoccupiedClasses
+            });
         }
     }
     catch(err){

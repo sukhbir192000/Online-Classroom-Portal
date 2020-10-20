@@ -244,11 +244,14 @@ document.querySelector(".add").addEventListener('click',function(e){
         branchForm.selectedIndex=0;
         groupForm.selectedIndex=0;
         subGroupForm.selectedIndex=0;
+        slotForm.selectedIndex=0;
+        durationForm.value=1;
         groupForm.disabled=true;
         subGroupForm.disabled=true;
         branchForm.disabled=true;
         dateForm.disabled=true;
         durationForm.disabled=true;
+        slotForm.disabled = true;
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -381,7 +384,7 @@ durationForm.addEventListener('change',function(e){
 
 function findSlots(){
     if(subjectForm.value!=""&&durationForm.value!=""){
-        console.log("finding slots");
+        slotForm.disabled = false;
         $.ajax({
             url:"/content/timetable/slots",
             data:{
@@ -395,7 +398,19 @@ function findSlots(){
             cache:false,
             type:"POST",
             success:function(response){
-
+                slotForm.innerText="";
+                var opt = document.createElement('option');
+                opt.innerText="--Select an option--";
+                opt.value = ""
+                opt.disabled = true;
+                slotForm.appendChild(opt);
+                for(let freeTime of response.unoccupiedClasses){
+                    var opt = document.createElement('option');
+                    opt.value=freeTime;
+                    opt.innerText=`${freeTime}:00-${parseInt(freeTime)+parseInt(durationForm.value)}:00`;
+                    slotForm.appendChild(opt);
+                }
+                slotForm.selectedIndex = 0;
             }
         });
     }
