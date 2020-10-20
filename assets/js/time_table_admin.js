@@ -4,7 +4,12 @@ let inProcess = false;
 let daysRow=document.getElementsByClassName('table_row')[0];
 let startDate=new Date(document.getElementById("starting_date").value);
 function setDates(){
-    
+    if(offset == 0){
+        week_shift_div.children[0].classList.add("hide_prev_week");
+    }
+    else{
+        week_shift_div.children[0].classList.remove("hide_prev_week");
+    }
     for(let i=0;i<7;i++){
         daysRow.children[i+1].children[0].innerText= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'numeric', day: '2-digit'}).format(startDate);
         startDate.setDate(startDate.getDate()+1);
@@ -14,7 +19,7 @@ function setDates(){
 setDates();
 week_shift_div.children[0].addEventListener('click', function(e){
     
-    if(!inProcess){
+    if(!inProcess && offset > 0){
         
         offset--;
         inProcess = true;
@@ -235,25 +240,124 @@ document.querySelector(".add").addEventListener('click',function(e){
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>"; 
         document.getElementById("duration_hr").value = "";
         document.getElementById("lecture_date").value = "";
+        subjectForm.selectedIndex = 0;
+        branchForm.selectedIndex=0;
+        groupForm.selectedIndex=0;
+        subGroupForm.selectedIndex=0;
+        groupForm.disabled=true;
+        subGroupForm.disabled=true;
+        branchForm.disabled=true;
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-times'></i>";  
-        $(document).ready(function() {
-            $('#subject').select2();
-        });  
-        $(document).ready(function() {
-            $('#branch').select2();
-        });  
-        $(document).ready(function() {
-            $('#group').select2();
-        });  
-        $(document).ready(function() {
-            $('#sub_group').select2();
-        });  
-        $(document).ready(function() {
-            $('#slots_available').select2();
-        });     
+        // $(document).ready(function() {
+        //     $('#subject').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('#branch').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('#group').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('#sub_group').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('#slots_available').select2();
+        // });     
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
+})
+
+var branchForm=document.getElementById("branch")
+branchForm.disabled=true;
+var groupForm=document.getElementById("group")
+groupForm.disabled=true;
+var subGroupForm=document.getElementById("sub_group")
+subGroupForm.disabled=true;
+var subjectForm=document.getElementById("subject");
+var slotForm = document.getElementById("slots_available");
+slotForm.disabled = true;
+subjectForm.addEventListener('change',function(e){
+    branchForm.selectedIndex=0;
+    groupForm.selectedIndex=0;
+    subGroupForm.selectedIndex=0;
+    groupForm.disabled=true;
+    subGroupForm.disabled=true;
+    branchForm.disabled=false;
+    $.ajax({
+        url:"/content/announcements/form/branches",
+        data: {course: subjectForm.value},
+        cache:false,
+        type:"POST",
+        success:function(response){
+            branchForm.innerText="";
+            var opt = document.createElement('option');
+            opt.innerText="--Select an option--";
+            opt.value = ""
+            opt.disabled = true;
+            branchForm.appendChild(opt);
+            for(let obj of response.data.branchList){
+                var opt = document.createElement('option');
+                opt.value=obj.id;
+                opt.innerText=obj.name;
+                branchForm.appendChild(opt);
+            }
+            branchForm.selectedIndex=0;
+        }
+    })
+})
+branchForm.addEventListener('change',function(e){
+    groupForm.selectedIndex=0;
+    subGroupForm.selectedIndex=0;
+    subGroupForm.disabled=true;
+    groupForm.disabled=false;
+    $.ajax({
+        url:"/content/announcements/form/groups",
+        data: {course: subjectForm.value,class:branchForm.value},
+        cache:false,
+        type:"POST",
+        success:function(response){
+            groupForm.innerText="";
+            var opt = document.createElement('option');
+            opt.value="All";
+            opt.innerText="All";
+            groupForm.appendChild(opt);
+            for(let obj of response.data.groupList){
+                var opt = document.createElement('option');
+                opt.value=obj.id;
+                opt.innerText=obj.name;
+                groupForm.appendChild(opt);
+            }
+        }
+    })
+})
+groupForm.addEventListener('change',function(e){
+    subGroupForm.selectedIndex=0;
+    if(groupForm.value!="All"){
+        subGroupForm.disabled=false;
+        $.ajax({
+            url:"/content/announcements/form/subGroups",
+            data: {course: subjectForm.value,class:branchForm.value,group:groupForm.value},
+            cache:false,
+            type:"POST",
+            success:function(response){
+                subGroupForm.innerText="";
+                var opt = document.createElement('option');
+                opt.value="All";
+                opt.innerText="All";
+                subGroupForm.appendChild(opt);
+                for(let obj of response.data.subGroupList){
+                    var opt = document.createElement('option');
+                    opt.value=obj.id;
+                    opt.innerText=obj.name;
+                    subGroupForm.appendChild(opt);
+                }
+            }
+        })
+    }
+    else{
+        subGroupForm.disabled=true;
+    }
 })

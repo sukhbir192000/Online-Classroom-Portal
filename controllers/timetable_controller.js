@@ -91,6 +91,33 @@ module.exports.timetable = async function(req, res) {
             }
             timetableItems[i] = newDayItems;
         }
+
+
+        // ----------------------COURSE LIST OF TEACHER FOR ADD OPTION------------------------------
+        if(user.isAdmin){
+            var courseList = []
+            for(let classSubElement of user.classSub){
+                let course = await CourseModel.findById(classSubElement.course);
+                courseList.push(course);
+            }
+            let mymap = new Map();
+
+            courseList = courseList.filter(el => {
+                const val = mymap.get(el.name);
+                if(val) {
+                    if(el.id < val) {
+                        mymap.delete(el.name);
+                        mymap.set(el.name, el.id);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } 
+                mymap.set(el.name, el.id);
+                return true;
+            });
+        }
+        // ----------------------RETURN RESPONSE------------------------------
         if(req.xhr){
             return res.status(200).json({
                 timetableItems: timetableItems,
@@ -101,7 +128,8 @@ module.exports.timetable = async function(req, res) {
             return res.render('time_table',{
                 timetableItems: timetableItems,
                 title: "Timetable",
-                startingDate: startingDate
+                startingDate: startingDate,
+                courseList: courseList
             });
         }
     }
@@ -109,3 +137,4 @@ module.exports.timetable = async function(req, res) {
         console.log("Error: ", err);
     }
 }
+

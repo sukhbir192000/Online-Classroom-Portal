@@ -9,6 +9,9 @@ Assignments
 DOUBT
 - Edit material part ejs(static hai abhi)
 
+TIMETABLE
+- disable previous week for offset=0
+
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
 - set value of input deadline as current deadline in edit mode (ASSIGNMENT AND QUIZ)

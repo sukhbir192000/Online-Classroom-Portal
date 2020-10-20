@@ -513,6 +513,9 @@ form{
     padding-right: 2em;
     max-width: 40vw;
 }
+.hide_prev_week{
+    visibility: hidden;
+}
 
 @media(min-width: 991px) and (max-width:1100px){
     .table_heading{

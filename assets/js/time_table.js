@@ -4,7 +4,12 @@ let inProcess = false;
 let daysRow=document.getElementsByClassName('table_row')[0];
 let startDate=new Date(document.getElementById("starting_date").value);
 function setDates(){
-    
+    if(offset == 0){
+        week_shift_div.children[0].classList.add("hide_prev_week");
+    }
+    else{
+        week_shift_div.children[0].classList.remove("hide_prev_week");
+    }
     for(let i=0;i<7;i++){
         daysRow.children[i+1].children[0].innerText= new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'numeric', day: '2-digit'}).format(startDate);
         startDate.setDate(startDate.getDate()+1);
@@ -13,9 +18,9 @@ function setDates(){
 }
 setDates();
 week_shift_div.children[0].addEventListener('click', function(e){
-    
-    if(!inProcess){
-        
+    console.log("outside",offset);
+    if(!inProcess && offset > 0){
+        console.log(offset);
         offset--;
         inProcess = true;
         $.ajax({
@@ -25,7 +30,6 @@ week_shift_div.children[0].addEventListener('click', function(e){
             success: function(response){
                 startDate.setDate(startDate.getDate()-7);
                 setDates();
-                // console.log(response);
                 let container = document.getElementsByClassName("timetable_content_container")[0];
                 let container_parent = container.parentNode;
                 container.style.marginRight = "-100%";
@@ -76,7 +80,6 @@ week_shift_div.children[1].addEventListener('click', function(e){
             success: function(response){
                 startDate.setDate(startDate.getDate()+7);
                 setDates();
-                console.log(response);
                 let container = document.getElementsByClassName("timetable_content_container")[0];
                 let container_parent = container.parentNode;
                 container.style.marginLeft = "-100%";

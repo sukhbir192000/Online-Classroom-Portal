@@ -11,22 +11,27 @@
     <div class="main_content">
         <div class="main_heading">
             <div class="heading"> Time Table</div>
-            <div class="add" id="addButton">
-                <div class="add_icon"><i class="fas fa-plus"></i></div>
-                <div class="add_content">Add Class </div>
-            </div>
+            <% if(user.isAdmin){ %>
+                <div class="add" id="addButton">
+                    <div class="add_icon"><i class="fas fa-plus"></i></div>
+                    <div class="add_content">Add Class </div>
+                </div>
+            <% } %>
         </div>
         
-        
-        <div class="add_admin">
+        <% if(user.isAdmin){ %>
+            <div class="add_admin">
             <form id="add_form" action="" method="POST" >
-                <label for="subject" class="subject_label">Subject Code:</label>
-                <select id="subject" name="subject">
-                    <option value="ECN-201">ECN-201</option>
+                <label for="subject" class="subject_label">Subject HATA:</label>
+                <select id="subject" name="subject" required>
+                    <option value="" disabled selected>--Select an option--</option>
+                    <% for(let course of courseList){ %>
+                        <option value="<%= course._id %>"><%= course.name %></option>
+                    <% } %>
                 </select><br><br>
                 <label for="branch" class="branch_label">Branch:</label>
-                <select id="branch" name="branch">
-                    <option value="ECE">ECE</option>
+                <select id="branch" name="branch" required>
+                    <option value="" disabled selected>--Select an option--</option>
                 </select><br><br>
                 <label for="group" class="group_label">Class Group:</label>
                 <select id="group" name="group">
@@ -61,7 +66,8 @@
                     <button type="submit">Submit</button>
                 </div>
             </form>
-        </div>
+            </div>
+        <% } %>
 
         <div id="week_shift">
             <div class="left_week">
