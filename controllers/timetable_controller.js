@@ -138,3 +138,124 @@ module.exports.timetable = async function(req, res) {
     }
 }
 
+module.exports.availableSlots=async function(req,res){
+    try{
+        if(req.xhr){
+            let occupiedClasses
+            console.log("request arrived");
+            let requiredDate=new Date(req.body.date);
+            requiredDate.setHours(1);
+            requiredDate.setMinutes(0);
+            requiredDate.setSeconds(0);
+            requiredDate.setMilliseconds(0);
+            let user=res.locals.user;
+            if(req.body.group=="All"){
+                occupiedClasses=await Timetable.find({
+                    $or:[{
+                        "classSub.class":req.body.branch,
+                        date:requiredDate
+                    },{
+                        teacher:user._id,
+                        date:requiredDate
+                    }]
+                    
+                }).sort('startingTime');
+            }
+            else if(req.body.subGroup=="All"){
+                occupiedClasses=await Timetable.find({
+                    $or:[{
+                        $and:[
+                            {
+                                "classSub.class":req.body.branch,
+                                date:requiredDate
+                            },{
+                                $or:[
+                                    {
+                                        "classSub.group":undefined
+                                    },{
+                                        "classSub.group":req.body.group
+                                    }
+                                ]
+                            }
+                        ]
+                    },{
+                        teacher:user._id,
+                        date:requiredDate
+                    }]
+                }).sort('startingTime');
+            }
+            else{
+                occupiedClasses=await Timetable.find({
+                    $or:[{
+                        $and: [
+                            {
+                                date: requiredDate,
+                                "classSub.class":req.body.branch
+                            },
+                            {
+                                $or: [
+                                    {"classSub.group": undefined},
+                                    {
+                                        $and: [
+                                            {"classSub.group": req.body.group},
+                                            {$or: [
+                                                {"classSub.subGroup": undefined},
+                                                {"classSub.subGroup": req.body.subGroup}
+                                            ]}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },{
+                        teacher:user._id,
+                        date:requiredDate
+                    }]
+                    
+                }).sort('startingTime');
+            }
+            let unoccupiedClasses=[];
+            let j=0;
+            let breakCondition=false;
+            console.log(occupiedClasses);
+            for(let i=8;i<17;i++){
+                console.log(i);
+                if(breakCondition){
+                    console.log("hi");
+                    if(17-i>=req.body.duration){
+                        unoccupiedClasses.push(i);
+                    }
+                }
+                else{
+                    
+                        //i may be included ->1 hour free
+                    if(occupiedClasses[j].startingTime-i>=req.body.duration){
+                        unoccupiedClasses.push(i);
+                    }
+                    
+                    while(occupiedClasses[j].startingTime<=i){
+                        //not to include
+                        if(occupiedClasses[j].startingTime+occupiedClasses[j].duration-1>i){
+                            i=occupiedClasses[j].duration+occupiedClasses[j].startingTime-1;
+                        }
+                        
+                        j++;
+                        
+                        if(j>=occupiedClasses.length){
+                            breakCondition=true;
+                            break;
+                        }
+                    } 
+                }
+            
+            }
+            console.log(unoccupiedClasses);
+            return res.status(200).json({
+                message:"Received response"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+}

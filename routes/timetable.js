@@ -3,6 +3,7 @@ const Router=express.Router();
 const passport=require('../config/passport-google-oauth2-strategy');
 const contentController=require('../controllers/timetable_controller');
 Router.get('/',contentController.timetable);
+Router.post('/slots',contentController.availableSlots);
 //change to isAdmin
 // Router.post('/create',passport.checkAdmin,contentController.announcementCreate);
 // Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelete);

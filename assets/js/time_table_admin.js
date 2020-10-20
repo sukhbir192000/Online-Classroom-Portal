@@ -247,6 +247,8 @@ document.querySelector(".add").addEventListener('click',function(e){
         groupForm.disabled=true;
         subGroupForm.disabled=true;
         branchForm.disabled=true;
+        dateForm.disabled=true;
+        durationForm.disabled=true;
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -276,8 +278,13 @@ var groupForm=document.getElementById("group")
 groupForm.disabled=true;
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
+var dateForm=document.getElementById("lecture_date");
+var durationForm=document.getElementById("duration_hr");
+dateForm.disabled=true;
+durationForm.disabled=true;
 var subjectForm=document.getElementById("subject");
 var slotForm = document.getElementById("slots_available");
+
 slotForm.disabled = true;
 subjectForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
@@ -285,6 +292,8 @@ subjectForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
     groupForm.disabled=true;
     subGroupForm.disabled=true;
+    dateForm.disabled=true;
+    durationForm.disabled=true;
     branchForm.disabled=false;
     $.ajax({
         url:"/content/announcements/form/branches",
@@ -313,6 +322,8 @@ branchForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
     subGroupForm.disabled=true;
     groupForm.disabled=false;
+    dateForm.disabled=false;
+    durationForm.disabled=false;
     $.ajax({
         url:"/content/announcements/form/groups",
         data: {course: subjectForm.value,class:branchForm.value},
@@ -361,3 +372,31 @@ groupForm.addEventListener('change',function(e){
         subGroupForm.disabled=true;
     }
 })
+dateForm.addEventListener('change',function(e){
+    findSlots();
+})
+durationForm.addEventListener('change',function(e){
+    findSlots();
+})
+
+function findSlots(){
+    if(subjectForm.value!=""&&durationForm.value!=""){
+        console.log("finding slots");
+        $.ajax({
+            url:"/content/timetable/slots",
+            data:{
+                branch:branchForm.value,
+                group:groupForm.value,
+                subGroup:subGroupForm.value,
+                date:dateForm.value,
+                duration:durationForm.value
+
+            },
+            cache:false,
+            type:"POST",
+            success:function(response){
+
+            }
+        });
+    }
+}
