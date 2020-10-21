@@ -125,6 +125,7 @@ module.exports.timetable = async function(req, res) {
             })
         }
         else{
+            console.log(timetableItems);
             return res.render('time_table',{
                 timetableItems: timetableItems,
                 title: "Timetable",
@@ -306,9 +307,19 @@ module.exports.classCreate = async function(req,res){
                 teacher: res.locals.user
             })
         }
+        req.flash('success',"Added class");
         return res.redirect('back');
     }
     catch(err){
         console.log(err);
+    }
+}
+module.exports.classDelete=async function(req,res){
+    if(req.xhr){
+       
+        await TimetableModel.findByIdAndDelete(req.params.id);
+        return res.status(200).json({
+            message:"deleted class"
+        })
     }
 }

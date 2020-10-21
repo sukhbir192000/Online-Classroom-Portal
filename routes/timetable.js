@@ -6,7 +6,7 @@ Router.get('/',contentController.timetable);
 Router.post('/slots',passport.checkAdmin,contentController.availableSlots);
 //change to isAdmin
 Router.post('/create',passport.checkAdmin,contentController.classCreate);
-// Router.get('/delete/:id',passport.checkAdmin,contentController.announcementDelete);
+Router.get('/delete/:id',passport.checkAdmin,contentController.classDelete);
 // Router.get('/form/subjects',passport.checkAdmin,contentController.getSubjects);
 // Router.post('/form/branches',passport.checkAdmin,contentController.getBranches);
 // Router.post('/form/groups',passport.checkAdmin,contentController.getGroups);

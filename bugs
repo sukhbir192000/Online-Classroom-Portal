@@ -10,8 +10,8 @@ DOUBT
 - Edit material part ejs(static hai abhi)
 
 TIMETABLE
-- disable previous week for offset=0
 - set minimum current date in add class
+- table breaks on changing page width(tablet mode)
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)

@@ -128,6 +128,19 @@ week_shift_div.children[1].addEventListener('click', function(e){
 var current_div = null, prevText = "";
 var clickAddFunction = function (a){
     a.addEventListener('click',function(e){
+        let newDiv=document.createElement('div');
+        newDiv.innerHTML=`
+        <div id="info">
+            <div class="subject_name">Computer Architecture and OrganizationComputer Architecture and Organization</div>
+            <div class="class_group"><b>Class Group: &nbsp; </b>2</div>
+            <div class="lab_group"><b>Lab group: &nbsp;</b> All</div>
+            <div class="timings"><b>Time:&nbsp; </b> 2:00PM - 3:00PM</div>
+            <div class="buttons_edit">
+                <button type="button" class="cancel_button">Cancel class</button>
+                <button type="button" class="reschedule_button">Reschedule class</button>
+            </div>
+        </div>`
+        document.getElementsByClassName('main_content')[0].appendChild(newDiv);
         // var rect =this.getBoundingClientRect();
         // console.log(rect);
         if(a.isActive){
@@ -145,14 +158,35 @@ var clickAddFunction = function (a){
                 document.getElementById("info").style.left = '50%';
                 document.getElementById("info").style.transform = 'translate(-50%, -50%)';
                 document.querySelector(".table").style.opacity="0.2";
-                console.log(this.id);
+              
+                let classId=this.id;
                 document.getElementById("info").children[4].children[1].addEventListener("click", function(e){
-                    console.log("hiiiiiii");
+                    console.log("hiiiiiii2");
                     document.getElementById("reschedule_class").style.display = "flex";
                     document.getElementById("reschedule_class").style.top = '50%';
                     document.getElementById("reschedule_class").style.left = '50%';
                     document.getElementById("reschedule_class").style.transform = 'translate(-50%, -50%)';
                 })
+                document.getElementById('info').children[4].children[0].addEventListener('click',function(){
+                    $.ajax({
+                        url:`/content/timetable/delete/${classId}`,
+                        type:"GET",
+                        success:function(response){
+                            document.getElementById('info').parentNode.removeChild(document.getElementById('info'));
+                            current_div.style.opacity = "1";
+                            document.getElementById("reschedule_class").style.display = "none";
+                            document.querySelector(".table").style.opacity="1";
+                            current_div.classList.remove("font_size_remove");
+                            current_div.isActive = (!current_div.isActive);
+                            current_div = null;
+                        }
+                    })
+                   
+                })
+            
+               
+
+            
                 current_div = this;
             }
         }
@@ -206,36 +240,29 @@ var addFunctions = function(){
 
 addFunctions();
 document.addEventListener('click',function(e){
-    var rect = document.getElementById("info").getBoundingClientRect();
-    if(current_div && (e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height)){
-        var rectinner = current_div.getBoundingClientRect();
-        if((e.x<rectinner.left || e.x>rectinner.left+rectinner.width || e.y<rectinner.top || e.y>rectinner.top+rectinner.height) && current_div.classList.contains("font_size_remove")){
-            current_div.style.opacity = "1";
-            document.getElementById("info").style.display = "none";
-            document.getElementById("reschedule_class").style.display = "none";
-            document.querySelector(".table").style.opacity="1";
-            current_div.classList.remove("font_size_remove");
-            current_div.isActive = (!current_div.isActive);
-            current_div = null;
+
+    var rect = document.getElementById("info")
+    if(rect){
+        rect=rect.getBoundingClientRect();
+        if(current_div && (e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height)){
+            var rectinner = current_div.getBoundingClientRect();
+            if((e.x<rectinner.left || e.x>rectinner.left+rectinner.width || e.y<rectinner.top || e.y>rectinner.top+rectinner.height) && current_div.classList.contains("font_size_remove")){
+                current_div.style.opacity = "1";
+                // document.getElementById("info").style.display = "none";
+                document.getElementById("reschedule_class").style.display = "none";
+                document.querySelector(".table").style.opacity="1";
+                current_div.classList.remove("font_size_remove");
+                current_div.isActive = (!current_div.isActive);
+                
+                current_div = null;
+                document.getElementById('info').parentNode.removeChild(document.getElementById('info'));
+    
+            }
         }
     }
+    
 })
-let buttonOptions=document.getElementById('info');
 
-
-
-buttonOptions.children[0].addEventListener('click',function(){
-    // $.ajax({
-    //     url:"",
-    //     data:{
-    //         id:this.parentNode.parentNode.id
-    //     },
-    //     succgess:function(){
-    //         this.parentNode.parentNode.innerHTML="";
-    //         this.parentNode.parentNode.removeAttribute("id");
-    //     }
-    // })
-});
 
 document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
