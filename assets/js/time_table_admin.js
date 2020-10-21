@@ -147,21 +147,21 @@ var clickAddFunction = function (a){
                 document.getElementById("info").style.transform = 'translate(-50%, -50%)';
                 document.querySelector(".table").style.opacity="0.2";
                 console.log(this.id);
-                // var newDiv = document.createElement("div");
-                // newDiv.style.position = "absolute";
-                // newDiv.style.top = this.offsetTop;
-                // newDiv.style.left = this.offsetLeft;
-                // newDiv.textContent = "i am a new div";
-                // this.parentNode.appendChild(newDiv);
-                // this.style.opacity = "0.2";
-                // this.appendChild(document.getElementById("info"));
+                document.getElementById("info").children[4].children[1].addEventListener("click", function(e){
+                    console.log("hiiiiiii");
+                    document.getElementById("reschedule_class").style.display = "flex";
+                    document.getElementById("reschedule_class").style.top = '50%';
+                    document.getElementById("reschedule_class").style.left = '50%';
+                    document.getElementById("reschedule_class").style.transform = 'translate(-50%, -50%)';
+                })
                 current_div = this;
             }
         }
         else{
-            if(current_div){
+            if(current_div ){
                 current_div.style.opacity = "1";
                 document.getElementById("info").style.display = "none";
+                document.getElementById("reschedule_class").style.display = "none";
                 document.querySelector(".table").style.opacity="1";
                 current_div.classList.remove("font_size_remove");
                 current_div = null;
@@ -213,6 +213,7 @@ document.addEventListener('click',function(e){
         if((e.x<rectinner.left || e.x>rectinner.left+rectinner.width || e.y<rectinner.top || e.y>rectinner.top+rectinner.height) && current_div.classList.contains("font_size_remove")){
             current_div.style.opacity = "1";
             document.getElementById("info").style.display = "none";
+            document.getElementById("reschedule_class").style.display = "none";
             document.querySelector(".table").style.opacity="1";
             current_div.classList.remove("font_size_remove");
             current_div.isActive = (!current_div.isActive);
@@ -221,6 +222,9 @@ document.addEventListener('click',function(e){
     }
 })
 let buttonOptions=document.getElementById('info');
+
+
+
 buttonOptions.children[0].addEventListener('click',function(){
     // $.ajax({
     //     url:"",

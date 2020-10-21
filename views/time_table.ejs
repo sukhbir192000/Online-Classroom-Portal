@@ -111,15 +111,42 @@
         <!-- -------------------------------------------THEEK KRO (STATIC DATA)-------------------------------------------------- -->
         <div id="info">
             <div class="subject_name">Computer Architecture and OrganizationComputer Architecture and Organization</div>
-            <div class="class_group"><b>Class Group:</b> 2</div>
-            <div class="lab_group"><b>Lab group:</b> All</div>
-            <div class="timings"><b>Time:</b> 2:00PM - 3:00PM</div>
+            <div class="class_group"><b>Class Group: &nbsp; </b>2</div>
+            <div class="lab_group"><b>Lab group: &nbsp;</b> All</div>
+            <div class="timings"><b>Time:&nbsp; </b> 2:00PM - 3:00PM</div>
             <div class="buttons_edit">
                 <button type="button" class="cancel_button">Cancel class</button>
                 <button type="button" class="reschedule_button">Reschedule class</button>
             </div>
         </div>
-        <!-- -------------------------------------------------------------------------------------------------------------------- -->
+        <div id="reschedule_class">
+            <div class="subject_name_reschedule">Computer Architecture and OrganizationComputer Architecture and Organization</div>
+            <div class="class_group_reschedule">
+                <div class="cg_reschedule_heading"><b>Class Group:&nbsp;</b></div>
+                <div class="cg_reschedule_content">2</div>
+            </div>
+            <div class="lab_group_reschedule">
+                <div class="lg_reschedule_heading"><b>Lab group:&nbsp;</b></div> 
+                <div class="lg_reschedule_content">All</div>
+            </div>
+            <div>
+                <label class="duration_reschedule_label"><b>Duration:</b></label>
+                <input type="number" min="1" name="duration_reschedule" id="duration_reschedule" required>
+            </div>
+            <div>
+                <label class="slots_available_label_reschedule"><b>Available slots:</b></label>
+                <select id="slots_available_reschedule" name="slots_available_reschedule" required>
+                    <option value="" disabled selected>--Select an option--</option>
+                </select>
+            </div>
+            <div class="buttons_reschedule">
+                <button type="button" class="submit_button_reschedule">Reschedule</button>
+            </div>
+        </div>
+
+        
+         <!-- -------------------------------------------------------------------------------------------------------------------- -->
+
     </div>
 
 </div>
