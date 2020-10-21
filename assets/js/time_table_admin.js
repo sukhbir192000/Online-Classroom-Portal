@@ -171,8 +171,8 @@ var clickAddFunction = function (a){
     a.addEventListener("mouseenter",function(e){
         prevText = a.innerHTML;
         a.innerHTML ="<div>Group:1</div><div>Lab Group: 2</div>";
-        a.style.opacity=0.6;
-        a.style.backgroundColor="black";
+        // a.style.opacity=0.6;
+        a.style.backgroundColor="#640e1f";
         a.style.color ="white";
         a.style.transition = "all 0.5s";
        
@@ -181,7 +181,7 @@ var clickAddFunction = function (a){
     a.addEventListener("mouseleave",function(e){
         a.innerHTML = prevText;
         prevText="";
-        a.style.opacity=1;
+        // a.style.opacity=1;
         a.style.backgroundColor="white";
         a.style.color="black";
         a.style.transition = "all 0.5s";

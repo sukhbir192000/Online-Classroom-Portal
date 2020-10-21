@@ -275,6 +275,7 @@ body{
     /* word-wrap: break-word; */
     background-color: white;
     cursor: pointer;
+    text-overflow: ellipsis;
 }
 .table_heading{
     box-sizing: border-box;
@@ -343,7 +344,7 @@ input,select{
     opacity:0.3;
 }
 .font_size_remove{
-    font-size: 0;
+    height:0;
 }
 #week_shift{
     display: flex;
@@ -402,11 +403,15 @@ input,select{
     display: flex;
     flex-direction: row;
 }
+
 .cg_reschedule_heading{
     margin-right: 1em;
 }
 .lg_reschedule_heading{
     margin-right: 2em;
+}
+.date_reschedule_label{
+    margin-right: 4.9em;
 }
 .duration_reschedule_label{
     margin-right: 3em;
