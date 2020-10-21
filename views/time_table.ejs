@@ -21,7 +21,7 @@
         
         <% if(user.isAdmin){ %>
             <div class="add_admin">
-            <form id="add_form" action="" method="POST" >
+            <form id="add_form" action="/content/timetable/create" method="POST" >
                 <label for="subject" class="subject_label">Subject HATA:</label>
                 <select id="subject" name="subject" required>
                     <option value="" disabled selected>--Select an option--</option>
@@ -98,7 +98,7 @@
                             <div class="table_row" id="row<%=i+1%>">
                                 <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
                                 <% for(let j=0;j<7;j++){%>
-                                    <div class="table_column" <%if(timetableItems[j][8+i]){%>id="<%=timetableItems[j][8+i]._id%>"<%}%> ><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
+                                    <div class="table_column" <%if(timetableItems[j][8+i]){%>id="<%=timetableItems[j][8+i]._id%>" style="height:<%= 4*timetableItems[j][8+i].duration %>em !important; z-index:2;"<%}%> ><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
                                 <% } %>
                             </div>
                         <% } %>

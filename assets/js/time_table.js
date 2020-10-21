@@ -45,7 +45,7 @@ week_shift_div.children[0].addEventListener('click', function(e){
                     rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
                     for(let j=0;j<7;j++){
                         if(response.timetableItems[j][8+i]){
-                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" style="height:${4*response.timetableItems[j][8+i].duration}em !important; z-index:2;">${response.timetableItems[j][8+i].classSub.course.name}</div>`
                         }
                         else{
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
@@ -95,7 +95,7 @@ week_shift_div.children[1].addEventListener('click', function(e){
                     rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
                     for(let j=0;j<7;j++){
                         if(response.timetableItems[j][8+i]){
-                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" style="height:${4*response.timetableItems[j][8+i].duration}em !important; z-index:2;">${response.timetableItems[j][8+i].classSub.course.name}</div>`
                         }
                         else{
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`

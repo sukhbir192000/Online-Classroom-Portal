@@ -256,3 +256,59 @@ module.exports.availableSlots=async function(req,res){
         console.log(err);
     }
 }
+
+module.exports.classCreate = async function(req,res){
+    try{
+        let user = res.locals.user;
+        let classDate = new Date(req.body.lecture_date);
+        classDate.setHours(1);
+        classDate.setMinutes(0);
+        classDate.setSeconds(0);
+        classDate.setMilliseconds(0);
+        let subject = req.body.subject, group = req.body.group, branch=req.body.branch;
+        if(req.body.group=='All'){
+            for(let classSubElement of user.classSub){
+                if(subject==classSubElement.course && branch==classSubElement.class){
+                    await TimetableModel.create({
+                        startingTime: req.body.slots_available,
+                        date: classDate,
+                        duration: req.body.duration_hr,
+                        classSub: classSubElement,
+                        teacher: res.locals.user
+                    })
+                }
+            }
+        }
+        else if(req.body.sub_group == 'All'){
+            for(let classSubElement of user.classSub){
+                if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
+                    await TimetableModel.create({
+                        startingTime: req.body.slots_available,
+                        date: classDate,
+                        duration: req.body.duration_hr,
+                        classSub: classSubElement,
+                        teacher: res.locals.user
+                    })
+                }
+            }
+        }
+        else{
+            await TimetableModel.create({
+                startingTime: req.body.slots_available,
+                date: classDate,
+                duration: req.body.duration_hr,
+                classSub: {
+                    course: req.body.subject,
+                    class: req.body.branch,
+                    group: req.body.group,
+                    subGroup: req.body.sub_group
+                },
+                teacher: res.locals.user
+            })
+        }
+        return res.redirect('back');
+    }
+    catch(err){
+        console.log(err);
+    }
+}

@@ -11,6 +11,7 @@ DOUBT
 
 TIMETABLE
 - disable previous week for offset=0
+- set minimum current date in add class
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)

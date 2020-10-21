@@ -47,8 +47,7 @@ week_shift_div.children[0].addEventListener('click', function(e){
                     rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
                     for(let j=0;j<7;j++){
                         if(response.timetableItems[j][8+i]){
-
-                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8+i]._id}">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8+i]._id}" style="height:${4*response.timetableItems[j][8+i].duration}em !important; z-index:2;">${response.timetableItems[j][8+i].classSub.course.name}</div>`
                         }
                         else{
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
@@ -99,7 +98,7 @@ week_shift_div.children[1].addEventListener('click', function(e){
                     rowDiv.innerHTML = `<div class="table_column table_heading">${8+i}:00 - ${9+i}:00</div>`;
                     for(let j=0;j<7;j++){
                         if(response.timetableItems[j][8+i]){
-                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8+i]._id}">${response.timetableItems[j][8+i].classSub.course.name}</div>`
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8+i]._id}" style="height:${4*response.timetableItems[j][8+i].duration}em !important; z-index:2;">${response.timetableItems[j][8+i].classSub.course.name}</div>`
                         }
                         else{
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
@@ -302,6 +301,7 @@ subjectForm.addEventListener('change',function(e){
     dateForm.disabled=true;
     durationForm.disabled=true;
     branchForm.disabled=false;
+    findSlots();
     $.ajax({
         url:"/content/announcements/form/branches",
         data: {course: subjectForm.value},
@@ -331,6 +331,7 @@ branchForm.addEventListener('change',function(e){
     groupForm.disabled=false;
     dateForm.disabled=false;
     durationForm.disabled=false;
+    findSlots();
     $.ajax({
         url:"/content/announcements/form/groups",
         data: {course: subjectForm.value,class:branchForm.value},
@@ -353,6 +354,7 @@ branchForm.addEventListener('change',function(e){
 })
 groupForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
+    findSlots();
     if(groupForm.value!="All"){
         subGroupForm.disabled=false;
         $.ajax({
@@ -387,7 +389,7 @@ durationForm.addEventListener('change',function(e){
 })
 
 function findSlots(){
-    if(subjectForm.value!=""&&durationForm.value!=""){
+    if(dateForm.value!=""&&durationForm.value!=""){
         slotForm.disabled = false;
         $.ajax({
             url:"/content/timetable/slots",
@@ -417,5 +419,9 @@ function findSlots(){
                 slotForm.selectedIndex = 0;
             }
         });
+    }
+    else{
+        slotForm.disabled = true;
+        slotForm.selectedIndex = 0;
     }
 }
