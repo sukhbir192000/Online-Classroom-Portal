@@ -101,20 +101,14 @@ module.exports.announcement=async function(req,res){
                             "classSub.course":course,
                             "classSub.class":user.class
                         },
-                        {
-                            $or: [
-                                {"classSub.group": undefined},
-                                {
-                                    $and: [
-                                        {"classSub.group": user.group},
-                                        {$or: [
-                                            {"classSub.subGroup": undefined},
-                                            {"classSub.subGroup": user.subGroup}
-                                        ]}
-                                    ]
-                                }
-                            ]
-                        }
+                        {$or: [
+                            {"classSub.group": undefined},
+                            {"classSub.group": user.group}
+                        ]},
+                        {$or: [
+                            {"classSub.subGroup": undefined},
+                            {"classSub.subGroup": user.subGroup}
+                        ]}
                     ]
                 }).populate('classSub.course');
                 if(announcements.length>0){
@@ -280,18 +274,64 @@ module.exports.getBranches=async function(req,res){
         });
     }
 }
-module.exports.getGroups=async function(req,res){
+// module.exports.getGroups=async function(req,res){
+//     if(req.xhr){
+//         let user = res.locals.user;
+//         let groupList = [];
+//         for(let classSub of user.classSub){
+//             if(classSub.course == req.body.course && req.body.class==classSub.class){
+
+//                 var groupElement = await GroupModel.findById(classSub.group);
+//                 groupList.push({
+//                     id: classSub.group,
+//                     name: groupElement.groupNumber
+//                 })
+//             }
+//         }
+//         let mymap = new Map(); 
+
+//         groupList = groupList.filter(el => { 
+//             const val = mymap.get(el.name);
+//             if(val) { 
+//                 if(el.id < val) { 
+//                     mymap.delete(el.name); 
+//                     mymap.set(el.name, el.id); 
+//                     return true; 
+//                 } else { 
+//                     return false; 
+//                 } 
+//             } 
+//             mymap.set(el.name, el.id); 
+//             return true; 
+//         });
+//         return res.status(200).json({
+//             data:{
+//                 groupList:groupList
+//             },
+//             message:"Subjects Sent"
+//         });
+//     }
+// }
+module.exports.getSubGroups=async function(req,res){
     if(req.xhr){
         let user = res.locals.user;
         let groupList = [];
         for(let classSub of user.classSub){
             if(classSub.course == req.body.course && req.body.class==classSub.class){
-
-                var groupElement = await GroupModel.findById(classSub.group);
-                groupList.push({
-                    id: classSub.group,
-                    name: groupElement.groupNumber
-                })
+                if(req.body.group=="Lecture" && classSub.group){
+                    var groupElement = await GroupModel.findById(classSub.group);
+                    groupList.push({
+                        id: classSub.group,
+                        name: groupElement.groupNumber
+                    })
+                }
+                else if(req.body.group=="Lab" && classSub.subGroup){
+                    var subGroupElement = await SubGroupModel.findById(classSub.subGroup);
+                    groupList.push({
+                        id: classSub.subGroup,
+                        name: subGroupElement.subGroupNumber
+                    })
+                }
             }
         }
         let mymap = new Map(); 
@@ -314,104 +354,50 @@ module.exports.getGroups=async function(req,res){
             data:{
                 groupList:groupList
             },
-            message:"Subjects Sent"
-        });
-    }
-}
-module.exports.getSubGroups=async function(req,res){
-    if(req.xhr){
-        let user = res.locals.user;
-        let subGroupList = [];
-        for(let classSub of user.classSub){
-            if(classSub.course == req.body.course && req.body.class==classSub.class && req.body.group==classSub.group){
-                if(classSub.subGroup){
-                    var subGroupElement = await SubGroupModel.findById(classSub.subGroup);
-                    subGroupList.push({
-                        id: classSub.subGroup,
-                        name: subGroupElement.subGroupNumber
-                    })
-                }
-            }
-        }
-        let mymap = new Map(); 
-
-        subGroupList = subGroupList.filter(el => { 
-            const val = mymap.get(el.name);
-            if(val) { 
-                if(el.id < val) { 
-                    mymap.delete(el.name); 
-                    mymap.set(el.name, el.id); 
-                    return true; 
-                } else { 
-                    return false; 
-                } 
-            } 
-            mymap.set(el.name, el.id); 
-            return true; 
-        });
-        return res.status(200).json({
-            data:{
-                subGroupList:subGroupList
-            },
             message:"Sub-groups Sent"
         });
     }
 }
-module.exports.announcementCreate=async function(req,res){
-    
-    try{
-        let user=res.locals.user
-        if(req.body.subject=="All"){
-            for(let subjects of user.classSub){
+
+async function addAnnouncements(req, res, classSubList){
+    console.log(classSubList);
+    let user = res.locals.user;
+    for(let subject in classSubList){
+        for(let clas in classSubList[subject]){
+            let fullCondition = false;
+            if(classSubList[subject][clas]=={}){
+                fullCondition = true;
+            }
+            else{
+                let classInfo = await ClassModel.findById(clas);
+                if((req.body.group=="Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.group=="Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)){
+                    fullCondition = true;
+                }
+            }
+            if(fullCondition){
                 await AnnouncementsModel.create({
                     title: req.body.title,
                     content: req.body.message,
-                    classSub: subjects,
+                    classSub: {
+                        course: subject,
+                        class: clas
+                    },
                     postedBy: user._id
                 })
             }
-        }
-        else{
-            var subject = req.body.subject;
-            if(req.body.branch=="All"){
-                for(let classSubElement of user.classSub){
-                    if(subject==classSubElement.course){
+            else{
+                for(let groupItem of classSubList[subject][clas].groups){
+                    if(req.body.group=="Lecture"){
                         await AnnouncementsModel.create({
                             title: req.body.title,
                             content: req.body.message,
-                            classSub: classSubElement,
+                            classSub: {
+                                course: subject,
+                                class: clas,
+                                group: groupItem
+                            },
                             postedBy: user._id
                         })
-                    }
-                }
-            }
-            else{
-                var branch = req.body.branch;
-                if(req.body.group == "All"){
-                    for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course && branch==classSubElement.class){
-                            await AnnouncementsModel.create({
-                                title: req.body.title,
-                                content: req.body.message,
-                                classSub: classSubElement,
-                                postedBy: user._id
-                            })
-                        }
-                    }
-                }
-                else{
-                    var group = req.body.group;
-                    if(req.body.sub_group == "All"){
-                        for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                await AnnouncementsModel.create({
-                                    title: req.body.title,
-                                    content: req.body.message,
-                                    classSub: classSubElement,
-                                    postedBy: user._id
-                                })
-                            }
-                        }
                     }
                     else{
                         await AnnouncementsModel.create({
@@ -419,13 +405,121 @@ module.exports.announcementCreate=async function(req,res){
                             content: req.body.message,
                             classSub: {
                                 course: subject,
-                                class: branch,
-                                group: group,
-                                subGroup: req.body.sub_group
+                                class: clas,
+                                subGroup: groupItem
                             },
                             postedBy: user._id
                         })
                     }
+                }
+            }
+        }
+    }
+}
+
+module.exports.announcementCreate=async function(req,res){
+    
+    try{
+        let user=res.locals.user
+        if(req.body.subject=="All"){
+            let classSubList = {};
+            for(let classSubElement of user.classSub){
+                if(!classSubList[classSubElement.course]){
+                    classSubList[classSubElement.course] = {};
+                }
+                if(!classSubList[classSubElement.course][classSubElement.class]){
+                    classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                }
+                if(req.body.group=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                    if(classSubElement.group){
+                        classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                    }
+                    else{
+                        classSubList[classSubElement.course][classSubElement.class] = {};
+                    }
+                }
+                else if(req.body.group=="Lab" && classSubElement.subGroup){
+                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                }
+            }
+            addAnnouncements(req, res, classSubList);
+        }
+        else{
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                let classSubList = {};
+                for(let classSubElement of user.classSub){
+                    if(classSubElement.course == subject){
+                        if(!classSubList[classSubElement.course]){
+                            classSubList[classSubElement.course] = {};
+                        }
+                        if(!classSubList[classSubElement.course][classSubElement.class]){
+                            classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                        }
+                        if(req.body.group=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                            if(classSubElement.group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else{
+                                classSubList[classSubElement.course][classSubElement.class] = {};
+                            }
+                        }
+                        else if(req.body.group=="Lab" && classSubElement.subGroup){
+                            classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                        }
+                    }
+                }
+                addAnnouncements(req, res, classSubList);
+            }
+            else{
+                var branch = req.body.branch;
+                if(req.body.sub_group == "All"){
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.group=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                                if(classSubElement.group){
+                                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                                }
+                                else{
+                                    classSubList[classSubElement.course][classSubElement.class] = {};
+                                }
+                            }
+                            else if(req.body.group=="Lab" && classSubElement.subGroup){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    addAnnouncements(req, res, classSubList);
+                }
+                else{
+                    console.log(req.body);
+                    var group = req.body.sub_group;
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.group=="Lecture" && classSubElement.group==group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else if(req.body.group=="Lab" && classSubElement.subGroup==group){
+                                console.log("hi");
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    addAnnouncements(req, res, classSubList);
                 }
             }
         }
