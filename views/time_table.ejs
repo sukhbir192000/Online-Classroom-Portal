@@ -29,15 +29,16 @@
                         <option value="<%= course._id %>"><%= course.name %></option>
                     <% } %>
                 </select><br><br>
+                <label for="class_type"  class="class_type_label">Class type:</label>
+                <select id="class_type" name="class_type">
+                    <option value="Lecture">Lecture</option>
+                    <option value="Lab">Lab/Tutorial</option>
+                </select><br><br>
                 <label for="branch" class="branch_label">Branch:</label>
                 <select id="branch" name="branch" required>
                     <option value="" disabled selected>--Select an option--</option>
                 </select><br><br>
-                <label for="group" class="group_label">Class Group:</label>
-                <select id="group" name="group" required>
-                    <option value="All">All</option>   
-                </select><br><br>
-                <label for="sub_group" class="lab_group_label">Lab Group:</label>
+                <label for="sub_group" class="sub_group_label">Group:</label>
                 <select id="sub_group" name="sub_group" required>
                     <option value="All">All</option>
                 </select><br><br>    

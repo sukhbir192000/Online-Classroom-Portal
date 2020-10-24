@@ -150,11 +150,11 @@ document.addEventListener('click',function(e){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
         branchForm.disabled=true;
-        groupForm.disabled=true;
+        classTypeForm.disabled=true;
         subGroupForm.disabled=true;
         subjectForm.selectedIndex=0;
         branchForm.selectedIndex=0;
-        groupForm.selectedIndex=0;
+        classTypeForm.selectedIndex=0;
         subGroupForm.selectedIndex=0;
         document.getElementById("title").value="";
         document.getElementById("message").value="";
@@ -247,8 +247,8 @@ function inputFormInitialise(){
 
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
-var groupForm=document.getElementById("group")
-groupForm.disabled=true;
+var classTypeForm=document.getElementById("class_type")
+classTypeForm.disabled=true;
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
 var subjectForm=document.getElementById("subject");
@@ -276,9 +276,9 @@ addButton.addEventListener('click',function(e){
 })
 subjectForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
-    groupForm.selectedIndex=0;
+    classTypeForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
-    groupForm.disabled=true;
+    classTypeForm.disabled=true;
     subGroupForm.disabled=true;
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
@@ -310,14 +310,14 @@ subjectForm.addEventListener('change',function(e){
 })
 // ---------------------
 branchForm.addEventListener('change',function(e){
-    groupForm.selectedIndex=0;
+    classTypeForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
     subGroupForm.disabled=true;
     if(branchForm.value!="All"){
-        groupForm.disabled=false;
+        classTypeForm.disabled=false;
     }
     else{
-        groupForm.disabled=true;
+        classTypeForm.disabled=true;
     }
     if(branchForm.value!="All"){
         $.ajax({
@@ -326,28 +326,28 @@ branchForm.addEventListener('change',function(e){
             cache:false,
             type:"POST",
             success:function(response){
-                groupForm.innerText="";
+                classTypeForm.innerText="";
                 var opt = document.createElement('option');
                 opt.value="All",
                 opt.innerText="All",
-                groupForm.appendChild(opt);
+                classTypeForm.appendChild(opt);
                 for(let obj of response.data.groupList){
                     var opt = document.createElement('option');
                     opt.value=obj.id,
                     opt.innerText=obj.name,
-                    groupForm.appendChild(opt);
+                    classTypeForm.appendChild(opt);
                 }
             }
         })
     }
 })
-groupForm.addEventListener('change',function(e){
+classTypeForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
-    if(groupForm.value!="All"){
+    if(classTypeForm.value!="All"){
         subGroupForm.disabled=false;
         $.ajax({
             url:"/content/announcements/form/subGroups",
-            data: {course: subjectForm.value,class:branchForm.value,group:groupForm.value},
+            data: {course: subjectForm.value,class:branchForm.value,classType:classTypeForm.value},
             cache:false,
             type:"POST",
             success:function(response){

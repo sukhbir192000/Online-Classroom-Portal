@@ -272,11 +272,11 @@ document.querySelector(".add").addEventListener('click',function(e){
         document.getElementById("lecture_date").value = "";
         subjectForm.selectedIndex = 0;
         branchForm.selectedIndex=0;
-        groupForm.selectedIndex=0;
+        classTypeForm.selectedIndex=0;
         subGroupForm.selectedIndex=0;
         slotForm.selectedIndex=0;
         durationForm.value=1;
-        groupForm.disabled=true;
+        classTypeForm.disabled=true;
         subGroupForm.disabled=true;
         branchForm.disabled=true;
         dateForm.disabled=true;
@@ -307,8 +307,8 @@ document.querySelector(".add").addEventListener('click',function(e){
 
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
-var groupForm=document.getElementById("group")
-groupForm.disabled=true;
+var classTypeForm=document.getElementById("class_type")
+classTypeForm.disabled=true;
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
 var dateForm=document.getElementById("lecture_date");
@@ -321,9 +321,9 @@ var slotForm = document.getElementById("slots_available");
 slotForm.disabled = true;
 subjectForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
-    groupForm.selectedIndex=0;
+    classTypeForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
-    groupForm.disabled=true;
+    classTypeForm.disabled=true;
     subGroupForm.disabled=true;
     dateForm.disabled=true;
     durationForm.disabled=true;
@@ -352,10 +352,10 @@ subjectForm.addEventListener('change',function(e){
     })
 })
 branchForm.addEventListener('change',function(e){
-    groupForm.selectedIndex=0;
+    classTypeForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
     subGroupForm.disabled=true;
-    groupForm.disabled=false;
+    classTypeForm.disabled=false;
     dateForm.disabled=false;
     durationForm.disabled=false;
     findSlots();
@@ -365,28 +365,28 @@ branchForm.addEventListener('change',function(e){
         cache:false,
         type:"POST",
         success:function(response){
-            groupForm.innerText="";
+            classTypeForm.innerText="";
             var opt = document.createElement('option');
             opt.value="All";
             opt.innerText="All";
-            groupForm.appendChild(opt);
+            classTypeForm.appendChild(opt);
             for(let obj of response.data.groupList){
                 var opt = document.createElement('option');
                 opt.value=obj.id;
                 opt.innerText=obj.name;
-                groupForm.appendChild(opt);
+                classTypeForm.appendChild(opt);
             }
         }
     })
 })
-groupForm.addEventListener('change',function(e){
+classTypeForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
     findSlots();
-    if(groupForm.value!="All"){
+    if(classTypeForm.value!="All"){
         subGroupForm.disabled=false;
         $.ajax({
             url:"/content/announcements/form/subGroups",
-            data: {course: subjectForm.value,class:branchForm.value,group:groupForm.value},
+            data: {course: subjectForm.value,class:branchForm.value,classType:classTypeForm.value},
             cache:false,
             type:"POST",
             success:function(response){
@@ -422,7 +422,7 @@ function findSlots(){
             url:"/content/timetable/slots",
             data:{
                 branch:branchForm.value,
-                group:groupForm.value,
+                classType:classTypeForm.value,
                 subGroup:subGroupForm.value,
                 date:dateForm.value,
                 duration:durationForm.value

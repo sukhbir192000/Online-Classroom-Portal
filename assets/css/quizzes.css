@@ -434,11 +434,11 @@ select option{
 #branch{
     margin-left: 6.25em;
 }
-#group{
-    margin-left: 3.5em
+#class_type{
+    margin-left: 4.45em
 }
 #sub_group{
-    margin-left: 4.5em;
+    margin-left: 6.8em;
 }
 
 input,textarea{

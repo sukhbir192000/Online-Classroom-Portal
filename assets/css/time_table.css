@@ -541,22 +541,22 @@ form{
     padding:0;
 } */
 .subject_label{
-    margin-right:2.4em;
+    margin-right:2.3em;
 }
 .branch_label{
     margin-right: 5.2em;
 }
-.group_label{
-    margin-right: 2.9em;
+.class_type_label{
+    margin-right: 3.7em;
 }
-.lab_group_label{
-    margin-right: 3.8em;
+.sub_group_label{
+    margin-right: 5.6em;
 }
 .duration_label{
     margin-right: 0.3em;
 }
 .date_label{
-    margin-right: 6.5em;
+    margin-right: 6.4em;
 }
 .slots_available_label{
     margin-right: 2.2em;
@@ -569,7 +569,7 @@ form{
     padding-right: 2em;
     max-width: 40vw;
 }
-#group{
+#class_type{
     padding-right: 2em;
     max-width: 40vw;
 }

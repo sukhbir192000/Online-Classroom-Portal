@@ -500,11 +500,11 @@ select option{
 #branch{
     margin-left: 3.2em;
 }
-#group{
-    margin-left: 0.37em;
+#class_type{
+    margin-left: 1.4em;
 }
 #sub_group{
-    margin-left: 1.38em;
+    margin-left: 3.7em;
 }
 
 input,textarea{
@@ -586,7 +586,6 @@ input,textarea{
     content:attr(title-text);
     color:gray;
 }
-
 
 
 /* FOOTER */
