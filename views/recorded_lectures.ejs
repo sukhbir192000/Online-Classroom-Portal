@@ -61,8 +61,8 @@
                             <div class="title"><%= lecture.title %></div>
                         </div>
                         <div class="box_content">  
-                            <div class="box_content_details">                    
-                                <div class="deadline"><%= lecture.recordedOn %></div>
+                            <div class="box_content_details">
+                                <div class="deadline"><%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(lecture.recordedOn) %></div>
                                 <% if(user.isAdmin){ %>
                                     <div class="branch_admin">Branch: <%= lecture.classSub.class.stream %></div>
                                     <div class="group_admin"><% if(lecture.classSub.group){ %>Class Group: <%= lecture.classSub.group.groupNumber %><% } %></div>

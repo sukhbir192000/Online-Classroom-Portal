@@ -308,7 +308,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                     classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
                 }
             }
-            count = await addStudyMaterials(req, res, classSubList,count);
+            count = await addStudyMaterials(req, res, classSubList);
         }
         else{
             var subject = req.body.subject;
@@ -335,7 +335,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                         }
                     }
                 }
-                count = await addStudyMaterials(req, res, classSubList,count);
+                count = await addStudyMaterials(req, res, classSubList);
             }
             else{
                 var branch = req.body.branch;
@@ -362,7 +362,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                             }
                         }
                     }
-                    count = await addStudyMaterials(req, res, classSubList,count);
+                    count = await addStudyMaterials(req, res, classSubList);
                 }
                 else{
                     var group = req.body.sub_group;
@@ -384,7 +384,7 @@ module.exports.studyMaterialCreate=async function(req,res){
                             }
                         }
                     }
-                    count = await addStudyMaterials(req, res, classSubList,count);
+                    count = await addStudyMaterials(req, res, classSubList);
                 }
             }
         }

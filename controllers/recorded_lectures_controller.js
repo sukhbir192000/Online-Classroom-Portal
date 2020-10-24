@@ -1,8 +1,6 @@
 const RecordedLecturesModel=require('../models/recorded-lecture');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
-const GroupModel=require('../models/group');
-const SubGroupModel=require('../models/sub-group');
 
 
 module.exports.recordedLecture=async function(req,res){
@@ -101,20 +99,14 @@ module.exports.recordedLecture=async function(req,res){
                             "classSub.course":course,
                             "classSub.class":user.class
                         },
-                        {
-                            $or: [
-                                {"classSub.group": undefined},
-                                {
-                                    $and: [
-                                        {"classSub.group": user.group},
-                                        {$or: [
-                                            {"classSub.subGroup": undefined},
-                                            {"classSub.subGroup": user.subGroup}
-                                        ]}
-                                    ]
-                                }
-                            ]
-                        }
+                        {$or: [
+                            {"classSub.group": undefined},
+                            {"classSub.group": user.group}
+                        ]},
+                        {$or: [
+                            {"classSub.subGroup": undefined},
+                            {"classSub.subGroup": user.subGroup}
+                        ]}
                     ]
                 }).populate('classSub.course');
                 if(recordedLectures.length>0){
@@ -198,84 +190,44 @@ module.exports.recordedLecture=async function(req,res){
     }
 }
 
-module.exports.recordedLectureCreate=async function(req,res){
-    
-    try{
-        console.log(req.body);
-        let user=res.locals.user
-        if(req.body.subject=="All"){
-            for(let subjects of user.classSub){
+async function addRecordedLectures(req, res, classSubList){
+    let user = res.locals.user;
+    for(let subject in classSubList){
+        for(let clas in classSubList[subject]){
+            let fullCondition = false;
+            if(classSubList[subject][clas]=={}){
+                fullCondition = true;
+            }
+            else{
+                let classInfo = await ClassModel.findById(clas);
+                if((req.body.class_type=="Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type=="Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)){
+                    fullCondition = true;
+                }
+            }
+            if(fullCondition){
                 await RecordedLecturesModel.create({
                     title: req.body.title,
                     content: req.body.message,
-                    classSub: subjects,
+                    classSub: {
+                        course: subject,
+                        class: clas
+                    },
                     recordedOn: req.body.lecture_date,
                     postedBy: user._id,
                     link: req.body.lecture_link,
                     references: req.body.lecture_references
                 })
             }
-        }
-        else{
-            var subject = req.body.subject;
-            if(req.body.branch=="All"){
-                for(let classSubElement of user.classSub){
-                    if(subject==classSubElement.course){
-                        await RecordedLecturesModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: classSubElement,
-                            recordedOn: req.body.lecture_date,
-                            postedBy: user._id,
-                            link: req.body.lecture_link,
-                            references: req.body.lecture_references
-                        })
-                    }
-                }
-            }
             else{
-                var branch = req.body.branch;
-                if(req.body.group == "All"){
-                    for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course && branch==classSubElement.class){
-                            await RecordedLecturesModel.create({
-                                title: req.body.title,
-                                content: req.body.message,
-                                classSub: classSubElement,
-                                recordedOn: req.body.lecture_date,
-                                postedBy: user._id,
-                                link: req.body.lecture_link,
-                                references: req.body.lecture_references
-                            })
-                        }
-                    }
-                }
-                else{
-                    var group = req.body.group;
-                    if(req.body.sub_group == "All"){
-                        for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                await RecordedLecturesModel.create({
-                                    title: req.body.title,
-                                    content: req.body.message,
-                                    classSub: classSubElement,
-                                    recordedOn: req.body.lecture_date,
-                                    postedBy: user._id,
-                                    link: req.body.lecture_link,
-                                    references: req.body.lecture_references
-                                })
-                            }
-                        }
-                    }
-                    else{
+                for(let groupItem of classSubList[subject][clas].groups){
+                    if(req.body.class_type=="Lecture"){
                         await RecordedLecturesModel.create({
                             title: req.body.title,
                             content: req.body.message,
                             classSub: {
                                 course: subject,
-                                class: branch,
-                                group: group,
-                                subGroup: req.body.sub_group
+                                class: clas,
+                                group: groupItem
                             },
                             recordedOn: req.body.lecture_date,
                             postedBy: user._id,
@@ -283,6 +235,129 @@ module.exports.recordedLectureCreate=async function(req,res){
                             references: req.body.lecture_references
                         })
                     }
+                    else{
+                        await RecordedLecturesModel.create({
+                            title: req.body.title,
+                            content: req.body.message,
+                            classSub: {
+                                course: subject,
+                                class: clas,
+                                subGroup: groupItem
+                            },
+                            recordedOn: req.body.lecture_date,
+                            postedBy: user._id,
+                            link: req.body.lecture_link,
+                            references: req.body.lecture_references
+                        })
+                    }
+                }
+            }
+        }
+    }
+}
+
+module.exports.recordedLectureCreate=async function(req,res){
+    
+    try{
+        let user=res.locals.user
+        if(req.body.subject=="All"){
+            let classSubList = {};
+            for(let classSubElement of user.classSub){
+                if(!classSubList[classSubElement.course]){
+                    classSubList[classSubElement.course] = {};
+                }
+                if(!classSubList[classSubElement.course][classSubElement.class]){
+                    classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                }
+                if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                    if(classSubElement.group){
+                        classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                    }
+                    else{
+                        classSubList[classSubElement.course][classSubElement.class] = {};
+                    }
+                }
+                else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                }
+            }
+            addRecordedLectures(req, res, classSubList);
+        }
+        else{
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                let classSubList = {};
+                for(let classSubElement of user.classSub){
+                    if(classSubElement.course == subject){
+                        if(!classSubList[classSubElement.course]){
+                            classSubList[classSubElement.course] = {};
+                        }
+                        if(!classSubList[classSubElement.course][classSubElement.class]){
+                            classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                        }
+                        if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                            if(classSubElement.group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else{
+                                classSubList[classSubElement.course][classSubElement.class] = {};
+                            }
+                        }
+                        else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                            classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                        }
+                    }
+                }
+                addRecordedLectures(req, res, classSubList);
+            }
+            else{
+                var branch = req.body.branch;
+                if(req.body.sub_group == "All"){
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                                if(classSubElement.group){
+                                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                                }
+                                else{
+                                    classSubList[classSubElement.course][classSubElement.class] = {};
+                                }
+                            }
+                            else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    addRecordedLectures(req, res, classSubList);
+                }
+                else{
+                    var group = req.body.sub_group;
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.class_type=="Lecture" && classSubElement.group==group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else if(req.body.class_type=="Lab" && classSubElement.subGroup==group){
+                                console.log("hi");
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    addRecordedLectures(req, res, classSubList);
                 }
             }
         }
