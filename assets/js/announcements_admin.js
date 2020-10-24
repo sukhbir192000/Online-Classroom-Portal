@@ -84,7 +84,7 @@ document.querySelector(".add").addEventListener('click',function(e){
         subGroupForm.disabled=true;
         subjectForm.selectedIndex=0;
         branchForm.selectedIndex=0;
-        groupForm.selectedIndex=0;
+        classTypeForm.selectedIndex=0;
         subGroupForm.selectedIndex=0;
     }
     else{
@@ -96,7 +96,7 @@ document.querySelector(".add").addEventListener('click',function(e){
  //----------addannouncement--------------------
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
-var groupForm=document.getElementById("group")
+var classTypeForm=document.getElementById("class_type")
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
 var subjectForm=document.getElementById("subject");
@@ -158,7 +158,7 @@ subjectForm.addEventListener('change',function(e){
 let getGroups = function(){
     $.ajax({
         url:"/content/announcements/form/subGroups",
-        data: {course: subjectForm.value,class:branchForm.value,group:groupForm.value},
+        data: {course: subjectForm.value,class:branchForm.value,classType:classTypeForm.value},
         cache:false,
         type:"POST",
         success:function(response){
@@ -186,29 +186,9 @@ branchForm.addEventListener('change',function(e){
         subGroupForm.disabled=true;
     }
     getGroups();
-    // if(branchForm.value!="All"){
-    //     $.ajax({
-    //         url:"/content/announcements/form/groups",
-    //         data: {course: subjectForm.value,class:branchForm.value},
-    //         cache:false,
-    //         type:"POST",
-    //         success:function(response){
-    //             groupForm.innerText="";
-    //             var opt = document.createElement('option');
-    //             opt.value="All",
-    //             opt.innerText="All",
-    //             groupForm.appendChild(opt);
-    //             for(let obj of response.data.groupList){
-    //                 var opt = document.createElement('option');
-    //                 opt.value=obj.id,
-    //                 opt.innerText=obj.name,
-    //                 groupForm.appendChild(opt);
-    //             }
-    //         }
-    //     })
-    // }
+
 })
-groupForm.addEventListener('change',function(e){
+classTypeForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
     getGroups();
 })
