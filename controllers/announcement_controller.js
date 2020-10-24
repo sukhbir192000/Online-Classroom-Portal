@@ -450,7 +450,7 @@ module.exports.announcementCreate=async function(req,res){
                     classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
                 }
             }
-            addAnnouncements(req, res, classSubList);
+            await addAnnouncements(req, res, classSubList);
         }
         else{
             var subject = req.body.subject;
@@ -477,7 +477,7 @@ module.exports.announcementCreate=async function(req,res){
                         }
                     }
                 }
-                addAnnouncements(req, res, classSubList);
+                await addAnnouncements(req, res, classSubList);
             }
             else{
                 var branch = req.body.branch;
@@ -504,7 +504,7 @@ module.exports.announcementCreate=async function(req,res){
                             }
                         }
                     }
-                    addAnnouncements(req, res, classSubList);
+                    await addAnnouncements(req, res, classSubList);
                 }
                 else{
                     var group = req.body.sub_group;
@@ -526,12 +526,12 @@ module.exports.announcementCreate=async function(req,res){
                             }
                         }
                     }
-                    addAnnouncements(req, res, classSubList);
+                    await addAnnouncements(req, res, classSubList);
                 }
             }
         }
         req.flash('success', 'Announcement Posted');
-        return res.redirect('back')
+        return res.redirect('back');
     }
     catch(err){
         console.log("error while adding to Db announcements :",err);

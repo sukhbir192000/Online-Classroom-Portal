@@ -281,7 +281,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                     classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
                 }
             }
-            addRecordedLectures(req, res, classSubList);
+            await addRecordedLectures(req, res, classSubList);
         }
         else{
             var subject = req.body.subject;
@@ -308,7 +308,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                         }
                     }
                 }
-                addRecordedLectures(req, res, classSubList);
+                await addRecordedLectures(req, res, classSubList);
             }
             else{
                 var branch = req.body.branch;
@@ -335,7 +335,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                             }
                         }
                     }
-                    addRecordedLectures(req, res, classSubList);
+                    await addRecordedLectures(req, res, classSubList);
                 }
                 else{
                     var group = req.body.sub_group;
@@ -357,7 +357,7 @@ module.exports.recordedLectureCreate=async function(req,res){
                             }
                         }
                     }
-                    addRecordedLectures(req, res, classSubList);
+                    await addRecordedLectures(req, res, classSubList);
                 }
             }
         }
