@@ -4,8 +4,6 @@ const AssignmentModel=require('../models/assignment');
 const AssignmentSubmissionModel=require('../models/assignment_submission');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
-const GroupModel=require('../models/group');
-const SubGroupModel=require('../models/sub-group');
 const FileModel=require('../models/file');
 
 

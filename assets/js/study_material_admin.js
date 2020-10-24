@@ -73,9 +73,6 @@ for(let i=0;i<boxelements.length;i++){
     })   
 }
 
-
-
-
 document.addEventListener('click',function(e){
     if(current_box){
         var rect = current_box.getBoundingClientRect();
@@ -215,7 +212,6 @@ function inputFormInitialise(){
 var branchForm=document.getElementById("branch")
 branchForm.disabled=true;
 var classTypeForm=document.getElementById("class_type")
-classTypeForm.disabled=true;
 var subGroupForm=document.getElementById("sub_group")
 subGroupForm.disabled=true;
 var subjectForm=document.getElementById("subject");
@@ -226,6 +222,20 @@ addButton.addEventListener('click',function(e){
         cache:false,
         type:"GET",
         success:function(response){
+            classTypeForm.innerText="";
+            if(response.data.lecturePresent){
+                var opt = document.createElement('option');
+                opt.value="Lecture",
+                opt.innerText="Lecture",
+                classTypeForm.appendChild(opt);
+            }
+            if(response.data.labPresent){
+                var opt = document.createElement('option');
+                opt.value="Lab",
+                opt.innerText="Lab/Tutorial",
+                classTypeForm.appendChild(opt);
+            }
+            classTypeForm.selectedIndex = 0;
             subjectForm.innerText="";
             var opt = document.createElement('option');
             opt.value="All",
@@ -240,22 +250,61 @@ addButton.addEventListener('click',function(e){
         }
     })
 })
+
 subjectForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
-    classTypeForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
-    classTypeForm.disabled=true;
     subGroupForm.disabled=true;
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
+        $.ajax({
+            url:"/content/announcements/form/branches",
+            data: {course: subjectForm.value, class_type: classTypeForm.value},
+            cache:false,
+            type:"POST",
+            success:function(response){
+                classTypeForm.innerText="";
+                if(response.data.lecturePresent){
+                    var opt = document.createElement('option');
+                    opt.value="Lecture",
+                    opt.innerText="Lecture",
+                    classTypeForm.appendChild(opt);
+                }
+                if(response.data.labPresent){
+                    var opt = document.createElement('option');
+                    opt.value="Lab",
+                    opt.innerText="Lab/Tutorial",
+                    classTypeForm.appendChild(opt);
+                }
+                branchForm.innerText="";
+                var opt = document.createElement('option');
+                opt.value="All",
+                opt.innerText="All",
+                branchForm.appendChild(opt);
+                for(let obj of response.data.branchList){
+                    var opt = document.createElement('option');
+                    opt.value=obj.id,
+                    opt.innerText=obj.name,
+                    branchForm.appendChild(opt);
+                }
+            }
+        })
     }
     else{
         branchForm.disabled=true;
     }
+})
+// ---------------------
+
+classTypeForm.addEventListener('change',function(e){
+    branchForm.selectedIndex=0;
+    subGroupForm.selectedIndex=0;
+    subGroupForm.disabled=true;
     if(subjectForm.value!="All"){
+        branchForm.disabled=false;
         $.ajax({
             url:"/content/announcements/form/branches",
-            data: {course: subjectForm.value},
+            data: {course: subjectForm.value, class_type: classTypeForm.value},
             cache:false,
             type:"POST",
             success:function(response){
@@ -273,43 +322,14 @@ subjectForm.addEventListener('change',function(e){
             }
         })
     }
-})
-// ---------------------
-branchForm.addEventListener('change',function(e){
-    classTypeForm.selectedIndex=0;
-    subGroupForm.selectedIndex=0;
-    subGroupForm.disabled=true;
-    if(branchForm.value!="All"){
-        classTypeForm.disabled=false;
-    }
     else{
-        classTypeForm.disabled=true;
-    }
-    if(branchForm.value!="All"){
-        $.ajax({
-            url:"/content/announcements/form/groups",
-            data: {course: subjectForm.value,class:branchForm.value},
-            cache:false,
-            type:"POST",
-            success:function(response){
-                classTypeForm.innerText="";
-                var opt = document.createElement('option');
-                opt.value="All",
-                opt.innerText="All",
-                classTypeForm.appendChild(opt);
-                for(let obj of response.data.groupList){
-                    var opt = document.createElement('option');
-                    opt.value=obj.id,
-                    opt.innerText=obj.name,
-                    classTypeForm.appendChild(opt);
-                }
-            }
-        })
+        branchForm.disabled=true;
     }
 })
-classTypeForm.addEventListener('change',function(e){
+
+branchForm.addEventListener('change',function(e){
     subGroupForm.selectedIndex=0;
-    if(classTypeForm.value!="All"){
+    if(branchForm.value!="All"){
         subGroupForm.disabled=false;
         $.ajax({
             url:"/content/announcements/form/subGroups",
@@ -322,14 +342,14 @@ classTypeForm.addEventListener('change',function(e){
                 opt.value="All",
                 opt.innerText="All",
                 subGroupForm.appendChild(opt);
-                for(let obj of response.data.subGroupList){
+                for(let obj of response.data.groupList){
                     var opt = document.createElement('option');
                     opt.value=obj.id,
                     opt.innerText=obj.name,
                     subGroupForm.appendChild(opt);
                 }
             }
-        })
+        });
     }
     else{
         subGroupForm.disabled=true;
