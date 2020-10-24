@@ -68,7 +68,19 @@ for(let i=0;i<boxelements.length;i++){
             current_box.children[1].children[2].children[1].children[1].children[0].setAttribute('value',title.textContent);
             current_box.children[1].children[2].children[1].children[1].children[1].setAttribute('value',description.textContent);
             current_box.children[1].children[2].children[1].children[1].children[2].setAttribute('value',deleted_files);
-            current_box.children[1].children[2].children[1].children[1].submit();
+            // current_box.children[1].children[2].children[1].children[1].submit();
+            $.ajax({
+                url: current_box.children[1].children[2].children[1].children[1].action,
+                data: {
+                    title: title.textContent,
+                    description: description.textContent,
+                    after_delete_files: deleted_files
+                },
+                type: "POST",
+                success: function(response){
+                    location.reload();
+                }
+            })
         })
     })   
 }

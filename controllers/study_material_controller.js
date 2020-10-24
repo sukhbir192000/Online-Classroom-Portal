@@ -407,24 +407,20 @@ module.exports.studyMaterialCreate=async function(req,res){
 
 module.exports.studyMaterialUpdate=async function(req,res){
     try{
-        // console.log(req.body);
         let studyMaterial=await StudyMaterialsModel.findById(req.params.studyMaterialId);
         studyMaterial.title=req.body.title;
         studyMaterial.content=req.body.description;
-        let delete_files=(req.body.after_delete_files).split(',');
-        
+        let delete_files=(req.body.after_delete_files);
         for(let i=0;i<delete_files.length;i++){
             if(delete_files[i]==""){
                 continue;
             }
-            // console.log(delete_files[i]);
             let pathTry=new URL(delete_files[i]);
             let pathName=pathTry.pathname
             pathName=path.normalize(pathName);
             delete_files[i]=pathName;
-            
+            delete_files[i] = decodeURI(delete_files[i]);
         }
-        console.log(delete_files);
         for(let i=0;i<studyMaterial.files.length;i++){
          
             if(delete_files.includes(studyMaterial.files[i].url)){
@@ -439,13 +435,12 @@ module.exports.studyMaterialUpdate=async function(req,res){
                 }
                 studyMaterial.files.splice(i,1);
                 i--;
-                console.log("edited array")
             }
             
         }
         studyMaterial.save();
-        return res.redirect('back');
-    }  
+        return res.json(200);
+    }
     catch(err){
         console.log("error while updating study material:",err);
         return res.redirect('back');
@@ -468,4 +463,4 @@ module.exports.studyMaterialDelete=async function(req,res){
     await StudyMaterialsModel.findByIdAndDelete(studyMaterial._id);
     req.flash('success', 'Study Material Deleted');
     return res.redirect('back');
-}
+};
