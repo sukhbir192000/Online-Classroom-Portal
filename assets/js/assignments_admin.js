@@ -91,7 +91,21 @@ for(let i=0;i<boxelements.length;i++){
             current_box.children[1].children[3].children[1].children[1].children[2].setAttribute('value',deleted_files);
             current_box.children[1].children[3].children[1].children[1].children[3].setAttribute('value',points.textContent);
             current_box.children[1].children[3].children[1].children[1].children[4].setAttribute('value',deadline_input.value);
-            current_box.children[1].children[3].children[1].children[1].submit();
+            // current_box.children[1].children[3].children[1].children[1].submit();
+            $.ajax({
+                url: current_box.children[1].children[3].children[1].children[1].action,
+                data: {
+                    title: title.textContent,
+                    description: description.textContent,
+                    after_delete_files: deleted_files,
+                    points: points.textContent,
+                    deadline_input: deadline_input.value
+                },
+                type: "POST",
+                success: function(response){
+                    location.reload();
+                }
+            })
         })
     })   
 }

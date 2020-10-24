@@ -455,23 +455,17 @@ module.exports.assignmentUpdate=async function(req,res){
         let assignment=await AssignmentModel.findById(req.params.assignmentId);
         assignment.title=req.body.title;
         assignment.content=req.body.description;
-        console.log("hi",req.body);
-        let delete_files=(req.body.after_delete_files).split(',');
-        console.log(delete_files);
-     
+        let delete_files=(req.body.after_delete_files);
         for(let i=0;i<delete_files.length;i++){
             if(delete_files[i]==""){
                 continue;
             }
-            // console.log(delete_files[i]);
             let pathTry=new URL(delete_files[i]);
             let pathName=pathTry.pathname
             pathName=path.normalize(pathName);
             delete_files[i]=pathName;
-            
+            delete_files[i] = decodeURI(delete_files[i]);
         }
-        console.log("hi2");
-        console.log(delete_files);
         for(let i=0;i<assignment.files.length;i++){
          
             if(delete_files.includes(assignment.files[i].url)){
@@ -486,12 +480,11 @@ module.exports.assignmentUpdate=async function(req,res){
                 }
                 assignment.files.splice(i,1);
                 i--;
-                console.log("edited array")
             }
             
         }
         assignment.save();
-        return res.redirect('back');
+        return res.json(200);
     }  
     catch(err){
         console.log("error while updating assignment:",err);
