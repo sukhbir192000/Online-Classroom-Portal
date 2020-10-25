@@ -43,8 +43,8 @@
                                 <option value="All">All</option>
                             </select><br><br>
                             <label>Date of lecture:</label>
-                            <input class="date_lecture" name="lecture_date" type="date" id="lecture_date" placeholder="Date of lecture" ><br><br>
-                            <input type=text name="lecture_link" id="lecture_link" placeholder="Link of the lecture" ><br><br>
+                            <input class="date_lecture" name="lecture_date" type="date" id="lecture_date" placeholder="Date of lecture" required><br><br>
+                            <input type=url name="lecture_link" id="lecture_link" placeholder="Link of the lecture" ><br><br>
                             <input type="text" name="title" id="lecture_title" placeholder="Title of lecture" ></textarea><br><br>
                             <textarea name="lecture_references" id="lecture_references" placeholder="Book/video references" rows="3"></textarea><br><br>
                             <textarea name="message" id="lecture_message" placeholder="Other description" rows="4" ></textarea><br><br>
@@ -58,19 +58,19 @@
                     <div class="box">
                         <div class="box_heading"> 
                             <div class="subject"><%= lecture.classSub.course.name %></div>
-                            <div class="title"><%= lecture.title %></div>
+                            <div class="title" <% if(lecture.title == ""){%> style="display:none"<%}%>><%= lecture.title %></div>
                         </div>
                         <div class="box_content">  
                             <div class="box_content_details">
-                                <div class="deadline"><%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(lecture.recordedOn) %></div>
+                                <div class="deadline">Recorded on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(lecture.recordedOn) %></div>
                                 <% if(user.isAdmin){ %>
                                     <div class="branch_admin">Branch: <%= lecture.classSub.class.stream %></div>
-                                    <div class="group_admin"><% if(lecture.classSub.group){ %>Class Group: <%= lecture.classSub.group.groupNumber %><% } %></div>
-                                    <div class="sub_group_admin"><% if(lecture.classSub.subGroup){ %>Lab Group: <%= lecture.classSub.subGroup.subGroupNumber %><% } %></div>
+                                    <div class="group_admin" <% if(!lecture.classSub.group){ %> style="display:none"<%}%>><% if(lecture.classSub.group){ %>Class Group: <%= lecture.classSub.group.groupNumber %><% } %></div>
+                                    <div class="sub_group_admin" <% if(!lecture.classSub.subGroup){ %> style="display:none"<%}%>><% if(lecture.classSub.subGroup){ %>Lab Group: <%= lecture.classSub.subGroup.subGroupNumber %><% } %></div>
                                 <% } %>
-                                <a class="link" target="_blank" href="<%= lecture.link %>"><%= lecture.link %></a>
-                                <div class="references"><%= lecture.references %></div>
-                                <div class="description"><%= lecture.content %></div>
+                                <a class="link" target="_blank" href="<%= lecture.link %>" <%if(lecture.link==""){%>style="display:none"<%}%>><%= lecture.link %></a>
+                                <div class="references" <%if(lecture.references==""){%>style="display:none"<%}%>><%= lecture.references %></div>
+                                <div class="description" <%if(lecture.content==""){%>style="display:none"<%}%>><%= lecture.content %></div>
                                 <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(lecture.createdAt) %></div>
                                 <% if(user.isAdmin){ %>
                                     <div class="buttons">
