@@ -1,8 +1,6 @@
 const QuizModel=require('../models/quiz');
 const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
-const GroupModel=require('../models/group');
-const SubGroupModel=require('../models/sub-group');
 
 
 module.exports.quiz=async function(req,res){
@@ -101,20 +99,14 @@ module.exports.quiz=async function(req,res){
                             "classSub.course":course,
                             "classSub.class":user.class
                         },
-                        {
-                            $or: [
-                                {"classSub.group": undefined},
-                                {
-                                    $and: [
-                                        {"classSub.group": user.group},
-                                        {$or: [
-                                            {"classSub.subGroup": undefined},
-                                            {"classSub.subGroup": user.subGroup}
-                                        ]}
-                                    ]
-                                }
-                            ]
-                        }
+                        {$or: [
+                            {"classSub.group": undefined},
+                            {"classSub.group": user.group}
+                        ]},
+                        {$or: [
+                            {"classSub.subGroup": undefined},
+                            {"classSub.subGroup": user.subGroup}
+                        ]}
                     ]
                 }).populate('classSub.course');
                 if(quizzes.length>0){
@@ -198,85 +190,44 @@ module.exports.quiz=async function(req,res){
     }
 }
 
-
-module.exports.quizCreate=async function(req,res){
-    
-    try{
-        console.log(req.body);
-        let user=res.locals.user
-        if(req.body.subject=="All"){
-            for(let subjects of user.classSub){
+async function addQuizzes(req, res, classSubList){
+    let user = res.locals.user;
+    for(let subject in classSubList){
+        for(let clas in classSubList[subject]){
+            let fullCondition = false;
+            if(classSubList[subject][clas]=={}){
+                fullCondition = true;
+            }
+            else{
+                let classInfo = await ClassModel.findById(clas);
+                if((req.body.class_type=="Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type=="Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)){
+                    fullCondition = true;
+                }
+            }
+            if(fullCondition){
                 await QuizModel.create({
                     title: req.body.quiz_title,
                     content: req.body.instructions,
-                    classSub: subjects,
+                    classSub: {
+                        course: subject,
+                        class: clas
+                    },
                     postedBy: user._id,
                     link: req.body.quiz_link,
                     dateTime: req.body.quiz_date,
                     duration: req.body.time_quiz
                 })
             }
-        }
-        else{
-            var subject = req.body.subject;
-            if(req.body.branch=="All"){
-                for(let classSubElement of user.classSub){
-                    if(subject==classSubElement.course){
-                        await QuizModel.create({
-                            title: req.body.quiz_title,
-                            content: req.body.instructions,
-                            classSub: classSubElement,
-                            postedBy: user._id,
-                            link: req.body.quiz_link,
-                            dateTime: req.body.quiz_date,
-                            duration: req.body.time_quiz
-                        })
-                    }
-                }
-            }
             else{
-                var branch = req.body.branch;
-                if(req.body.group == "All"){
-                    for(let classSubElement of user.classSub){
-                        if(subject==classSubElement.course && branch==classSubElement.class){
-                            await QuizModel.create({
-                                title: req.body.quiz_title,
-                                content: req.body.instructions,
-                                classSub: classSubElement,
-                                postedBy: user._id,
-                                link: req.body.quiz_link,
-                                dateTime: req.body.quiz_date,
-                                duration: req.body.time_quiz
-                            })
-                        }
-                    }
-                }
-                else{
-                    var group = req.body.group;
-                    if(req.body.sub_group == "All"){
-                        for(let classSubElement of user.classSub){
-                            if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                                await QuizModel.create({
-                                    title: req.body.quiz_title,
-                                    content: req.body.instructions,
-                                    classSub: classSubElement,
-                                    postedBy: user._id,
-                                    link: req.body.quiz_link,
-                                    dateTime: req.body.quiz_date,
-                                    duration: req.body.time_quiz
-                                })
-                            }
-                        }
-                    }
-                    else{
+                for(let groupItem of classSubList[subject][clas].groups){
+                    if(req.body.class_type=="Lecture"){
                         await QuizModel.create({
                             title: req.body.quiz_title,
                             content: req.body.instructions,
                             classSub: {
                                 course: subject,
-                                class: branch,
-                                group: group,
-                                subGroup: req.body.sub_group
+                                class: clas,
+                                group: groupItem
                             },
                             postedBy: user._id,
                             link: req.body.quiz_link,
@@ -284,6 +235,130 @@ module.exports.quizCreate=async function(req,res){
                             duration: req.body.time_quiz
                         })
                     }
+                    else{
+                        await QuizModel.create({
+                            title: req.body.quiz_title,
+                            content: req.body.instructions,
+                            classSub: {
+                                course: subject,
+                                class: clas,
+                                subGroup: groupItem
+                            },
+                            postedBy: user._id,
+                            link: req.body.quiz_link,
+                            dateTime: req.body.quiz_date,
+                            duration: req.body.time_quiz
+                        })
+                    }
+                }
+            }
+        }
+    }
+}
+
+module.exports.quizCreate=async function(req,res){
+    
+    try{
+        console.log(req.body);
+        let user=res.locals.user
+        if(req.body.subject=="All"){
+            let classSubList = {};
+            for(let classSubElement of user.classSub){
+                if(!classSubList[classSubElement.course]){
+                    classSubList[classSubElement.course] = {};
+                }
+                if(!classSubList[classSubElement.course][classSubElement.class]){
+                    classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                }
+                if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                    if(classSubElement.group){
+                        classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                    }
+                    else{
+                        classSubList[classSubElement.course][classSubElement.class] = {};
+                    }
+                }
+                else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                }
+            }
+            await addAnnouncements(req, res, classSubList);
+        }
+        else{
+            var subject = req.body.subject;
+            if(req.body.branch=="All"){
+                let classSubList = {};
+                for(let classSubElement of user.classSub){
+                    if(classSubElement.course == subject){
+                        if(!classSubList[classSubElement.course]){
+                            classSubList[classSubElement.course] = {};
+                        }
+                        if(!classSubList[classSubElement.course][classSubElement.class]){
+                            classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                        }
+                        if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                            if(classSubElement.group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else{
+                                classSubList[classSubElement.course][classSubElement.class] = {};
+                            }
+                        }
+                        else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                            classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                        }
+                    }
+                }
+                await addAnnouncements(req, res, classSubList);
+            }
+            else{
+                var branch = req.body.branch;
+                if(req.body.sub_group == "All"){
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.class_type=="Lecture" && !classSubElement.subGroup && classSubList[classSubElement.course][classSubElement.class]!={}){
+                                if(classSubElement.group){
+                                    classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                                }
+                                else{
+                                    classSubList[classSubElement.course][classSubElement.class] = {};
+                                }
+                            }
+                            else if(req.body.class_type=="Lab" && classSubElement.subGroup){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    await addAnnouncements(req, res, classSubList);
+                }
+                else{
+                    var group = req.body.sub_group;
+                    let classSubList = {};
+                    for(let classSubElement of user.classSub){
+                        if(classSubElement.course == subject && classSubElement.class == branch){
+                            if(!classSubList[classSubElement.course]){
+                                classSubList[classSubElement.course] = {};
+                            }
+                            if(!classSubList[classSubElement.course][classSubElement.class]){
+                                classSubList[classSubElement.course][classSubElement.class] = {groups:[]}
+                            }
+                            if(req.body.class_type=="Lecture" && classSubElement.group==group){
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.group);
+                            }
+                            else if(req.body.class_type=="Lab" && classSubElement.subGroup==group){
+                                console.log("hi");
+                                classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
+                            }
+                        }
+                    }
+                    await addAnnouncements(req, res, classSubList);
                 }
             }
         }
@@ -297,7 +372,6 @@ module.exports.quizCreate=async function(req,res){
 }
 
 module.exports.quizUpdate=async function(req,res){
-    console.log(req.body);
     await QuizModel.findByIdAndUpdate(req.params.quizId,{
         $set: {
             title: req.body.title,
