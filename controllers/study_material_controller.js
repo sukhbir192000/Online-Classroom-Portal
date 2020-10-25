@@ -410,33 +410,32 @@ module.exports.studyMaterialUpdate=async function(req,res){
         let studyMaterial=await StudyMaterialsModel.findById(req.params.studyMaterialId);
         studyMaterial.title=req.body.title;
         studyMaterial.content=req.body.description;
-        let delete_files=(req.body.after_delete_files);
-        for(let i=0;i<delete_files.length;i++){
-            if(delete_files[i]==""){
-                continue;
+        let delete_files=req.body.after_delete_files;
+        if(delete_files){
+            for(let i=0;i<delete_files.length;i++){
+                let pathTry=new URL(delete_files[i]);
+                let pathName=pathTry.pathname
+                pathName=path.normalize(pathName);
+                delete_files[i]=pathName;
+                delete_files[i] = decodeURI(delete_files[i]);
             }
-            let pathTry=new URL(delete_files[i]);
-            let pathName=pathTry.pathname
-            pathName=path.normalize(pathName);
-            delete_files[i]=pathName;
-            delete_files[i] = decodeURI(delete_files[i]);
-        }
-        for(let i=0;i<studyMaterial.files.length;i++){
-         
-            if(delete_files.includes(studyMaterial.files[i].url)){
-                var fileElement = await FileModel.findOne({url: studyMaterial.files[i].url});
-                if(fileElement.timesUsed>1){
-                    fileElement.timesUsed--;
-                    fileElement.save();
+            for(let i=0;i<studyMaterial.files.length;i++){
+             
+                if(delete_files.includes(studyMaterial.files[i].url)){
+                    var fileElement = await FileModel.findOne({url: studyMaterial.files[i].url});
+                    if(fileElement.timesUsed>1){
+                        fileElement.timesUsed--;
+                        fileElement.save();
+                    }
+                    else{
+                        fs.unlinkSync(path.join(__dirname,'..',studyMaterial.files[i].url));
+                        await FileModel.findByIdAndDelete(fileElement._id);
+                    }
+                    studyMaterial.files.splice(i,1);
+                    i--;
                 }
-                else{
-                    fs.unlinkSync(path.join(__dirname,'..',studyMaterial.files[i].url));
-                    await FileModel.findByIdAndDelete(fileElement._id);
-                }
-                studyMaterial.files.splice(i,1);
-                i--;
+                
             }
-            
         }
         studyMaterial.save();
         return res.json(200);

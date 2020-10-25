@@ -456,32 +456,34 @@ module.exports.assignmentUpdate=async function(req,res){
         assignment.title=req.body.title;
         assignment.content=req.body.description;
         let delete_files=(req.body.after_delete_files);
-        for(let i=0;i<delete_files.length;i++){
-            if(delete_files[i]==""){
-                continue;
-            }
-            let pathTry=new URL(delete_files[i]);
-            let pathName=pathTry.pathname
-            pathName=path.normalize(pathName);
-            delete_files[i]=pathName;
-            delete_files[i] = decodeURI(delete_files[i]);
-        }
-        for(let i=0;i<assignment.files.length;i++){
-         
-            if(delete_files.includes(assignment.files[i].url)){
-                var fileElement = await FileModel.findOne({url: assignment.files[i].url});
-                if(fileElement.timesUsed>1){
-                    fileElement.timesUsed--;
-                    fileElement.save();
+        if(delete_files){
+            for(let i=0;i<delete_files.length;i++){
+                if(delete_files[i]==""){
+                    continue;
                 }
-                else{
-                    fs.unlinkSync(path.join(__dirname,'..',assignment.files[i].url));
-                    await FileModel.findByIdAndDelete(fileElement._id);
-                }
-                assignment.files.splice(i,1);
-                i--;
+                let pathTry=new URL(delete_files[i]);
+                let pathName=pathTry.pathname
+                pathName=path.normalize(pathName);
+                delete_files[i]=pathName;
+                delete_files[i] = decodeURI(delete_files[i]);
             }
-            
+            for(let i=0;i<assignment.files.length;i++){
+             
+                if(delete_files.includes(assignment.files[i].url)){
+                    var fileElement = await FileModel.findOne({url: assignment.files[i].url});
+                    if(fileElement.timesUsed>1){
+                        fileElement.timesUsed--;
+                        fileElement.save();
+                    }
+                    else{
+                        fs.unlinkSync(path.join(__dirname,'..',assignment.files[i].url));
+                        await FileModel.findByIdAndDelete(fileElement._id);
+                    }
+                    assignment.files.splice(i,1);
+                    i--;
+                }
+                
+            }
         }
         assignment.save();
         return res.json(200);
