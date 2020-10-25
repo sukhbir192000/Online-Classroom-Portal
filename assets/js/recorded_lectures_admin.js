@@ -26,6 +26,15 @@ for(let i=0;i<boxelements.length;i++){
             description.textContent=arr[1];
             references.textContent=arr[2];
             link.textContent=arr[3];
+            if(description.textContent == ""){
+                description.style.display = "none";
+            }
+            if(references.textContent == ""){
+                references.style.display = "none";
+            }
+            if(link.textContent == ""){
+                link.style.display = "none";
+            }
             current_box=null;
             arr=[];
         }
@@ -45,14 +54,16 @@ for(let i=0;i<boxelements.length;i++){
         title.classList.add("heading_edit");
         description.contentEditable="true";
         description.setAttribute("description-text", "Enter description");
-        description.classList.add("content_edit")
+        description.classList.add("content_edit");
+        description.style.display = "flex";
         references.contentEditable="true";
         references.setAttribute("references-text","Enter book/video references");
-        references.classList.add("content_edit")
+        references.classList.add("content_edit");
+        references.style.display = "flex";
         link.contentEditable="true";
         link.setAttribute("link-text","Enter link of lecture");
-        link.classList.add("content_edit")
-        link.classList.add("content_edit")
+        link.classList.add("content_edit");
+        link.style.display = "flex";
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
@@ -95,6 +106,15 @@ document.addEventListener('click',function(e){
             description.textContent=arr[1];
             references.textContent=arr[2];
             link.textContent=arr[3];
+            if(description.textContent == ""){
+                description.style.display = "none";
+            }
+            if(references.textContent == ""){
+                references.style.display = "none";
+            }
+            if(link.textContent == ""){
+                link.style.display = "none";
+            }
             current_box=null;
             arr=[];
         }
