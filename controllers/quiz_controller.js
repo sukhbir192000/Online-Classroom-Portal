@@ -282,7 +282,7 @@ module.exports.quizCreate=async function(req,res){
                     classSubList[classSubElement.course][classSubElement.class].groups.push(classSubElement.subGroup);
                 }
             }
-            await addAnnouncements(req, res, classSubList);
+            await addQuizzes(req, res, classSubList);
         }
         else{
             var subject = req.body.subject;
@@ -309,7 +309,7 @@ module.exports.quizCreate=async function(req,res){
                         }
                     }
                 }
-                await addAnnouncements(req, res, classSubList);
+                await addQuizzes(req, res, classSubList);
             }
             else{
                 var branch = req.body.branch;
@@ -336,7 +336,7 @@ module.exports.quizCreate=async function(req,res){
                             }
                         }
                     }
-                    await addAnnouncements(req, res, classSubList);
+                    await addQuizzes(req, res, classSubList);
                 }
                 else{
                     var group = req.body.sub_group;
@@ -358,7 +358,7 @@ module.exports.quizCreate=async function(req,res){
                             }
                         }
                     }
-                    await addAnnouncements(req, res, classSubList);
+                    await addQuizzes(req, res, classSubList);
                 }
             }
         }
