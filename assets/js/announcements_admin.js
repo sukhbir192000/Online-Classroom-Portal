@@ -169,10 +169,11 @@ subjectForm.addEventListener('change',function(e){
                 branchForm.appendChild(opt);
                 for(let obj of response.data.branchList){
                     var opt = document.createElement('option');
-                    opt.value=obj.id,
-                    opt.innerText=obj.name,
+                    opt.value=obj.id;
+                    opt.innerText=obj.name;
                     branchForm.appendChild(opt);
                 }
+                branchForm.selectedIndex=0;
             }
         })
     }

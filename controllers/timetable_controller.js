@@ -3,7 +3,6 @@ const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
-const { render } = require('ejs');
 const Timetable = require('../models/timetable');
 
 module.exports.timetable = async function(req, res) {
@@ -95,10 +94,13 @@ module.exports.timetable = async function(req, res) {
 
         // ----------------------COURSE LIST OF TEACHER FOR ADD OPTION------------------------------
         if(user.isAdmin){
+            var lecturePresent = false, labPresent = false;
             var courseList = []
             for(let classSubElement of user.classSub){
                 let course = await CourseModel.findById(classSubElement.course);
                 courseList.push(course);
+                if(classSubElement.subGroup) labPresent = true;
+                if(classSubElement.group || (!classSubElement.group && !classSubElement.subGroup)) lecturePresent = true;
             }
             let mymap = new Map();
 
@@ -125,12 +127,13 @@ module.exports.timetable = async function(req, res) {
             })
         }
         else{
-            console.log(timetableItems);
             return res.render('time_table',{
                 timetableItems: timetableItems,
                 title: "Timetable",
                 startingDate: startingDate,
-                courseList: courseList
+                courseList: courseList,
+                lecturePresent: lecturePresent,
+                labPresent: labPresent
             });
         }
     }
