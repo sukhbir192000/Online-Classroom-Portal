@@ -51,20 +51,14 @@ module.exports.timetable = async function(req, res) {
                             "classSub.course":{$in:user.courses},
                             "classSub.class":user.class
                         },
-                        {
-                            $or: [
-                                {"classSub.group": undefined},
-                                {
-                                    $and: [
-                                        {"classSub.group": user.group},
-                                        {$or: [
-                                            {"classSub.subGroup": undefined},
-                                            {"classSub.subGroup": user.subGroup}
-                                        ]}
-                                    ]
-                                }
-                            ]
-                        }
+                        {$or: [
+                            {"classSub.group": undefined},
+                            {"classSub.group": user.group}
+                        ]},
+                        {$or: [
+                            {"classSub.subGroup": undefined},
+                            {"classSub.subGroup": user.subGroup}
+                        ]}
                     ]
                 }).populate('classSub.course').sort("startingTime");
                 timetableItems.push(items);
@@ -246,7 +240,7 @@ module.exports.availableSlots=async function(req,res){
                             breakCondition=true;
                             break;
                         }
-                    } 
+                    }
                 }
             
             }
