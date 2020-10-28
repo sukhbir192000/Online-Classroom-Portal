@@ -167,6 +167,7 @@ var clickAddFunction = function (a){
                     document.getElementById("reschedule_class").style.left = '50%';
                     document.getElementById("reschedule_class").style.transform = 'translate(-50%, -50%)';
                 })
+                
                 document.getElementById('info').children[4].children[0].addEventListener('click',function(){
                     $.ajax({
                         url:`/content/timetable/delete/${classId}`,
@@ -179,6 +180,11 @@ var clickAddFunction = function (a){
                             current_div.classList.remove("font_size_remove");
                             current_div.isActive = (!current_div.isActive);
                             current_div = null;
+                            x.innerHTML="";
+                            x.removeAttribute(id);
+                            x.style.height="4em";
+                            x.style.transition="none";
+                            x.style.zIndex="1";
                         }
                     })
                    
