@@ -263,46 +263,46 @@ module.exports.classCreate = async function(req,res){
         classDate.setMinutes(0);
         classDate.setSeconds(0);
         classDate.setMilliseconds(0);
-        let subject = req.body.subject, group = req.body.group, branch=req.body.branch;
-        if(req.body.group=='All'){
-            for(let classSubElement of user.classSub){
-                if(subject==classSubElement.course && branch==classSubElement.class){
-                    await TimetableModel.create({
-                        startingTime: req.body.slots_available,
-                        date: classDate,
-                        duration: req.body.duration_hr,
-                        classSub: classSubElement,
-                        teacher: res.locals.user
-                    })
-                }
-            }
-        }
-        else if(req.body.sub_group == 'All'){
-            for(let classSubElement of user.classSub){
-                if(subject==classSubElement.course && branch==classSubElement.class && group==classSubElement.group){
-                    await TimetableModel.create({
-                        startingTime: req.body.slots_available,
-                        date: classDate,
-                        duration: req.body.duration_hr,
-                        classSub: classSubElement,
-                        teacher: res.locals.user
-                    })
-                }
-            }
-        }
-        else{
+        let subject = req.body.subject, branch=req.body.branch;
+        if(req.body.sub_group == 'All'){
             await TimetableModel.create({
                 startingTime: req.body.slots_available,
                 date: classDate,
                 duration: req.body.duration_hr,
-                classSub: {
-                    course: req.body.subject,
-                    class: req.body.branch,
-                    group: req.body.group,
-                    subGroup: req.body.sub_group
+                classSub:{
+                    course: subject,
+                    class: branch
                 },
                 teacher: res.locals.user
             })
+        }
+        else{
+            if(req.body.class_type=="Lecture"){
+                await TimetableModel.create({
+                    startingTime: req.body.slots_available,
+                    date: classDate,
+                    duration: req.body.duration_hr,
+                    classSub: {
+                        course: req.body.subject,
+                        class: req.body.branch,
+                        group: req.body.sub_group
+                    },
+                    teacher: res.locals.user
+                })
+            }
+            else{
+                await TimetableModel.create({
+                    startingTime: req.body.slots_available,
+                    date: classDate,
+                    duration: req.body.duration_hr,
+                    classSub: {
+                        course: req.body.subject,
+                        class: req.body.branch,
+                        subGroup: req.body.sub_group
+                    },
+                    teacher: res.locals.user
+                })
+            }
         }
         req.flash('success',"Added class");
         return res.redirect('back');
@@ -311,6 +311,7 @@ module.exports.classCreate = async function(req,res){
         console.log(err);
     }
 }
+
 module.exports.classDelete=async function(req,res){
     if(req.xhr){
        
