@@ -179,12 +179,10 @@ var clickAddFunction = function (a){
                             document.querySelector(".table").style.opacity="1";
                             current_div.classList.remove("font_size_remove");
                             current_div.isActive = (!current_div.isActive);
+                            let emptyDiv = document.createElement('div');
+                            emptyDiv.classList.add('table_column');
+                            current_div.parentNode.replaceChild(emptyDiv, current_div);
                             current_div = null;
-                            x.innerHTML="";
-                            x.removeAttribute(id);
-                            x.style.height="4em";
-                            x.style.transition="none";
-                            x.style.zIndex="1";
                         }
                     })
                    
