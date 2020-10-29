@@ -12,11 +12,15 @@ for(let i=0;i<boxelements.length;i++){
             title.contentEditable="false";
             description.contentEditable="false";
             title.classList.remove("heading_edit");
-            description.classList.remove("content_edit")
+            description.classList.remove("content_edit");
             deletebutton.classList.remove("hide");
             editbutton.classList.remove("hide");
             savebutton.classList.remove("show");
             title.textContent=arr[0];
+            description.textContent=arr[1];
+            if(description.textContent==""){
+                description.style.display="none";
+            }
             fileDeleteButtons = current_box.children[1].children[1];
             current_box.children[1].children[2].classList.remove("show_delete");
             for(let j=0;j<fileDeleteButtons.childElementCount;j++){
@@ -42,6 +46,7 @@ for(let i=0;i<boxelements.length;i++){
         title.contentEditable="true";
         title.setAttribute("title-text","Enter title")
         description.contentEditable="true";
+        description.style.display = "flex";
         description.setAttribute("description-text", "Enter description");
         title.classList.add("heading_edit");
         description.classList.add("content_edit")
@@ -110,7 +115,9 @@ document.addEventListener('click',function(e){
             }
             title.textContent=arr[0];
             description.textContent=arr[1];
-            subject.textContent=arr[2];
+            if(description.textContent==""){
+                description.style.display="none";
+            }
             current_box=null;
             arr=[];
             links=[];
