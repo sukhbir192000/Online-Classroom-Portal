@@ -161,7 +161,6 @@ document.addEventListener('click',function(e){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
         branchForm.disabled=true;
-        classTypeForm.disabled=true;
         subGroupForm.disabled=true;
         subjectForm.selectedIndex=0;
         branchForm.selectedIndex=0;

@@ -133,7 +133,6 @@ document.querySelector(".add").addEventListener('click',function(e){
         document.getElementById("lecture_link").value="";
         document.getElementById("lecture_references").value="";
         branchForm.disabled=true;
-        classTypeForm.disabled=true;
         subGroupForm.disabled=true;
         subjectForm.selectedIndex=0;
         branchForm.selectedIndex=0;

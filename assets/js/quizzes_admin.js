@@ -8,7 +8,6 @@ document.querySelector(".add").addEventListener('click',function(e){
         document.getElementById("quiz_title").value="";
         document.getElementById("quiz_instructions").value="";
         branchForm.disabled=true;
-        classTypeForm.disabled=true;
         subGroupForm.disabled=true;
         subjectForm.selectedIndex=0;
         branchForm.selectedIndex=0;

@@ -359,9 +359,15 @@ module.exports.getSubGroups=async function(req,res){
             mymap.set(el.name, el.id); 
             return true; 
         });
+        let classItem = await ClassModel.findById(req.body.class);
+        let allAvailable = false;
+        if((req.body.classType=="Lecture" && groupList.length == classItem.totalGroups) || (req.body.classType=="Lab" && groupList.length == classItem.totalSubGroups)){
+            allAvailable = true;
+        }
         return res.status(200).json({
             data:{
-                groupList:groupList
+                groupList:groupList,
+                allAvailable:allAvailable
             },
             message:"Sub-groups Sent"
         });
