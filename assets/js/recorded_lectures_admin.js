@@ -55,15 +55,15 @@ for(let i=0;i<boxelements.length;i++){
         description.contentEditable="true";
         description.setAttribute("description-text", "Enter description");
         description.classList.add("content_edit");
-        description.style.display = "flex";
+        description.style.display = "inline";
         references.contentEditable="true";
         references.setAttribute("references-text","Enter book/video references");
         references.classList.add("content_edit");
-        references.style.display = "flex";
+        references.style.display = "inline";
         link.contentEditable="true";
         link.setAttribute("link-text","Enter link of lecture");
         link.classList.add("content_edit");
-        link.style.display = "flex";
+        link.style.display = "inline";
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");

@@ -298,7 +298,6 @@ body{
 .box_content_details{
     display: flex;
     flex-direction: column;
-    width:100%;
 }
 
 .description{
@@ -968,7 +967,15 @@ li:hover{
     .add_content{
         font-size: 0.9em;
     }
-
+    .edit{
+        font-size: 1.2em;
+    }
+    .delete{
+        font-size: 1.2em;
+    }
+    .savechanges{
+        font-size: 1.2em;
+    }
     /* FOOTER
     .footer_content{
         font-size: 0.7em;

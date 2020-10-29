@@ -2,6 +2,7 @@
 let current_box=null,arr=[];
 let boxelements = document.querySelectorAll('.box');
 for(let i=0;i<boxelements.length;i++){
+    // console.log(boxelements[i].children[1].children[0].children[3]);
     var editbutton = boxelements[i].children[1].children[0].children[5].children[0].children[0];
     editbutton.addEventListener('click',function(e){
         if(current_box!=null){
@@ -19,6 +20,9 @@ for(let i=0;i<boxelements.length;i++){
             savebutton.classList.remove("show");
             title.textContent=arr[0];
             description.textContent=arr[1];
+            if(description.textContent==""){
+                description.style.display="none";
+            }
             current_box=null;
             arr=[];
         }
@@ -32,6 +36,7 @@ for(let i=0;i<boxelements.length;i++){
         title.contentEditable="true";
         title.setAttribute("title-text","Enter title");
         description.contentEditable="true";
+        description.style.display = "inline";
         description.setAttribute("description-text", "Enter description");
         title.classList.add("heading_edit");
         description.classList.add("content_edit")
@@ -40,7 +45,6 @@ for(let i=0;i<boxelements.length;i++){
         savebutton.classList.add("show");
         current_box=boxelements[i];
         savebutton.addEventListener('click',function(e){
-            console.log("hiii");
             current_box.children[1].children[0].children[5].children[1].children[1].children[1].setAttribute('value',title.textContent);
             current_box.children[1].children[0].children[5].children[1].children[1].children[2].setAttribute('value',description.textContent);
             current_box.children[1].children[0].children[5].children[1].children[1].submit();
@@ -67,6 +71,9 @@ document.addEventListener('click',function(e){
             savebutton.classList.remove("show");
             title.textContent=arr[0];
             description.textContent=arr[1];
+            if(description.textContent==""){
+                description.style.display="none";
+            }
             current_box=null;
             arr=[];
         }

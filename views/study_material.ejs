@@ -66,10 +66,10 @@
                             <div class="box_content_details">  
                                 <% if(user.isAdmin){ %>  
                                     <div class="branch_admin"><b>Branch: <%= studyMaterial.classSub.class.stream %></b></div>
-                                    <div class="group_admin"z><% if(studyMaterial.classSub.group){ %><b>Class Group: <%= studyMaterial.classSub.group.groupNumber %></b><% } %></div>
-                                    <div class="sub_group_admin"><% if(studyMaterial.classSub.subGroup){ %><b>Lab Group: <%= studyMaterial.classSub.subGroup.subGroupNumber %></b><% } %></div> 
+                                    <div class="group_admin" <%if(!studyMaterial.classSub.group){%>style="display:none" <%}%>><% if(studyMaterial.classSub.group){ %><b>Class Group: <%= studyMaterial.classSub.group.groupNumber %></b><% } %></div>
+                                    <div class="sub_group_admin" <%if(!studyMaterial.classSub.subGroup){%>style="display:none" <%}%>><% if(studyMaterial.classSub.subGroup){ %><b>Lab Group: <%= studyMaterial.classSub.subGroup.subGroupNumber %></b><% } %></div> 
                                 <% } %>                
-                                <div class="description"><%= studyMaterial.content %></div>
+                                <div class="description" <%if(studyMaterial.content==""){%> style="display:none" <%}%>><%= studyMaterial.content %></div>
                                 <div class="date_posted">Posted on <%= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit', hour: 'numeric', minute: 'numeric'}).format(studyMaterial.createdAt) %></div>
                             </div>
                             <!-- multer vali files -->
