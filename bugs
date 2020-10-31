@@ -1,7 +1,7 @@
 Bugs:
 
 ADD MATERIAL:
-- BRANCH NOT FETCHED WHEN CLASS TYPE CHANGES BY ITSELF.
+- BRANCH NOT FETCHED WHEN CLASS TYPE CHANGES BY ITSELF. (Announcements done)
 
 Assignments
 - Edit (NOT COMPLETE)
@@ -16,6 +16,9 @@ DOUBT
 TIMETABLE
 - set minimum current date in add class
 - table breaks on changing page width(tablet mode)
+- z-index of time table items too much
+- click outside lower box while rescheduling class
+- remove ajax from hover
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)

@@ -255,6 +255,20 @@ module.exports.availableSlots=async function(req,res){
     }
 }
 
+module.exports.classInfo = async function(req, res){
+    if(req.xhr){
+        let class_info = await TimetableModel.findById(req.params.id)
+        .populate('classSub.course')
+        .populate('classSub.class')
+        .populate('classSub.group')
+        .populate('classSub.subGroup');
+        console.log(class_info);
+        return res.status(200).json({
+            data: class_info
+        })
+    }
+}
+
 module.exports.classCreate = async function(req,res){
     try{
         let user = res.locals.user;
@@ -273,7 +287,8 @@ module.exports.classCreate = async function(req,res){
                     course: subject,
                     class: branch
                 },
-                teacher: res.locals.user
+                teacher: res.locals.user,
+                classType: req.body.class_type
             })
         }
         else{
@@ -287,7 +302,8 @@ module.exports.classCreate = async function(req,res){
                         class: req.body.branch,
                         group: req.body.sub_group
                     },
-                    teacher: res.locals.user
+                    teacher: res.locals.user,
+                    classType: req.body.class_type
                 })
             }
             else{
@@ -300,7 +316,8 @@ module.exports.classCreate = async function(req,res){
                         class: req.body.branch,
                         subGroup: req.body.sub_group
                     },
-                    teacher: res.locals.user
+                    teacher: res.locals.user,
+                    classType: req.body.class_type
                 })
             }
         }

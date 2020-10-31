@@ -125,24 +125,34 @@ week_shift_div.children[1].addEventListener('click', function(e){
 //----------------------options for admin-------------------------------
 
 
-var current_div = null, prevText = "";
+var current_div = null, prevText = "", current_div_info, mouseEntered = false;
 var clickAddFunction = function (a){
     a.addEventListener('click',function(e){
         let newDiv=document.createElement('div');
         newDiv.innerHTML=`
-        <div id="info">
-            <div class="subject_name">Computer Architecture and OrganizationComputer Architecture and Organization</div>
-            <div class="class_group"><b>Class Group: &nbsp; </b>2</div>
-            <div class="lab_group"><b>Lab group: &nbsp;</b> All</div>
-            <div class="timings"><b>Time:&nbsp; </b> 2:00PM - 3:00PM</div>
+            <div class="subject_name">${current_div_info.classSub.course.name}</div>`;
+            if(current_div_info.classSub.group){
+                newDiv.innerHTML += `<div class="class_group"><b>Class Group: &nbsp; </b>${current_div_info.classSub.group.groupNumber}</div>`
+            }
+            else{
+                newDiv.innerHTML += `<div class="class_group" style="display:none"><b>Class Group: &nbsp; </b></div>`
+            }
+            if(current_div_info.classSub.subGroup){
+                newDiv.innerHTML += `<div class="lab_group"><b>Lab group: &nbsp;</b> ${current_div_info.classSub.subGroup.subGroupNumber}</div>`
+            }
+            else{
+                newDiv.innerHTML += `<div class="lab_group" style="display:none"><b>Lab group: &nbsp;</b></div>`
+            }
+            newDiv.innerHTML += `
+            <div class="timings"><b>Time:&nbsp; </b> ${current_div_info.startingTime}:00PM - ${current_div_info.startingTime + current_div_info.duration}:00PM</div>
             <div class="buttons_edit">
                 <button type="button" class="cancel_button">Cancel class</button>
                 <button type="button" class="reschedule_button">Reschedule class</button>
             </div>
-        </div>`
+        `;
+        newDiv.innerHTML = `<div id="info">${newDiv.innerHTML}</div>`
+        console.log(newDiv);
         document.getElementsByClassName('main_content')[0].appendChild(newDiv);
-        // var rect =this.getBoundingClientRect();
-        // console.log(rect);
         if(a.isActive){
             if(document.getElementById("info").style.display == "none" || document.getElementById("info").style.display == ""){
                 if(current_div){
@@ -158,14 +168,27 @@ var clickAddFunction = function (a){
                 document.getElementById("info").style.left = '50%';
                 document.getElementById("info").style.transform = 'translate(-50%, -50%)';
                 document.querySelector(".table").style.opacity="0.2";
-              
+                
                 let classId=this.id;
                 document.getElementById("info").children[4].children[1].addEventListener("click", function(e){
-                    console.log("hiiiiiii2");
-                    document.getElementById("reschedule_class").style.display = "flex";
-                    document.getElementById("reschedule_class").style.top = '50%';
-                    document.getElementById("reschedule_class").style.left = '50%';
-                    document.getElementById("reschedule_class").style.transform = 'translate(-50%, -50%)';
+                    let rescheduleContainer = document.getElementById("reschedule_class")
+                    rescheduleContainer.style.display = "flex";
+                    rescheduleContainer.style.top = '50%';
+                    rescheduleContainer.style.left = '50%';
+                    rescheduleContainer.style.transform = 'translate(-50%, -50%)';
+                    rescheduleContainer.children[0].innerText = current_div_info.classSub.course.name;
+                    if(current_div_info.classSub.group){
+                        rescheduleContainer.children[1].children[1].innerText = current_div_info.classSub.group.groupNumber;
+                    }
+                    else{
+                        rescheduleContainer.children[1].style.display = "none";
+                    }
+                    if(current_div_info.classSub.subGroup){
+                        rescheduleContainer.children[2].children[1].innerText = current_div_info.classSub.subGroup.subGroupNumber;
+                    }
+                    else{
+                        rescheduleContainer.children[2].style.display = "none";
+                    }
                 })
                 
                 document.getElementById('info').children[4].children[0].addEventListener('click',function(){
@@ -200,26 +223,49 @@ var clickAddFunction = function (a){
             }
         }
         a.isActive = (!a.isActive);
-    })      
+    })
     a.addEventListener("mouseenter",function(e){
-        prevText = a.innerHTML;
-        a.innerHTML ="<div>Group:1</div><div>Lab Group: 2</div>";
-        // a.style.opacity=0.6;
-        a.style.backgroundColor="#640e1f";
-        a.style.color ="white";
-        a.style.transition = "all 0.5s";
-       
-        // a.style.transform ="rotatex(360deg)"
-    })        
+        if(!mouseEntered){
+            // prevText = a.innerHTML;
+            a.style.backgroundColor="#640e1f";
+            a.style.color ="white";
+            a.style.transition = "all 0.5s";
+            $.ajax({
+                url: `/content/timetable/getInfo/${a.id}`,
+                type:"GET",
+                success:function(response){
+                    if(mouseEntered){
+                        current_div_info = response.data;
+                        if(response.data.classSub.group){
+                            a.innerHTML = `<div>Group:${response.data.classSub.group.groupNumber}</div>
+                                            <div>${response.data.classType}</div>`
+                        }
+                        else if(response.data.classSub.subGroup){
+                            a.innerHTML = `<div>Lab Group:${response.data.classSub.subGroup.subGroupNumber}</div>
+                                            <div>${response.data.classType}</div>`
+                        }
+                        else{
+                            a.innerHTML = `<div>${response.data.classType}</div>`
+                        }
+                        console.log("enter", a.innerHTML);
+                    }
+                }
+            })
+            mouseEntered = true;
+        }
+    })
     a.addEventListener("mouseleave",function(e){
-        a.innerHTML = prevText;
-        prevText="";
-        // a.style.opacity=1;
-        a.style.backgroundColor="white";
-        a.style.color="black";
-        a.style.transition = "all 0.5s";
-        
-        // a.style.transform ="rotatex(0deg)";
+        if(mouseEntered){
+            mouseEntered = false;
+            console.log("leave", current_div_info.classSub.course.name, a);
+            a.innerHTML = current_div_info.classSub.course.name;
+            // a.style.opacity=1;
+            a.style.backgroundColor="white";
+            a.style.color="black";
+            a.style.transition = "all 0.5s";
+            
+            // a.style.transform ="rotatex(0deg)";
+        }
     })
 }
 

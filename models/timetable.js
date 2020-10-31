@@ -15,6 +15,9 @@ const timetableSchema = new mongoose.Schema({
     teacher: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    classType: {
+        type: String
     }
 }, {
     timestamps: true
