@@ -100,6 +100,8 @@
                                 <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
                                 <% for(let j=0;j<7;j++){%>
                                     <div class="table_column" <%if(timetableItems[j][8+i]){%>id="<%=timetableItems[j][8+i]._id%>" style="height:<%= 4*timetableItems[j][8+i].duration %>em !important; z-index:2;"<%}%> ><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%}%></div>
+        
+                                    <div class="groupDisplay" style="display: none;">Group:1</div>
                                 <% } %>
                             </div>
                         <% } %>
