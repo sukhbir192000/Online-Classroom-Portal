@@ -303,6 +303,7 @@ subjectForm.addEventListener('change',function(e){
     subGroupForm.disabled=true;
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
+        let classTypeValue = classTypeForm.value;
         $.ajax({
             url:"/content/announcements/form/branches",
             data: {course: subjectForm.value, class_type: classTypeForm.value},
@@ -322,16 +323,40 @@ subjectForm.addEventListener('change',function(e){
                     opt.innerText="Lab/Tutorial",
                     classTypeForm.appendChild(opt);
                 }
+                classTypeForm.selectedIndex = 0;
                 branchForm.innerText="";
                 var opt = document.createElement('option');
-                opt.value="All",
-                opt.innerText="All",
+                opt.value="All";
+                opt.innerText="All";
                 branchForm.appendChild(opt);
                 for(let obj of response.data.branchList){
                     var opt = document.createElement('option');
                     opt.value=obj.id,
                     opt.innerText=obj.name,
                     branchForm.appendChild(opt);
+                }
+                branchForm.selectedIndex=0;
+                if(classTypeValue != classTypeForm.value){
+                    $.ajax({
+                        url:"/content/announcements/form/branches",
+                        data: {course: subjectForm.value, class_type: classTypeForm.value},
+                        cache:false,
+                        type:"POST",
+                        success:function(response){
+                            branchForm.innerText="";
+                            var opt = document.createElement('option');
+                            opt.value="All",
+                            opt.innerText="All",
+                            branchForm.appendChild(opt);
+                            for(let obj of response.data.branchList){
+                                var opt = document.createElement('option');
+                                opt.value=obj.id,
+                                opt.innerText=obj.name,
+                                branchForm.appendChild(opt);
+                            }
+                            branchForm.selectedIndex=0;
+                        }
+                    })
                 }
             }
         })
@@ -365,6 +390,7 @@ classTypeForm.addEventListener('change',function(e){
                     opt.innerText=obj.name,
                     branchForm.appendChild(opt);
                 }
+                branchForm.selectedIndex=0;
             }
         })
     }
