@@ -125,33 +125,35 @@ week_shift_div.children[1].addEventListener('click', function(e){
 //----------------------options for admin-------------------------------
 
 
-var current_div = null, prevText = "", current_div_info, mouseEntered = false, subjectName="";
+var current_div = null, prevText = "", current_div_info, subjectName="";
 var clickAddFunction = function (a){
     a.addEventListener('click',function(e){
         let newDiv=document.createElement('div');
-        // newDiv.innerHTML=`
-        //     <div class="subject_name">${current_div_info.classSub.course.name}</div>`;
-        //     if(current_div_info.classSub.group){
-        //         newDiv.innerHTML += `<div class="class_group"><b>Class Group: &nbsp; </b>${current_div_info.classSub.group.groupNumber}</div>`
-        //     }
-        //     else{
-        //         newDiv.innerHTML += `<div class="class_group" style="display:none"><b>Class Group: &nbsp; </b></div>`
-        //     }
-        //     if(current_div_info.classSub.subGroup){
-        //         newDiv.innerHTML += `<div class="lab_group"><b>Lab group: &nbsp;</b> ${current_div_info.classSub.subGroup.subGroupNumber}</div>`
-        //     }
-        //     else{
-        //         newDiv.innerHTML += `<div class="lab_group" style="display:none"><b>Lab group: &nbsp;</b></div>`
-        //     }
-        //     newDiv.innerHTML += `
-        //     <div class="timings"><b>Time:&nbsp; </b> ${current_div_info.startingTime}:00PM - ${current_div_info.startingTime + current_div_info.duration}:00PM</div>
-        //     <div class="buttons_edit">
-        //         <button type="button" class="cancel_button">Cancel class</button>
-        //         <button type="button" class="reschedule_button">Reschedule class</button>
-        //     </div>
-        // `;
-        newDiv.innerHTML = `<div id="info">${newDiv.innerHTML}</div>`
-        console.log(newDiv);
+        console.log("hi ", subjectName.split('<div')[0]);
+        newDiv.innerHTML=`
+            <div class="subject_name">${subjectName.split('<div')[0]}</div>`;
+            let groupNumber = a.getElementsByClassName("groupNumber");
+            let subGroupNumber = a.getElementsByClassName("subGroupNumber");
+            if(groupNumber.length!=0){
+                newDiv.innerHTML += `<div class="class_group"><b>Class Group: &nbsp; </b>${groupNumber[0].innerText}</div>`
+            }
+            else{
+                newDiv.innerHTML += `<div class="class_group" style="display:none"><b>Class Group: &nbsp; </b></div>`
+            }
+            if(subGroupNumber.length!=0){
+                newDiv.innerHTML += `<div class="lab_group"><b>Lab group: &nbsp;</b> ${subGroupNumber[0].innerText}</div>`
+            }
+            else{
+                newDiv.innerHTML += `<div class="lab_group" style="display:none"><b>Lab group: &nbsp;</b></div>`
+            }
+            newDiv.innerHTML += `
+            <div class="timings"><b>Time:&nbsp; </b> ${current_div_info.startingTime}:00PM - ${current_div_info.startingTime + current_div_info.duration}:00PM</div>
+            <div class="buttons_edit">
+                <button type="button" class="cancel_button">Cancel class</button>
+                <button type="button" class="reschedule_button">Reschedule class</button>
+            </div>
+        `;
+        newDiv.innerHTML = `<div id="info">${newDiv.innerHTML}</div>`;
         document.getElementsByClassName('main_content')[0].appendChild(newDiv);
         if(a.isActive){
             if(document.getElementById("info").style.display == "none" || document.getElementById("info").style.display == ""){
@@ -224,56 +226,22 @@ var clickAddFunction = function (a){
         }
         a.isActive = (!a.isActive);
     })
-    a.addEventListener("mouseenter",function(e){
-        // if(!mouseEntered){
-            // prevText = a.innerHTML;
-            console.log("mouseenter");
+    if(a.innerText){
+        a.addEventListener("mouseenter",function(e){
             a.style.backgroundColor="#640e1f";
             a.style.color ="white";
             a.style.transition = "all 0.5s";
-            subjectName = a.textContent;
-            a.textContent = a.parentNode.children[2].textContent;
-            // a.parentNode.children[1].style.display = "inline";
-            // $.ajax({
-            //     url: `/content/timetable/getInfo/${a.id}`,
-            //     type:"GET",
-            //     success:function(response){
-            //         if(mouseEntered){
-                        
-            //             current_div_info = response.data;
-            //             if(response.data.classSub.group){
-            //                 a.innerHTML = `<div>Group:${response.data.classSub.group.groupNumber}</div>
-            //                                 <div>${response.data.classType}</div>`
-            //             }
-            //             else if(response.data.classSub.subGroup){
-            //                 a.innerHTML = `<div>Lab Group:${response.data.classSub.subGroup.subGroupNumber}</div>
-            //                                 <div>${response.data.classType}</div>`
-            //             }
-            //             else{
-            //                 a.innerHTML = `<div>${response.data.classType}</div>`
-            //             }
-            //             console.log("enter", a.innerHTML);
-            //         }
-            //     }
-            // })
-            // mouseEntered = true;
-        // }
-    })
-    a.addEventListener("mouseleave",function(e){
-        // if(mouseEntered){
-            // mouseEntered = false;
-            // console.log("leave", current_div_info.classSub.course.name, a);
-            // a.innerHTML = current_div_info.classSub.course.name;
-            
-            // a.style.opacity=1;
+            subjectName = a.innerHTML;
+            a.innerHTML = a.children[0].innerHTML;
+        })
+        a.addEventListener("mouseleave",function(e){
             a.style.backgroundColor="white";
             a.style.color="black";
             a.style.transition = "all 0.5s";
-            a.textContent = subjectName;
+            a.innerHTML = subjectName;
             subjectName = "";
-            // a.style.transform ="rotatex(0deg)";
-        // }
-    })
+        })
+    }
 }
 
 var addFunctions = function(){
@@ -281,7 +249,7 @@ var addFunctions = function(){
     for(let i=0;i<rows.length;i++){
         var row = document.getElementById("row" + rows[i]);
         for(let j=1;j<row.childElementCount;j++){
-            if(row.children[j].textContent!="" ){
+            if(row.children[j].textContent){
                 row.children[j].isActive = true;
                 clickAddFunction(row.children[j]);
             }

@@ -1,29 +1,12 @@
 const TimetableModel=require('../models/timetable');
 const CourseModel=require('../models/course');
-const ClassModel=require('../models/class');
-const GroupModel=require('../models/group');
-const SubGroupModel=require('../models/sub-group');
+// const ClassModel=require('../models/class');
+// const GroupModel=require('../models/group');
+// const SubGroupModel=require('../models/sub-group');
 const Timetable = require('../models/timetable');
 
 module.exports.timetable = async function(req, res) {
     try{
-        // let customDate = new Date(Date.now());
-        // customDate.setHours(1);
-        // customDate.setMinutes(0);
-        // customDate.setSeconds(0);
-        // customDate.setMilliseconds(0);
-        // await TimetableModel.create({
-        //     startingTime: 11,
-        //     date: customDate,
-        //     duration: 1,
-        //     classSub: {
-        //         "course" : "5f7474e8ed898e4664816678",
-        //         "class" : "5f7439c114b9781df80b3c4f",
-        //         "group" : "5f746dde33b7d3478095bb02"
-        //     },
-        //     teacher: res.locals.user.id
-        // })
-        
         var user = res.locals.user;
         var startingDate = new Date(Date.now());
         if(startingDate.getDay()==0){
@@ -60,7 +43,7 @@ module.exports.timetable = async function(req, res) {
                             {"classSub.subGroup": user.subGroup}
                         ]}
                     ]
-                }).populate('classSub.course').sort("startingTime");
+                }).populate('classSub.course').populate('classSub.class').populate('classSub.group').populate('classSub.subGroup').sort("startingTime");
                 timetableItems.push(items);
             }
         }
@@ -72,7 +55,7 @@ module.exports.timetable = async function(req, res) {
                 let items = await TimetableModel.find({
                     "date": date,
                     "teacher": user._id
-                }).populate('classSub.course').sort("startingTime");
+                }).populate('classSub.course').populate('classSub.class').populate('classSub.group').populate('classSub.subGroup').sort("startingTime");
                 timetableItems.push(items);
             }
         }
