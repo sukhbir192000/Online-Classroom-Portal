@@ -103,10 +103,10 @@
                                         <%_ if(user.isAdmin && timetableItems[j][8+i]){ _%>
                                             <div class="groupDisplay" style="display: none;">
                                                 <% if(timetableItems[j][8+i].classSub.group){ %>
-                                                    Group: <span class="groupNumber"><%= timetableItems[j][8+i].classSub.group.groupNumber %></span><br>
+                                                    Group: <span class="groupNumber"><%= timetableItems[j][8+i].classSub.group.groupNumber %></span>
                                                 <% } %>
                                                 <% if(timetableItems[j][8+i].classSub.subGroup){ %>
-                                                    Lab Group: <span class="subGroupNumber"><%= timetableItems[j][8+i].classSub.subGroup.subGroupNumber %></span><br>
+                                                    Lab Group: <span class="subGroupNumber"><%= timetableItems[j][8+i].classSub.subGroup.subGroupNumber %></span>
                                                 <% } %>
                                                 <span class="typeDisplay"><%= timetableItems[j][8+i].classType %></span>
                                             </div>

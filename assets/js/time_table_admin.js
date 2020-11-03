@@ -125,15 +125,17 @@ week_shift_div.children[1].addEventListener('click', function(e){
 //----------------------options for admin-------------------------------
 
 
-var current_div = null, prevText = "", current_div_info, subjectName="";
+var current_div = null, prevText = "", subjectName="";
 var clickAddFunction = function (a){
     a.addEventListener('click',function(e){
+        let current_subject_name = subjectName;
         let newDiv=document.createElement('div');
-        console.log("hi ", subjectName.split('<div')[0]);
         newDiv.innerHTML=`
-            <div class="subject_name">${subjectName.split('<div')[0]}</div>`;
+            <div class="subject_name">${current_subject_name.split('<div')[0]}</div>`;
             let groupNumber = a.getElementsByClassName("groupNumber");
             let subGroupNumber = a.getElementsByClassName("subGroupNumber");
+            let startingTime = 8+Array.prototype.indexOf.call(a.parentNode.parentNode.children, a.parentNode);
+            let duration = parseInt(a.style.height) / 4;
             if(groupNumber.length!=0){
                 newDiv.innerHTML += `<div class="class_group"><b>Class Group: &nbsp; </b>${groupNumber[0].innerText}</div>`
             }
@@ -147,7 +149,7 @@ var clickAddFunction = function (a){
                 newDiv.innerHTML += `<div class="lab_group" style="display:none"><b>Lab group: &nbsp;</b></div>`
             }
             newDiv.innerHTML += `
-            <div class="timings"><b>Time:&nbsp; </b> ${current_div_info.startingTime}:00PM - ${current_div_info.startingTime + current_div_info.duration}:00PM</div>
+            <div class="timings"><b>Time:&nbsp; </b> ${startingTime}:00PM - ${startingTime + duration}:00PM</div>
             <div class="buttons_edit">
                 <button type="button" class="cancel_button">Cancel class</button>
                 <button type="button" class="reschedule_button">Reschedule class</button>
@@ -178,15 +180,17 @@ var clickAddFunction = function (a){
                     rescheduleContainer.style.top = '50%';
                     rescheduleContainer.style.left = '50%';
                     rescheduleContainer.style.transform = 'translate(-50%, -50%)';
-                    rescheduleContainer.children[0].innerText = current_div_info.classSub.course.name;
-                    if(current_div_info.classSub.group){
-                        rescheduleContainer.children[1].children[1].innerText = current_div_info.classSub.group.groupNumber;
+                    rescheduleContainer.children[0].innerText = current_subject_name.split('<div')[0];
+                    let groupNumber = a.getElementsByClassName("groupNumber");
+                    let subGroupNumber = a.getElementsByClassName("subGroupNumber");
+                    if(groupNumber.length!=0){
+                        rescheduleContainer.children[1].children[1].innerText = groupNumber[0].innerText;
                     }
                     else{
                         rescheduleContainer.children[1].style.display = "none";
                     }
-                    if(current_div_info.classSub.subGroup){
-                        rescheduleContainer.children[2].children[1].innerText = current_div_info.classSub.subGroup.subGroupNumber;
+                    if(subGroupNumber.length!=0){
+                        rescheduleContainer.children[2].children[1].innerText = subGroupNumber[0].innerText;
                     }
                     else{
                         rescheduleContainer.children[2].style.display = "none";
