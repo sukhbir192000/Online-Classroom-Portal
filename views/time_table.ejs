@@ -103,10 +103,10 @@
                                         <%_ if(user.isAdmin && timetableItems[j][8+i]){ _%>
                                             <div class="groupDisplay" style="display: none;">
                                                 <% if(timetableItems[j][8+i].classSub.group){ %>
-                                                    Group: <span class="groupNumber"><%= timetableItems[j][8+i].classSub.group.groupNumber %></span>
+                                                    Group: <span class="groupNumber" id="<%= timetableItems[j][8+i].classSub.group %>"><%= timetableItems[j][8+i].classSub.group.groupNumber %></span>
                                                 <% } %>
                                                 <% if(timetableItems[j][8+i].classSub.subGroup){ %>
-                                                    Lab Group: <span class="subGroupNumber"><%= timetableItems[j][8+i].classSub.subGroup.subGroupNumber %></span>
+                                                    Lab Group: <span class="subGroupNumber" id="<%= timetableItems[j][8+i].classSub.subGroup %>"><%= timetableItems[j][8+i].classSub.subGroup.subGroupNumber %></span>
                                                 <% } %>
                                                 <span class="typeDisplay"><%= timetableItems[j][8+i].classType %></span>
                                             </div>
@@ -132,23 +132,25 @@
                 <div class="lg_reschedule_heading"><b>Lab group:&nbsp;</b></div> 
                 <div class="lg_reschedule_content"></div>
             </div>
-            <div>
-                <label class="date_reschedule_label"><b>Date:</b></label>
-                <input type="date" name="date_reschedule" id="date_reschedule" required>
-            </div>
-            <div>
-                <label class="duration_reschedule_label"><b>Duration:</b></label>
-                <input type="number" min="1" name="duration_reschedule" id="duration_reschedule" required>
-            </div>
-            <div>
-                <label class="slots_available_label_reschedule"><b>Available slots:</b></label>
-                <select id="slots_available_reschedule" name="slots_available_reschedule" required>
-                    <option value="" disabled selected>--Select an option--</option>
-                </select>
-            </div>
-            <div class="buttons_reschedule">
-                <button type="button" class="submit_button_reschedule">Reschedule</button>
-            </div>
+            <form id="reschedule_form" action="/content/timetable/create" method="POST">
+                <div>
+                    <label class="date_reschedule_label"><b>Date:</b></label>
+                    <input type="date" name="date_reschedule" id="date_reschedule" required>
+                </div>
+                <div>
+                    <label class="duration_reschedule_label"><b>Duration:</b></label>
+                    <input type="number" min="1" name="duration_reschedule" id="duration_reschedule" required>
+                </div>
+                <div>
+                    <label class="slots_available_label_reschedule"><b>Available slots:</b></label>
+                    <select id="slots_available_reschedule" name="slots_available_reschedule" required>
+                        <option value="" disabled selected>--Select an option--</option>
+                    </select>
+                </div>
+                <div class="buttons_reschedule">
+                    <button type="submit" class="submit_button_reschedule">Reschedule</button>
+                </div>
+            </form>
         </div>
 
         

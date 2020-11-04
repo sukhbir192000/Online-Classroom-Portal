@@ -197,6 +197,35 @@ var clickAddFunction = function (a){
                     else{
                         rescheduleContainer.children[2].style.display = "none";
                     }
+                    let date_form_res = document.getElementById("date_reschedule");
+                    let duration_form_res = document.getElementById("duration_reschedule");
+                    let slot_form_res = document.getElementById("slots_available_reschedule");
+                    date_form_res.value = "";
+                    duration_form_res.value = parseInt(a.style.height) / 4;
+                    slot_form_res.selectedIndex = 0;
+                    slot_form_res.disabled = true;
+                    $.ajax({
+                        url: `/content/timetable/getInfo/${classId}`,
+                        type: "GET",
+                        cache: false,
+                        success: function(response){
+                            date_form_res.addEventListener('change', function(e){
+                                console.log("hi");
+                                if(response.data.classType=="Lecture")
+                                    findSlots(response.data.classSub.class, response.data.classType, response.data.classSub.group, date_form_res, duration_form_res, slot_form_res);
+                                else
+                                    findSlots(response.data.classSub.class, response.data.classType, response.data.classSub.subGroup, date_form_res, duration_form_res, slot_form_res);
+                            })
+                            duration_form_res.addEventListener('change', function(e){
+                                if(response.data.classType=="Lecture")
+                                    findSlots(response.data.classSub.class, response.data.classType, response.data.classSub.group, date_form_res, duration_form_res, slot_form_res);
+                                else
+                                    findSlots(response.data.classSub.class, response.data.classType, response.data.classSub.subGroup, date_form_res, duration_form_res, slot_form_res);
+                            })
+                        }
+                    })
+
+
                 })
                 
                 document.getElementById('info').children[4].children[0].addEventListener('click',function(){
@@ -350,7 +379,7 @@ subjectForm.addEventListener('change',function(e){
     durationForm.disabled=true;
     branchForm.disabled=false;
     let classTypeValue = classTypeForm.value;
-    findSlots();
+    findSlots(branchForm.value, classTypeForm.value, subGroupForm.value, dateForm, durationForm, slotForm);
     $.ajax({
         url:"/content/announcements/form/branches",
         data: {course: subjectForm.value, class_type: classTypeForm.value},
@@ -415,7 +444,7 @@ classTypeForm.addEventListener('change',function(e){
     branchForm.selectedIndex=0;
     subGroupForm.selectedIndex=0;
     subGroupForm.disabled=true;
-    findSlots();
+    findSlots(branchForm.value, classTypeForm.value, subGroupForm.value, dateForm, durationForm, slotForm);
     if(subjectForm.value!="All"){
         branchForm.disabled=false;
         $.ajax({
@@ -450,7 +479,7 @@ branchForm.addEventListener('change',function(e){
     subGroupForm.disabled=false;
     dateForm.disabled=false;
     durationForm.disabled=false;
-    findSlots();
+    findSlots(branchForm.value, classTypeForm.value, subGroupForm.value, dateForm, durationForm, slotForm);
     $.ajax({
         url:"/content/announcements/form/subGroups",
         data: {course: subjectForm.value,class:branchForm.value,classType:classTypeForm.value},
@@ -481,21 +510,21 @@ branchForm.addEventListener('change',function(e){
 })
 
 dateForm.addEventListener('change',function(e){
-    findSlots();
+    findSlots(branchForm.value, classTypeForm.value, subGroupForm.value, dateForm, durationForm, slotForm);
 })
 durationForm.addEventListener('change',function(e){
-    findSlots();
+    findSlots(branchForm.value, classTypeForm.value, subGroupForm.value, dateForm, durationForm, slotForm);
 })
 
-function findSlots(){
-    if(dateForm.value!=""&&durationForm.value!=""){
+function findSlots(branch, classType, subGroup, dateForm, durationForm, slotForm){
+    if(!dateForm.disabled && dateForm.value!="" && !durationForm.disabled && durationForm.value!=""){
         slotForm.disabled = false;
         $.ajax({
             url:"/content/timetable/slots",
             data:{
-                branch:branchForm.value,
-                classType:classTypeForm.value,
-                subGroup:subGroupForm.value,
+                branch:branch,
+                classType:classType,
+                subGroup:subGroup,
                 date:dateForm.value,
                 duration:durationForm.value
             },

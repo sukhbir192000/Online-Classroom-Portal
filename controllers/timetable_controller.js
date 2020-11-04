@@ -129,7 +129,7 @@ module.exports.availableSlots=async function(req,res){
             requiredDate.setSeconds(0);
             requiredDate.setMilliseconds(0);
             let user=res.locals.user;
-            if(req.body.group=="All"){
+            if(req.body.subGroup=="All"){
                 occupiedClasses=await Timetable.find({
                     $or:[{
                         "classSub.class":req.body.branch,
@@ -138,61 +138,53 @@ module.exports.availableSlots=async function(req,res){
                         teacher:user._id,
                         date:requiredDate
                     }]
-                    
-                }).sort('startingTime');
-            }
-            else if(req.body.subGroup=="All"){
-                occupiedClasses=await Timetable.find({
-                    $or:[{
-                        $and:[
-                            {
-                                "classSub.class":req.body.branch,
-                                date:requiredDate
-                            },{
-                                $or:[
-                                    {
-                                        "classSub.group":undefined
-                                    },{
-                                        "classSub.group":req.body.group
-                                    }
-                                ]
-                            }
-                        ]
-                    },{
-                        teacher:user._id,
-                        date:requiredDate
-                    }]
                 }).sort('startingTime');
             }
             else{
-                occupiedClasses=await Timetable.find({
-                    $or:[{
-                        $and: [
-                            {
-                                date: requiredDate,
-                                "classSub.class":req.body.branch
-                            },
-                            {
-                                $or: [
-                                    {"classSub.group": undefined},
-                                    {
-                                        $and: [
-                                            {"classSub.group": req.body.group},
-                                            {$or: [
-                                                {"classSub.subGroup": undefined},
-                                                {"classSub.subGroup": req.body.subGroup}
-                                            ]}
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },{
-                        teacher:user._id,
-                        date:requiredDate
-                    }]
-                    
-                }).sort('startingTime');
+                if(req.body.classType == "Lecture"){
+                    occupiedClasses=await Timetable.find({
+                        $or:[{
+                            $and: [
+                                {
+                                    date: requiredDate,
+                                    "classSub.class":req.body.branch
+                                },
+                                {
+                                    $or: [
+                                        {"classSub.group": undefined},
+                                        {"classSub.group": req.body.subGroup}
+                                    ]
+                                }
+                            ]
+                        },{
+                            teacher:user._id,
+                            date:requiredDate
+                        }]
+                        
+                    }).sort('startingTime');
+                }
+                else if(req.body.classType == "Lab"){
+                    occupiedClasses=await Timetable.find({
+                        $or:[{
+                            $and: [
+                                {
+                                    date: requiredDate,
+                                    "classSub.class":req.body.branch
+                                },
+                                {
+                                    $or: [
+                                        {"classSub.subGroup": undefined},
+                                        {"classSub.subGroup": req.body.subGroup}
+                                    ]
+                                }
+                            ]
+                        },{
+                            teacher:user._id,
+                            date:requiredDate
+                        }]
+                        
+                    }).sort('startingTime');
+                }
             }
             let unoccupiedClasses=[];
             let j=0;
@@ -240,11 +232,7 @@ module.exports.availableSlots=async function(req,res){
 
 module.exports.classInfo = async function(req, res){
     if(req.xhr){
-        let class_info = await TimetableModel.findById(req.params.id)
-        .populate('classSub.course')
-        .populate('classSub.class')
-        .populate('classSub.group')
-        .populate('classSub.subGroup');
+        let class_info = await TimetableModel.findById(req.params.id);
         console.log(class_info);
         return res.status(200).json({
             data: class_info
