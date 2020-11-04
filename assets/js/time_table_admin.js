@@ -184,12 +184,14 @@ var clickAddFunction = function (a){
                     let groupNumber = a.getElementsByClassName("groupNumber");
                     let subGroupNumber = a.getElementsByClassName("subGroupNumber");
                     if(groupNumber.length!=0){
+                        rescheduleContainer.children[1].style.display="flex";
                         rescheduleContainer.children[1].children[1].innerText = groupNumber[0].innerText;
                     }
                     else{
                         rescheduleContainer.children[1].style.display = "none";
                     }
                     if(subGroupNumber.length!=0){
+                        rescheduleContainer.children[2].style.display="flex";
                         rescheduleContainer.children[2].children[1].innerText = subGroupNumber[0].innerText;
                     }
                     else{
