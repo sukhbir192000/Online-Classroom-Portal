@@ -7,9 +7,6 @@ Assignments
 - file name too long gets chopped off
 - make only future dates vailable in deadline while adding assignment
 
-DOUBT
-- Edit material part ejs(static hai abhi)
-
 TIMETABLE
 - set minimum current date in add class and reschedule
 - table breaks on changing page width(tablet mode)

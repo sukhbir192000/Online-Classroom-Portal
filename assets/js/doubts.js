@@ -291,13 +291,17 @@ var nextReplyFunction = function(a){
                     content:a.children[0].textContent
                 },
                 success:function(response){
-                    console.log("a hai ye: ", a.parentNode.parentNode);
-                    var matches = a.parentNode.parentNode.children[2].children[0].innerText.match(/(\d+)/);
-                    if(a.parentNode.parentNode.children[2].children[0].innerText.split(" ")[0]=="View"){
-                        a.parentNode.parentNode.children[2].children[0].innerText = "View Replies("+(parseInt(matches[0])+1)+")";
-                    }
-                    else{
-                        a.parentNode.parentNode.children[2].children[0].innerText = "Hide Replies("+(parseInt(matches[0])+1)+")";
+                    console.log("a hai ye: ", a);
+                    if(a.parentNode.parentNode.children[2]){
+                        var matches = a.parentNode.parentNode.children[2].children[0].innerText.match(/(\d+)/);
+                        if(a.parentNode.parentNode.children[2].children[0].innerText.split(" ")[0]=="View"){
+                            // console.log(a.parentNode.parentNode.children[2].children[0]);
+                            a.parentNode.parentNode.children[2].children[0].style.display = "flex";
+                            a.parentNode.parentNode.children[2].children[0].innerText = "View Replies("+(parseInt(matches[0])+1)+")";
+                        }
+                        else{
+                            a.parentNode.parentNode.children[2].children[0].innerText = "Hide Replies("+(parseInt(matches[0])+1)+")";
+                        }   
                     }
                     createReplyFunction(response, a);
                 }
