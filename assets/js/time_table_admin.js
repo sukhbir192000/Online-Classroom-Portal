@@ -197,6 +197,15 @@ var clickAddFunction = function (a){
                     else{
                         rescheduleContainer.children[2].style.display = "none";
                     }
+
+                    document.getElementById("slots_available_reschedule").addEventListener("focus", function(e){
+                        enable = true;
+                    });
+                    document.getElementById("slots_available_reschedule").addEventListener("blur", function(e){
+                        enable = false;
+                    });
+
+                    let reschedule_form = document.getElementById("reschedule_form");
                     let date_form_res = document.getElementById("date_reschedule");
                     let duration_form_res = document.getElementById("duration_reschedule");
                     let slot_form_res = document.getElementById("slots_available_reschedule");
@@ -222,10 +231,27 @@ var clickAddFunction = function (a){
                                 else
                                     findSlots(response.data.classSub.class, response.data.classType, response.data.classSub.subGroup, date_form_res, duration_form_res, slot_form_res);
                             })
+                            reschedule_form.children[0].value = response.data.classSub.course;
+                            reschedule_form.children[1].value = response.data.classType;
+                            reschedule_form.children[2].value = response.data.classSub.class
+                            if(response.data.classType=="Lecture")
+                                reschedule_form.children[3].value = response.data.classSub.group;
+                            else
+                                reschedule_form.children[3].value = response.data.classSub.subGroup;
+                            if(reschedule_form.children[3].value == 'undefined') reschedule_form.children[3].value = "All";
+                            reschedule_form.children[4].value = true;
+                            document.getElementsByClassName("submit_button_reschedule")[0].addEventListener('click', function(e){
+                                e.preventDefault();
+                                $.ajax({
+                                    url:`/content/timetable/delete/${classId}`,
+                                    type:"GET",
+                                    success:function(response){
+                                        reschedule_form.submit();
+                                    }
+                                })
+                            })
                         }
                     })
-
-
                 })
                 
                 document.getElementById('info').children[4].children[0].addEventListener('click',function(){
@@ -293,12 +319,7 @@ var addFunctions = function(){
 }
 
 var enable = false;
-document.getElementById("slots_available_reschedule").addEventListener("focus", function(e){
-    enable = true;
-});
-document.getElementById("slots_available_reschedule").addEventListener("blur", function(e){
-    enable = false;
-});
+
 
 addFunctions();
 
@@ -313,6 +334,41 @@ document.addEventListener('click',function(e){;
                 // console.log("hi2");
                 // document.getElementById("info").style.display = "none";
                 document.getElementById("reschedule_class").style.display = "none";
+                document.getElementById("reschedule_class").innerHTML = `
+                    <input type="hidden" name="subject">
+                    <input type="hidden" name="class_type">
+                    <input type="hidden" name="branch">
+                    <input type="hidden" name="sub_group">
+                    <input type="hidden" name="reschedule">
+                    <div class="subject_name_reschedule"></div>
+                    <div class="class_group_reschedule">
+                        <div class="cg_reschedule_heading"><b>Class Group:&nbsp;</b></div>
+                        <div class="cg_reschedule_content"></div>
+                    </div>
+                    <div class="lab_group_reschedule">
+                        <div class="lg_reschedule_heading"><b>Lab group:&nbsp;</b></div> 
+                        <div class="lg_reschedule_content"></div>
+                    </div>
+                    <form id="reschedule_form" action="/content/timetable/create" method="POST">
+                        <div>
+                            <label class="date_reschedule_label"><b>Date:</b></label>
+                            <input type="date" name="date_reschedule" id="date_reschedule" required>
+                        </div>
+                        <div>
+                            <label class="duration_reschedule_label"><b>Duration:</b></label>
+                            <input type="number" min="1" name="duration_reschedule" id="duration_reschedule" required>
+                        </div>
+                        <div>
+                            <label class="slots_available_label_reschedule"><b>Available slots:</b></label>
+                            <select id="slots_available_reschedule" name="slots_available_reschedule" required>
+                                <option value="" disabled selected>--Select an option--</option>
+                            </select>
+                        </div>
+                        <div class="buttons_reschedule">
+                            <button type="submit" class="submit_button_reschedule">Reschedule</button>
+                        </div>
+                    </form>
+                `;
                 document.querySelector(".table").style.opacity="1";
                 current_div.classList.remove("font_size_remove");
                 current_div.isActive = (!current_div.isActive);

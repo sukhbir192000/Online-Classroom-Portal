@@ -50,19 +50,6 @@
                 <select id="slots_available" name="slots_available" required>
                     <option value="" disabled selected>--Select an option--</option>
                 </select>
-                <!-- <label name="deadline_lecture">Deadline: </label>
-                <input type="datetime-local" name="lecture_deadline" id="lecture_deadline" required="true"><br><br>
-                <label for="weightage_input">Marks:</label>
-                <input id="weightage_input" type="number" name="weightage" class="weightageStyle" min=0><br><br>
-                <input type="text" name="title" id="title" placeholder="Enter the title" ></textarea><br><br>
-                <textarea name="message" id="message" placeholder="Enter the message" rows="5" required=true></textarea><br><br>
-                <div class="files">
-                    <div id="file_names"></div>
-                    <div id="file_inputs">
-                        <input type=file name="file0" class="file" style="display: none;">
-                        <button id="add_files_button" type="button">Add file</button>
-                    </div>
-                </div> -->
                 <div class="submit_button">
                     <button type="submit">Submit</button>
                 </div>
@@ -133,17 +120,22 @@
                 <div class="lg_reschedule_content"></div>
             </div>
             <form id="reschedule_form" action="/content/timetable/create" method="POST">
+                <input type="hidden" name="subject">
+                <input type="hidden" name="class_type">
+                <input type="hidden" name="branch">
+                <input type="hidden" name="sub_group">
+                <input type="hidden" name="reschedule">
                 <div>
                     <label class="date_reschedule_label"><b>Date:</b></label>
-                    <input type="date" name="date_reschedule" id="date_reschedule" required>
+                    <input type="date" name="lecture_date" id="date_reschedule" required>
                 </div>
                 <div>
                     <label class="duration_reschedule_label"><b>Duration:</b></label>
-                    <input type="number" min="1" name="duration_reschedule" id="duration_reschedule" required>
+                    <input type="number" min="1" name="duration_hr" id="duration_reschedule" required>
                 </div>
                 <div>
                     <label class="slots_available_label_reschedule"><b>Available slots:</b></label>
-                    <select id="slots_available_reschedule" name="slots_available_reschedule" required>
+                    <select id="slots_available_reschedule" name="slots_available" required>
                         <option value="" disabled selected>--Select an option--</option>
                     </select>
                 </div>

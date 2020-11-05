@@ -11,11 +11,8 @@ DOUBT
 - Edit material part ejs(static hai abhi)
 
 TIMETABLE
-- set minimum current date in add class
+- set minimum current date in add class and reschedule
 - table breaks on changing page width(tablet mode)
-- z-index of time table items too much
-- click outside lower box while rescheduling class
-- remove ajax from hover
 
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
@@ -23,10 +20,6 @@ BACKEND
 - remove unsubmitted if graded from backend
 
 BAAD KE KAAM:
-- Remove Coding ninajs product in login
-- Make ajax urls common
 - pagination
-- delete getSubjects etc from all controllers except assignment_controller
-
 - add backlog field to user schema and make additions accordingly in controllers
 - add isActive field to class-sub schema and make additions accordingly in controllers

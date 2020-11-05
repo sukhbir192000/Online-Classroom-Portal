@@ -274,39 +274,37 @@ var createReplyFunction = function(response,a){
 }
 
 var nextReplyFunction = function(a){
-        a.children[0].addEventListener('keydown',function(e){ 
-            if(e.key=="Enter" && e.shiftKey==false){
-                this.parentNode.children[1].click();
-            }   
-        })
-        a.children[1].addEventListener("click",function(e){
-            
-            if(a.children[0].textContent != ""){
-                let doubtId=a.children[2].value;
-                $.ajax({
-                    url:"/content/doubts/createReply",
-                    type:"POST",
-                    data:{
-                        doubtId:doubtId,
-                        content:a.children[0].textContent,
-                        
-                        
-                    },
-                    success:function(response){
-                        var matches = a.parentNode.parentNode.children[2].children[0].innerText.match(/(\d+)/);
-                        if(a.parentNode.parentNode.children[2].children[0].innerText.split(" ")[0]=="View"){
-                            a.parentNode.parentNode.children[2].children[0].innerText = "View Replies("+(parseInt(matches[0])+1)+")";
-                        }
-                        else{
-                            a.parentNode.parentNode.children[2].children[0].innerText = "Hide Replies("+(parseInt(matches[0])+1)+")";
-                        }
-                        createReplyFunction(response, a);
+    a.children[0].addEventListener('keydown',function(e){ 
+        if(e.key=="Enter" && e.shiftKey==false){
+            this.parentNode.children[1].click();
+        }   
+    })
+    a.children[1].addEventListener("click",function(e){
+        
+        if(a.children[0].textContent != ""){
+            let doubtId=a.children[2].value;
+            $.ajax({
+                url:"/content/doubts/createReply",
+                type:"POST",
+                data:{
+                    doubtId:doubtId,
+                    content:a.children[0].textContent
+                },
+                success:function(response){
+                    console.log("a hai ye: ", a.parentNode.parentNode);
+                    var matches = a.parentNode.parentNode.children[2].children[0].innerText.match(/(\d+)/);
+                    if(a.parentNode.parentNode.children[2].children[0].innerText.split(" ")[0]=="View"){
+                        a.parentNode.parentNode.children[2].children[0].innerText = "View Replies("+(parseInt(matches[0])+1)+")";
                     }
-                })
-               
-            }
-        })
-    }
+                    else{
+                        a.parentNode.parentNode.children[2].children[0].innerText = "Hide Replies("+(parseInt(matches[0])+1)+")";
+                    }
+                    createReplyFunction(response, a);
+                }
+            })
+        }
+    })
+}
 
 
 var y = document.querySelectorAll(".next_reply");

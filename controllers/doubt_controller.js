@@ -300,7 +300,7 @@ module.exports.doubtCreate=async function(req,res){
                 });
             }
         }
-        doubtElement.save();
+        await doubtElement.save();
     
         req.flash('success', 'Doubt Posted');
         return res.redirect('back')

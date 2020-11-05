@@ -292,7 +292,12 @@ module.exports.classCreate = async function(req,res){
                 })
             }
         }
-        req.flash('success',"Added class");
+        if(req.body.reschedule){
+            req.flash('success',"Rescheduled class");
+        }
+        else{
+            req.flash('success',"Added class");
+        }
         return res.redirect('back');
     }
     catch(err){
