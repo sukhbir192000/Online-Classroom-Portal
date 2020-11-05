@@ -293,25 +293,18 @@ var addFunctions = function(){
 }
 
 var enable = false;
-var slot_available_true = function(){
-    document.getElementById("slots_available_reschedule").addEventListener("focus", function(e){
-        enable = true;
-    });
-}
-var slot_available_false = function(){
-    document.getElementById("slots_available_reschedule").addEventListener("blur", function(e){
-        enable = false;
-    });
-}
+document.getElementById("slots_available_reschedule").addEventListener("focus", function(e){
+    enable = true;
+});
+document.getElementById("slots_available_reschedule").addEventListener("blur", function(e){
+    enable = false;
+});
 
 addFunctions();
 
 document.addEventListener('click',function(e){;
     var rect = document.getElementById("reschedule_class");
     if(rect.style.display == "flex"){
-        console.log("hellooooo");
-        slot_available_true();
-        slot_available_false();
         rect=rect.getBoundingClientRect();
         if(current_div && (e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height)){
             var rectinner = current_div.getBoundingClientRect();
@@ -327,8 +320,7 @@ document.addEventListener('click',function(e){;
                 document.getElementById('info').parentNode.removeChild(document.getElementById('info'));
             }
         }
-        document.getElementById("slots_available_reschedule").removeEventListener("focus",slot_available_true);
-        document.getElementById("slots_available_reschedule").removeEventListener("blur",slot_available_false);
+
     }
     else{
         // console.log("hello");
