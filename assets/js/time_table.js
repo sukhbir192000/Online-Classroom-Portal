@@ -23,23 +23,6 @@ document.addEventListener('mouseup',function(e){
     }
  });
 
-
-
- document.addEventListener('mouseup',function(e){
-    var position=document.querySelector(".filters_small").getBoundingClientRect();
-    var rect=document.querySelector(".filters").getBoundingClientRect();
-    var container = document.querySelector(".profile");
-    if(container.contains(e.target)){
-        document.querySelector(".filters_small").disabled=true;
-    }
-    else if(e.x>=position.left && e.x<=(position.left+position.width) && e.y>=position.top && e.y<=(position.top+position.height) ){
-        document.querySelector(".filters").classList.toggle("show");
-    }
-    else if(e.x<rect.left || e.x>(rect.left+rect.width) || e.y<rect.top || e.y>(rect.top+rect.height) ){
-
-        document.querySelector(".filters").classList.remove("show");
-    }
- });
  
 let week_shift_div = document.getElementById('week_shift');
 let offset = 0;
