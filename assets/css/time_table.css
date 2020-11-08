@@ -120,7 +120,7 @@ input,select{
     min-width:12.5%;
     max-width: 40%;
     z-index: 15;
-    padding:0.5em;
+    padding:0.7em;
     background-color: white;
     border:5px solid black;
     box-shadow: 0.1em 0.1em 0.5em;
@@ -210,12 +210,17 @@ input,select{
     min-width:12.5%;
     max-width: 40%;
     z-index: 17;
-    padding:0.5em;
+    padding:0.7em;
     background-color: white;
     border:5px solid black;
     box-shadow: 0.1em 0.1em 0.5em;
 }
 #reschedule_class>div{
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+#reschedule_class>form>div{
     margin-bottom: 0.5em;
     display: flex;
     flex-direction: row;
@@ -249,29 +254,18 @@ input,select{
 
 .submit_button_reschedule{
     margin: 0.5em;
+    margin-bottom: 0.2em;
     background-color: #1D3557;
     color: white;
     font-size: 1em;
     padding:0.2em;
     border-radius: 4px;
 }
-
-
-
-/* FOOTER */
-.footer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 7;
-} 
-.footer_content{
-    padding: 0.1em 0;
+form{
+    margin-block-end: 0em;
 }
+
+
 .add{
     margin:1.5em 0 1em 0;
     width:fit-content;
@@ -342,7 +336,7 @@ form{
     display: flex;
 }
 
-.select2-container .select2-selection--single .select2-selection__rendered {
+/* .select2-container .select2-selection--single .select2-selection__rendered {
     font-size: 0.9em;
     text-overflow: unset;
 }
@@ -353,12 +347,12 @@ form{
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
     margin-left: 0.1em;
     margin-right: 1em;
-}
+} */
 /* .select2-search--dropdown .select2-search__field{
     padding:0;
 } */
 .subject_label{
-    margin-right:2.3em;
+    margin-right:5em;
 }
 .branch_label{
     margin-right: 5.2em;
@@ -420,6 +414,9 @@ form{
     }
     .table_column{
         font-size: 0.8em;
+    }
+    .table_row{
+        height: auto;
     }
 }
 
@@ -484,6 +481,9 @@ form{
     }
     #info{
         max-width: 60%;
+    }
+    .table_row{
+        height: auto;
     }
 
 
@@ -626,10 +626,68 @@ form{
     }
     .box_layout{
         width: 92%;
-        padding-right: 0;
+        padding-right: 0;    
     } 
     #info{
         max-width: 90%;
+    }
+    .table:hover{
+        overflow-x: auto;
+    }
+    .table::-webkit-scrollbar{
+        height:8px;
+    }
+    .table::-webkit-scrollbar-track {
+        background: rgb(231, 232, 233);      
+    }
+    .table::-webkit-scrollbar-thumb {
+        background-color: rgb(189, 187, 187);    
+        border-radius: 20px;        
+    }
+    .table_heading{
+        font-size: 0.8em;
+        min-width: 10em;
+    }
+    .table_column{
+        font-size: 0.7em;
+        min-width: 10em;
+    }
+    .table_row{
+        height: auto;
+    }
+    .left_week_arrow{
+        font-size: 1.2em;
+        padding-right: 0.5em;
+    }
+    .left_week_content{
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    .right_week_arrow{
+        font-size: 1.2em;
+        padding-left: 0.5em;
+    }
+    .right_week_content{
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    .add_content{
+        font-size: 0.9em;
+    }
+    .add_icon{
+        font-size: 0.9em;
+    }
+    #add_form>label{
+        font-size: 0.9em;
+    }
+    .submit_button>button{
+        font-size: 0.9em;
+    }
+    select>option{
+        font-size: 0.85em;
+        height:auto;
+        padding:0;
+        margin:0;
     }
 
     /* FOOTER */

@@ -190,6 +190,7 @@ var clickAddFunction = function (a){
                     else{
                         rescheduleContainer.children[1].style.display = "none";
                     }
+                    console.log(rescheduleContainer);
                     if(subGroupNumber.length!=0){
                         rescheduleContainer.children[2].style.display="flex";
                         rescheduleContainer.children[2].children[1].innerText = subGroupNumber[0].innerText;
@@ -213,6 +214,19 @@ var clickAddFunction = function (a){
                     duration_form_res.value = parseInt(a.style.height) / 4;
                     slot_form_res.selectedIndex = 0;
                     slot_form_res.disabled = true;
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1;
+                    var yyyy = today.getFullYear();
+                    if(dd<10){
+                        dd='0'+dd
+                    } 
+                    if(mm<10){
+                        mm='0'+mm
+                    } 
+
+                    today = yyyy+'-'+mm+'-'+dd;
+                    document.getElementById("date_reschedule").setAttribute("min", today);
                     $.ajax({
                         url: `/content/timetable/getInfo/${classId}`,
                         type: "GET",
@@ -335,11 +349,6 @@ document.addEventListener('click',function(e){;
                 // document.getElementById("info").style.display = "none";
                 document.getElementById("reschedule_class").style.display = "none";
                 document.getElementById("reschedule_class").innerHTML = `
-                    <input type="hidden" name="subject">
-                    <input type="hidden" name="class_type">
-                    <input type="hidden" name="branch">
-                    <input type="hidden" name="sub_group">
-                    <input type="hidden" name="reschedule">
                     <div class="subject_name_reschedule"></div>
                     <div class="class_group_reschedule">
                         <div class="cg_reschedule_heading"><b>Class Group:&nbsp;</b></div>
@@ -350,6 +359,11 @@ document.addEventListener('click',function(e){;
                         <div class="lg_reschedule_content"></div>
                     </div>
                     <form id="reschedule_form" action="/content/timetable/create" method="POST">
+                        <input type="hidden" name="subject">
+                        <input type="hidden" name="class_type">
+                        <input type="hidden" name="branch">
+                        <input type="hidden" name="sub_group">
+                        <input type="hidden" name="reschedule">
                         <div>
                             <label class="date_reschedule_label"><b>Date:</b></label>
                             <input type="date" name="date_reschedule" id="date_reschedule" required>
@@ -439,6 +453,19 @@ document.querySelector(".add").addEventListener('click',function(e){
         // $(document).ready(function() {
         //     $('#slots_available').select2();
         // });     
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("lecture_date").setAttribute("min", today);
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })

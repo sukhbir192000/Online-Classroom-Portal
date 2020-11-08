@@ -22,7 +22,7 @@
         <% if(user.isAdmin){ %>
             <div class="add_admin">
             <form id="add_form" action="/content/timetable/create" method="POST" >
-                <label for="subject" class="subject_label">Subject HATA:</label>
+                <label for="subject" class="subject_label">Subject:</label>
                 <select id="subject" name="subject" required>
                     <option value="" disabled selected>--Select an option--</option>
                     <% for(let course of courseList){ %>
