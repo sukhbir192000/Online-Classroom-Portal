@@ -438,7 +438,7 @@ input[type="checkbox"]{
 .reply_content{
     font-size: 0.9em;
     overflow-wrap: break-word;
-    white-space: pre;
+    /* white-space: pre; */
     margin: 0.1em 0;
 }
 .reply_button{
@@ -684,7 +684,7 @@ a{
     font-weight: 600;
 }
 .comment_text{
-    width: 100%;
+    width: 90%;
     border-bottom: 1px solid black;
 }
 .comment_text[contentEditable=true]:empty::before{
@@ -721,6 +721,7 @@ a{
 
 /* FILTERS */
 .filters{
+    box-sizing: border-box;
     height:auto;
     max-height: 70vh;
     position: fixed;
@@ -732,7 +733,6 @@ a{
     overflow-y:hidden;
     width:24%;
     padding: 0 1em 0 3em;
-    box-sizing: border-box;
 }
 .filters:hover{
     overflow-y: auto;
@@ -830,7 +830,7 @@ li:hover{
         height:auto;
         max-height: 70vh;
         position: fixed;
-        top:7.8em;
+        top:3.3em;
         right:8vw;
         display: flex;
         flex-direction: column;
@@ -870,6 +870,10 @@ li:hover{
     }
     input, textarea{
         width:80vw;
+    }
+    .comment_text{
+        width: 85%;
+        border-bottom: 1px solid black;
     }
 
 
@@ -1003,7 +1007,7 @@ li:hover{
         height:auto;
         max-height: 70vh;
         position: fixed;
-        top:7em;
+        top:3em;
         right:8vw;
         display: flex;
         flex-direction: column;
@@ -1096,11 +1100,25 @@ li:hover{
     .date_uploaded{
         margin-left: 0;
     }
-    
-
-    /* FOOTER */
-    .footer_content{
-        font-size: 0.7em;
+    .add_content{
+        font-size: 0.9em;
     }
+    .add_icon{
+        font-size: 0.9em;
+    }
+    #add_form>label{
+        font-size: 0.9em;
+    }
+    .submit_button>button{
+        font-size: 0.9em;
+    }
+    select>option{
+        font-size: 0.85em;
+        height:auto;
+        padding:0;
+        margin:0;
+    }
+
+    
     
 }

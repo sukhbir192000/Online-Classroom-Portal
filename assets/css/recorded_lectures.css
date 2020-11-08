@@ -933,6 +933,24 @@ li:hover{
     .delete{
         font-size: 1.2em;
     }
+    .add_content{
+        font-size: 0.9em;
+    }
+    .add_icon{
+        font-size: 0.9em;
+    }
+    #add_form>label{
+        font-size: 0.9em;
+    }
+    .submit_button>button{
+        font-size: 0.9em;
+    }
+    select>option{
+        font-size: 0.85em;
+        height:auto;
+        padding:0;
+        margin:0;
+    }
 
     /* FOOTER */
     .footer_content{

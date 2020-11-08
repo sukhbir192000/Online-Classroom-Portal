@@ -1,7 +1,8 @@
 <link rel="stylesheet" type="text/css" href="/css/doubts.css">
 <% if(!user.isAdmin){ %>
     <link rel="stylesheet" type="text/css" href="/css/filters_position_admin.css">
-<% } %>   
+<% } %>
+
 <div class="main">
     <%- include('navbar') %>
 
@@ -23,7 +24,7 @@
                     <div class="add_content">Add </div>
                 </div>
                 <div class="add_admin">
-                    <form action="/content/doubts/create" method="POST" enctype="multipart/form-data">
+                    <form id="add_form" action="/content/doubts/create" method="POST" enctype="multipart/form-data">
                         <label for="subject">Subject:</label>
                         <select  id="subject" name="subject" required>
                             <option value="" disabled selected>--Select an option--</option>
@@ -185,7 +186,6 @@
 
 <script src="/js/doubts.js"></script>
 <% if(user.isAdmin){ %>
-   
     <script src="/js/doubt_filter_admin.js"></script>
 <% }else{ %>
     <script src="/js/doubt_filter.js"></script>
