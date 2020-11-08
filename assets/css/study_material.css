@@ -17,186 +17,6 @@ body{
 }
 
 
-/* HEADER */
-.header{
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index:1;
-}
-
-.welcome_user{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
-.welcome_user_heading{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 2em;
-}
-.hamburger_icon{
-    visibility: hidden;
-    cursor: pointer;
-}
-.profile_icon{
-    display: flex;
-    padding-right:1em;
-    padding-top:0.2em;
-    /*--------------------------------------------------------------------------------------*/
-    padding-bottom: 0.2em;
-    /*--------------------------------------------------------------------------------------*/
-    cursor: pointer;
-    font-size: 1.7em;
-}
-
-.welcome_user_content{
-    padding: 0.3em 1em 0.3em 0;
-    font-size: 1.3em;
-}
-
-.banner{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    cursor: pointer;
-}
-.banner_content{
-    position:relative;
-    padding: 0.6em;
-    font-size: 1.3em;
-    font-weight: 700;
-    color: rgb(30, 43, 71);
-    text-transform: uppercase;
-}
-.profile{
-    visibility: hidden;
-    position: fixed;
-    top:2.5em;
-    right:3.6em;
-    width:auto;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    justify-content: flex-end;
-    border: 2px solid gray;
-    cursor: pointer;
-}
-.profile>div{
-    display: flex;
-    padding:0.5em;
-    margin:0;
-    justify-content: center;
-}
-.profile>div:hover{
-    background-color: #1D3557;
-    color:white;
-}
-
-/* NAVIGATION BAR */
-.navbar{
-    height: 100vh;
-    position: fixed;
-    top:5.4em;
-    left:0;
-    display: flex;
-    flex-direction: column;
-    z-index:7;
-    overflow: auto;
-}
-
-.nav_icon{
-    padding: 1.2em 0.8em;
-    color: white;
-}
-
-.nav_content{
-    width: 0;
-    overflow: hidden;
-    transition: all 0.3s ;
-}
-
-.navbar:hover .nav_content{
-    width: auto;
-    min-width: 9em;
-    overflow: visible;
-    padding: 1.2em 1.5em 1.2em 0;
-    font-size: 1.2em;
-    color: white;
-    text-decoration: none;
-}
-
-.navbar a{
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-}
-
-.navbar a:hover .nav_content{
-    font-weight: 600;
-    transform: scale(1.01);
-}
-
-.navbar a:hover .nav_icon{
-    transform: scale(1.01);
-    transition: all 0.3s;
-}
-
-.navbar a:active{
-    background-color: black;
-}
-
-#black_screen{
-    transition: all 0.3s;
-}
-
-.navbar:hover ~ #black_screen{
-    position: fixed;
-    top: 5.4em;
-    left: 0;
-    width: 100vw;
-    height: 100%;
-    z-index:5;
-    opacity:0.5;
-    background-color: black;
-}
-.navbar a:active{
-    background-color: white;
-}
-
-.navbar a:active .nav_content{
-    color: #1D3557;
-}
-
-.navbar a:active .nav_icon{
-    color:#1D3557;
-}
-
-.navbar a:target{
-    background-color: #F1FAEE;
-}
-
-.navbar a:target .nav_content{
-    color: #1D3557;
-}
-
-.navbar a:target .nav_icon{
-    color:#1D3557;
-}
-.navbar::-webkit-scrollbar{
-    width:8px;
-}
-.navbar::-webkit-scrollbar-track {
-    background: rgb(231, 232, 233);      
-}
-.navbar::-webkit-scrollbar-thumb {
-    background-color: rgb(189, 187, 187);    
-    border-radius: 20px;        
-}
 
 
 
@@ -507,10 +327,27 @@ select option{
     margin-left: 3.7em;
 }
 
-input,textarea{
+input{
+    height:1.8em;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    border-radius: 4px;
+    border:1px solid #aaa;
+    width:60vw;
+}
+select{
+    height:1.4em;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    border-radius: 4px;
+    border:1px solid #aaa;
+}
+textarea{
     width:60vw;
     overflow-y: auto;
     font-family: Helvetica, Arial, sans-serif;
+    border-radius: 4px;
+    border:1px solid #aaa;
 }
 .submit_button{
     display: flex;
@@ -523,6 +360,7 @@ input,textarea{
     background-color: #1D3557;
     color:white;
     padding:0.3em 0.7em;
+    border-radius: 4px;
 }
 .submit_button button:hover{
     background-color:white;
@@ -585,22 +423,6 @@ input,textarea{
 .title[contentEditable=true]:empty:not(:focus):before{
     content:attr(title-text);
     color:gray;
-}
-
-
-/* FOOTER */
-.footer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 7;
-} 
-.footer_content{
-    padding: 0.1em 0;
 }
 
 
@@ -674,39 +496,7 @@ li:hover{
 
 /* For tablet devices */
 @media(min-width: 767px) and (max-width: 991px){
-    /* HEADER */
-    .banner_content{
-        font-size: 1em;
-    }
-    .welcome_user{
-        
-        justify-content: space-between;
-    }
-    .welcome_user_heading{
-        justify-content: flex-end;
-    }
-    .hamburger_icon{
-        visibility: visible;
-        padding: 0.3em 0 0.3em 1em;
-    }
-    .welcome_user_content{
-        font-size: 1em;
-        padding-right:0.2em ;
-    }
-    .profile{
-        top:2em;
-    }
-    .profile_icon{
-        font-size: 1.5em;
-        display: flex;
-        padding: 0.2em 1em;
-    }
-
-    /* FOOTER */
-    .footer_content{
-        font-size: 0.8em;
-    }
-
+    
     
     /* FILTERS */
     .filters{
@@ -766,131 +556,11 @@ li:hover{
     /* ------------------------------------------------------------------------------ */
 
 
-    /* NAVIGATION BAR */
-    .navbar{
-        width:0;
-        overflow: hidden;
-       
-    }
-    .show_navbar{
-        overflow-y: auto;
-        width:auto;
-        height: 95%;
-        position: fixed;
-        top:1.9em;
-        left:0;
-        display: flex;
-        flex-direction: column;
-        z-index:7;
-        transition: all 0.3s ;
-        
-    }
-
-    .nav_icon{
-        padding: 1.1em 0.8em;
-        color: white;
-    }
-
-    .nav_content, .navbar:hover .nav_content{
-        width: auto;
-        min-width: 9em;
-        padding: 1.2em 1.5em 1.2em 0;
-        font-size: 1.1em;
-        color: white;
-        text-decoration: none;
-        transition: none;
-    }  
-      
-    .show_black_screen, .navbar:hover~#black_screen{
-        position: fixed;
-        top: 1.9em;
-        left: 0;
-        width: 100vw;
-        height: 100%;
-        z-index:5;
-        opacity:0.5;
-        background-color: black;
-    }
 }
 
 /* For mobile devices */
 @media(max-width: 767px){
-    /* HEADER */
-    .banner_content{
-        font-size:0.8em;
-    }
-    .welcome_user_content{
-        font-size: 1em;
-        visibility: hidden;
-    }
-    .welcome_user{
-        justify-content: space-between;
-    }
-    .welcome_user_heading{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    .hamburger_icon{
-        visibility: visible;
-        padding: 0.3em 0 0.3em 0.5em;
-    }
-    .profile{
-        top:2em;
-        right: 3.2em;
-    }
-    .profile>div{
-        font-size: 0.9em;
-    }
-    .profile_icon{
-        font-size: 1.5em;
-        display: flex;
-        padding: 0.2em 0.5em;
-    }
     
-
-    /* NAVIGATION BAR */
-    .navbar{
-        width:0;
-        overflow: hidden;
-    }
-    .show_navbar{
-        overflow-y: auto;
-        width:auto;
-        height: 95%;
-        position: fixed;
-        top:1.9em;
-        left:0;
-        display: flex;
-        flex-direction: column;
-        z-index:7;
-        transition: ease 0.3s ;
-    }  
-
-    .nav_icon{
-        padding: 1.1em 0.8em;
-        color: white;
-    }
-
-    .nav_content, .navbar:hover .nav_content{
-        width: auto;
-        min-width: 9em;
-        padding: 1.2em 1.5em 1.2em 0;
-        font-size: 1.1em;
-        color: white;
-        text-decoration: none;
-        transition: none;
-    }
-    .show_black_screen, .navbar:hover~#black_screen{
-        position: fixed;
-        top: 1.9em;
-        left: 0;
-        width: 100vw;
-        height: 100%;
-        z-index:5;
-        opacity:0.5;
-        background-color: black;
-    }
 
     /* FILTERS */
     .filters{
@@ -1002,10 +672,16 @@ li:hover{
         padding:0;
         margin:0;
     }
+    .edit{
+        font-size: 1.2em;
+    }
+    .delete{
+        font-size: 1.2em;
+    }
+    .savechanges{
+        font-size: 1.2em;
+    }
     /* -------------------------------------------------------------------------- */
 
-    /* FOOTER */
-    .footer_content{
-        font-size: 0.7em;
-    }
+
 }
