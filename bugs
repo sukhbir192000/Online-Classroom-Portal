@@ -1,4 +1,9 @@
+todo:
+    add classlinks to top banner
+    add dynamic announcements
 Bugs:
+general(important)
+- remove pointer from *EVERYWHERE* -_-
 
 Assignments
 - Edit (NOT COMPLETE)
@@ -7,10 +12,8 @@ Assignments
 - file name too long gets chopped off
 - make only future dates vailable in deadline while adding assignment
 
-TIMETABLE
-- set minimum current date in add class and reschedule
-- table breaks on changing page width(tablet mode)
-
+Timetable
+- changing week breaks hover
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
 - set value of input deadline as current deadline in edit mode (ASSIGNMENT AND QUIZ)

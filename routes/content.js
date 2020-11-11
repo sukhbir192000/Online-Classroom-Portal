@@ -1,5 +1,6 @@
 const express=require('express');
 const Router=express.Router();
+const headerController=require('../controllers/header_controller');
 const passport=require('../config/passport-google-oauth2-strategy');
 Router.use('/announcements',require('./announcements'));
 Router.use('/studymaterial',require('./studyMaterial'));
@@ -10,4 +11,5 @@ Router.use('/assignmentsubmissions',require('./assignmentSubmission'));
 Router.use('/viewsubmissions',passport.checkAdmin,require('./assignmentViewSubmission'));
 Router.use('/quizzes',require('./quizzes'));
 Router.use('/doubts',require('./doubts'));
+Router.get('/getCurrentClass',headerController.getClass);
 module.exports=Router;

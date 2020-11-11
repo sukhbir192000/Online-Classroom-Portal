@@ -4,20 +4,21 @@
         <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div>
         <div class="welcome_user_heading">
             <div class="welcome_user_content color_white">
-                Welcome User!
+                Welcome <%=user.name%>!
             </div>
             <div class="profile_icon"><i class="fa fa-user-circle color_white"></i></div>
         </div>
     </div>
-    <div class="banner bgcolor_banner">
+    <a href="<%= %>"><div class="banner bgcolor_banner">
         <div class="banner_content color_white">
-            Computer Architecture class going on!
+            <span id="class_name_banner"></span> class going on!
         </div>
         
-    </div>
+    </div></a>
     <div class="profile" id="profile">
         <div>My profile</div>
         <a href="/users/logout"><div>Logout</div></a>
     </div>
 
 </header>
+<script src="/js/header.js"></script>
