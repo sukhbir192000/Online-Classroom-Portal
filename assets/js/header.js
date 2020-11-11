@@ -19,7 +19,18 @@ function ajaxFunc(){
         cache:false,
         success:function(response){
             $('#class_name_banner').html(response.className);
-            
+            if(response.className != "No"){
+                document.getElementById("bannerid").removeEventListener("click",bannerFunction);
+                document.querySelector(".banner").style.cursor = "pointer";
+            }
+            else{
+                document.getElementById("bannerid").removeEventListener("click",bannerFunction);
+                document.getElementById("bannerid").addEventListener("click",bannerFunction);
+            }
         }
     })
+}
+
+var bannerFunction = function(e){
+    e.preventDefault();
 }

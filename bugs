@@ -1,9 +1,6 @@
 todo:
     add classlinks to top banner
     add dynamic announcements
-Bugs:
-general(important)
-- remove pointer from *EVERYWHERE* -_-
 
 Assignments
 - Edit (NOT COMPLETE)
@@ -14,6 +11,7 @@ Assignments
 
 Timetable
 - changing week breaks hover
+
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
 - set value of input deadline as current deadline in edit mode (ASSIGNMENT AND QUIZ)

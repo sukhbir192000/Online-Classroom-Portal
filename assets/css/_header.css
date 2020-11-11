@@ -37,12 +37,13 @@
     font-size: 1.3em;
 }
 
-
+a{
+    cursor: context-menu;
+}
 .banner{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    cursor: pointer;
     z-index:10;
 }
 .banner_content{

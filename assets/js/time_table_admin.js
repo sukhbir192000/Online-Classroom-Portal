@@ -153,6 +153,9 @@ week_shift_div.children[1].addEventListener('click', function(e){
 
 var current_div = null, prevText = "", subjectName="";
 var clickAddFunction = function (a){
+    if(a.textContent != ""){
+        a.style.cursor = "pointer";
+    }
     a.addEventListener('click',function(e){
         let current_subject_name = subjectName;
         let newDiv=document.createElement('div');
@@ -201,6 +204,7 @@ var clickAddFunction = function (a){
                 
                 let classId=this.id;
                 document.getElementById("info").children[4].children[1].addEventListener("click", function(e){
+                    document.getElementById("info").style.display = "none";
                     let rescheduleContainer = document.getElementById("reschedule_class")
                     rescheduleContainer.style.display = "flex";
                     rescheduleContainer.style.top = '50%';
@@ -689,3 +693,4 @@ function findSlots(branch, classType, subGroup, dateForm, durationForm, slotForm
         slotForm.selectedIndex = 0;
     }
 }
+

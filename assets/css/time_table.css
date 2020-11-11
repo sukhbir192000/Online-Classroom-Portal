@@ -91,7 +91,7 @@ body{
     word-break: break-all;
     /* word-wrap: break-word; */
     background-color: white;
-    cursor: pointer;
+    /* cursor: pointer; */
     text-overflow: ellipsis;
 }
 .table_heading{
@@ -422,41 +422,6 @@ form{
 
 /* For tablet devices */
 @media(min-width: 767px) and (max-width: 991px){
-    /* HEADER */
-    .banner_content{
-        font-size: 1em;
-    }
-    .welcome_user{
-        
-        justify-content: space-between;
-    }
-    .welcome_user_heading{
-        justify-content: flex-end;
-    }
-    .hamburger_icon{
-        visibility: visible;
-        padding: 0.3em 0 0.3em 1em;
-    }
-    .welcome_user_content{
-        font-size: 1em;
-        padding-right:0.2em ;
-    }
-    .profile{
-        top:2em;
-    }
-    .profile_icon{
-        font-size: 1.5em;
-        display: flex;
-        padding: 0.2em 1em;
-    }
-
-    /* FOOTER */
-    .footer_content{
-        font-size: 0.8em;
-    }
-
-    
-
 
     /* MAIN */   
     .main{
@@ -487,133 +452,11 @@ form{
     }
 
 
-    /* NAVIGATION BAR */
-    .navbar{
-        width:0;
-        overflow: hidden;
-       
-    }
-    .show_navbar{
-        overflow-y: auto;
-        width:auto;
-        height: 95%;
-        position: fixed;
-        top:1.9em;
-        left:0;
-        display: flex;
-        flex-direction: column;
-        z-index:7;
-        transition: all 0.3s ;
-        
-    }
-
-    .nav_icon{
-        padding: 1.1em 0.8em;
-        color: white;
-    }
-
-    .nav_content, .navbar:hover .nav_content{
-        width: auto;
-        min-width: 9em;
-        padding: 1.2em 1.5em 1.2em 0;
-        font-size: 1.1em;
-        color: white;
-        text-decoration: none;
-        transition: none;
-    }  
-      
-    .show_black_screen, .navbar:hover~#black_screen{
-        position: fixed;
-        top: 1.9em;
-        left: 0;
-        width: 100vw;
-        height: 100%;
-        z-index:5;
-        opacity:0.5;
-        background-color: black;
-    }
+    
 }
 
 /* For mobile devices */
-@media(max-width: 767px){
-    /* HEADER */
-    .banner_content{
-        font-size:0.8em;
-    }
-    .welcome_user_content{
-        font-size: 1em;
-        visibility: hidden;
-    }
-    .welcome_user{
-        justify-content: space-between;
-    }
-    .welcome_user_heading{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    .hamburger_icon{
-        visibility: visible;
-        padding: 0.3em 0 0.3em 0.5em;
-    }
-    .profile{
-        top:2em;
-        right: 3.2em;
-    }
-    .profile>div{
-        font-size: 0.9em;
-    }
-    .profile_icon{
-        font-size: 1.5em;
-        display: flex;
-        padding: 0.2em 0.5em;
-    }
-    
-
-    /* NAVIGATION BAR */
-    .navbar{
-        width:0;
-        overflow: hidden;
-    }
-    .show_navbar{
-        overflow-y: auto;
-        width:auto;
-        height: 95%;
-        position: fixed;
-        top:1.9em;
-        left:0;
-        display: flex;
-        flex-direction: column;
-        z-index:7;
-        transition: ease 0.3s ;
-    }  
-
-    .nav_icon{
-        padding: 1.1em 0.8em;
-        color: white;
-    }
-
-    .nav_content, .navbar:hover .nav_content{
-        width: auto;
-        min-width: 9em;
-        padding: 1.2em 1.5em 1.2em 0;
-        font-size: 1.1em;
-        color: white;
-        text-decoration: none;
-        transition: none;
-    }
-    .show_black_screen, .navbar:hover~#black_screen{
-        position: fixed;
-        top: 1.9em;
-        left: 0;
-        width: 100vw;
-        height: 100%;
-        z-index:5;
-        opacity:0.5;
-        background-color: black;
-    }
-
-    
+@media(max-width: 767px ){   
 
     /* MAIN */
 
@@ -689,9 +532,19 @@ form{
         padding:0;
         margin:0;
     }
-
-    /* FOOTER */
-    .footer_content{
-        font-size: 0.7em;
+    #info>div{
+        font-size: 0.85em;
+    }
+    #reschedule_class>div{
+        font-size: 0.85em;
+    }
+    #reschedule_form>div{
+        font-size: 0.85em;
+    }
+    #reschedule_class>form>div{
+        flex-direction: column;
+    }
+    #date_reschedule{
+        width: 10em;
     }
 }
