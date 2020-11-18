@@ -6,7 +6,9 @@
     font-size: 16px;
     font-family:Helvetica, Arial, sans-serif;
 } */
-
+a{
+    cursor: pointer;
+}
 html{
     scroll-behavior: smooth !important;
 }
@@ -401,8 +403,11 @@ li:hover{
 
 .main_area_profile{
     background-color: #F1FAEE;
+    box-sizing: border-box;
+    /* border:0.1em solid black; */
     display: flex;
     width: 100%;
+    overflow: hidden;
     padding: 0;
     margin: 0;
 }
@@ -416,7 +421,7 @@ li:hover{
     margin: 0;
     position: fixed;
     padding: 0;
-    width: 20%;
+    width: 20vw;
 }
 
 .navbar_profile{
@@ -558,11 +563,13 @@ li:hover{
     text-decoration: none;
     width: 18vw;
 }
-
 .option{
+    margin: 1em 0;
+}
+.option div{
     align-items: center;
     border-bottom: solid 0.1em #F1FAEE;
-    margin: 1em 0;
+    
     text-align: center;
     width: 20vw;
 }
@@ -608,8 +615,8 @@ li:hover{
     /* border: solid 0.5em black; */
     display: flex;
     flex-direction: column;
-    margin-left: 20%;
-    width: 100vw;
+    margin-left: 20vw;
+    width: 80vw !important;
 }
 
 #personal_info{
@@ -639,14 +646,19 @@ li:hover{
 }
 
 .personal_info_input{
-    box-shadow: gray 0.1em 0.1em 0.001em 0.01em;
-    box-sizing: border-box;
-    border: solid 0.01em #000;
+    
+    
     font-size: 1.2em;
     margin: 0.95em;
     outline: none;
     padding: 0 0.5em;
     width: 25vw;
+    border:none !important;
+    background-color:inherit !important;
+    border-bottom:solid rgb(80, 80, 80) 0.1em !important;
+    
+ 
+   
 }
 
 /* input{
@@ -1259,6 +1271,9 @@ input[type="number"]{
     }
 
     .personal_info_input{
+        border:none !important;
+        background-color:inherit !important;
+        border-bottom:solid rgb(80, 80, 80) 0.1em !important;
         font-size: 0.8em;
         width: 12em;
         margin: 0.9em;

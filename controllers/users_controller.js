@@ -16,3 +16,8 @@ module.exports.destroySession = function(req, res){
     req.logout();
     return res.redirect('/users/login');
 }
+module.exports.getProfile=function(req,res){
+    res.render('profile',{
+        title:"Profile"
+    });
+}
