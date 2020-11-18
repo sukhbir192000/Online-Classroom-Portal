@@ -3,6 +3,7 @@ const CourseModel=require('../models/course');
 const ClassModel=require('../models/class');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
+const TimetableModel=require('../models/timetable');
 
 
 module.exports.announcement=async function(req,res){
@@ -567,4 +568,51 @@ module.exports.announcementDelete=function(req,res){
         }
     })
     
+}
+
+module.exports.getClasses = async function(req, res){
+    let date=new Date(Date.now());
+    let currentHour=date.getHours();
+    date.setHours(1);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    let user=res.locals.user;
+    let class_upcoming = [];
+    if(user.isAdmin){
+        let classes=await TimetableModel.find({
+            teacher:user._id,
+            date:date,
+            startingTime: {$gt: currentHour}
+        }).sort("startingTime").populate('classSub.course');
+        if(classes.length > 0) class_upcoming[0] = classes[0];
+        if(classes.length > 1) class_upcoming[1] = classes[1];
+    }
+    else{
+        let classes=await TimetableModel.findOne({
+            $and: [
+                {
+                    "date": date,
+                    startingTime:{$gt: currentHour},
+                    "classSub.course":{$in:user.courses},
+                    "classSub.class":user.class
+                },
+                {$or: [
+                    {"classSub.group": undefined},
+                    {"classSub.group": user.group}
+                ]},
+                {$or: [
+                    {"classSub.subGroup": undefined},
+                    {"classSub.subGroup": user.subGroup}
+                ]}
+            ]
+        }).sort("startingTime").populate('classSub.course');
+        if(classes.length > 0) class_upcoming[0] = classes[0];
+        if(classes.length > 1) class_upcoming[1] = classes[1];
+    }
+    if(req.xhr){
+        return res.status(200).json({
+            data:class_upcoming
+        })
+    }
 }

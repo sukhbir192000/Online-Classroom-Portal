@@ -42,7 +42,6 @@ module.exports.getClass=async function(req,res){
         if(classCurrent){
             
             className=classCurrent.classSub.course.name;
-            console.log(className);
         }
         
         return res.status(200).json({

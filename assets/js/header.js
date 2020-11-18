@@ -5,7 +5,7 @@ if(currentMinutes==0){
 }
 else{
     ajaxFunc();
-    setTimeout(setBanner(),(60-currentMinutes)*60000);
+    setTimeout(setBanner,(60-currentMinutes)*60000);
 }
 function setBanner(){
     ajaxFunc();
