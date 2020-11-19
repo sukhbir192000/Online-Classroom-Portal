@@ -12,4 +12,6 @@ Router.post('/form/branches',passport.checkAdmin,contentController.getBranches);
 Router.post('/form/subGroups',passport.checkAdmin,contentController.getSubGroups);
 Router.post('/update/:announcementId',passport.checkAdmin,contentController.announcementUpdate);
 Router.get('/getClasses',contentController.getClasses);
+Router.get('/getAssignments',contentController.getAssignments);
+Router.get('/getQuizzes',contentController.getQuizzes);
 module.exports = Router;

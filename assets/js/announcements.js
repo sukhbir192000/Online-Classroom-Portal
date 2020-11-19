@@ -39,18 +39,6 @@ else if(e.x<rect.left || e.x>(rect.left+rect.width) || e.y<rect.top || e.y>(rect
 }
 });
 
-let presentMinutes=new Date(Date.now()).getMinutes();
-if(presentMinutes==0){
-    setClasses();
-}
-else{
-    ajaxClassFunc();
-    setTimeout(setClasses, (60-currentMinutes)*60000);
-}
-function setClasses(){
-    ajaxClassFunc();
-    setInterval(ajaxClassFunc,3600000);
-}
 
 function ajaxClassFunc(){
     $.ajax({
@@ -63,6 +51,12 @@ function ajaxClassFunc(){
                 sidebox.removeChild(sidebox.lastElementChild);
             }
             for(let i in response.data){
+                if(i==0){
+                    let currentTime = new Date(Date.now());
+                    let current_hour = currentTime.getHours(), current_minute = currentTime.getMinutes();
+                    let minutes = 60-current_minute + (response.data[i].startingTime - current_hour - 1)*60;
+                    setTimeout(ajaxClassFunc, minutes*60000);
+                }
                 let content_div = document.createElement('div');
                 content_div.classList.add("sidebar_content");
                 let title_div = document.createElement('div');
@@ -78,3 +72,64 @@ function ajaxClassFunc(){
         }
     })
 }
+ajaxClassFunc();
+
+function ajaxAssignmentFunc(){
+    $.ajax({
+        type:'GET',
+        url:'/content/announcements/getAssignments',
+        cache:false,
+        success:function(response){
+            let sidebox = document.getElementById('assignment_sidebox');
+            while(sidebox.childElementCount>1){
+                sidebox.removeChild(sidebox.lastElementChild);
+            }
+            for(let i in response.data){
+                let content_div = document.createElement('div');
+                content_div.classList.add("sidebar_content");
+                let title_div = document.createElement('div');
+                title_div.classList.add("sidebar_title");
+                title_div.innerText = response.data[i].classSub.course.name;
+                let time_div = document.createElement('div');
+                time_div.classList.add("sidebar_time");
+                let deadline_date = new Intl.DateTimeFormat('en-GB', { year: '2-digit', month: 'numeric', day: '2-digit'}).format(new Date(response.data[i].deadline));
+                // let deadline_time = new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: 'numeric'}).format(new Date(response.data[i].deadline));
+                time_div.innerText = deadline_date;
+                content_div.appendChild(title_div);
+                content_div.appendChild(time_div);
+                sidebox.appendChild(content_div);
+            }
+        }
+    })
+}
+ajaxAssignmentFunc()
+
+function ajaxQuizFunc(){
+    $.ajax({
+        type:'GET',
+        url:'/content/announcements/getQuizzes',
+        cache:false,
+        success:function(response){
+            let sidebox = document.getElementById('quiz_sidebox');
+            while(sidebox.childElementCount>1){
+                sidebox.removeChild(sidebox.lastElementChild);
+            }
+            for(let i in response.data){
+                let content_div = document.createElement('div');
+                content_div.classList.add("sidebar_content");
+                let title_div = document.createElement('div');
+                title_div.classList.add("sidebar_title");
+                title_div.innerText = response.data[i].classSub.course.name;
+                let time_div = document.createElement('div');
+                time_div.classList.add("sidebar_time");
+                let quiz_date = new Intl.DateTimeFormat('en-GB', { year: '2-digit', month: 'numeric', day: '2-digit'}).format(new Date(response.data[i].dateTime));
+                // let quiz_time = new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: 'numeric'}).format(new Date(response.data[i].dateTime));
+                time_div.innerText = quiz_date;
+                content_div.appendChild(title_div);
+                content_div.appendChild(time_div);
+                sidebox.appendChild(content_div);
+            }
+        }
+    })
+}
+ajaxQuizFunc();
