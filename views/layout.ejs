@@ -34,13 +34,13 @@
        
     </head>
     <body>
-        <% if(title!='Login'){ %>
+        <% if(title!='Login' && title!='Register'){ %>
         <%- include('_header') %>
         <% } %>
         <main id="layout-main">
             <%- body %>
         </main>
-        <% if(title!='Login'){ %>
+        <% if(title!='Login' && title!='Register'){ %>
             <%- include('_footer') %>
             <%- script %>
         <% } %>
