@@ -15,7 +15,7 @@ router.get('/auth/google/callback',passport.authenticate(
 
 router.get('/login', usersController.login);
 router.get('/logout',passport.checkAuthentication,usersController.destroySession);
-router.get('/profile/view',passport.checkAuthentication,usersController.getProfile);
-router.get('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerPage)
+router.get('/profile/view',passport.checkAuthentication,passport.checkNotSuperUser,usersController.getProfile);
+router.get('/registerLocal',passport.checkAuthentication,firstTimeCheck.notRegistered,firstTimeCheck.registerPage)
 router.post('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerUser)
 module.exports=router;

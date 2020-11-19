@@ -66,6 +66,22 @@ passport.checkAuthentication = function(req, res, next){
     // if the user is not signed in
     return res.redirect('/users/login');
 }
+passport.checkNotSuperUser=function(req,res,next){
+    if(res.locals.user.isSuperUser){
+        return res.redirect('back');
+    }
+    else{
+        return next();
+    }
+}
+passport.checkSuperUser=function(req,res,next){
+    if(res.locals.user.isSuperUser){
+        return next();
+    }
+    else{
+        return res.redirect('back');
+    }
+}
 
 passport.setAuthenticatedUser = function(req, res, next){
     if (req.isAuthenticated()){

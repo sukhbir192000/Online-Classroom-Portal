@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    isSuperUser:{
+        type:Boolean
+    },
     password: {
         type: String,
         required: true
