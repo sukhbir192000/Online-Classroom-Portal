@@ -38,6 +38,9 @@ module.exports.notRegistered=async function(req,res,next){
                 return res.redirect('/');
             }
         }
+        else{
+            return next();
+        }
         // else{
         //     return res.redirect('back');
         // }

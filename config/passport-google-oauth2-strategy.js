@@ -17,22 +17,25 @@ passport.use(new googleStrategy({
             }
             else{
                 // console.log(profile);
+                
                 if(user){
                     
                     return done(null,user);
                 }
                 else{
                     //first time sign up
+                    
                     User.create({
-                       
                         email:profile.emails[0].value,
                         password:Crypto.randomBytes(20).toString('hex')
                     },function(err,user){
+                        console.log("profile creating");
                         if(err){
-                            console.log(err);
+                            console.log("Heres the error:",err);
                             return;
                         }
                         else{
+                            
                             return done(null,user);
                         }
                     })
