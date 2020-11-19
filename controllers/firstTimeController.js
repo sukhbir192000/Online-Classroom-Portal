@@ -33,6 +33,6 @@ module.exports.registerUser=async function(req,res){
     let user=await UserModel.findById(res.locals.user._id);
     user.sid=req.body.sid;
     user.name=req.body.firstName+" "+req.body.lastName;
-    
+    user.save();
 
 }
