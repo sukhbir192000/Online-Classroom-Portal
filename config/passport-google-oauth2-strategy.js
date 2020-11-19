@@ -16,14 +16,15 @@ passport.use(new googleStrategy({
                 return;
             }
             else{
-                console.log(profile);
+                // console.log(profile);
                 if(user){
                     
                     return done(null,user);
                 }
                 else{
+                    //first time sign up
                     User.create({
-                        name:profile.displayName,
+                       
                         email:profile.emails[0].value,
                         password:Crypto.randomBytes(20).toString('hex')
                     },function(err,user){

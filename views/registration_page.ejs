@@ -11,11 +11,11 @@
                         <div>Student ID:</div>
                         <div>Branch</div>
                     </div>
-                    <form class="form_data">
-                        <input type="input">
-                        <input type="input">
-                        <input type="input">
-                        <select>
+                    <form class="form_data" action="/users/registerLocal" method="POST">
+                        <input type="input" name='firstName'>
+                        <input type="input" name='lastName'>
+                        <input type="input" name='sid'>
+                        <select name='branch'>
                             <option disabled selected>---Select---</option>
                             <option>CSE</option>
                             <option>ECE</option>
@@ -26,10 +26,10 @@
                             <option>AERO</option>
                             <option>METTA</option>
                         </select>
-                        
+                        <button type="submit" class="submit">SUBMIT</button>
                     </form>
                 </div>
-                <div class="submit">SUBMIT</div>
+                
                 <div class="instruction">*Changes once made can't be altered</div>
             </div>
         </div>

@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const usersController = require('../controllers/users_controller');
 const passport=require('passport');
-
+const firstTimeCheck=require('../controllers/firstTimeController');
 router.get('/auth/google',passport.authenticate(
     'google',
     {scope:['profile','email']}
@@ -16,4 +16,6 @@ router.get('/auth/google/callback',passport.authenticate(
 router.get('/login', usersController.login);
 router.get('/logout',passport.checkAuthentication,usersController.destroySession);
 router.get('/profile/view',passport.checkAuthentication,usersController.getProfile);
+router.get('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerPage)
+router.post('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerUser)
 module.exports=router;
