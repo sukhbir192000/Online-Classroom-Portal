@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "5fb60fc273ea2345e02e3f89"
+  },
+  "startingTime": 12,
+  "date": {
+    "$date": "2020-11-18T19:30:00Z"
+  },
+  "duration": 1,
+  "classSub": {
+    "_id": {
+      "$oid": "5fb60fc273ea2345e02e3f8a"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "teacher": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "classType": "Lecture",
+  "createdAt": {
+    "$date": "2020-11-19T06:25:06.654Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-19T06:25:06.654Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fb60ff373ea2345e02e3f95"
+  },
+  "startingTime": 14,
+  "date": {
+    "$date": "2020-11-18T19:30:00Z"
+  },
+  "duration": 1,
+  "classSub": {
+    "_id": {
+      "$oid": "5fb60ff373ea2345e02e3f96"
+    },
+    "course": {
+      "$oid": "5f7474e8ed898e4664816678"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "teacher": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "classType": "Lecture",
+  "createdAt": {
+    "$date": "2020-11-19T06:25:55.526Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-19T06:25:55.526Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fb6100673ea2345e02e3f9d"
+  },
+  "startingTime": 15,
+  "date": {
+    "$date": "2020-11-18T19:30:00Z"
+  },
+  "duration": 2,
+  "classSub": {
+    "_id": {
+      "$oid": "5fb6100673ea2345e02e3f9e"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    }
+  },
+  "teacher": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "classType": "Lab",
+  "createdAt": {
+    "$date": "2020-11-19T06:26:14.485Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-19T06:26:14.485Z"
+  },
+  "__v": 0
+}]

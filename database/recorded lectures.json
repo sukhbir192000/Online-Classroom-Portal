@@ -1,12 +1,12 @@
 [{
   "_id": {
-    "$oid": "5fb8cfac6f494541103a2c78"
+    "$oid": "5fb8cfdd6f494541103a2c7d"
   },
-  "title": "kjvnjk",
-  "content": "jvsjknl",
+  "title": "ancn",
+  "content": "jbsjk",
   "classSub": {
     "_id": {
-      "$oid": "5fb8cfac6f494541103a2c79"
+      "$oid": "5fb8cfdd6f494541103a2c7e"
     },
     "course": {
       "$oid": "5f7474e8ed898e4664816678"
@@ -18,14 +18,19 @@
       "$oid": "5f746dde33b7d3478095bb02"
     }
   },
+  "recordedOn": {
+    "$date": "2020-11-21T00:00:00Z"
+  },
   "postedBy": {
     "$oid": "5f74790927236520ccdb278e"
   },
+  "link": "https://www.google.co.in/",
+  "references": "jkvbs",
   "createdAt": {
-    "$date": "2020-11-21T08:28:28.635Z"
+    "$date": "2020-11-21T08:29:17.704Z"
   },
   "updatedAt": {
-    "$date": "2020-11-21T08:28:28.635Z"
+    "$date": "2020-11-21T08:29:17.704Z"
   },
   "__v": 0
 }]

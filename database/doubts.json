@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "5fa3cc9afb290e46fc90a994"
+  },
+  "postedFor": [
+    {
+      "$oid": "5f74790927236520ccdb278e"
+    }
+  ],
+  "isPrivate": false,
+  "replies": [
+    {
+      "$oid": "5fa3cca7fb290e46fc90a999"
+    },
+    {
+      "$oid": "5fa3cd10f22e02353cfb8a9f"
+    }
+  ],
+  "title": "vdkmk",
+  "content": "rkjvnkdsl",
+  "classSub": {
+    "_id": {
+      "$oid": "5fa3cc9afb290e46fc90a995"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    },
+    "subGroup": {
+      "$oid": "5f74729102517e1314bde661"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74792327236520ccdb278f"
+  },
+  "files": [
+    {
+      "_id": {
+        "$oid": "5fa3cc9afb290e46fc90a996"
+      },
+      "url": "\\uploads\\doubts\\file0-1604570266482L2E3.a",
+      "name": "L2E3.a"
+    }
+  ],
+  "createdAt": {
+    "$date": "2020-11-05T09:57:46.500Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-05T09:59:44.710Z"
+  },
+  "__v": 3
+}]

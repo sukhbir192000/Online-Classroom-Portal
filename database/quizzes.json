@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "5fb8cff96f494541103a2c81"
+  },
+  "title": "Test quiz",
+  "content": "hbiksvd",
+  "classSub": {
+    "_id": {
+      "$oid": "5fb8cff96f494541103a2c82"
+    },
+    "course": {
+      "$oid": "5f747590198ace273c0e73d1"
+    },
+    "class": {
+      "$oid": "5f7439c114b9781df80b3c4f"
+    },
+    "group": {
+      "$oid": "5f746dde33b7d3478095bb02"
+    }
+  },
+  "postedBy": {
+    "$oid": "5f74790927236520ccdb278e"
+  },
+  "link": "https://www.google.co.in/",
+  "dateTime": {
+    "$date": "2020-11-28T08:29:00Z"
+  },
+  "duration": 15,
+  "createdAt": {
+    "$date": "2020-11-21T08:29:45.052Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-21T08:29:45.052Z"
+  },
+  "__v": 0
+}]

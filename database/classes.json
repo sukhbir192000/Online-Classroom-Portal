@@ -2,12 +2,16 @@
   "_id": {
     "$oid": "5f7439c114b9781df80b3c4f"
   },
-  "student": [],
+  "student": [
+    {
+      "$oid": "5f74792327236520ccdb278f"
+    }
+  ],
   "stream": "ECE",
   "passingOutYear": 2022,
   "totalGroups": 2,
   "totalSubGroups": 6,
-  "__v": 0
+  "__v": 1
 },{
   "_id": {
     "$oid": "5f7439e0ac79e333b4949e71"

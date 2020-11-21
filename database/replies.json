@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "5fa3cd10f22e02353cfb8a9f"
+  },
+  "replies": [],
+  "content": "jsbj",
+  "postedBy": {
+    "$oid": "5f74792327236520ccdb278f"
+  },
+  "createdAt": {
+    "$date": "2020-11-05T09:59:44.699Z"
+  },
+  "updatedAt": {
+    "$date": "2020-11-05T09:59:44.699Z"
+  },
+  "__v": 0
+}]
