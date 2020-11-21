@@ -1,4 +1,7 @@
+
 <html>
+    <!-- =========== layout 1 ========== -->
+    
     <head>
         <title>
             <%= title  %>
@@ -26,8 +29,14 @@
 
         
         <% if(title!='Login'){ %>
+            
             <link rel="stylesheet" href="/css/layout.css">
-            <link rel="stylesheet" type="text/css" href="/css/_header.css">
+            <%if(!user.isSuperUser){%>
+                <link rel="stylesheet" type="text/css" href="/css/_header.css">
+            <%}%>
+            <!-- else here -->
+            
+
         <% } %>
     
         <%- style %>   
@@ -35,7 +44,10 @@
     </head>
     <body>
         <% if(title!='Login' && title!='Register'){ %>
-        <%- include('_header') %>
+            <%if(!user.isSuperUser){%>
+                <%- include('_header') %>
+            <%}%>
+            <!-- else here -->
         <% } %>
         <main id="layout-main">
             <%- body %>
@@ -59,4 +71,5 @@
             <% } %>
         </script>
     </body>
+  
 </html>

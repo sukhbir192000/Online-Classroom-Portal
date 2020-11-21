@@ -1,5 +1,5 @@
-const staffController=require('../controllers/superuser_staff_controller');
+const staffController=require('../../controllers/superuser_staff_controller');
 const express=require('express');
 const Router=express.Router();
-Router.get('/',contentController.announcement);
+Router.get('/',staffController.staff);
 module.exports = Router;

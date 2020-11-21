@@ -1,5 +1,5 @@
-const coursesController=require('../controllers/superuser_courses_controller');
+const coursesController=require('../../controllers/superuser_courses_controller');
 const express=require('express');
 const Router=express.Router();
-Router.get('/',contentController.announcement);
+Router.get('/',coursesController.courses);
 module.exports = Router;
