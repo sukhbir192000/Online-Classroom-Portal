@@ -1,0 +1,53 @@
+<link rel="stylesheet" type="text/css" href="/css/programmes_superuser.css">
+<div class="main">
+    <%- include('navbar_superuser') %>
+    <div id="black_screen"></div>
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading">Programmes </div>
+        </div>
+    </div>
+    <div class="box_layout">
+        <div class="add" id="addButton">
+            <div class="add_icon"><i class="fas fa-plus"></i></div>
+            <div class="add_content">Add </div>
+        </div>
+        <div class="add_admin">
+            <form method="POST" action="#">
+                <label class="programme_name_label">Programme Name:</label>
+                <input type="text" name="programme_name" id="programme_name" required><br><br>
+                <label class="year_label">Graduating year(YYYY):</label>
+                <input type="number" name="year" id="year" required ><br><br>
+                <label class="class_groups_label">Total Class Groups:</label>
+                <input type="number" name="class_groups" id="class_groups" min="1" required><br><br>
+                <label class="lab_groups_label">Total Lab Groups:</label>
+                <input type="number" name="lab_groups" id="lab_groups" min="1" required><br><br>
+                <div class="submit_button" id="button_submit">
+                    <button type="button">Add Programme</button>
+                </div>
+            </form>
+        </div>
+        <div class="programme_container">
+            <div class="programme_heading">
+                <div class="programme_name_heading">Name</div>
+                <div class="year_heading">Year</div>
+                <div class="groups_heading">Class groups</div>
+                <div class="sub_groups_heading">Lab Groups</div>
+                <div class="edit_icon" style="visibility: hidden;"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
+                <div class="save_icon" ><i class="fas fa-save"></i></div>
+            </div>
+            <div class="no_courses">No Programmes Added</div>
+            <div class="programme">
+                <div class="programme_name_main">BTECH</div>
+                <div class="year_main">2022</div>
+                <div class="groups_main">2</div>
+                <div class="sub_groups_main">6</div>
+                <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="save_icon" ><i class="fas fa-save"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/programmes_superuser.js"></script>

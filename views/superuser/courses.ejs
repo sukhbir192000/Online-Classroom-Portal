@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="/css/courses_superuser.css">
+<div class="main">
+    <%- include('navbar_superuser') %>
+    <div id="black_screen"></div>
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading">Courses Offered</div>
+        </div>
+    </div>
+    <div class="box_layout">
+        <div class="add" id="addButton">
+            <div class="add_icon"><i class="fas fa-plus"></i></div>
+            <div class="add_content">Add </div>
+        </div>
+        <div class="add_admin">
+            <form method="POST" action="#">
+                <label class="subject_code_label">Subject Code:</label>
+                <input type="text" name="subject_code" id="subject_code" required><br><br>
+                <label class="subject_name_label">Subject Name:</label>
+                <input type="text" name="subject_name" id="subject_name" required><br>
+                <div id="checkbox_container">
+                    <input name="isActive" type="checkbox" id="active_course">
+                    <label for="active_course" class="active_course_label">Currently Active</label>
+                </div>
+                <div class="submit_button" id="button_submit">
+                    <button type="button">Add Course</button>
+                </div>
+            </form>
+        </div>
+        <div class="subject_container">
+            <div class="subject_heading">
+                <div class="code_subject_heading">Course Code</div>
+                <div class="name_subject_heading">Course Name</div>
+            </div>
+            <div class="no_courses">No Courses added</div>
+            <div class="subject">
+                <div class="active_icon"><i class="fas fa-check"></i></div>
+                <div class="code_subject">ECN-202</div>
+                <div class="name_subject">Computer Architecture and Organisation</div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+            </div>
+            <div class="subject">
+                <div class="active_icon"><i class="fas fa-check"></i></div>
+                <div class="code_subject">ECN-202</div>
+                <div class="name_subject">Computer Architecture and Organisation</div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+            </div>
+            <div class="subject">
+                <div class="active_icon"><i class="fas fa-check"></i></div>
+                <div class="code_subject">ECN-202</div>
+                <div class="name_subject">Computer Architecture and Organisation</div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+            </div>
+            <div class="subject">
+                <div class="active_icon"><i class="fas fa-check"></i></div>
+                <div class="code_subject">ECN-202</div>
+                <div class="name_subject">Computer Architecture and Organisation</div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/courses_superuser.js"></script>

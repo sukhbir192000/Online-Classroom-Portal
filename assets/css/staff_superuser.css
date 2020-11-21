@@ -1,0 +1,287 @@
+.main{
+    position: relative;
+    min-height: 90vh;
+    margin-left: 5em;
+    /* border:1px solid black; */
+}
+.main_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    /* border:1px solid black; */
+}
+
+.box_layout{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1.5em 3em 1.5em;
+    width: 100%;
+    flex-wrap: wrap;
+    /* border:1px solid black; */
+}
+
+.main_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+
+}
+.heading{
+    padding: 1em 2em 0 1.7em;
+    font-size: 1.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #1D3557;
+}
+
+
+.add{
+    margin:1em 1.5em;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
+.add_admin{
+    margin:1em 1.5em;
+    border:1px solid #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    padding: 1.3em 0.8em;
+    display: none;
+    width:80%;
+}
+input{
+    width:60vw;
+    height:1.4em;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+}
+#teacher_name{
+    margin-left:1.4em;
+}
+#position_add{
+    margin-left: 0.3em;
+}
+
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    margin-top:1em;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+
+.show{
+    visibility: visible;
+}
+.hide{
+    display: none;
+}
+.teacher_container{
+    width:90%;
+    margin:1em 0 2em 1.5em;
+    /* border:1px solid black; */
+}
+.teacher_heading{
+    width:100%;
+    min-height:1em;
+    /* background-color:peachpuff; */
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    justify-content: center;
+    /* padding-right:3em; */
+}
+.name_teacher_heading{
+    width: 45%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:0.5em;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.position_heading{
+    width: 35%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:0.5em;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.teacher{
+    width:100%;
+    min-height:1em;
+    /* background-color:peachpuff; */
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    justify-content: center;
+}
+.teacher:nth-child(2n+1){
+    background-color: white;
+    
+}
+.name_teacher{
+    width: 45%;
+    /* border: 1px solid black; */
+    margin:0.5em;
+    text-align: center;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+}
+.position{
+    width: 35%;
+    /* border: 1px solid black; */
+    margin:0.5em;
+    margin-right: 1em;
+    text-align: center;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+}
+.edit_icon{
+    font-size: 1.5em;
+    align-self: center;
+    color: #c5c1c1;
+    /* border: 1px solid black; */
+    margin-left: 0.5em;
+}
+
+.delete_icon{
+    font-size: 1.3em;
+    align-self: center;
+    color: #a9a6a6;
+    margin-left: 0.5em;
+    /* border: 1px solid black; */
+}
+.save_icon{
+    font-size: 1.4em;
+    align-self: center;
+    color: #5f5959;
+    display: none;
+    margin-right:0.85em;
+}
+.content_color{
+    background-color: #e4e4e4;
+}
+.no_teachers{
+    justify-content: center;
+    font-size: 1.2em;
+    margin-top:1.5em;
+    font-style: italic;
+    display: none;
+}
+
+
+
+
+/* ----------------------------------TABLET DEVICES----------------------------------- */
+@media(min-width: 767px) and (max-width: 991px){
+    .box_layout{
+        width: 95%;
+    }    
+    .main{
+        margin-left:1em;
+    }    
+    .heading{
+        font-size: 1.4em;
+        padding-left:2.3em;
+    }
+}
+
+
+/* ---------------------------------MOBILE DEVICES----------------------------------- */
+@media(max-width: 767px){
+    .box_layout{
+        width: 98%;
+        padding: 0;
+        padding-left:0.5em;
+    }
+    .main{
+        margin-left:0;
+        
+    }    
+    .heading{
+        font-size: 1.3em;
+        padding-left:1.5em;
+    }
+    .add_content{
+        font-size: 1em;
+    }
+    .name_teacher{
+        font-size:0.9em;
+    }
+    .position{
+        font-size: 0.9em;
+    }
+    .edit_icon{
+        font-size:1.2em;
+    }
+    .delete_icon{
+        font-size: 1.1em;
+    }
+    .save_icon{
+        font-size:1.3em;
+    }
+    .teacher_name_label{
+        display: block;
+    }
+    .position_label{
+        display: block;
+    }
+    #teacher_name{
+        margin-left:0;
+    }
+    #position_add{
+        margin-left:0;
+    }
+    .name_teacher{
+        width: 42%;
+        margin:0.3em;
+    }
+    .position{
+        width: 32%;
+        /* border: 1px solid black; */
+        margin:0.3em;
+        margin-right: 0.5em;
+    }
+}

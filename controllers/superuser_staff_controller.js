@@ -1,3 +1,5 @@
 module.exports.staff=function(req,res){
-    return res.send('<h1>staff</h1>');
+    return res.render('superuser/staff', {
+        title: 'Faculty'
+    });
 }

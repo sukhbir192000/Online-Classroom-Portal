@@ -1,3 +1,5 @@
 module.exports.courses=function(req,res){
-    return res.send('<h1>courses</h1>');
+    return res.render('superuser/courses', {
+        title: 'Courses'
+    });
 }
