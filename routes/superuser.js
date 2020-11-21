@@ -9,4 +9,5 @@ router.use('/courses',require('./superuser/courses'));
 router.use('/programmes',require('./superuser/programmes'));
 router.use('/staff',require('./superuser/staff'));
 router.use('/timetable',require('./superuser/timetable'));
+router.use('/coursesassigned',require('./superuser/coursesassigned'));
 module.exports=router;
