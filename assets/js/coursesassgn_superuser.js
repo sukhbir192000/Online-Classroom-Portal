@@ -145,27 +145,4 @@ else{
 //     document.querySelector(".add_admin").classList.remove("showx");    
 // })
 
-var currentArrowIcon = null;
-var arrowIconFunction = function(arrowIcon){
-    arrowIcon.addEventListener("click", function(e){
-        if(currentArrowIcon!=null && currentArrowIcon!=arrowIcon){
-            currentArrowIcon.classList.toggle("rotate_arrow");
-            currentArrowIcon.parentNode.parentNode.children[1].classList.toggle("show_container");
-            currentArrowIcon = null;
-        }
-        setTimeout(() => {arrowIcon.classList.toggle("rotate_arrow");
-        arrowIcon.parentNode.parentNode.children[1].classList.toggle("show_container");
-        if(currentArrowIcon==arrowIcon){
-            currentArrowIcon=null;
-        }
-        else{
-        currentArrowIcon = arrowIcon;} }, 600);
-    })
-}
-
-var arrowIconPrev = document.querySelectorAll(".arrow_icon");
-    for(let i=0;i<arrowIconPrev.length;i++){
-        arrowIconFunction(arrowIconPrev[i]);
-    }
-
 
