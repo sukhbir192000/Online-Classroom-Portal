@@ -46,3 +46,13 @@ let branch_input = document.getElementsByName("branch")[0];
 let year_input = document.getElementsByName("year")[0];
 branch_input.addEventListener('change', (e)=>{getGroupNumber(branch_input.value, year_input.value)});
 year_input.addEventListener('change', (e)=>{getGroupNumber(branch_input.value, year_input.value)});
+
+
+var today = new Date();
+var yyyy = today.getFullYear();
+for(let i=0;i<10;i++){
+    var option_new = document.createElement("option");
+    option_new.value = yyyy+i;
+    option_new.textContent = yyyy+i;
+    document.getElementsByName('year')[0].appendChild(option_new)
+}

@@ -50,7 +50,7 @@ module.exports.registerPage=function(req,res){
 module.exports.registerUser=async function(req,res){
     let req_class = await ClassModel.findOne({
         stream: req.body.branch,
-        passingOutYear: 2025-parseInt(req.body.year)
+        passingOutYear: parseInt(req.body.year)
     });
     let req_group = await GroupModel.findOne({
         groupNumber: parseInt(req.body.group),
@@ -80,7 +80,7 @@ module.exports.getGroupNumber=async function(req, res){
     try{
         let req_class = await ClassModel.findOne({
             stream: req.params.branch,
-            passingOutYear: 2025-parseInt(req.params.year)
+            passingOutYear: parseInt(req.params.year)
         });
         return res.status(200).json({
             totalGroups: req_class.totalGroups,
