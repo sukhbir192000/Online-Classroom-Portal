@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const path = require('path');
 
 const classSchema = new mongoose.Schema({
     stream: {
