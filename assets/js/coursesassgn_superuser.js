@@ -28,34 +28,38 @@ document.addEventListener('mouseup',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-        // document.getElementById("subject_name").value = "";
-        // document.getElementById("subject_code").value = "";
-        // document.getElementById("active_course").checked = false;
+        document.getElementById("code_course").selectedIndex = "0";
+        document.getElementById("programme_add").selectedIndex = "0";
+        document.getElementById("study_year").selectedIndex = "0";
+        document.getElementById("group_class").selectedIndex = "0";
+        document.getElementById("group_lab").selectedIndex = "0";
+        document.getElementById("branch_teacher").selectedIndex = "0";
+        document.getElementById("name_teacher").selectedIndex = "0";
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-times'></i>";      
-        $(document).ready(function() {
-            $('.course_code').select2();
-        });     
-        $(document).ready(function() {
-            $('.programme').select2();
-        });  
-        $(document).ready(function() {
-            $('.year_study').select2();
-        });  
-        $(document).ready(function() {
-            $('.class_group').select2();
-        });  
-        $(document).ready(function() {
-            $('.lab_group').select2();
-        });  
-        $(document).ready(function() {
-            $('.branch').select2();
-        });  
-        $(document).ready(function() {
-            $('.teacher_name').select2();
-        });   
+        // $(document).ready(function() {
+        //     $('.course_code').select2();
+        // });     
+        // $(document).ready(function() {
+        //     $('.programme').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('.year_study').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('.class_group').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('.lab_group').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('.branch').select2();
+        // });  
+        // $(document).ready(function() {
+        //     $('.teacher_name').select2();
+        // });   
     }
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
@@ -85,27 +89,34 @@ document.querySelector(".add_teacher_button").addEventListener("click",function(
 
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
-        if(this.parentNode.parentNode.parentNode.children.length == 1){
-            document.querySelector(".no_teacher").style.display = "flex";
+        if(this.parentNode.parentNode.children.length == 3){
+            this.parentNode.parentNode.children[1].style.display = "flex";
         }
-        this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+        // console.log(this.parentNode.parentNode.children.length);
+        this.parentNode.parentNode.removeChild(this.parentNode);
+        
     })
 }
 
-var deleteIconPrev = document.querySelectorAll(".delete_icon");
+var deleteIconPrev = document.querySelectorAll(".delete_icon_subject");
 for(let i=0;i<deleteIconPrev.length;i++){
     deleteIconFunction(deleteIconPrev[i]);
 }
 
 
 
-// ----------------------------------NO COURSES-------------------------------------------------
-if(document.querySelector(".teacher_main_container").childElementCount==0){
-    document.querySelector(".no_teacher").style.display = "flex";
+// ----------------------------------NO TEACHER ASSIGNED-------------------------------------------------
+var subjectsAdded = document.getElementsByClassName("subjects_added");
+var noTeacher = document.getElementsByClassName("no_teacher");
+for(let i=0;i<subjectsAdded.length;i++){
+    if(subjectsAdded[i].childElementCount == 2){
+        noTeacher[i].style.display = "flex";
+    }
+    else{
+        noTeacher[i].style.display = "none";
+    }
 }
-else{
-    document.querySelector(".no_teacher").style.display = "none";
-}
+
 
 
 // // ---------------------------------------------ADD COURSE-----------------------------------------

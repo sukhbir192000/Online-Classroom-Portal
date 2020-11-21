@@ -17,53 +17,58 @@
         <div class="add_admin">
             <form method="POST" action="#">
                 <label class="course_code_label">Course Code: </label>
-                <select class="course_code" name="code_course" id="code_course">
+                <select class="course_code" name="code_course" id="code_course" required>
+                    <option selected disabled value="">---SELECT---</option>
                     <option value="ECN-201">ECN-201</option>
                     <option value="ECN-202">ECN-202</option>
                     <option value="ECN-203">ECN-203</option>
                     <option value="ECN-204">ECN-204</option>
                 </select><br><br>
                 <label class="programme_label">Programme: </label>
-                <select class="programme" name="programme_add" id="programme_add">
+                <select class="programme" name="programme_add" id="programme_add" required>
+                    <option selected disabled value="">---SELECT---</option>
                     <option value="BTECH">BTECH</option>
                     <option value="MTECH">MTECH(Vlsi)</option>
                 </select><br><br>
                 <label class="year_study_label">Year of Study:</label> 
-                <select class="year_study" name="study_year" id="study_year">
+                <select class="year_study" name="study_year" id="study_year" required>
+                    <option selected disabled value="">---SELECT---</option>
                     <option value="1">1st</option>
-                    <option value="1">2nd</option>
-                    <option value="1">3rd</option>
-                    <option value="1">4th</option>
+                    <option value="2">2nd</option>
+                    <option value="3">3rd</option>
+                    <option value="4">4th</option>
                 </select><br><br>
                 <label class="class_group_label">Class group:</label>
-                <select class="class_group" name="group_class" id="group_class">
-                    <option>All</option>
-                    <option>1</option>
-                    <option>2</option>
+                <select class="class_group" name="group_class" id="group_class" required>
+                    <option selected disabled value="">---SELECT---</option>
+                    <option value="All">All</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
                 </select><br><br>
                 <label class="lab_group_label">Lab group:</label>
-                <select class="lab_group" name="group_lab" id="group_lab">
-                    <option>All</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
+                <select class="lab_group" name="group_lab" id="group_lab" required>
+                    <option selected disabled value="">---SELECT---</option>
+                    <option value="All">All</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 </select><br><br>
-                <select class="branch" name="branch_teacher" id="branch_teacher">
-                    <option>ECE</option>
-                    <option>CSE</option>
+                <select class="branch" name="branch_teacher" id="branch_teacher" required>
+                    <option value="ECE">ECE</option>
+                    <option value="CSE">CSE</option>
                 </select>
-                <select class="teacher_name" name="name_teacher" id="name_teacher">
-                    <option>Jyoti Kedia</option>
-                    <option>Divya Dhawan</option>
+                <select class="teacher_name" name="name_teacher" id="name_teacher" required>
+                    <option value="Jyoti Kedia">Jyoti Kedia</option>
+                    <option value="Divya Dhawan">Divya Dhawan</option>
                 </select>
                 <button type="button" class="add_teacher_button">Add teacher</button>
                 <div class="teacher_selected"></div>
                 
                 <div class="submit_button" id="button_submit">
-                    <button type="submit">Add</button>
+                    <button type="button">Submit</button>
                 </div>
             </form>
             
@@ -75,7 +80,7 @@
                 <div class="subject_heading">Course Code</div>
                 <div class="programme_heading">Programme</div>
             </div>
-            <div class="no_teacher">No Courses assigned</div>
+            <!-- <div class="no_teacher">No Courses assigned</div> -->
             <div class="teacher_main_container">
                 <!-- -------------------------TEACHER1--------------------------------------- -->
                 <div class="teacher_subjects">
@@ -93,6 +98,7 @@
                             <div class="sub_group_heading">Lab Group</div>
                             <div class="delete_icon_subject" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                         </div>
+                        <div class="no_teacher">No teachers assigned</div>
                         <div class="subject_container">
                             <div class="teacher_name_main">Jyoti Kedia Jyoti KediaJyoti Kedia</div>
                             <div class="year">1</div>
@@ -127,20 +133,7 @@
                             <div class="sub_group_heading">Lab Group</div>
                             <div class="delete_icon_subject" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                         </div>
-                        <div class="subject_container">
-                            <div class="teacher_name_main">Jyoti Kedia Jyoti KediaJyoti Kedia</div>
-                            <div class="year">1</div>
-                            <div class="group">1</div>
-                            <div class="sub_group">2</div>
-                            <div class="delete_icon_subject" ><i class="fas fa-trash"></i></div>
-                        </div>
-                        <div class="subject_container">
-                            <div class="teacher_name_main">Jyoti Kedia</div>
-                            <div class="year">1</div>
-                            <div class="group">1</div>
-                            <div class="sub_group">2</div>
-                            <div class="delete_icon_subject" ><i class="fas fa-trash"></i></div>
-                        </div>
+                        <div class="no_teacher">No teachers assigned</div>  
                     </div>
                 </div>
             </div>

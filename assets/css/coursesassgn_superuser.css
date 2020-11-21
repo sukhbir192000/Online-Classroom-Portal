@@ -175,6 +175,7 @@ input[type="checkbox"]{
     background-color: #d62648;
     color:white;
     padding:0.3em;
+    border-radius: 8px;
 }
 .submit_button button{
     margin-top:1.7em;
@@ -182,6 +183,7 @@ input[type="checkbox"]{
     background-color: #1D3557;
     color:white;
     padding:0.3em 0.7em;
+    border-radius: 8px;
 }
 form{
     width: 100%;
@@ -267,8 +269,8 @@ form{
 
 .no_teacher{
     justify-content: center;
-    font-size: 1.2em;
-    margin-top:1.5em;
+    font-size: 1em;
+    margin-top:1em;
     font-style: italic;
 }
 .teacher_main_container{
@@ -469,6 +471,11 @@ form{
 } */
 .content_color{
     background-color: #e4e4e4;
+}
+select{
+    border-radius: 4px;
+    padding:0.1em 0;
+    
 }
 
 
