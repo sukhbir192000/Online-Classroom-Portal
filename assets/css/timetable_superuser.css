@@ -1,0 +1,550 @@
+.main{
+    position: relative;
+    min-height: 90vh;
+    margin-left: 4vw;
+    /* border:1px solid black; */
+}
+
+.main_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    /* border:1px solid black; */
+
+}
+
+.main_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border:1px solid black; */
+    margin-bottom: 1em;
+    margin-right:4vw;
+    
+}
+.heading{
+    padding: 1em 2em 0 2em;
+    font-size: 1.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #1D3557;
+}
+.box_layout{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1.5em 3em 1.5em;
+    flex-wrap: wrap;
+    margin: 0 4vw;
+    margin-bottom: 5em;
+    padding:0;
+    /* border-bottom: 1px solid black; */
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:100%;
+    overflow: hidden;
+    /* border: 1px solid black; */
+}
+.table_row{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 4em;
+    overflow-y: visible;
+    /* border: 1px solid black; */
+}
+.table_column{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 12.5%;
+    height: 4em;
+    /* height: auto; */
+    /* font-size: 0.9em; */
+    padding: 0.5em ;
+    word-break: break-all;
+    /* word-wrap: break-word; */
+    background-color: white;
+    /* cursor: pointer; */
+    text-overflow: ellipsis;
+}
+.table_heading{
+    box-sizing: border-box;
+    height: 4em;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1em;
+    background-color: #d62648;
+    color:white;
+}
+input,select{
+    height:1.4em;
+    overflow-y: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    border-radius: 4px;
+    border:1px solid #aaa;
+}
+#info{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    min-width:12.5%;
+    max-width: 40%;
+    z-index: 15;
+    padding:0.7em;
+    background-color: white;
+    border:5px solid black;
+    box-shadow: 0.1em 0.1em 0.5em;
+}
+#info>div{
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+.buttons_edit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+.cancel_button{
+    margin: 0.5em;
+    background-color: #1D3557;
+    color: white;
+    font-size: 1em;
+    padding:0.2em;
+    border-radius: 4px;
+}
+.reschedule_button{
+    margin: 0.5em;
+    background-color: #1D3557;
+    color: white;
+    font-size: 1em;
+    padding:0.2em;
+    border-radius: 4px;
+}
+.timetable_content_container{
+    transition: all 0.4s;
+    width: 100%;
+}
+.table_background{
+    opacity:0.3;
+}
+.font_size_remove{
+    height:0;
+}
+#week_shift{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.left_week{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2.5em;
+    padding: 0.5em 0 1em 0;
+    cursor: pointer;
+}
+.left_week_arrow{
+    font-size: 1.5em;
+    padding-right: 0.5em;
+}
+.left_week_content{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.right_week{
+    display: flex;
+    flex-direction: row;
+    padding:0.5em 0 1em 0;
+    align-items: center;
+    cursor: pointer;
+}
+.right_week_arrow{
+    font-size: 1.5em;
+    padding-left: 0.5em;
+}
+.right_week_content{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+#reschedule_class{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    min-width:12.5%;
+    max-width: 40%;
+    z-index: 17;
+    padding:0.7em;
+    background-color: white;
+    border:5px solid black;
+    box-shadow: 0.1em 0.1em 0.5em;
+}
+#reschedule_class>div{
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+#reschedule_class>form>div{
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+
+.cg_reschedule_heading{
+    margin-right: 1em;
+}
+.lg_reschedule_heading{
+    margin-right: 2em;
+}
+.date_reschedule_label{
+    margin-right: 4.9em;
+}
+.duration_reschedule_label{
+    margin-right: 3em;
+}
+.slots_available_label_reschedule{
+    margin-right: 0.2em;
+}
+#duration_reschedule{
+    width:5em;
+}
+.buttons_reschedule{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+
+.submit_button_reschedule{
+    margin: 0.5em;
+    margin-bottom: 0.2em;
+    background-color: #1D3557;
+    color: white;
+    font-size: 1em;
+    padding:0.2em;
+    border-radius: 4px;
+}
+form{
+    margin-block-end: 0em;
+}
+
+
+.add{
+    margin:1.5em 0 1em 0;
+    width:fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color:#d62648; 
+    border: 1px solid rgb(224, 211, 211);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.01px 0.01px 5px 0;
+    cursor: pointer;
+}
+.add:active{
+    background-color: white;
+}
+.add:active .add_icon,.add:active .add_content{
+    color:#d62648;
+}
+.add_content{
+    padding: 0.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    user-select: none;
+}
+.add_icon{
+    padding-left:0.5em;
+    font-size: 1.1em;
+    color: white;
+}
+
+.add_admin{
+    padding: 0.5em 1.5em 0.5em 1.5em;
+    /* width:100%; */
+    margin: 0 4vw;
+    /* margin:1em 1.5em 1em 4em; */
+    border:2px solid  #1D3557;
+    box-shadow: 0.1px 0.1px 4px 0;
+    /* padding: 0.8em; */
+    display: none;
+    margin-bottom: 1em;
+
+}
+form{
+    width: 100%;
+}
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+.submit_button button{
+    font-size: 1.1em;
+    background-color: #1D3557;
+    color:white;
+    padding:0.3em 0.7em;
+}
+.submit_button button:hover{
+    background-color:white;
+    color: #1D3557;
+    font-weight: 600;
+}
+.showx{
+    display: flex;
+}
+
+/* .select2-container .select2-selection--single .select2-selection__rendered {
+    font-size: 0.9em;
+    text-overflow: unset;
+}
+.select2-results__options {
+    font-size: 0.9em;
+    height:auto;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    margin-left: 0.1em;
+    margin-right: 1em;
+} */
+/* .select2-search--dropdown .select2-search__field{
+    padding:0;
+} */
+.subject_label{
+    margin-right:5em;
+}
+.branch_label{
+    margin-right: 5.2em;
+}
+.class_type_label{
+    margin-right: 3.7em;
+}
+.sub_group_label{
+    margin-right: 5.6em;
+}
+.duration_label{
+    margin-right: 0.3em;
+}
+.date_label{
+    margin-right: 6.4em;
+}
+.slots_available_label{
+    margin-right: 2.2em;
+}
+#subject{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#branch{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#class_type{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#sub_group{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+#lecture_date{
+    width: auto;
+    /* min-width: 10em; */
+}
+#duration_hr{
+    padding:0;
+    height:1.8em;
+    width:5em;
+}
+#slots_available{
+    padding-right: 2em;
+    max-width: 40vw;
+}
+.hide_prev_week{
+    visibility: hidden;
+}
+.groupNumber, .subGroupNumber{
+    display: contents;
+}
+
+
+
+.filterData{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+select{
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    height: auto;
+    margin-right: 2em;
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+@media(min-width: 991px) and (max-width:1100px){
+    .table_heading{
+        font-size: 0.95em;
+    }
+    .table_column{
+        font-size: 0.8em;
+    }
+    .table_row{
+        height: auto;
+    }
+}
+
+/* For tablet devices */
+@media(min-width: 767px) and (max-width: 991px){
+
+    /* MAIN */   
+    .main{
+        margin-left:1em;
+    }    
+    .heading{
+        font-size: 1.4em;
+        padding-left:2.3em;
+        
+    }
+    .box_layout{
+        width: 92%;
+    } 
+    /* .table{
+        overflow: auto;
+    } */
+    .table_heading{
+        font-size: 0.95em;
+    }
+    .table_column{
+        font-size: 0.8em;
+    }
+    #info{
+        max-width: 60%;
+    }
+    .table_row{
+        height: auto;
+    }
+
+
+    
+}
+
+/* For mobile devices */
+@media(max-width: 767px ){   
+
+    /* MAIN */
+
+    .main{
+        margin-left:0;
+    }    
+    .heading{
+        font-size: 1.3em;
+        padding-left:1.3em;
+    }
+    .box_layout{
+        width: 92%;
+        padding-right: 0;    
+    } 
+    #info{
+        max-width: 90%;
+    }
+    .table:hover{
+        overflow-x: auto;
+    }
+    .table::-webkit-scrollbar{
+        height:8px;
+    }
+    .table::-webkit-scrollbar-track {
+        background: rgb(231, 232, 233);      
+    }
+    .table::-webkit-scrollbar-thumb {
+        background-color: rgb(189, 187, 187);    
+        border-radius: 20px;        
+    }
+    .table_heading{
+        font-size: 0.8em;
+        min-width: 10em;
+    }
+    .table_column{
+        font-size: 0.7em;
+        min-width: 10em;
+    }
+    .table_row{
+        height: auto;
+    }
+    .left_week_arrow{
+        font-size: 1.2em;
+        padding-right: 0.5em;
+    }
+    .left_week_content{
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    .right_week_arrow{
+        font-size: 1.2em;
+        padding-left: 0.5em;
+    }
+    .right_week_content{
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    .add_content{
+        font-size: 0.9em;
+    }
+    .add_icon{
+        font-size: 0.9em;
+    }
+    #add_form>label{
+        font-size: 0.9em;
+    }
+    .submit_button>button{
+        font-size: 0.9em;
+    }
+    select>option{
+        font-size: 0.85em;
+        height:auto;
+        padding:0;
+        margin:0;
+    }
+    #info>div{
+        font-size: 0.85em;
+    }
+    #reschedule_class>div{
+        font-size: 0.85em;
+    }
+    #reschedule_form>div{
+        font-size: 0.85em;
+    }
+    #reschedule_class>form>div{
+        flex-direction: column;
+    }
+    #date_reschedule{
+        width: 10em;
+    }
+}

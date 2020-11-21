@@ -1,0 +1,70 @@
+<link rel="stylesheet" type="text/css" href="/css/timetable_superuser.css">
+   
+<div class="main">
+    <%- include('navbar_superuser') %>
+
+    <div id="black_screen"></div>
+
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading"> Time Table</div>
+        </div>
+        
+        <div class="box_layout">
+            <div class=table_background></div>
+            <div class="filterData">
+            <select name='programme'>
+                <option selected disabled>---Select Programme---</option>
+                <option>BTECH</option>
+                <option>MTECH</option>
+            </select>
+            <select name='graduation_year'>
+                <option selected disabled>---Select year of Graduation---</option>
+            </select>
+            </div>
+            <div class="table">
+                <div class="table_row">
+                    <div class="table_column table_heading"></div>
+                    <div class="table_column table_heading">MONDAY<span></span></div>
+                    <div class="table_column table_heading">TUESDAY<span></span></div>
+                    <div class="table_column table_heading">WEDNESDAY<span></span></div>
+                    <div class="table_column table_heading">THURSDAY<span></span></div>
+                    <div class="table_column table_heading">FRIDAY<span></span></div>
+                    <div class="table_column table_heading">SATURDAY<span></span></div>
+                    <div class="table_column table_heading">SUNDAY<span></span></div>
+                </div>
+                <div style="display: flex; flex-direction: row; width:100%">
+                    <div class="timetable_content_container">
+                        <% for(let i=0;i<9;i++){ %>
+                            <div class="table_row" id="row<%=i+1%>">
+                                <div class="table_column table_heading"><%=8+i%>:00 - <%=9+i%>:00</div>
+                                <% for(let j=0;j<7;j++){%>
+                                    <div class="table_column" <%if(timetableItems[j][8+i]){%>id="<%=timetableItems[j][8+i]._id%>" style="height:<%= 4*timetableItems[j][8+i].duration %>em !important; z-index:2;"<%}%> ><%if(timetableItems[j][8+i]){%><%=timetableItems[j][8+i].classSub.course.name%><%} _%>
+                                        <%_ if(user.isAdmin && timetableItems[j][8+i]){ _%>
+                                            <div class="groupDisplay" style="display: none;">
+                                                <% if(timetableItems[j][8+i].classSub.group){ %>
+                                                    Group: <span class="groupNumber" id="<%= timetableItems[j][8+i].classSub.group %>"><%= timetableItems[j][8+i].classSub.group.groupNumber %></span>
+                                                <% } %>
+                                                <% if(timetableItems[j][8+i].classSub.subGroup){ %>
+                                                    Lab Group: <span class="subGroupNumber" id="<%= timetableItems[j][8+i].classSub.subGroup %>"><%= timetableItems[j][8+i].classSub.subGroup.subGroupNumber %></span>
+                                                <% } %>
+                                                <span class="typeDisplay"><%= timetableItems[j][8+i].classType %></span>
+                                            </div>
+                                        <%_ } _%></div>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+    </div>
+
+</div>
+
+<script src="/js/timetable_superuser.js"></script>
