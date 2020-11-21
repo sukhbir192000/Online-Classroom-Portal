@@ -1,0 +1,66 @@
+<link rel="stylesheet" type="text/css" href="/css/staff_superuser.css">
+<div class="main">
+    <%- include('navbar_superuser') %>
+    <div id="black_screen"></div>
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading">Faculty</div>
+        </div>
+    </div>
+    <div class="box_layout">
+        <div class="add" id="addButton">
+            <div class="add_icon"><i class="fas fa-plus"></i></div>
+            <div class="add_content">Add </div>
+        </div>
+        <div class="add_admin">
+            <form method="POST" action="#">
+                <label class="teacher_name_label">Name:</label>
+                <input type="text" name="teacher_name" id="teacher_name" required><br><br>
+                <label class="position_label">Position:</label>
+                <input type="text" name="position_add" id="position_add" required><br>
+                <div class="submit_button" id="button_submit">
+                    <button type="button">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="teacher_container">
+            <div class="teacher_heading">
+                <div class="name_teacher_heading">Name</div>
+                <div class="position_heading">Position</div>
+                <div class="edit_icon" style="visibility: hidden;"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
+                <div class="save_icon" style="visibility: hidden;"><i class="fas fa-save"></i></div>
+            </div>
+            <div class="no_teachers">No staff added</div>
+            <div class="teacher">
+                <div class="name_teacher">Jyoti Kedia</div>
+                <div class="position">Assistant Professor</div>
+                <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="save_icon"><i class="fas fa-save"></i></div>
+            </div>
+            <div class="teacher">
+                <div class="name_teacher">Jyoti Kedia</div>
+                <div class="position">Assistant Professor</div>
+                <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="save_icon"><i class="fas fa-save"></i></div>
+            </div>
+            <div class="teacher">
+                <div class="name_teacher">Jyoti Kedia</div>
+                <div class="position">Assistant Professor</div>
+                <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="save_icon"><i class="fas fa-save"></i></div>
+            </div>
+            <div class="teacher">
+                <div class="name_teacher">Jyoti Kedia</div>
+                <div class="position">Assistant Professor</div>
+                <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="save_icon"><i class="fas fa-save"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/staff_superuser.js"></script>
