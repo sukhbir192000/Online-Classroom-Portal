@@ -18,7 +18,7 @@
                 <input type="text" name="subject_code" id="subject_code" required><br><br>
                 <label class="subject_name_label">Subject Name:</label>
                 <input type="text" name="subject_name" id="subject_name" required><br><br>
-                <label class="subject_credits_label">Subject Credits:</label>
+                <label class="subject_credits_label">Credits:</label>
                 <input type="number" min="0" name="subject_credits" id="subject_credits" required><br>
                 <div id="checkbox_container">
                     <input name="isActive" type="checkbox" id="active_course">
@@ -33,6 +33,7 @@
             <div class="subject_heading">
                 <div class="code_subject_heading">Course Code</div>
                 <div class="name_subject_heading">Course Name</div>
+                <div class="credits_heading">Credits</div>
             </div>
             <div class="no_courses">No Courses added</div>
             <% for(let course of courseList){ %>
@@ -40,6 +41,7 @@
                     <div class="active_icon"><input class="activity_state" type="hidden" value='<%=course.isActive%>'><i class="fas fa-check"></i></div>
                     <div class="code_subject"><%=course.code%></div>
                     <div class="name_subject"><%=course.name%></div>
+                    <div class="credits"><%=course.credits%></div>
                     <div class="delete_icon"><i class="fas fa-trash"></i></div>
                     
                 </div>

@@ -86,7 +86,7 @@ input{
     margin-left:1.4em;
 }
 #position_add{
-    margin-left: 0.3em;
+    margin-left: 1.65em;
 }
 
 .submit_button{
@@ -133,7 +133,7 @@ input{
     /* padding-right:3em; */
 }
 .name_teacher_heading{
-    width: 45%;
+    width: 30%;
     font-weight: bold;
     text-transform: uppercase;
     margin:0.5em;
@@ -141,7 +141,7 @@ input{
     /* border: 1px solid black; */
 }
 .position_heading{
-    width: 35%;
+    width: 50%;
     font-weight: bold;
     text-transform: uppercase;
     margin:0.5em;
@@ -157,12 +157,16 @@ input{
     border-bottom: 1px solid black;
     justify-content: center;
 }
+/* .teacher_content{
+    display: flex;
+    flex-direction: row;
+} */
 .teacher:nth-child(2n+1){
     background-color: white;
     
 }
 .name_teacher{
-    width: 45%;
+    width: 30%;
     /* border: 1px solid black; */
     margin:0.5em;
     text-align: center;
@@ -170,12 +174,12 @@ input{
     overflow-wrap: break-word;
 }
 .position{
-    width: 35%;
+    width: 50%;
     /* border: 1px solid black; */
     margin:0.5em;
     margin-right: 1em;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: lowercase;
     overflow-wrap: break-word;
 }
 .edit_icon{

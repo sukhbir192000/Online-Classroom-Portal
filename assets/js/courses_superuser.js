@@ -32,6 +32,7 @@ document.addEventListener('mouseup',function(e){
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
         document.getElementById("subject_name").value = "";
         document.getElementById("subject_code").value = "";
+        document.getElementById("subject_credits").value = "";
         document.getElementById("active_course").checked = false;
     }
     else{
@@ -144,6 +145,9 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 var nameSubject = document.createElement("div");
                 nameSubject.classList.add("name_subject");
                 nameSubject.textContent = response.name;
+                var credits = document.createElement("div");
+                credits.classList.add("credits");
+                credits.textContent = response.credits;
                 var deleteIcon = document.createElement("div");
                 deleteIcon.classList.add("delete_icon");
                 deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
@@ -151,6 +155,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 subject.appendChild(activeIcon);
                 subject.appendChild(codeSubject);
                 subject.appendChild(nameSubject);
+                subject.appendChild(credits);
                 subject.appendChild(deleteIcon);
                 subject.id=response._id;
                 document.querySelector(".subject_container").appendChild(subject);
@@ -161,6 +166,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
                 document.getElementById("subject_name").value = "";
                 document.getElementById("subject_code").value = "";
+                document.getElementById("subject_credits").value = "";
                 document.getElementById("active_course").checked = false;
                 document.querySelector(".add_admin").classList.remove("showx");
             }

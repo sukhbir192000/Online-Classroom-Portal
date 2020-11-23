@@ -156,7 +156,7 @@ input{
     padding-left:0.3em;
 }
 .programme_name_heading{
-    width: 45%;
+    width: 35%;
     font-weight: bold;
     text-transform: uppercase;
     margin:0.5em;
@@ -172,7 +172,7 @@ input{
     /* border: 1px solid black; */
 }
 .groups_heading{
-    width: 17%;
+    width: 22%;
     font-weight: bold;
     text-transform: uppercase;
     margin:0.5em;
@@ -180,7 +180,7 @@ input{
     /* border: 1px solid black; */
 }
 .sub_groups_heading{
-    width: 15%;
+    width: 20%;
     font-weight: bold;
     text-transform: uppercase;
     margin:0.5em;
@@ -202,7 +202,7 @@ input{
     
 }
 .programme_name_main{
-    width: 45%;
+    width: 35%;
     /* border: 1px solid black; */
     margin:0.5em;
     text-align: center;
@@ -218,7 +218,7 @@ input{
     overflow-wrap: break-word;
 }
 .groups_main{
-    width: 17%;
+    width: 22%;
     /* border: 1px solid black; */
     margin:0.5em;
     text-align: center;
@@ -226,7 +226,7 @@ input{
     overflow-wrap: break-word;
 }
 .sub_groups_main{
-    width: 15%;
+    width: 20%;
     /* border: 1px solid black; */
     margin:0.5em;
     text-align: center;
