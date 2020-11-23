@@ -1,8 +1,13 @@
 const CourseModel = require("../models/course");
 
-module.exports.courses=function(req,res){
+module.exports.courses= async function(req,res){
+    console.log(res.locals.user);
+    let courseList=await CourseModel.find({
+        dept:res.locals.user.dept
+    }).sort('code');
     return res.render('superuser/courses', {
-        title: 'Courses'
+        title: 'Courses',
+        courseList:courseList
     });
 }
 
@@ -16,5 +21,33 @@ module.exports.courseCreate = async function(req,res){
         return res.status(200).json({
             err: true
         });
+    }
+}
+module.exports.courseDelete=async function(req,res){
+    try{
+        console.log("deleting : ",req.body);
+        let course=await CourseModel.findByIdAndDelete(req.body.id);
+        return res.status(200).json({
+            course:course   
+        });
+    }
+    catch(err){
+        console.log(err);
+        return res.status(400);
+    }
+}
+module.exports.courseUpdate=async function(req,res){
+    try{
+        console.log(req.body);
+        let course=await CourseModel.findById(req.body.id);
+        course.isActive=!course.isActive;
+        course.save();
+        return res.status(200).json({
+            course:course
+        });
+    }
+    catch(err){
+        console.log(err);
+        return res.status(400);
     }
 }

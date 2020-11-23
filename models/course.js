@@ -25,6 +25,9 @@ const courseSchema = new mongoose.Schema({
     }],
     isActive: {
         type: Boolean
+    },
+    dept:{
+        type:String
     }
 }, {
     timestamps: true

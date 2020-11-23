@@ -1,3 +1,5 @@
+
+
 document.addEventListener('mouseup',function(e){
     var position=document.querySelector(".profile_icon").getBoundingClientRect();
     var rect=document.querySelector(".profile").getBoundingClientRect();
@@ -42,13 +44,32 @@ document.addEventListener('mouseup',function(e){
 // --------------------------------ACTIVE ICON-----------------------------------------------------
 var activeIconFunction = function(activeIcon){
     activeIcon.addEventListener("click",function(e){
-        activeIcon.classList.toggle("icon_color_change");
+        
+        let state=activeIcon.classList.contains('icon_color_change');
+       
+        $.ajax({
+            type:"POST",
+            url:"/superuser/courses/update",
+            data:{
+                id:activeIcon.parentNode.id,
+                state:state
+            },
+            success:function(response){
+              
+                activeIcon.classList.toggle("icon_color_change");
+            }
+        })
+        
         
     })
 }
 
 var activeIconPrev = document.querySelectorAll(".active_icon");
 for(let i=0;i<activeIconPrev.length;i++){
+   
+    if(activeIconPrev[i].children[0].value=="true"){
+        activeIconPrev[i].classList.add("icon_color_change");
+    }
     activeIconFunction(activeIconPrev[i]);
 }
 
@@ -56,11 +77,23 @@ for(let i=0;i<activeIconPrev.length;i++){
 
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
-        console.log(this.parentNode.parentNode.children.length);
+        console.log("HI!!!!!!!!!!!!!!!:",this.parentNode.parentNode.children.length);
         if(this.parentNode.parentNode.children.length == 3){
             document.querySelector(".no_courses").style.display = "flex";
         }
-        this.parentNode.parentNode.removeChild(this.parentNode);
+        let deleteButton=this;
+        console.log("Reaching here:",deleteButton.parentNode.id)
+        $.ajax({
+            type:"POST",
+            url:"/superuser/courses/delete",
+            data:{
+                id:deleteButton.parentNode.id
+            },
+            success:function(response){
+                deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
+            }
+        })
+        
         
     })
 }
@@ -90,7 +123,8 @@ document.getElementById("button_submit").addEventListener("click", function(e){
             code: document.getElementById("subject_code").value,
             name: document.getElementById("subject_name").value,
             credits: document.getElementById("subject_credits").value,
-            isActive: document.getElementById("active_course").checked
+            isActive: document.getElementById("active_course").checked,
+            dept:document.getElementById('top_banner_dept').value
         },
         success: function(response){
             console.log(response);
@@ -118,6 +152,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 subject.appendChild(codeSubject);
                 subject.appendChild(nameSubject);
                 subject.appendChild(deleteIcon);
+                subject.id=response._id;
                 document.querySelector(".subject_container").appendChild(subject);
                 if(document.querySelector(".subject_container").childElementCount>2){
                     document.querySelector(".no_courses").style.display = "none";

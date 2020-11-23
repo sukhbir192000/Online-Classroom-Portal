@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course'
     }],
+    dept:{
+        type:String
+    },
     classSub: [classSubSchema]
 }, {
     timestamps: true
