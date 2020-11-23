@@ -400,13 +400,110 @@ form{
 }
 select{
     border-radius: 4px;
-    padding: 0.5em 1em;
+    padding: 0.7em 1em;
     height: auto;
     margin-right: 2em;
     text-align: center;
     text-align-last: center;
     -moz-text-align-last: center;
+    background-color: #1d3557;
+    color: white;
+    box-shadow: 0.1em 0.1em 0.3em black;
 }
+
+
+
+/* -----------------------ADD CLASS-------------------------------- */
+.add_container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border:0.3em solid black;
+    width: fit-content;
+    padding: 1em;
+}
+
+.add_container>div{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.7em;
+}
+
+.add_container select{
+    padding:0.5em 1em;
+}
+
+.add_container>div>div:first-child{
+    width:120px;
+    /* background-color: red; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.teachers_added{
+    display: flex;
+    flex-direction: column !important;
+}
+
+.teacher_details{
+    display: flex;
+    flex-direction: row;
+    width: auto !important;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.teacher_branch{
+    width: 60px;
+    /* background-color: rgb(126, 126, 107); */
+    margin-right: 1em;
+}
+
+.teacher_name{
+    /* background-color: yellow; */
+    width: auto;
+    max-width: 400px;
+    overflow-wrap: break-word;
+    margin-right: 1em;
+}
+
+.add_teacher{
+    border-radius: 8px;
+    width:fit-content;
+    padding: 0.5em;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_button{
+    width:fit-content;
+    padding: 0.7em 1em;
+    background-color: #d62648;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-color: white;
+    border-radius: 8px;
+    margin-right: 1em;
+}
+
+.cancel_button{
+    width:fit-content;
+    padding: 0.7em 1em;
+    background-color: #d62648;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-color: white;
+    border-radius: 8px;
+}
+
 
 @media(min-width: 991px) and (max-width:1100px){
     .table_heading{

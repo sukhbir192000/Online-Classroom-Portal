@@ -33,3 +33,16 @@ for(let i=0;i<10;i++){
 }
 
 
+// -------------------DELETE TEACHER-------------------------
+function teacherDeleteFucntion(teacher){
+    console.log(teacher);
+    console.log(teacher.parentNode);
+    teacher.parentNode.parentNode.removeChild(teacher.parentNode);
+}
+
+var teacher_delete = document.getElementsByClassName("delete_icon");
+for(let i=0;i<teacher_delete.length;i++){
+    teacher_delete[i].addEventListener("click",function(e){
+        teacherDeleteFucntion(teacher_delete[i]);
+    });
+}
