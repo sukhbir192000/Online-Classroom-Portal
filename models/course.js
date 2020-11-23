@@ -4,7 +4,8 @@ const path = require('path');
 const courseSchema = new mongoose.Schema({
     code: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     name: {
         type: String,
@@ -19,14 +20,11 @@ const courseSchema = new mongoose.Schema({
         ref: 'User'
     }],
     teachers:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'User'
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }],
-    sem: {
-        type: Number,
-        required: true,
-        min: 1,
-        max: 8
+    isActive: {
+        type: Boolean
     }
 }, {
     timestamps: true

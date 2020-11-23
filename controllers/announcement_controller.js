@@ -631,7 +631,8 @@ module.exports.getAssignments = async function(req, res){
         let assignmentList=[];
         if(user.isAdmin){
             assignmentList = await AssignmentModel.find({
-                postedBy: user._id
+                postedBy: user._id,
+                "deadline": {$gt: new Date()}
             }).sort('deadline').limit(2).populate('classSub.course');
         }
         else{

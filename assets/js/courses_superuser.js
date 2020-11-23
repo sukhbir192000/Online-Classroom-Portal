@@ -82,37 +82,56 @@ else{
 
 // ---------------------------------------------ADD COURSE-----------------------------------------
 document.getElementById("button_submit").addEventListener("click", function(e){
-    var subject = document.createElement("div");
-    subject.classList.add("subject");
-    var activeIcon = document.createElement("div");
-    activeIcon.classList.add("active_icon");
-    activeIcon.innerHTML = "<i class='fas fa-check'></i>";
-    if(document.getElementById("active_course").checked){
-        activeIcon.classList.add("icon_color_change");
-    }
-    activeIconFunction(activeIcon);
-    var codeSubject = document.createElement("div");
-    codeSubject.classList.add("code_subject");
-    codeSubject.textContent = document.getElementById("subject_code").value;
-    var nameSubject = document.createElement("div");
-    nameSubject.classList.add("name_subject");
-    nameSubject.textContent = document.getElementById("subject_name").value;
-    var deleteIcon = document.createElement("div");
-    deleteIcon.classList.add("delete_icon");
-    deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
-    deleteIconFunction(deleteIcon);
-    subject.appendChild(activeIcon);
-    subject.appendChild(codeSubject);
-    subject.appendChild(nameSubject);
-    subject.appendChild(deleteIcon);
-    document.querySelector(".subject_container").appendChild(subject);
-    if(document.querySelector(".subject_container").childElementCount>2){
-        document.querySelector(".no_courses").style.display = "none";
-    }
-    document.querySelector(".add_content").textContent = "Add";
-    document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-    document.getElementById("subject_name").value = "";
-    document.getElementById("subject_code").value = "";
-    document.getElementById("active_course").checked = false;
-    document.querySelector(".add_admin").classList.remove("showx");    
+    e.preventDefault();
+    $.ajax({
+        url: "/superuser/courses/create",
+        type: "POST",
+        data:{
+            code: document.getElementById("subject_code").value,
+            name: document.getElementById("subject_name").value,
+            credits: document.getElementById("subject_credits").value,
+            isActive: document.getElementById("active_course").checked
+        },
+        success: function(response){
+            console.log(response);
+            if(!response.err){
+                var subject = document.createElement("div");
+                subject.classList.add("subject");
+                var activeIcon = document.createElement("div");
+                activeIcon.classList.add("active_icon");
+                activeIcon.innerHTML = "<i class='fas fa-check'></i>";
+                if(document.getElementById("active_course").checked){
+                    activeIcon.classList.add("icon_color_change");
+                }
+                activeIconFunction(activeIcon);
+                var codeSubject = document.createElement("div");
+                codeSubject.classList.add("code_subject");
+                codeSubject.textContent = response.code;
+                var nameSubject = document.createElement("div");
+                nameSubject.classList.add("name_subject");
+                nameSubject.textContent = response.name;
+                var deleteIcon = document.createElement("div");
+                deleteIcon.classList.add("delete_icon");
+                deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
+                deleteIconFunction(deleteIcon);
+                subject.appendChild(activeIcon);
+                subject.appendChild(codeSubject);
+                subject.appendChild(nameSubject);
+                subject.appendChild(deleteIcon);
+                document.querySelector(".subject_container").appendChild(subject);
+                if(document.querySelector(".subject_container").childElementCount>2){
+                    document.querySelector(".no_courses").style.display = "none";
+                }
+                document.querySelector(".add_content").textContent = "Add";
+                document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
+                document.getElementById("subject_name").value = "";
+                document.getElementById("subject_code").value = "";
+                document.getElementById("active_course").checked = false;
+                document.querySelector(".add_admin").classList.remove("showx");
+            }
+            else{
+                window.alert("Unable to add course!!!");
+            }
+        }
+    })
 })

@@ -17,13 +17,15 @@
                 <label class="subject_code_label">Subject Code:</label>
                 <input type="text" name="subject_code" id="subject_code" required><br><br>
                 <label class="subject_name_label">Subject Name:</label>
-                <input type="text" name="subject_name" id="subject_name" required><br>
+                <input type="text" name="subject_name" id="subject_name" required><br><br>
+                <label class="subject_credits_label">Subject Credits:</label>
+                <input type="number" min="0" name="subject_credits" id="subject_credits" required><br>
                 <div id="checkbox_container">
                     <input name="isActive" type="checkbox" id="active_course">
                     <label for="active_course" class="active_course_label">Currently Active</label>
                 </div>
-                <div class="submit_button" id="button_submit">
-                    <button type="submit">Add Course</button>
+                <div class="submit_button">
+                    <button type="submit" id="button_submit">Add Course</button>
                 </div>
             </form>
         </div>
