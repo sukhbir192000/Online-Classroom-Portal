@@ -78,12 +78,10 @@ for(let i=0;i<activeIconPrev.length;i++){
 
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
-        console.log("HI!!!!!!!!!!!!!!!:",this.parentNode.parentNode.children.length);
         if(this.parentNode.parentNode.children.length == 3){
             document.querySelector(".no_courses").style.display = "flex";
         }
         let deleteButton=this;
-        console.log("Reaching here:",deleteButton.parentNode.id)
         $.ajax({
             type:"POST",
             url:"/superuser/courses/delete",

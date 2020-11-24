@@ -7,10 +7,10 @@ document.addEventListener('mouseup',function(e){
     else if(e.x<rect.left || e.x>(rect.left+rect.width) || e.y<rect.top || e.y>(rect.top+rect.height) ){
         document.querySelector(".profile").classList.remove("show");
     }
- });
+});
 
 
- document.addEventListener('mouseup',function(e){
+document.addEventListener('mouseup',function(e){
     var position=document.querySelector(".hamburger_icon").getBoundingClientRect();
     var rect=document.querySelector(".navbar").getBoundingClientRect();
     if(e.x>=position.left && e.x<=(position.left+position.width) && e.y>=position.top && e.y<=(position.top+position.height) ){
@@ -21,10 +21,10 @@ document.addEventListener('mouseup',function(e){
         document.querySelector(".navbar").classList.remove("show_navbar");
         document.querySelector("#black_screen").classList.remove("show_black_screen");
     }
- });
+});
 
 // -----------------------------------------ADD BUTTON--------------------------------------------
- document.querySelector(".add").addEventListener('click',function(e){
+document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
@@ -104,8 +104,17 @@ var deleteIconFunction = function(deleteIcon){
         if(this.parentNode.parentNode.children.length == 3){
             document.querySelector(".no_teachers").style.display = "flex";
         }
-        this.parentNode.parentNode.removeChild(this.parentNode);
-        
+        let deleteButton=this;
+        $.ajax({
+            type:"POST",
+            url:"/superuser/staff/delete",
+            data:{
+                id:deleteButton.parentNode.id
+            },
+            success:function(response){
+                deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
+            }
+        })
     })
 }
 
@@ -126,37 +135,48 @@ else{
 
 // -----------------------------------ADD TEACHER--------------------------------------------------
 document.getElementById("button_submit").addEventListener("click", function(e){
-    var teacher = document.createElement("div");
-    teacher.classList.add("teacher");
-    var teacherName = document.createElement("div");
-    teacherName.classList.add("name_teacher");
-    teacherName.textContent = document.getElementById("teacher_name").value;
-    var position = document.createElement("div");
-    position.classList.add("position");
-    position.textContent = document.getElementById("position_add").value;
-    var editIcon = document.createElement("div");
-    editIcon.classList.add("edit_icon");
-    editIcon.innerHTML = "<i class='fas fa-edit'></i>";
-    editIconFunction(editIcon);
-    var deleteIcon = document.createElement("div");
-    deleteIcon.classList.add("delete_icon");
-    deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
-    deleteIconFunction(deleteIcon);
-    var saveIcon = document.createElement("div");
-    saveIcon.classList.add("save_icon");
-    saveIcon.innerHTML = "<i class='fas fa-save'></i>";
-    teacher.appendChild(teacherName);
-    teacher.appendChild(position);
-    teacher.appendChild(editIcon);
-    teacher.appendChild(deleteIcon);
-    teacher.appendChild(saveIcon);
-    document.querySelector(".teacher_container").appendChild(teacher);
-    if(document.querySelector(".teacher_container").childElementCount>2){
-        document.querySelector(".no_teachers").style.display = "none";
-    }
-    document.getElementById("teacher_name").value = "";
-    document.getElementById("position_add").value = "";
-    document.querySelector(".add_content").textContent = "Add";
-    document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-    document.querySelector(".add_admin").classList.remove("showx");    
+    e.preventDefault();
+    $.ajax({
+        url: "/superuser/staff/create",
+        type: "POST",
+        data: {
+            name: document.getElementById("teacher_name").value,
+            email: document.getElementById("position_add").value
+        },
+        success: function(response){
+            var teacher = document.createElement("div");
+            teacher.classList.add("teacher");
+            var teacherName = document.createElement("div");
+            teacherName.classList.add("name_teacher");
+            teacherName.textContent = response.name;
+            var position = document.createElement("div");
+            position.classList.add("position");
+            position.textContent = response.email;
+            var editIcon = document.createElement("div");
+            editIcon.classList.add("edit_icon");
+            editIcon.innerHTML = "<i class='fas fa-edit'></i>";
+            editIconFunction(editIcon);
+            var deleteIcon = document.createElement("div");
+            deleteIcon.classList.add("delete_icon");
+            deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
+            deleteIconFunction(deleteIcon);
+            var saveIcon = document.createElement("div");
+            saveIcon.classList.add("save_icon");
+            saveIcon.innerHTML = "<i class='fas fa-save'></i>";
+            teacher.appendChild(teacherName);
+            teacher.appendChild(position);
+            teacher.appendChild(editIcon);
+            teacher.appendChild(deleteIcon);
+            teacher.appendChild(saveIcon);
+            document.querySelector(".teacher_container").appendChild(teacher);
+            if(document.querySelector(".teacher_container").childElementCount>2){
+                document.querySelector(".no_teachers").style.display = "none";
+            }
+            document.getElementById("teacher_name").value = "";
+            document.getElementById("position_add").value = "";
+            document.querySelector(".add_content").textContent = "Add";
+            document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
+            document.querySelector(".add_admin").classList.remove("showx");   
+        }
+    })
 })

@@ -18,8 +18,8 @@
                 <input type="text" name="teacher_name" id="teacher_name" required><br><br>
                 <label class="position_label">Email:</label>
                 <input type="text" name="position_add" id="position_add" required><br>
-                <div class="submit_button" id="button_submit">
-                    <button type="submit">Submit</button>
+                <div class="submit_button">
+                    <button type="submit" id="button_submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -32,37 +32,15 @@
                 <div class="save_icon" style="visibility: hidden;"><i class="fas fa-save"></i></div>
             </div>
             <div class="no_teachers">No staff added</div>
-            <!-- <div class="teacher">
-                <div class="teacher_content">
-                    <div class="name_teacher">Jyoti Kedia</div>
-                    <div class="position">Assistant Professor</div>
+            <% for(let faculty of facultyList){ %>
+                <div class="teacher" id=<%= faculty._id %>>
+                    <div class="name_teacher"><%= faculty.name %></div>
+                    <div class="position"><%= faculty.email %></div>
                     <div class="edit_icon"><i class="fas fa-edit"></i></div>
                     <div class="delete_icon"><i class="fas fa-trash"></i></div>
                     <div class="save_icon"><i class="fas fa-save"></i></div>
                 </div>
-                <div>Email: jyotikedia@gmail.com</div>
-            </div> -->
-            <div class="teacher">
-                <div class="name_teacher">Jyoti Kedia</div>
-                <div class="position">jyotikedia@pec.edu.in</div>
-                <div class="edit_icon"><i class="fas fa-edit"></i></div>
-                <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                <div class="save_icon"><i class="fas fa-save"></i></div>
-            </div>
-            <div class="teacher">
-                <div class="name_teacher">Jyoti Kedia</div>
-                <div class="position">jyotikedia@pec.edu.in</div>
-                <div class="edit_icon"><i class="fas fa-edit"></i></div>
-                <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                <div class="save_icon"><i class="fas fa-save"></i></div>
-            </div>
-            <div class="teacher">
-                <div class="name_teacher">Jyoti Kedia</div>
-                <div class="position">jyotikedia@pec.edu.in</div>
-                <div class="edit_icon"><i class="fas fa-edit"></i></div>
-                <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                <div class="save_icon"><i class="fas fa-save"></i></div>
-            </div>
+            <% } %>
         </div>
     </div>
 </div>
