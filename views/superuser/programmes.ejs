@@ -22,8 +22,8 @@
                 <input type="number" name="class_groups" id="class_groups" min="1" required><br><br>
                 <label class="lab_groups_label">Total Lab Groups:</label>
                 <input type="number" name="lab_groups" id="lab_groups" min="1" required><br><br>
-                <div class="submit_button" id="button_submit">
-                    <button type="submit">Add Programme</button>
+                <div class="submit_button">
+                    <button type="submit" id="button_submit">Add Programme</button>
                 </div>
             </form>
         </div>
@@ -38,16 +38,18 @@
                 <div class="save_icon" ><i class="fas fa-save"></i></div>
             </div>
             <div class="no_courses">No Programmes Added</div>
-            <div class="programme">
-                <div class="programme_name_main">BTECH</div>
-                <div class="year_main">2022</div>
-                <div class="groups_main">2</div>
-                <div class="sub_groups_main">6</div>
-                <div class="edit_icon"><i class="fas fa-edit"></i></div>
-                <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                <div class="save_icon" ><i class="fas fa-save"></i></div>
+            <%for(let program of programList){%>
+                <div class="programme" id="<%=program._id%>">
+                    <div class="programme_name_main">BTECH</div>
+                    <div class="year_main"><%=program.passingOutYear%></div>
+                    <div class="groups_main"><%=program.totalGroups%></div>
+                    <div class="sub_groups_main"><%=program.totalSubGroups%></div>
+                    <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                    <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                    <div class="save_icon" ><i class="fas fa-save"></i></div>
+                </div>
+            <%}%>
             </div>
-        </div>
     </div>
 </div>
 <script src="/js/programmes_superuser.js"></script>
