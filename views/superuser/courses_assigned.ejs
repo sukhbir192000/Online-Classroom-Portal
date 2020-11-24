@@ -24,28 +24,34 @@
                     <option value="ECN-203">ECN-203</option>
                     <option value="ECN-204">ECN-204</option>
                 </select><br><br>
-                <label class="programme_label">Programme: </label>
+                <!-- <label class="programme_label">Programme: </label>
                 <select class="programme" name="programme_add" id="programme_add" required>
                     <option selected disabled value="">---SELECT---</option>
                     <option value="BTECH">BTECH</option>
                     <option value="MTECH">MTECH(Vlsi)</option>
-                </select><br><br>
+                </select><br><br> -->
                 <label class="year_study_label">Year of Study:</label> 
                 <select class="year_study" name="study_year" id="study_year" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="1">1st</option>
-                    <option value="2">2nd</option>
-                    <option value="3">3rd</option>
-                    <option value="4">4th</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
                 </select><br><br>
-                <label class="class_group_label">Class group:</label>
+                <label class="lab_lecture_label">Class type:</label>
+                <select class="lab_lecture" name="lecture_lab" id="lecture_lab" required>
+                    <option selected disabled value="">---SELECT---</option>
+                    <option value="Lab">Lab</option>
+                    <option value="Lecture">Lecture</option>
+                </select><br><br>
+                <label class="class_group_label">Group:</label>
                 <select class="class_group" name="group_class" id="group_class" required>
                     <option selected disabled value="">---SELECT---</option>
                     <option value="All">All</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                 </select><br><br>
-                <label class="lab_group_label">Lab group:</label>
+                <!-- <label class="lab_group_label">Lab group:</label>
                 <select class="lab_group" name="group_lab" id="group_lab" required>
                     <option selected disabled value="">---SELECT---</option>
                     <option value="All">All</option>
@@ -55,7 +61,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
-                </select><br><br>
+                </select><br><br> -->
                 <select class="branch" name="branch_teacher" id="branch_teacher" required>
                     <option value="ECE">ECE</option>
                     <option value="CSE">CSE</option>
@@ -64,11 +70,11 @@
                     <option value="Jyoti Kedia">Jyoti Kedia</option>
                     <option value="Divya Dhawan">Divya Dhawan</option>
                 </select>
-                <button type="button" class="add_teacher_button">Add teacher</button>
-                <div class="teacher_selected"></div>
+                <!-- <button type="button" class="add_teacher_button">Add teacher</button> -->
+                <!-- <div class="teacher_selected"></div> -->
                 
-                <div class="submit_button" id="button_submit">
-                    <button type="button">Submit</button>
+                <div class="submit_button">
+                    <button  id="button_submit" type="submit">Submit</button>
                 </div>
             </form>
             
@@ -76,8 +82,9 @@
         
         <div class="teacher_container">
             <div class="teacher_heading">
-                <div class="branch_heading">Branch</div>
+                <div class="arrow_icon" style="visibility: hidden;"><i class="fas fa-caret-right"></i></div>
                 <div class="subject_heading">Course Code</div>
+                <div class="year_main_heading">Year</div>
                 <div class="programme_heading">Programme</div>
             </div>
             <!-- <div class="no_teacher">No Courses assigned</div> -->
@@ -86,30 +93,30 @@
                 <div class="teacher_subjects">
                     <div class="teacher_main">
                         <div class="arrow_icon"><i class="fas fa-caret-right"></i></div>
-                        <div class="branch_main">ECE</div>
                         <div class="subject">ECN-201</div>
+                        <div class="year_main">1</div>
                         <div class="programme_chosen">BTECH</div>
                     </div>
                     <div class="subjects_added">
                         <div class="subject_container_heading">
                             <div class="teacher_name_heading">Name</div>
-                            <div class="year_heading">Year</div>
-                            <div class="group_heading">Class Group</div>
-                            <div class="sub_group_heading">Lab Group</div>
+                            <div class="branch_heading">Branch</div>
+                            <div class="class_type_heading">Class type</div>
+                            <div class="sub_group_heading">Group</div>
                             <div class="delete_icon_subject" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                         </div>
                         <div class="no_teacher">No teachers assigned</div>
                         <div class="subject_container">
                             <div class="teacher_name_main">Jyoti Kedia Jyoti KediaJyoti Kedia</div>
-                            <div class="year">1</div>
-                            <div class="group">1</div>
+                            <div class="branch_main">ECE</div>
+                            <div class="class_type">Lab</div>
                             <div class="sub_group">2</div>
                             <div class="delete_icon_subject" ><i class="fas fa-trash"></i></div>
                         </div>
                         <div class="subject_container">
                             <div class="teacher_name_main">Jyoti Kedia</div>
-                            <div class="year">1</div>
-                            <div class="group">1</div>
+                            <div class="branch_main">ECE</div>
+                            <div class="class_type">Lecture</div>
                             <div class="sub_group">2</div>
                             <div class="delete_icon_subject" ><i class="fas fa-trash"></i></div>
                         </div>
@@ -120,17 +127,17 @@
                 <div class="teacher_subjects">
                     <div class="teacher_main">
                         <div class="arrow_icon"><i class="fas fa-caret-right"></i></div>
-                        <div class="branch_main">ECE</div>
                         <div class="subject">ECN-201</div>
+                        <div class="year_main">2</div>
                         <div class="programme_chosen">BTECH</div>
                         <!-- <div class="delete_icon"><i class="fas fa-trash"></i></div> -->
                     </div>
                     <div class="subjects_added">
                         <div class="subject_container_heading">
                             <div class="teacher_name_heading">Name</div>
-                            <div class="year_heading">Year</div>
-                            <div class="group_heading">Class Group</div>
-                            <div class="sub_group_heading">Lab Group</div>
+                            <div class="branch_heading">Branch</div>
+                            <div class="class_type_heading">Class Type</div>
+                            <div class="sub_group_heading">Group</div>
                             <div class="delete_icon_subject" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                         </div>
                         <div class="no_teacher">No teachers assigned</div>  

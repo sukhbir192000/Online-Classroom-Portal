@@ -73,6 +73,7 @@
     border:1px solid #1D3557;
     box-shadow: 0.1px 0.1px 4px 0;
     padding: 1.3em 0.8em;
+    padding-bottom: 0.5em;
     display: none;
     width:80%;
 }
@@ -129,29 +130,29 @@ input[type="checkbox"]{
     margin-right: 0.45em;
 }
 .class_group_label{
-    margin-right: 1.1em;
+    margin-right: 3.65em;
 }
-.lab_group_label{
-    margin-right:2em ;
+.lab_lecture_label{
+    margin-right:1.7em ;
 }
 .course_code{
-    padding-right: 2em;
+    padding:0 1em;
     max-width: 40vw;
 }
 .programme{
-    padding-right: 2em;
+    padding:0 1em;
     max-width: 40vw;
 }
 .year_study{
-    padding-right: 2em;
+    padding:0 1em;
     max-width: 40vw;
 }
 .class_group{
-    padding-right: 2em;
+    padding:0 1em;
     max-width: 40vw;
 }
-.lab_group{
-    padding-right: 2em;
+.lab_lecture{
+    padding:0 1em;
     max-width: 40vw;
 }
 .submit_button{
@@ -161,11 +162,12 @@ input[type="checkbox"]{
     justify-content: center;
 }
 .branch{
-    padding-right: 2em;
+    padding:0 1em;
     max-width: 9vw;
+    margin-right: 0.5em;
 }
 .teacher_name{
-    padding-right: 2em;
+    padding:0 1em;
     min-width: 15vw;
     max-width: 35vw;
 }
@@ -178,9 +180,9 @@ input[type="checkbox"]{
     border-radius: 8px;
 }
 .submit_button button{
-    margin-top:1.7em;
+    margin-top:1.3em;
     font-size: 1.1em;
-    background-color: #1D3557;
+    background: #1D3557;
     color:white;
     padding:0.3em 0.7em;
     border-radius: 8px;
@@ -239,14 +241,18 @@ form{
     justify-content: center;
     padding-left:0.3em;
 }
-.branch_heading{
-    width: 30%;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin:0.5em;
-    text-align: center;
-}
+
 .subject_heading{
+    font-weight: bold;
+    /* border:1px solid black; */
+    text-transform: uppercase;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    padding:0.3em 0;
+}
+.year_main_heading{
     font-weight: bold;
     /* border:1px solid black; */
     text-transform: uppercase;
@@ -299,11 +305,12 @@ form{
     margin-left: 0.5em;
     transition: all 0.3s;
 }
-.branch_main{
+.year_main{
     width: 30%;
-    margin:0.5em;
-    text-align: center;
-    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    margin:0.3em 0;
 }
 .subject{
     /* border:1px solid black; */
@@ -349,23 +356,27 @@ form{
 }
 
 .teacher_name_heading{
-    width: 45%;
+    width:45%;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    margin:0.3em 0;
     font-weight: bold;
+    margin-right:1em;
     text-transform: uppercase;
-    margin:0.5em;
-    text-align: center;
+    
 }
-.year_heading{
+.branch_heading{
+    text-transform: uppercase;
     font-weight: bold;
     /* border:1px solid black; */
-    text-transform: uppercase;
-    width:10%;
+    width:20%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
     padding:0.3em 0;
 }
-.group_heading{
+.class_type_heading{
     text-transform: uppercase;
     font-weight: bold;
     /* border:1px solid black; */
@@ -387,20 +398,20 @@ form{
 }
 .teacher_name_main{
     width: 45%;
-    margin:0.5em;
+    margin:0.3em 0;
     margin-right:1em;
     text-align: center;
     text-transform: uppercase;
 }
-.year{
+.branch_main{
     /* border:1px solid black; */
-    width:10%;
+    width:20%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
     margin:0.3em 0;
 }
-.group{
+.class_type{
     /* border:1px solid black; */
     width:20%;
     display: flex;
@@ -475,7 +486,9 @@ form{
 select{
     border-radius: 4px;
     padding:0.1em 0;
-    
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;    
 }
 
 
@@ -513,7 +526,7 @@ select{
     .add_content{
         font-size: 1em;
     }
-    .branch_main{
+    .year_main{
         font-size:0.9em;
     }
     .teacher_name_main{

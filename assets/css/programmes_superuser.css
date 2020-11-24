@@ -99,8 +99,9 @@ input{
     margin-right: 3.05em;
 }
 #programme_name{
-    min-width: 60%;
-    width:auto;
+    /* min-width: 60%;
+    width:auto; */
+    display: inline;
 }
 #year{
     width:5em;

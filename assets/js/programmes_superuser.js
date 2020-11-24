@@ -28,7 +28,7 @@ document.querySelector(".add").addEventListener('click', function (e) {
     if (document.querySelector(".add_content").textContent == "Cancel") {
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML = "<i class='fas fa-plus'></i>";
-        document.getElementById("programme_name").value = "";
+        // document.getElementById("programme_name").value = "";
         document.getElementById("year").value = "";
         document.getElementById("class_groups").value = "";
         document.getElementById("lab_groups").value = "";
@@ -251,7 +251,7 @@ document.getElementById("button_submit").addEventListener("click", function (e) 
             }
             document.querySelector(".add_content").textContent = "Add";
             document.querySelector(".add_icon").innerHTML = "<i class='fas fa-plus'></i>";
-            document.getElementById("programme_name").value = "";
+            // document.getElementById("programme_name").value = "";
             document.getElementById("year").value = "";
             document.getElementById("class_groups").value = "";
             document.getElementById("lab_groups").value = "";

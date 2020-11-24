@@ -20,6 +20,47 @@
                 <input type="text" name="subject_name" id="subject_name" required><br><br>
                 <label class="subject_credits_label">Credits:</label>
                 <input type="number" min="0" name="subject_credits" id="subject_credits" required><br>
+                <div id="subject_select_container">
+                    <div class="subject_select_label">Offered to:</div>
+                    <div class="select_container">
+                        <div class="subject_select">
+                            <input type="checkbox" name="ECE">
+                            <div>ECE</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="CSE">
+                            <div>CSE</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="EE">
+                            <div>EE</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="MECH">
+                            <div>MECH</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="PROD">
+                            <div>PROD</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="METTA">
+                            <div>METTA</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="AERO">
+                            <div>AERO</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="CIVIL">
+                            <div>CIVIL</div>
+                        </div>
+                        <div class="subject_select">
+                            <input type="checkbox" name="APPLIED SCIENCES">
+                            <div>APPLIED SCIENCES</div>
+                        </div>
+                    </div>                    
+                </div>
                 <div id="checkbox_container">
                     <input name="isActive" type="checkbox" id="active_course">
                     <label for="active_course" class="active_course_label">Currently Active</label>
@@ -31,9 +72,11 @@
         </div>
         <div class="subject_container">
             <div class="subject_heading">
+                <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
                 <div class="code_subject_heading">Course Code</div>
                 <div class="name_subject_heading">Course Name</div>
                 <div class="credits_heading">Credits</div>
+                <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
             </div>
             <div class="no_courses">No Courses added</div>
             <% for(let course of courseList){ %>
@@ -43,7 +86,6 @@
                     <div class="name_subject"><%=course.name%></div>
                     <div class="credits"><%=course.credits%></div>
                     <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                    
                 </div>
             <%}%>
             
