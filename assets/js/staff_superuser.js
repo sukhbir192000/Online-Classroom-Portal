@@ -98,6 +98,32 @@ for(let i=0;i<editIconPrev.length;i++){
     editIconFunction(editIconPrev[i]);
 }
 
+
+// ----------------------------------SAVE ICON---------------------------------------------
+var saveIconFunction = function(saveicon){
+    saveicon.addEventListener("click",function(e){
+        currentEditIcon.style.display = "flex";
+        currentEditIcon.parentNode.children[3].style.visibility="visible";
+        currentEditIcon.parentNode.children[4].style.display = "none";
+        // currentEditIcon.parentNode.children[0].textContent = arr[0];
+        // currentEditIcon.parentNode.children[1].textContent = arr[1];
+        currentEditIcon.parentNode.children[0].contentEditable = "false";
+        currentEditIcon.parentNode.children[0].classList.remove("content_color");
+        currentEditIcon.parentNode.children[0].style.border = "none";
+        currentEditIcon.parentNode.children[1].contentEditable = "false";
+        currentEditIcon.parentNode.children[1].classList.remove("content_color");
+        currentEditIcon.parentNode.children[1].style.border = "none";
+        currentEditIcon = null;
+        arr=[];
+    })
+}
+var saveIconPrev = document.getElementsByClassName("save_icon");
+for(let i=0;i<saveIconPrev.length;i++){
+    saveIconFunction(saveIconPrev[i]);
+}
+
+
+
 // -----------------------------------DELETE ICON---------------------------------------------------
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
@@ -163,6 +189,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
             var saveIcon = document.createElement("div");
             saveIcon.classList.add("save_icon");
             saveIcon.innerHTML = "<i class='fas fa-save'></i>";
+            saveIconFunction(saveIcon);
             teacher.appendChild(teacherName);
             teacher.appendChild(position);
             teacher.appendChild(editIcon);
