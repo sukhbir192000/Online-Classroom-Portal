@@ -102,19 +102,29 @@ for(let i=0;i<editIconPrev.length;i++){
 // ----------------------------------SAVE ICON---------------------------------------------
 var saveIconFunction = function(saveicon){
     saveicon.addEventListener("click",function(e){
-        currentEditIcon.style.display = "flex";
-        currentEditIcon.parentNode.children[3].style.visibility="visible";
-        currentEditIcon.parentNode.children[4].style.display = "none";
-        // currentEditIcon.parentNode.children[0].textContent = arr[0];
-        // currentEditIcon.parentNode.children[1].textContent = arr[1];
-        currentEditIcon.parentNode.children[0].contentEditable = "false";
-        currentEditIcon.parentNode.children[0].classList.remove("content_color");
-        currentEditIcon.parentNode.children[0].style.border = "none";
-        currentEditIcon.parentNode.children[1].contentEditable = "false";
-        currentEditIcon.parentNode.children[1].classList.remove("content_color");
-        currentEditIcon.parentNode.children[1].style.border = "none";
-        currentEditIcon = null;
-        arr=[];
+        let saveButton = this;
+        $.ajax({
+            url: "/superuser/staff/update",
+            type: "POST",
+            data: {
+                id: saveButton.parentNode.id,
+                name: currentEditIcon.parentNode.children[0].textContent,
+                email: currentEditIcon.parentNode.children[1].textContent
+            },
+            success: function(response){
+                currentEditIcon.style.display = "flex";
+                currentEditIcon.parentNode.children[3].style.visibility="visible";
+                currentEditIcon.parentNode.children[4].style.display = "none";
+                currentEditIcon.parentNode.children[0].contentEditable = "false";
+                currentEditIcon.parentNode.children[0].classList.remove("content_color");
+                currentEditIcon.parentNode.children[0].style.border = "none";
+                currentEditIcon.parentNode.children[1].contentEditable = "false";
+                currentEditIcon.parentNode.children[1].classList.remove("content_color");
+                currentEditIcon.parentNode.children[1].style.border = "none";
+                currentEditIcon = null;
+                arr=[];
+            }
+        })
     })
 }
 var saveIconPrev = document.getElementsByClassName("save_icon");
@@ -172,6 +182,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
         success: function(response){
             var teacher = document.createElement("div");
             teacher.classList.add("teacher");
+            teacher.id=response._id;
             var teacherName = document.createElement("div");
             teacherName.classList.add("name_teacher");
             teacherName.textContent = response.name;

@@ -35,7 +35,8 @@ module.exports.staffCreate=async function(req,res){
 module.exports.staffUpdate=async function(req,res){
     try{
         let faculty=await UserModel.findById(req.body.id);
-        faculty
+        faculty.name = req.body.name;
+        faculty.email = req.body.email;
         faculty.save();
         return res.status(200).json({
             faculty:faculty

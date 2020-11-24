@@ -170,7 +170,6 @@ input{
     /* border: 1px solid black; */
     margin:0.5em;
     text-align: center;
-    text-transform: uppercase;
     overflow-wrap: break-word;
 }
 .position{
@@ -179,7 +178,6 @@ input{
     margin:0.5em;
     margin-right: 1em;
     text-align: center;
-    text-transform: lowercase;
     overflow-wrap: break-word;
 }
 .edit_icon{
