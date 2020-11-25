@@ -32,7 +32,6 @@ document.addEventListener('mouseup',function(e){
         document.getElementById("lecture_lab").selectedIndex = "0";
         document.getElementById("study_year").selectedIndex = "0";
         document.getElementById("group_class").selectedIndex = "0";
-        document.getElementById("group_lab").selectedIndex = "0";
         document.getElementById("branch_teacher").selectedIndex = "0";
         document.getElementById("name_teacher").selectedIndex = "0";
     }
@@ -159,7 +158,6 @@ document.getElementById("button_submit").addEventListener("click", function(e){
     document.getElementById("lecture_lab").selectedIndex = "0";
     document.getElementById("study_year").selectedIndex = "0";
     document.getElementById("group_class").selectedIndex = "0";
-    document.getElementById("group_lab").selectedIndex = "0";
     document.getElementById("branch_teacher").selectedIndex = "0";
     document.getElementById("name_teacher").selectedIndex = "0";
 })
