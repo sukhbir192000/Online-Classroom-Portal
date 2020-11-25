@@ -28,7 +28,7 @@ document.querySelector(".add").addEventListener('click', function (e) {
     if (document.querySelector(".add_content").textContent == "Cancel") {
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML = "<i class='fas fa-plus'></i>";
-        document.getElementById("programme_name").value = "";
+        // document.getElementById("programme_name").value = "";
         document.getElementById("year").value = "";
         document.getElementById("class_groups").value = "";
         document.getElementById("lab_groups").value = "";
@@ -126,6 +126,40 @@ for (let i = 0; i < editIconPrev.length; i++) {
 }
 
 
+// -----------------------------------------SAVE ICON--------------------------------------------
+var saveIconFunction = function(saveicon){
+    saveicon.addEventListener("click", function(e){
+        currentEditIcon.style.display = "flex";
+        currentEditIcon.parentNode.children[5].style.visibility = "visible";
+        currentEditIcon.parentNode.children[6].style.display = "none";
+        // currentEditIcon.parentNode.children[0].textContent = arr[0];
+        // currentEditIcon.parentNode.children[1].textContent = arr[1];
+        // currentEditIcon.parentNode.children[2].textContent = arr[2];
+        // currentEditIcon.parentNode.children[3].textContent = arr[3];
+        currentEditIcon.parentNode.children[0].contentEditable = "false";
+        currentEditIcon.parentNode.children[0].classList.remove("content_color");
+        currentEditIcon.parentNode.children[0].style.border = "none";
+        currentEditIcon.parentNode.children[1].contentEditable = "false";
+        currentEditIcon.parentNode.children[1].classList.remove("content_color");
+        currentEditIcon.parentNode.children[1].style.border = "none";
+        currentEditIcon.parentNode.children[2].contentEditable = "false";
+        currentEditIcon.parentNode.children[2].classList.remove("content_color");
+        currentEditIcon.parentNode.children[2].style.border = "none";
+        currentEditIcon.parentNode.children[3].contentEditable = "false";
+        currentEditIcon.parentNode.children[3].classList.remove("content_color");
+        currentEditIcon.parentNode.children[3].style.border = "none";
+        currentEditIcon = null;
+        arr = [];
+    })
+}
+
+var saveIconPrev = document.querySelectorAll("save_icon");
+for(let i=0;i<saveIconPrev.length;i++){
+    saveIconFunction(saveIconPrev[i]);
+}
+
+
+
 
 // -----------------------------------DELETE ICON---------------------------------------------------
 
@@ -203,6 +237,7 @@ document.getElementById("button_submit").addEventListener("click", function (e) 
             var saveIcon = document.createElement("div");
             saveIcon.classList.add("save_icon");
             saveIcon.innerHTML = "<i class='fas fa-save'></i>";
+            saveIconFunction(saveIcon);
             programme.appendChild(programmeName);
             programme.appendChild(year);
             programme.appendChild(class_groups);
@@ -216,7 +251,7 @@ document.getElementById("button_submit").addEventListener("click", function (e) 
             }
             document.querySelector(".add_content").textContent = "Add";
             document.querySelector(".add_icon").innerHTML = "<i class='fas fa-plus'></i>";
-            document.getElementById("programme_name").value = "";
+            // document.getElementById("programme_name").value = "";
             document.getElementById("year").value = "";
             document.getElementById("class_groups").value = "";
             document.getElementById("lab_groups").value = "";

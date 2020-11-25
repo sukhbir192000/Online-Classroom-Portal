@@ -29,10 +29,9 @@ document.addEventListener('mouseup',function(e){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
         document.getElementById("code_course").selectedIndex = "0";
-        document.getElementById("programme_add").selectedIndex = "0";
+        document.getElementById("lecture_lab").selectedIndex = "0";
         document.getElementById("study_year").selectedIndex = "0";
         document.getElementById("group_class").selectedIndex = "0";
-        document.getElementById("group_lab").selectedIndex = "0";
         document.getElementById("branch_teacher").selectedIndex = "0";
         document.getElementById("name_teacher").selectedIndex = "0";
     }
@@ -64,26 +63,26 @@ document.addEventListener('mouseup',function(e){
     document.querySelector(".add_admin").classList.toggle("showx");    
 })
 
-var teachers_added = [];
-document.querySelector(".add_teacher_button").addEventListener("click",function(e){
-    var newDiv = document.createElement("div");
-    newDiv.classList.add("teacher_selected_div");
-    var branch = document.createElement("div");
-    branch.textContent = document.getElementById("branch_teacher").value;
-    branch.classList.add("teacher_selected_branch");
-    var teacher = document.createElement("div");
-    teacher.textContent = document.getElementById("name_teacher").value;
-    teacher.classList.add("teacher_selected_name");
-    var deleteTeacher = document.createElement("div");
-    deleteTeacher.innerHTML = "<i class='fas fa-times'></i>";
-    deleteTeacher.addEventListener("click",function(e){
-        this.parentNode.parentNode.removeChild(this.parentNode);
-    })
-    newDiv.appendChild(branch);
-    newDiv.appendChild(teacher);
-    newDiv.appendChild(deleteTeacher);
-    document.querySelector(".teacher_selected").appendChild(newDiv);
-})
+// var teachers_added = [];
+// document.querySelector(".add_teacher_button").addEventListener("click",function(e){
+//     var newDiv = document.createElement("div");
+//     newDiv.classList.add("teacher_selected_div");
+//     var branch = document.createElement("div");
+//     branch.textContent = document.getElementById("branch_teacher").value;
+//     branch.classList.add("teacher_selected_branch");
+//     var teacher = document.createElement("div");
+//     teacher.textContent = document.getElementById("name_teacher").value;
+//     teacher.classList.add("teacher_selected_name");
+//     var deleteTeacher = document.createElement("div");
+//     deleteTeacher.innerHTML = "<i class='fas fa-times'></i>";
+//     deleteTeacher.addEventListener("click",function(e){
+//         this.parentNode.parentNode.removeChild(this.parentNode);
+//     })
+//     newDiv.appendChild(branch);
+//     newDiv.appendChild(teacher);
+//     newDiv.appendChild(deleteTeacher);
+//     document.querySelector(".teacher_selected").appendChild(newDiv);
+// })
 
 // -----------------------------------DELETE ICON---------------------------------------------------
 
@@ -119,47 +118,54 @@ for(let i=0;i<subjectsAdded.length;i++){
 
 
 
-// // ---------------------------------------------ADD COURSE-----------------------------------------
-// document.getElementById("button_submit").addEventListener("click", function(e){
-//     var subject = document.createElement("div");
-//     subject.classList.add("subject");
-//     var activeIcon = document.createElement("div");
-//     activeIcon.classList.add("active_icon");
-//     activeIcon.innerHTML = "<i class='fas fa-check'></i>";
-//     if(document.getElementById("active_course").checked){
-//         activeIcon.classList.add("icon_color_change");
-//     }
-//     activeIconFunction(activeIcon);
-//     var codeSubject = document.createElement("div");
-//     codeSubject.classList.add("code_subject");
-//     codeSubject.textContent = document.getElementById("subject_code").value;
-//     var nameSubject = document.createElement("div");
-//     nameSubject.classList.add("name_subject");
-//     nameSubject.textContent = document.getElementById("subject_name").value;
-//     var deleteIcon = document.createElement("div");
-//     deleteIcon.classList.add("delete_icon");
-//     deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
-//     deleteIconFunction(deleteIcon);
-//     subject.appendChild(activeIcon);
-//     subject.appendChild(codeSubject);
-//     subject.appendChild(nameSubject);
-//     subject.appendChild(deleteIcon);
-//     document.querySelector(".subject_container").appendChild(subject);
-//     if(document.querySelector(".subject_container").childElementCount>2){
-//         document.querySelector(".no_courses").style.display = "none";
-//     }
-//     document.querySelector(".add_content").textContent = "Add";
-//     document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
-//     document.getElementById("subject_name").value = "";
-//     document.getElementById("subject_code").value = "";
-//     document.getElementById("active_course").checked = false;
-//     document.querySelector(".add_admin").classList.remove("showx");    
-// })
+// ---------------------------------------------ADD TEACHER-----------------------------------------
+document.getElementById("button_submit").addEventListener("click", function(e){
+    e.preventDefault();
+    var container = document.createElement("div");
+    container.classList.add("subject_container");
+    var teacherName = document.createElement("div");
+    teacherName.classList.add("teacher_name_main");
+    teacherName.textContent = document.getElementById("name_teacher").value;
+    var branch = document.createElement("div");
+    branch.classList.add("branch_main");
+    branch.textContent = document.getElementById("branch_teacher").value;
+    var classType = document.createElement("div");
+    classType.classList.add("class_type");
+    classType.textContent = document.getElementById("lecture_lab").value;
+    var group = document.createElement("div");
+    group.classList.add("sub_group");
+    group.textContent = document.getElementById("group_class").value;
+    var deleteIcon = document.createElement("div");
+    deleteIcon.classList.add("delete_icon_subject");
+    deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
+    deleteIconFunction(deleteIcon);
+    container.appendChild(teacherName);
+    container.appendChild(branch);
+    container.appendChild(classType);
+    container.appendChild(group);
+    container.appendChild(deleteIcon);
+    
+    
+    // SEARCH AND ADD IN PROPER POSITION
+    document.querySelector(".subjects_added").appendChild(container);
+    if(document.querySelector(".subjects_added").childElementCount==3){
+        document.querySelector(".no_teacher").style.display = "none";
+    }
+    //----------------------------------------------------
+
+    
+    document.getElementById("code_course").selectedIndex = "0";
+    document.getElementById("lecture_lab").selectedIndex = "0";
+    document.getElementById("study_year").selectedIndex = "0";
+    document.getElementById("group_class").selectedIndex = "0";
+    document.getElementById("branch_teacher").selectedIndex = "0";
+    document.getElementById("name_teacher").selectedIndex = "0";
+})
 
 
 var currentArrowIcon = null;
-var arrowIconFunction = function(arrowIcon){
-    arrowIcon.addEventListener("click", function(e){
+var arrowIconFunction = function(teacherDiv, arrowIcon){
+    teacherDiv.addEventListener("click", function(e){
         if(currentArrowIcon!=null && currentArrowIcon!=arrowIcon){
             currentArrowIcon.classList.toggle("rotate_arrow");
             currentArrowIcon.parentNode.parentNode.children[1].classList.toggle("show_container");
@@ -171,11 +177,12 @@ var arrowIconFunction = function(arrowIcon){
             currentArrowIcon=null;
         }
         else{
-        currentArrowIcon = arrowIcon;} }, 600);
+        currentArrowIcon = arrowIcon;} }, 300);
     })
 }
 
-var arrowIconPrev = document.querySelectorAll(".arrow_icon");
-    for(let i=0;i<arrowIconPrev.length;i++){
-        arrowIconFunction(arrowIconPrev[i]);
-    }
+var teacherMainPrev = document.querySelectorAll(".teacher_main");
+var arrowIcon = document.querySelectorAll(".arrow_icon");
+for(let i=0;i<teacherMainPrev.length;i++){
+    arrowIconFunction(teacherMainPrev[i], arrowIcon[i+1]);
+}
