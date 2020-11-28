@@ -76,20 +76,20 @@
             </div>
             <div class="no_courses">No Courses added</div>
             <% for(let course of courseList){ %>
-            <div class="subject_row">
-                <div class="subject" >
-                    <div class="active_icon"><input class="activity_state" type="hidden" value='<%=course.isActive%>'><i class="fas fa-check"></i></div>
-                    <div class="code_subject"><%=course.code%></div>
-                    <div class="name_subject"><%=course.name%></div>
-                    <div class="credits"><%=course.credits%></div>
-                    <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                <div class="subject_row">
+                    <div class="subject" id=<%= course._id %>>
+                        <div class="active_icon"><input class="activity_state" type="hidden" value='<%=course.isActive%>'><i class="fas fa-check"></i></div>
+                        <div class="code_subject"><%=course.code%></div>
+                        <div class="name_subject"><%=course.name%></div>
+                        <div class="credits"><%=course.credits%></div>
+                        <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                    </div>
+                    <div class="offered_to_container">
+                        <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
+                        <div class="offered_to"><b>Offered to:</b> <% for(let i=0;i<course.offered_to.length;i++){ if(i!=0){ %>, <% } %><%= course.offered_to[i] %><% } %></div>
+                        <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
+                    </div>
                 </div>
-                <div class="offered_to_container">
-                    <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
-                    <div class="offered_to"><b>Offered to:</b> ECE, EE, CSE</div>
-                    <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
-                </div>
-            </div>
             <%}%>
 
             <!-- <div class="subject" >
