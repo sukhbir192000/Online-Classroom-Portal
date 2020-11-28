@@ -28,7 +28,10 @@ const courseSchema = new mongoose.Schema({
     },
     dept:{
         type:String
-    }
+    },
+    offered_to: [{
+        type: String
+    }]
 }, {
     timestamps: true
 });

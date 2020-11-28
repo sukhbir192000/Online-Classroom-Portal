@@ -115,6 +115,13 @@ else{
 // ---------------------------------------------ADD COURSE-----------------------------------------
 document.getElementById("button_submit").addEventListener("click", function(e){
     e.preventDefault();
+    let branch_input = document.getElementById("branch_input");
+    let offered_to = [];
+    for(let i=0;i<branch_input.childElementCount;i++){
+        if(branch_input.children[i].children[0].checked){
+            offered_to.push(branch_input.children[i].children[0].name);
+        }
+    }
     $.ajax({
         url: "/superuser/courses/create",
         type: "POST",
@@ -123,7 +130,8 @@ document.getElementById("button_submit").addEventListener("click", function(e){
             name: document.getElementById("subject_name").value,
             credits: document.getElementById("subject_credits").value,
             isActive: document.getElementById("active_course").checked,
-            dept:document.getElementById('top_banner_dept').value
+            dept:document.getElementById('top_banner_dept').value,
+            offered_to: offered_to
         },
         success: function(response){
             console.log(response);
