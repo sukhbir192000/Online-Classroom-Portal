@@ -34,6 +34,10 @@ document.addEventListener('mouseup',function(e){
         document.getElementById("subject_code").value = "";
         document.getElementById("subject_credits").value = "";
         document.getElementById("active_course").checked = false;
+        var branch_names = document.getElementsByClassName("subject_select");
+        for(let i=0;i<branch_names.length;i++){
+            branch_names[i].children[0].checked = false;
+        }
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -78,7 +82,7 @@ for(let i=0;i<activeIconPrev.length;i++){
 
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
-        if(this.parentNode.parentNode.children.length == 3){
+        if(this.parentNode.parentNode.parentNode.children.length == 3){
             document.querySelector(".no_courses").style.display = "flex";
         }
         let deleteButton=this;
@@ -89,7 +93,7 @@ var deleteIconFunction = function(deleteIcon){
                 id:deleteButton.parentNode.id
             },
             success:function(response){
-                deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
+                deleteButton.parentNode.parentNode.parentNode.removeChild(deleteButton.parentNode.parentNode);
             }
         })
         
@@ -136,6 +140,34 @@ document.getElementById("button_submit").addEventListener("click", function(e){
         success: function(response){
             console.log(response);
             if(!response.err){
+                var subjectRow = document.createElement("div");
+                subjectRow.classList.add("subject_row");
+                var offeredToContainer = document.createElement("div");
+                offeredToContainer.classList.add("offered_to_container");
+                var activeIconNew = document.createElement("div");
+                activeIconNew.classList.add("active_icon");
+                activeIconNew.innerHTML = "<i class='fas fa-check'></i>";
+                activeIconNew.style.visibility = "hidden";
+                var offeredTo = document.createElement("div");
+                offeredTo.classList.add("offered_to");
+                offeredTo.innerHTML = "<b>Offered to:</b>";
+                var branch_names = document.getElementsByClassName("subject_select");
+                for(let i=0;i<branch_names.length;i++){
+                    if(branch_names[i].children[0].checked){
+                        offeredTo.innerHTML += branch_names[i].children[0].name;
+                        offeredTo.innerHTML += ",";
+                    }
+                }
+                offeredTo.innerHTML = offeredTo.innerHTML.slice(0,-1);
+
+                var deleteIconNew = document.createElement("div");
+                deleteIconNew.classList.add("delete_icon");
+                deleteIconNew.innerHTML = "<i class='fas fa-trash'></i>";
+                deleteIconNew.style.visibility = "hidden";
+                offeredToContainer.appendChild(activeIconNew);
+                offeredToContainer.appendChild(offeredTo);
+                offeredToContainer.appendChild(deleteIconNew);
+
                 var subject = document.createElement("div");
                 subject.classList.add("subject");
                 var activeIcon = document.createElement("div");
@@ -164,7 +196,9 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 subject.appendChild(credits);
                 subject.appendChild(deleteIcon);
                 subject.id=response._id;
-                document.querySelector(".subject_container").appendChild(subject);
+                subjectRow.appendChild(subject);
+                subjectRow.appendChild(offeredToContainer);
+                document.querySelector(".subject_container").appendChild(subjectRow);
                 if(document.querySelector(".subject_container").childElementCount>2){
                     document.querySelector(".no_courses").style.display = "none";
                 }
@@ -174,6 +208,10 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 document.getElementById("subject_code").value = "";
                 document.getElementById("subject_credits").value = "";
                 document.getElementById("active_course").checked = false;
+                var branch_names = document.getElementsByClassName("subject_select");
+                for(let i=0;i<branch_names.length;i++){
+                    branch_names[i].children[0].checked = false;
+                }
                 document.querySelector(".add_admin").classList.remove("showx");
             }
             else{
