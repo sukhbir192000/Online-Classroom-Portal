@@ -132,6 +132,9 @@ input[type="checkbox"]{
 .class_group_label{
     margin-right: 3.65em;
 }
+.teacher_name_label{
+    margin-right:2.8em;
+}
 .lab_lecture_label{
     margin-right:1.7em ;
 }
@@ -161,14 +164,13 @@ input[type="checkbox"]{
     width:100%;
     justify-content: center;
 }
-.branch{
+/* .branch{
     padding:0 1em;
     max-width: 9vw;
     margin-right: 0.5em;
-}
+} */
 .teacher_name{
     padding:0 1em;
-    min-width: 15vw;
     max-width: 35vw;
 }
 .add_teacher_button{
@@ -297,6 +299,7 @@ form{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 .arrow_icon{
     font-size: 1.5em;
@@ -380,7 +383,7 @@ form{
     text-transform: uppercase;
     font-weight: bold;
     /* border:1px solid black; */
-    width:20%;
+    width:30%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
@@ -390,7 +393,7 @@ form{
     text-transform: uppercase;
     font-weight: bold;
     /* border:1px solid black; */
-    width:20%;
+    width:25%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
@@ -413,7 +416,7 @@ form{
 }
 .class_type{
     /* border:1px solid black; */
-    width:20%;
+    width:30%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
@@ -421,7 +424,7 @@ form{
 }
 .sub_group{
     /* border:1px solid black; */
-    width:20%;
+    width:25%;
     display: flex;
     justify-content: center;
     vertical-align: middle;
