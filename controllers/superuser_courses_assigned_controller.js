@@ -20,5 +20,14 @@ module.exports.courses_assgnCreate = async function(req,res){
 }
 
 module.exports.courses_assgnDelete = async function(req,res){
-    
+    try{
+        let course = await CourseModel.findById(req.body.courseId);
+        course.teachers.splice(req.body.index,1);
+        course.save();
+        res.status(200);
+    }
+    catch(err){
+        console.log("Error while deleting assigned teacher", err);
+        res.status(400);
+    }
 }

@@ -89,12 +89,20 @@ document.addEventListener('mouseup',function(e){
 
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
-        if(this.parentNode.parentNode.children.length == 3){
-            this.parentNode.parentNode.children[1].style.display = "flex";
-        }
-        // console.log(this.parentNode.parentNode.children.length);
-        this.parentNode.parentNode.removeChild(this.parentNode);
-        
+        $.ajax({
+            url: "/superuser/coursesassigned/delete",
+            type: "POST",
+            data: {
+                courseId: this.parentNode.parentNode.parentNode.id,
+                index: $(this.parentNode).index()-2
+            },
+            success: function(response){
+                if(this.parentNode.parentNode.children.length == 3){
+                    this.parentNode.parentNode.children[1].style.display = "flex";
+                }
+                this.parentNode.parentNode.removeChild(this.parentNode);
+            }
+        })
     })
 }
 
