@@ -29,6 +29,7 @@ document.addEventListener('mouseup',function(e){
         document.querySelector(".add_content").textContent = "Add";
         document.querySelector(".add_icon").innerHTML =  "<i class='fas fa-plus'></i>";
         document.getElementById("code_course").selectedIndex = "0";
+        document.getElementById("choose_branch").selectedIndex = "0";
         document.getElementById("lecture_lab").selectedIndex = "0";
         document.getElementById("study_year").selectedIndex = "0";
         document.getElementById("group_class").selectedIndex = "0";
@@ -127,8 +128,8 @@ document.getElementById("button_submit").addEventListener("click", function(e){
     teacherName.classList.add("teacher_name_main");
     teacherName.textContent = document.getElementById("name_teacher").value;
     var branch = document.createElement("div");
-    // branch.classList.add("branch_main");
-    // branch.textContent = document.getElementById("branch_teacher").value;
+    branch.classList.add("branch_main");
+    branch.textContent = document.getElementById("choose_branch").value;
     var classType = document.createElement("div");
     classType.classList.add("class_type");
     classType.textContent = document.getElementById("lecture_lab").value;
@@ -155,6 +156,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
 
     
     document.getElementById("code_course").selectedIndex = "0";
+    document.getElementById("choose_branch").selectedIndex = "0";
     document.getElementById("lecture_lab").selectedIndex = "0";
     document.getElementById("study_year").selectedIndex = "0";
     document.getElementById("group_class").selectedIndex = "0";
