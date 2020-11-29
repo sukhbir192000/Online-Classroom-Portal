@@ -259,7 +259,11 @@ module.exports.doubtCreate=async function(req,res){
             privateCheck=false;
         }
         
-        let teachers=(await CourseModel.findById(subject)).teachers;
+        let teachers_temp=(await CourseModel.findById(subject)).teachers;
+        let teachers = [];
+        for(let i=0;i<teachers_temp.length;i++){
+            teachers[i] = teachers_temp[i].teacher;
+        }
         let teachersList=teachers.filter(async function(teacherId){
             let conditionTeacher=false;
             let teacher=await UserModel.findById(teacherId);

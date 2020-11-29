@@ -83,6 +83,41 @@
                 <div class="programme_heading">Programme</div>
             </div>
             <div class="teacher_main_container">
+                <% for(let course of courseList){ %>
+                    <div class="teacher_subjects" id=<%= course._id %>>
+                        <div class="teacher_main">
+                            <div class="arrow_icon"><i class="fas fa-caret-right"></i></div>
+                            <div class="subject"><%= course.code %></div>
+                            <div class="year_main">1</div>
+                            <div class="programme_chosen">BTECH</div>
+                        </div>
+                        <div class="subjects_added">
+                            <div class="subject_container_heading">
+                                <div class="teacher_name_heading">Name</div>
+                                <div class="branch_heading">Branch</div>
+                                <div class="class_type_heading">Class type</div>
+                                <div class="sub_group_heading">Group</div>
+                                <div class="delete_icon_subject" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
+                            </div>
+                            <div class="no_teacher">No teachers assigned</div>
+                            <% for(let teacherObject of course.teachers){ %>
+                                <div class="subject_container">
+                                    <div class="teacher_name_main"><%= teacherObject.teacher.name %></div>
+                                    <div class="branch_main"><%= teacherObject.classSub.class.stream %></div>
+                                    <div class="class_type"><%= teacherObject.classType %></div>
+                                    <% if((teacherObject.classType == "Lecture" && !teacherObject.classSub.group) || (teacherObject.classType == "Lab" && !teacherObject.classSub.subGroup)){ %>
+                                        <div class="sub_group">All</div>
+                                    <% } else if(teacherObject.classType == "Lecture"){ %>
+                                        <div class="sub_group"><%= teacherObject.classSub.group.groupNumber %></div>
+                                    <% } else if(teacherObject.classType == "Lab"){ %>
+                                        <div class="sub_group"><%= teacherObject.classSub.subGroup.subGroupNumber %></div>
+                                    <% } %>
+                                    <div class="delete_icon_subject" ><i class="fas fa-trash"></i></div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
                 <!-- -------------------------TEACHER1--------------------------------------- -->
                 <div class="teacher_subjects">
                     <div class="teacher_main">

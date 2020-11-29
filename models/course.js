@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const path = require('path');
+const classSubSchema = require('./class-sub');
 
 const courseSchema = new mongoose.Schema({
     code: {
@@ -20,8 +20,12 @@ const courseSchema = new mongoose.Schema({
         ref: 'User'
     }],
     teachers:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        teacher: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        },
+        classSub: classSubSchema,
+        classType: String
     }],
     isActive: {
         type: Boolean
