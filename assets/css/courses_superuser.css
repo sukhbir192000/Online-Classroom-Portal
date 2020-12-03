@@ -110,6 +110,7 @@ input[type="checkbox"]{
     flex-direction: row;
     width:100%;
     justify-content: center;
+    margin-top:1em;
 }
 .submit_button button{
     font-size: 1.1em;
@@ -171,6 +172,15 @@ input[type="checkbox"]{
     text-align: center;
     /* border: 1px solid black; */
 }
+/* .year_heading{
+    width:15%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:0.5em;
+    text-align: center;
+} */
+
+
 /* .subject{
     width:100%;
     min-height:1em;
@@ -240,6 +250,13 @@ input[type="checkbox"]{
     text-transform: uppercase;
     overflow-wrap: break-word;
 }
+/* .year_study{
+    width:15%;
+    margin:0.5em;
+    text-align: center;
+    text-transform: uppercase;
+    overflow-wrap: break-word;
+} */
 .active_icon{
     font-size: 1.5em;
     align-self: center;
@@ -313,7 +330,89 @@ input[type="checkbox"]{
     margin-right:3em;
 }
 
+.year_select_container{
+    display: flex;
+    flex-direction: row;
+}
+.year_label{
+    margin-right:0.7em;
+}
+.year_select{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.year_select>input{
+    display: flex;
+    align-items: center;
+}
+.year_select>div{
+    display: flex;
+    align-items: center;
+}
 
+
+
+
+.new_year_container{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: 1px solid  #1D3557;
+    background-color: white;
+    margin:0;
+}
+.new_year_label{
+    display: flex;
+    justify-content: center;
+    padding:0.5em 2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #1D3557 ;
+    color: white;
+    margin:0;
+}
+.new_year_select_container{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1em;
+}
+.new_year_select{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.2em;
+}
+.new_year_select>input{
+    display: flex;
+    align-items: center;
+    margin-right:0.5em;
+}
+.new_year_select>div{
+    display: flex;
+    align-items: center;
+}
+.new_year_button_container{
+    display: flex;
+    justify-content: center;
+}
+.new_year_button{
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    padding: 0.5em;
+    background-color: #d62648;
+    color: white;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.new_year_select_class{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 /* ----------------------------------TABLET DEVICES------------------------------------- */
 @media(min-width: 767px) and (max-width: 991px){

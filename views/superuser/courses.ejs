@@ -7,7 +7,7 @@
             <div class="heading">Courses Offered</div>
         </div>
     </div>
-    <div class="box_layout">
+    <div class="box_layout " >
         <div class="add" id="addButton">
             <div class="add_icon"><i class="fas fa-plus"></i></div>
             <div class="add_content">Add </div>
@@ -61,17 +61,40 @@
                     <input name="isActive" type="checkbox" id="active_course">
                     <label for="active_course" class="active_course_label">Currently Active</label>
                 </div>
+                <div class="year_select_container" id="year_container" style="display: none;">
+                    <div class="year_label">Year of Study: </div>
+                    <div class="year_select_subcontainer">
+                        <div class="year_select">
+                            <input type="checkbox" name="1">
+                            <div>1st</div>
+                        </div>
+                        <div class="year_select">
+                            <input type="checkbox" name="2">
+                            <div>2nd</div>
+                        </div>
+                        <div class="year_select">
+                            <input type="checkbox" name="3">
+                            <div>3rd</div>
+                        </div>
+                        <div class="year_select">
+                            <input type="checkbox" name="4">
+                            <div>4th</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="submit_button">
                     <button type="submit" id="button_submit">Add Course</button>
                 </div>
             </form>
         </div>
+        
         <div class="subject_container">
             <div class="subject_heading">
                 <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
                 <div class="code_subject_heading">Course Code</div>
                 <div class="name_subject_heading">Course Name</div>
                 <div class="credits_heading">Credits</div>
+                <!-- <div class="year_heading">Year</div> -->
                 <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
             </div>
             <div class="no_courses">No Courses added</div>
@@ -82,6 +105,7 @@
                         <div class="code_subject"><%=course.code%></div>
                         <div class="name_subject"><%=course.name%></div>
                         <div class="credits"><%=course.credits%></div>
+                        <!-- <div class="year_study">1,2,3,4</div> -->
                         <div class="delete_icon"><i class="fas fa-trash"></i></div>
                     </div>
                     <div class="offered_to_container">
@@ -94,5 +118,32 @@
             
         </div>
     </div>
+    <!-- -------------------------------YEAR SELECT---------------------------------------- -->
+    <!-- <div class="new_year_container" id="new_year_container_id" style="display: none;">
+        <div class="new_year_label">Select Year of Study</div>
+        <div class="new_year_select_container">
+            <div class="new_year_select">
+                <input type="checkbox" name="1">
+                <div>1st</div>
+            </div>
+            <div class="new_year_select">
+                <input type="checkbox" name="2">
+                <div>2nd</div>
+            </div>
+            <div class="new_year_select">
+                <input type="checkbox" name="3">
+                <div>3rd</div>
+            </div>
+            <div class="new_year_select">
+                <input type="checkbox" name="4">
+                <div>4th</div>
+            </div>
+        </div>
+        <div class="new_year_button_container">
+            <div class="new_year_button">Submit</div>
+        </div>            
+    </div> -->
+    <!-- ------------------------------------------------------------------------------------ -->
+
 </div>
 <script src="/js/courses_superuser.js"></script>

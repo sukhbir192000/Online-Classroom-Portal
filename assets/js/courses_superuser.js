@@ -38,6 +38,11 @@ document.addEventListener('mouseup',function(e){
         for(let i=0;i<branch_names.length;i++){
             branch_names[i].children[0].checked = false;
         }
+        var yearSelect = document.getElementsByClassName("year_select");
+        for(let i=0;i<yearSelect.length;i++){
+            yearSelect[i].children[0].checked = false;
+        }
+        document.getElementById("year_container").style.display = "none";
     }
     else{
         document.querySelector(".add_content").textContent = "Cancel";
@@ -51,7 +56,41 @@ var activeIconFunction = function(activeIcon){
     activeIcon.addEventListener("click",function(e){
         
         let state=activeIcon.classList.contains('icon_color_change');
-       
+
+        // -------------------------------------------THEEK KRO--------------------------------------
+        // if(!state){
+        //     document.getElementById("new_year_container_id").style.display = "flex";
+        //     document.getElementsByClassName("box_layout")[0].style.opacity = "0.2";
+        //     var yearContainer = document.createElement("div");
+        //     yearContainer.innerHTML = `<div class="new_year_container" id="new_year_container_id" style="display: none;">
+        //         <div class="new_year_label">Select Year of Study</div>
+        //         <div class="new_year_select_container">
+        //             <div class="new_year_select">
+        //                 <input type="checkbox" name="1">
+        //                 <div>1st</div>
+        //             </div>
+        //             <div class="new_year_select">
+        //                 <input type="checkbox" name="2">
+        //                 <div>2nd</div>
+        //             </div>
+        //             <div class="new_year_select">
+        //                 <input type="checkbox" name="3">
+        //                 <div>3rd</div>
+        //             </div>
+        //             <div class="new_year_select">
+        //                 <input type="checkbox" name="4">
+        //                 <div>4th</div>
+        //             </div>
+        //         </div>
+        //         <div class="new_year_button_container">
+        //             <div class="new_year_button">Submit</div>
+        //         </div>            
+        //     </div>`
+        //     yearContainer.classList.add("new_year_select_class");
+        // }
+        // -----------------------------------------------------------------------------------------
+
+
         $.ajax({
             type:"POST",
             url:"/superuser/courses/update",
@@ -71,7 +110,7 @@ var activeIconFunction = function(activeIcon){
 
 var activeIconPrev = document.querySelectorAll(".active_icon");
 for(let i=0;i<activeIconPrev.length;i++){
-   
+
     if(activeIconPrev[i].children[0].value=="true"){
         activeIconPrev[i].classList.add("icon_color_change");
     }
@@ -79,7 +118,6 @@ for(let i=0;i<activeIconPrev.length;i++){
 }
 
 // -----------------------------------DELETE ICON---------------------------------------------------
-
 var deleteIconFunction = function(deleteIcon){
     deleteIcon.addEventListener("click",function(e){
         if(this.parentNode.parentNode.parentNode.children.length == 3){
@@ -114,6 +152,17 @@ if(document.querySelector(".subject_container").childElementCount==2){
 else{
     document.querySelector(".no_courses").style.display = "none";
 }
+
+
+// -----------------------------YEAR SELECT CONTAINER---------------------------------------------
+document.getElementById("active_course").addEventListener("change", function(e){
+    if(this.checked){
+        document.getElementById("year_container").style.display = "flex";
+    }
+    else{
+        document.getElementById("year_container").style.display = "none";
+    }
+})
 
 
 // ---------------------------------------------ADD COURSE-----------------------------------------
@@ -212,6 +261,11 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 for(let i=0;i<branch_names.length;i++){
                     branch_names[i].children[0].checked = false;
                 }
+                var yearSelect = document.getElementsByClassName("year_select");
+                for(let i=0;i<yearSelect.length;i++){
+                    yearSelect[i].children[0].checked = false;
+                }
+                document.getElementById("year_container").style.display = "none";
                 document.querySelector(".add_admin").classList.remove("showx");
             }
             else{
