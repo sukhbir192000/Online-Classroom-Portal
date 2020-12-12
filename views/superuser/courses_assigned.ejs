@@ -47,19 +47,13 @@
                 <label class="class_group_label">Group:</label>
                 <select class="class_group" name="group_class" id="group_class" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="All">All</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
                 </select><br><br>
-                <!-- <select class="branch" name="branch_teacher" id="branch_teacher" required>
-                    <option value="ECE">ECE</option>
-                    <option value="CSE">CSE</option>
-                </select> -->
                 <label class="teacher_name_label">Teacher:</label>
                 <select class="teacher_name" name="name_teacher" id="name_teacher" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="Jyoti Kedia">Jyoti Kedia</option>
-                    <option value="Divya Dhawan">Divya Dhawan</option>
+                    <% for(let teacher_object of teacher_list){ %>
+                        <option value="<%= teacher_object._id %>"><%= teacher_object.name %></option>
+                    <% } %>
                 </select>
                 
                 <div class="submit_button">
