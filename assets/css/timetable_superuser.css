@@ -56,6 +56,7 @@
     /* border: 1px solid black; */
 }
 .table_column{
+    cursor: pointer;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -83,6 +84,7 @@
     font-size: 1em;
     background-color: #d62648;
     color:white;
+    cursor: auto;
 }
 input,select{
     height:1.4em;
@@ -415,12 +417,19 @@ select{
 
 /* -----------------------ADD CLASS-------------------------------- */
 .add_container{
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: white;
-    border:0.3em solid black;
+    border:0.2em solid black;
     width: fit-content;
     padding: 1em;
+
+    /* ISHJOT'S CODE */ 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
 }
 
 .add_container>div{
@@ -463,6 +472,7 @@ select{
     border-color: white;
     border-radius: 8px;
     margin-right: 1em;
+    outline: none;
 }
 
 .cancel_button{
@@ -474,6 +484,26 @@ select{
     font-size: 0.9em;
     border-color: white;
     border-radius: 8px;
+    outline: none;
+}
+
+/* ISHJOT'S CODE */
+.detail{
+    width: 5em;
+}
+
+.del_btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.class_no_display{
+    display: none;
+}
+
+.class_yes_display{
+    display: flex;
+    justify-content: center;
 }
 
 
