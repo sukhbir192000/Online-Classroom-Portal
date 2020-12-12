@@ -462,14 +462,17 @@ li:hover{
 }
 
 .profile_pic{
-    align-items: center;
+    /* align-items: center;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     width: 10em;
     height: 10em;
     object-fit: unset;
-    z-index: 1;
+    z-index: 1; */
+    font-size: 8em;
+    color: #F1FAEE;
+
 }
 
 .pic_option{
@@ -547,12 +550,11 @@ li:hover{
     margin: 0.5em;
 }
 
-.dp_hover:hover{
+/* .dp_hover:hover{
     background-color: #000;
 }
 
 .dp_hover:hover .profile_pic{
-    /* background-color: #000; */
     opacity: 0.3;
 }
 
@@ -562,6 +564,10 @@ li:hover{
 
 .edit_button:hover{
     visibility: visible;
+} */
+
+.color_pic{
+    color: black;
 }
 
 .profile_options{
@@ -591,12 +597,16 @@ li:hover{
 .personal_info{
     display: flex;
     flex-direction: column;
+    width: 75%;
+    /* border:1px solid black; */
 }
 
 .edit_container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width:100%;
+    justify-content: space-between;
 }
 
 .editable_content{
@@ -607,14 +617,15 @@ li:hover{
 .edit_info_name{
     display: flex;
     flex-direction: column;
-    margin: 0.5em 2em;
+    margin: 0.5em 0em;
     padding: 1em;
+    padding-right:0 ;
 }
 
 .edit_info_field{
     display: flex;
     flex-direction: column;
-    margin: 0.5em 2em;
+    margin: 0.5em 0em;
     padding: 1em;
 }
 
@@ -635,7 +646,7 @@ li:hover{
 
 #personal_info{
     scroll-margin-top: 120px;
-    font-size: 3em;
+    font-size: 2.1em;
 }
 
 #attendance{
@@ -645,19 +656,20 @@ li:hover{
 
 #course{
     scroll-margin-top: 120px;
-    font-size: 3em;
+    font-size: 2.1em;
 }
 
 .profile_content{
     display: flex;
     justify-content: center;
     margin-top: 0.5em;
-    /* min-height: 52em; */
+    min-height: 52vh;
 }
 
 .course_content{
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .personal_option{
@@ -666,14 +678,23 @@ li:hover{
 }
 
 .personal_info_input{
-    box-shadow: gray 0.1em 0.1em 0.001em 0.01em;
-    box-sizing: border-box;
-    border: solid 0.01em #000;
     font-size: 1.2em;
-    margin: 0.95em;
-    outline: none;
+    margin: 0.95em;    
     padding: 0 0.5em;
-    width: 25vw;
+    width: 26vw;
+    outline: none;
+    border:none !important;
+    background-color:inherit !important;
+    border-bottom:solid rgb(80, 80, 80) 0.1em !important;
+}
+
+.personal_info_input_edit{
+    font-size: 1.2em;
+    margin: 0.9em;    
+    padding: 0 0.5em;
+    width: 26vw;
+    background-color: white;
+    border:1px solid black;
 }
 
 /* input{
@@ -738,7 +759,7 @@ input[type="number"]{
 .submit_container{
     justify-content: flex-end;
     display: flex;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .submit{
@@ -747,11 +768,10 @@ input[type="number"]{
     justify-content: center;
     margin: 0;
     margin-top: 1em;
-    font-size: 1.2em;
+    font-size: 1.1em;
     background-color: #1D3557;
     color: #F1FAEE;
     padding: 0.5em;
-    width: 10em;
 }
 
 .underline{
@@ -821,7 +841,8 @@ input[type="number"]{
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
-    margin: 0 4.55em;
+    padding:0.5em;
+    /* margin-right:8%; */
 }
 
 .heading_add_1{
@@ -832,14 +853,15 @@ input[type="number"]{
 }
 
 .add{
-    border: solid 0.1em #000;
+    /* border: solid 0.1em #000; */
     background-color: #1D3557;
     color: #F1FAEE;
-    font-size: 1em;
-    padding: 0.2em 0.5em;
+    font-size: 1.1em;
+    padding: 0.5em;
     text-align: center;
     margin: 0;
-    width: 8em;
+    min-width: 8em;
+    width: auto;
 }
 
 
@@ -847,7 +869,10 @@ input[type="number"]{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height: 52em;
+    width: 75%;
+    align-self: center;
+    min-height: 80vh;
+    /* border: 1px solid black; */
 }
 
 .courses_heading{
@@ -967,7 +992,7 @@ input[type="number"]{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 4em 5em;
+    margin: 4em 3em;
 }
 
 
@@ -977,13 +1002,20 @@ input[type="number"]{
     display: flex;
     flex-direction: column;
     font-size: 1.2em;
-    font-weight: bold;
     overflow-wrap: break-word;
+    margin-bottom: 1.8em;
 }
 
 .subject_name{
-    text-decoration: underline;
-    margin: 1em 1em 1em 0;
+    font-weight: bold;
+    /* text-decoration: underline; */
+    /* margin: 1em 1em 1em 0; */
+    text-transform: uppercase;
+}
+
+.sub_name>a{
+    font-size: 1em;
+    color: blue;
 }
 
 .sub{
@@ -1000,6 +1032,7 @@ input[type="number"]{
 .anchor_class{
     text-decoration: none;
 }
+
 
 
 .class_link{
@@ -1021,8 +1054,10 @@ input[type="number"]{
 
 .class_link_edit{
     background-color: #FFF;
-    border: solid 0.1em #000;
+    border: solid 1px #000;
     color: #1D3557;
+    padding:0.1em 0.2em;
+    margin-top: 0.5em;
     /* min-width: 5em; */
 }
 .class_link_edit:hover{
