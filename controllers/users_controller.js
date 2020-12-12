@@ -23,8 +23,7 @@ module.exports.destroySession = function (req, res) {
 }
 module.exports.getProfile = async function (req, res) {
     try {
-        let group = (await GroupModel.findById(res.locals.user.group)).groupNumber
-        let subGroup = (await SubGroupModel.findById(res.locals.user.subGroup)).subGroupNumber;
+        
         // console.log("myuser", res.locals.user);
         if(res.locals.user.isAdmin){
             return res.render('adminProfile',{
@@ -32,7 +31,9 @@ module.exports.getProfile = async function (req, res) {
             })
         }
         else{
-            res.render('profile', {
+            let group = (await GroupModel.findById(res.locals.user.group)).groupNumber
+            let subGroup = (await SubGroupModel.findById(res.locals.user.subGroup)).subGroupNumber;
+            return res.render('profile', {
                 title: "Profile",
                 group: group,
                 subGroup: subGroup
