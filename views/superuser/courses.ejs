@@ -108,9 +108,20 @@
                         <!-- <div class="year_study">1,2,3,4</div> -->
                         <div class="delete_icon"><i class="fas fa-trash"></i></div>
                     </div>
+                    <!-- <div class="offered_to_container">
+                        <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
+                        <div class="offered_to"><b>Offered to:</b> <% for(let i=0;i<course.offered_to.length;i++){ if(i!=0){ %>, <% } %><%= course.offered_to[i] %><% } %>&nbsp;&nbsp;&nbsp;<b>Year:</b>1,2,3</div>
+                        <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
+                    </div> -->
                     <div class="offered_to_container">
                         <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
-                        <div class="offered_to"><b>Offered to:</b> <% for(let i=0;i<course.offered_to.length;i++){ if(i!=0){ %>, <% } %><%= course.offered_to[i] %><% } %></div>
+                        <div class="offered_to">
+                            <div><b>Offered to:</b> <% for(let i=0;i<course.offered_to.length;i++){ if(i!=0){ %>, <% } %><%= course.offered_to[i] %><% } %></div>
+                            <!-- ------------------------------------CONDITION DAALO----------------------------------------------- -->
+                            <div class="year_show" ><b>Year:</b>&nbsp;1,2,3</div>
+                            <!-- --------------------------------------------------------------------------------------------------------- -->
+                        </div>
+                        
                         <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                     </div>
                 </div>
@@ -119,30 +130,32 @@
         </div>
     </div>
     <!-- -------------------------------YEAR SELECT---------------------------------------- -->
-    <!-- <div class="new_year_container" id="new_year_container_id" style="display: none;">
+    <div class="new_year_container new_year_select_class" id="new_year_container_id" style="display: none;">
         <div class="new_year_label">Select Year of Study</div>
-        <div class="new_year_select_container">
-            <div class="new_year_select">
-                <input type="checkbox" name="1">
-                <div>1st</div>
+        <form class="year_form" action="#">
+            <div class="new_year_select_container">
+                <div class="new_year_select">
+                    <input type="checkbox" name="1" >
+                    <div>1st</div>
+                </div>
+                <div class="new_year_select">
+                    <input type="checkbox" name="2" >
+                    <div>2nd</div>
+                </div>
+                <div class="new_year_select">
+                    <input type="checkbox" name="3" >
+                    <div>3rd</div>
+                </div>
+                <div class="new_year_select">
+                    <input type="checkbox" name="4" >
+                    <div>4th</div>
+                </div>
             </div>
-            <div class="new_year_select">
-                <input type="checkbox" name="2">
-                <div>2nd</div>
-            </div>
-            <div class="new_year_select">
-                <input type="checkbox" name="3">
-                <div>3rd</div>
-            </div>
-            <div class="new_year_select">
-                <input type="checkbox" name="4">
-                <div>4th</div>
-            </div>
-        </div>
-        <div class="new_year_button_container">
-            <div class="new_year_button">Submit</div>
-        </div>            
-    </div> -->
+            <div class="new_year_button_container">
+                <button type="button" class="new_year_button">Submit</div>
+            </div>    
+        </form>        
+    </div>
     <!-- ------------------------------------------------------------------------------------ -->
 
 </div>
