@@ -16,6 +16,7 @@ router.get('/auth/google/callback',passport.authenticate(
 router.get('/login', usersController.login);
 router.get('/logout',passport.checkAuthentication,usersController.destroySession);
 router.get('/profile/view',passport.checkAuthentication,passport.checkNotSuperUser,usersController.getProfile);
+router.post('/profile/edit',passport.checkAuthentication,passport.checkNotSuperUser,usersController.editProfile);
 router.get('/registerLocal',passport.checkAuthentication,firstTimeCheck.notRegistered,firstTimeCheck.registerPage);
 router.post('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerUser);
 router.get('/registerLocal/getGroups/:branch/:year',passport.checkAuthentication,firstTimeCheck.notRegistered,firstTimeCheck.getGroupNumber);

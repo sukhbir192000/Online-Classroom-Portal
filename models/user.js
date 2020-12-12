@@ -45,6 +45,12 @@ const userSchema = new mongoose.Schema({
     dept:{
         type:String
     },
+    contact:{
+        type:String
+    },
+    dob:{
+        type:String
+    },
     classSub: [classSubSchema]
 }, {
     timestamps: true

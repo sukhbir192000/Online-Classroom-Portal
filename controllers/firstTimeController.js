@@ -48,6 +48,8 @@ module.exports.registerPage=function(req,res){
     })
 }
 module.exports.registerUser=async function(req,res){
+    let user=await UserModel.findById(res.locals.user._id);
+    user.dept=req.body.branch;
     let req_class = await ClassModel.findOne({
         stream: req.body.branch,
         passingOutYear: parseInt(req.body.year)
@@ -60,7 +62,7 @@ module.exports.registerUser=async function(req,res){
         subGroupNumber: parseInt(req.body.labGroup),
         class: req_class._id
     });
-    let user=await UserModel.findById(res.locals.user._id);
+    
     user.sid=req.body.sid;
     user.name=req.body.firstName+" "+req.body.lastName;
     user.class=req_class._id;
