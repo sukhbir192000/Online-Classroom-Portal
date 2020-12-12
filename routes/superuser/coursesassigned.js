@@ -4,4 +4,7 @@ const Router=express.Router();
 Router.get('/',coursesController.courses_assgn);
 Router.post('/create',coursesController.courses_assgnCreate);
 Router.post('/delete',coursesController.courses_assgnDelete);
+Router.post('/form/courses',coursesController.getCourses);
+Router.post('/form/branches',coursesController.getBranches);
+Router.post('/form/groups',coursesController.getGroups);
 module.exports = Router;

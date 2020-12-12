@@ -30,6 +30,9 @@ const courseSchema = new mongoose.Schema({
     isActive: {
         type: Boolean
     },
+    year: [{
+        type: Number
+    }],
     dept:{
         type:String
     },
