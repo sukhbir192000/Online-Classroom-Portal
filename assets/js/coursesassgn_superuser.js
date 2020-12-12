@@ -147,7 +147,12 @@ course_form.addEventListener('change', function(e){
 })
 
 branch_form.addEventListener('change', function(e){
-    classTypeForm.disabled = false;
+    class_type_form.selectedIndex=0;
+    group_form.selectedIndex=0;
+    teacher_form.selectedIndex=0;
+    class_type_form.disabled = false;
+    group_form.disabled = true;
+    teacher_form.disabled = true;
 })
 
 class_type_form.addEventListener('change', function(e){
@@ -160,13 +165,40 @@ class_type_form.addEventListener('change', function(e){
                 url: "/superuser/coursesassigned/form/groups",
                 cache: false,
                 type: "POST",
-                data: {course: course_form.value, year: year_form.value},
+                data: {
+                    branch: branch_form.value,
+                    class_type: class_type_form.value
+                },
                 success: function(response){
-
+                    group_form.innerText = "";
+                    var opt = document.createElement('option');
+                    opt.innerText="---SELECT---";
+                    opt.value = "";
+                    opt.disabled = true;
+                    group_form.appendChild(opt);
+                    var opt_all = document.createElement('option');
+                    opt.innerText="All";
+                    opt.value = "All";
+                    group_form.appendChild(opt);
+                    for(let i=1;i<=response.group_num;i++){
+                        var opt = document.createElement('option');
+                        opt.value=i;
+                        opt.innerText=i;
+                        group_form.appendChild(opt);
+                    }
+                    group_form.selectedIndex=0;
+                    teacher_form.selectedIndex=0;
+                    group_form.disabled = false;
+                    teacher_form.disabled = true;
                 }
             })
         }
     })
+})
+
+group_form.addEventListener('change', function(e){
+    teacher_form.selectedIndex=0;
+    teacher_form.disabled = false;
 })
 
 // -----------------------------------DELETE ICON---------------------------------------------------
