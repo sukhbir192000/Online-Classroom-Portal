@@ -4,7 +4,7 @@
         <div class="navbar_profile">
             <div class="dp_container dp_hover">
                 <div class="img_container profile_pic">
-                    <img class="profile_pic" id="img" src="./imgs/Ishjot.jpg" alt="User Image">
+                    <img class="profile_pic" id="img" src="" alt="User Image">
                 </div>
                 <div class="edit_button pencil">
                     <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn"></i>
@@ -27,7 +27,7 @@
     <div class="content">
         <div class="dp_container dp_hover responsive_dp">
             <div class="img_container profile_pic">
-                <img class="profile_pic" id="img_responsive" src="./imgs/Ishjot.jpg" alt="User Image">
+                <img class="profile_pic" id="img_responsive" src="" alt="User Image">
             </div>
             <div class="edit_button pencil">
                 <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn_1"></i>
@@ -55,7 +55,9 @@
                         <div class="personal_option">
                             Branch:
                         </div>
-
+                        <div class="personal_option">
+                            Current Year:
+                        </div>
                         <div class="personal_option">
                             Date of Birth:
                         </div>
@@ -67,6 +69,8 @@
                         <input type="text" class="personal_info_input_css" disabled value="<%=user.name%>">
                         <input type="text" class="personal_info_input_css" disabled value="<%=user.sid%>">
                         <input type="text" class="personal_info_input_css " disabled value="<%=user.dept%>">
+                        <input type="text" id="user_currentYear" class="personal_info_input personal_info_input_css"
+                            disabled value="<%=user.currentYear%>">
                         <input type="date" id="user_date" class="personal_info_input personal_info_input_css" disabled
                             value="<%=user.dob%>">
                         <input type="text" id="user_contact" class="personal_info_input personal_info_input_css"
@@ -84,7 +88,7 @@
             </div>
         </div>
         <div class="underline"></div>
-        
+
         <div class="courses">
             <div class="courses_inner_container">
                 <div class="edit_info_name table_title">
@@ -99,10 +103,12 @@
                             <div class="heading_add" id="course_select_container">
                                 <select name="course_id" id="course_id" class="subject_id">
                                     <option selected disabled value="">Select Course ID</option>
-                                    <option value="ECN301">ECN301: COMPUTER ARCHITECTURE</option>
-                                    <option value="ECN302">ECN302: WIRELESS COMMUNICATION</option>
-                                    <option value="ECN303">ECN303: ADVANCED COMMUNICATION</option>
-                                    <option value="ECN304">ECN304: EMBEDDED SYSTEM</option>
+                                    <!-- <option value="ECN301">ECN301: COMPUTER ARCHITECTURE</option> -->
+                                    <%for(let course of courseList){%>
+                                        <option id="<%=course._id%>" value="<%=course.code%>">
+                                            <%=course.name%>
+                                        </option>
+                                        <%}%>
                                 </select>
                                 <button type="button" class="add" id="add_course">
                                     Add Course
@@ -125,7 +131,19 @@
                                 <div></div>
                             </div>
                             <div class="added_course" id="new_course">
+
                                 <div class="no_courses" id="course_none">No courses added!</div>
+                                <%for(let course of userCourseList){%>
+                                    <div class="course_container" id="<%=course._id%>">
+                                        <div class="subject_id_added">
+                                            <%=course.code%>
+                                        </div>
+                                        <div class="course_name course_name_styling">
+                                            <%=course.name%>
+                                        </div>
+                                        <i class="fa fa-trash trash_icon"></i>
+                                    </div>
+                                    <%}%>
                             </div>
                             <!-- </div> -->
                             <div class="heading_add_1" id="heading_add_1">

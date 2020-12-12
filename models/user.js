@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema({
     },
     dob:{
         type:String
+    },currentYear:{
+        type:String
     },
     classSub: [classSubSchema]
 }, {
