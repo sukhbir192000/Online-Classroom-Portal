@@ -52,61 +52,102 @@ document.addEventListener('mouseup',function(e){
 })
 
 // --------------------------------ACTIVE ICON-----------------------------------------------------
+var active_display = false;
 var activeIconFunction = function(activeIcon){
-    activeIcon.addEventListener("click",function(e){
+    activeIcon.addEventListener("mouseup",function(e){
         
         let state=activeIcon.classList.contains('icon_color_change');
 
-        // -------------------------------------------THEEK KRO--------------------------------------
-        // if(!state){
-        //     document.getElementById("new_year_container_id").style.display = "flex";
-        //     document.getElementsByClassName("box_layout")[0].style.opacity = "0.2";
-        //     var yearContainer = document.createElement("div");
-        //     yearContainer.innerHTML = `<div class="new_year_container" id="new_year_container_id" style="display: none;">
-        //         <div class="new_year_label">Select Year of Study</div>
-        //         <div class="new_year_select_container">
-        //             <div class="new_year_select">
-        //                 <input type="checkbox" name="1">
-        //                 <div>1st</div>
-        //             </div>
-        //             <div class="new_year_select">
-        //                 <input type="checkbox" name="2">
-        //                 <div>2nd</div>
-        //             </div>
-        //             <div class="new_year_select">
-        //                 <input type="checkbox" name="3">
-        //                 <div>3rd</div>
-        //             </div>
-        //             <div class="new_year_select">
-        //                 <input type="checkbox" name="4">
-        //                 <div>4th</div>
-        //             </div>
-        //         </div>
-        //         <div class="new_year_button_container">
-        //             <div class="new_year_button">Submit</div>
-        //         </div>            
-        //     </div>`
-        //     yearContainer.classList.add("new_year_select_class");
-        // }
-        // -----------------------------------------------------------------------------------------
-
-
-        $.ajax({
-            type:"POST",
-            url:"/superuser/courses/update",
-            data:{
-                id:activeIcon.parentNode.id,
-                state:state
-            },
-            success:function(response){
-              
-                activeIcon.classList.toggle("icon_color_change");
+        var submitFunction = function(e){
+            var years = [];
+            var year_selected = document.getElementsByClassName("new_year_select");
+            for(let i=0;i<year_selected.length;i++){
+                if(year_selected[i].children[0].checked){
+                    years.push(year_selected[i].children[0].name);
+                }
             }
-        })
+            $.ajax({
+                type:"POST",
+                url:"/superuser/courses/update",
+                data:{
+                    id:activeIcon.parentNode.id,
+                    state:state
+                },
+                // --------------------------------take data also-------------------------------
+                success:function(response){
+                    console.log("activated");
+                    activeIcon.classList.toggle("icon_color_change");
+                    year_select_container.style.display = "none";
+                    document.getElementsByClassName("box_layout")[0].style.opacity = "1";
+                    active_display = false;
+                    document.removeEventListener("click",displayFunction);
+                    var checkboxes = document.getElementsByClassName("new_year_select");
+                    for(let i=0;i<checkboxes.length; i++){
+                        checkboxes[i].children[0].checked = false;
+                    }
+                   
+                    var year_display = activeIcon.parentNode.parentNode.children[1].children[1].children[1];
+                    year_display.innerHTML = "<b>Year:&nbsp;<b>";
+                    for(let i=0;i<years.length;i++){
+                        year_display.innerHTML+=years[i];
+                        year_display.innerHTML+=","
+                    }
+                    year_display.innerHTML = year_display.innerHTML.slice(0,-1);
+
+                    year_display.style.display = "flex";
+                    document.getElementsByClassName("new_year_button")[0].removeEventListener("click",submitFunction);
+                }
+            })
+        }
+        if(!state){
+            console.log("hii");
+            document.addEventListener("mousedown",displayFunction);
+            document.getElementById("new_year_container_id").style.display = "flex";
+            document.getElementsByClassName("box_layout")[0].style.opacity = "0.2";
+            active_display = true;
+            // ---------------------------------SUBMIT YEAR------------------------------------------
+            document.getElementsByClassName("new_year_button")[0].addEventListener("click",submitFunction);
+        }
+        else{
+            $.ajax({
+                type:"POST",
+                url:"/superuser/courses/update",
+                data:{
+                    id:activeIcon.parentNode.id,
+                    state:state
+                },
+                success:function(response){
+                    activeIcon.classList.toggle("icon_color_change");
+                    activeIcon.parentNode.parentNode.children[1].children[1].children[1].style.display = "none";
+                }
+            })
+        }
+        
+        // -----------------------------------------------------------------------------------------
         
         
     })
 }
+
+
+var year_select_container = document.getElementById("new_year_container_id");
+var displayFunction = function(f){
+    var coordinates = year_select_container.getBoundingClientRect();
+    
+    if( active_display && (f.x<coordinates.left || f.x>coordinates.left+coordinates.width || f.y<coordinates.top || f.y>coordinates.top+coordinates.height)) {
+        console.log("hello");
+        year_select_container.style.display = "none";
+        document.getElementsByClassName("box_layout")[0].style.opacity = "1";
+        active_display = false;
+        document.removeEventListener("click",displayFunction);
+    }
+}
+
+
+
+
+
+
 
 var activeIconPrev = document.querySelectorAll(".active_icon");
 for(let i=0;i<activeIconPrev.length;i++){
@@ -197,9 +238,10 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 activeIconNew.classList.add("active_icon");
                 activeIconNew.innerHTML = "<i class='fas fa-check'></i>";
                 activeIconNew.style.visibility = "hidden";
+                var offered_to_div = document.createElement("div");
+                offered_to_div.classList.add("offered_to");
                 var offeredTo = document.createElement("div");
-                offeredTo.classList.add("offered_to");
-                offeredTo.innerHTML = "<b>Offered to:</b>";
+                offeredTo.innerHTML = "<b>Offered to:&nbsp;</b>";
                 var branch_names = document.getElementsByClassName("subject_select");
                 for(let i=0;i<branch_names.length;i++){
                     if(branch_names[i].children[0].checked){
@@ -209,12 +251,33 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 }
                 offeredTo.innerHTML = offeredTo.innerHTML.slice(0,-1);
 
+                var yearActive = false;
+                var yearShow = document.createElement("div");
+                yearShow.classList.add("year_show");
+                var year_display = document.getElementsByClassName("year_select");
+                yearShow.innerHTML = "<b>Year:&nbsp;<b>";
+                for(let i=0;i<year_display.length;i++){
+                    if(year_display[i].children[0].checked){
+                        yearActive = true;
+                        yearShow.innerHTML+=year_display[i].children[0].name;
+                        yearShow.innerHTML+=",";
+                    }
+                }
+                yearShow.innerHTML = yearShow.innerHTML.slice(0,-1);
+                if(yearActive){
+                    yearShow.style.display = "flex";
+                }
+                else{
+                    yearShow.style.display = "none";
+                }
+                offered_to_div.appendChild(offeredTo);
+                offered_to_div.appendChild(yearShow);
                 var deleteIconNew = document.createElement("div");
                 deleteIconNew.classList.add("delete_icon");
                 deleteIconNew.innerHTML = "<i class='fas fa-trash'></i>";
                 deleteIconNew.style.visibility = "hidden";
                 offeredToContainer.appendChild(activeIconNew);
-                offeredToContainer.appendChild(offeredTo);
+                offeredToContainer.appendChild(offered_to_div);
                 offeredToContainer.appendChild(deleteIconNew);
 
                 var subject = document.createElement("div");

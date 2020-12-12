@@ -220,11 +220,15 @@ input[type="checkbox"]{
 }
 .offered_to{
     /* margin-left: 2em; */
+    display: flex;
+    flex-direction: row;
     width:85%;
     margin:0.1em 1em;
     font-style: italic;
 }
-
+.year_show{
+    margin-left:1em;
+}
 
 
 .code_subject{
@@ -358,7 +362,7 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: column;
     width: fit-content;
-    border: 1px solid  #1D3557;
+    border: 1px solid black;
     background-color: white;
     margin:0;
 }
@@ -404,10 +408,10 @@ input[type="checkbox"]{
     color: white;
     margin-bottom: 1em;
     font-weight: bold;
+    font-size: 1em;
 }
 
 .new_year_select_class{
-    display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
