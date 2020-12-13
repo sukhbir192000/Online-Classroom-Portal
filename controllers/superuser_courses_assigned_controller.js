@@ -103,26 +103,30 @@ module.exports.courses_assgnDelete = async function(req,res){
         let course = await CourseModel.findById(req.body.courseId);
         let teacher = await UserModel.findById(course.teachers[req.body.index].teacher);
         let req_classSub = course.teachers[req.body.index].classSub, teacher_index;
+        
         for(let i=0;i<teacher.classSub.length;i++){
-            classSubObj = teacher.classSub[i];
-            if(classSubObj.course==req_classSub.course && 
-                classSubObj.class==req_classSub.class && 
-                classSubObj.group==req_classSub.group && 
-                classSubObj.subGroup==req_classSub.subGroup){
+            let classSubObj = teacher.classSub[i];
+            
+            if(String(classSubObj.course)==String(req_classSub.course) && 
+                String(classSubObj.class)==String(req_classSub.class) && 
+                String(classSubObj.group)==String(req_classSub.group) && 
+                String(classSubObj.subGroup)==String(req_classSub.subGroup)){
                     teacher_index = i;
                     break;
                 }
+                
         }
+        
         await LinkModel.findByIdAndDelete(teacher.classSub[teacher_index].link);
         teacher.classSub.splice(teacher_index, 1);
         course.teachers.splice(req.body.index,1);
         teacher.save();
         course.save();
-        res.status(200);
+        return res.status(200).json({});
     }
     catch(err){
         console.log("Error while deleting assigned teacher", err);
-        res.status(400);
+        return res.status(400).json({});
     }
 }
 
