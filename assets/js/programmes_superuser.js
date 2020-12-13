@@ -233,10 +233,10 @@ document.getElementById("button_submit").addEventListener("click", function (e) 
             deleteIcon.classList.add("delete_icon");
             deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
             deleteIconFunction(deleteIcon);
-            var editIcon = document.createElement("div");
-            editIcon.classList.add("edit_icon");
-            editIcon.innerHTML = "<i class='fas fa-edit'></i>";
-            editIconFunction(editIcon);
+            // var editIcon = document.createElement("div");
+            // editIcon.classList.add("edit_icon");
+            // editIcon.innerHTML = "<i class='fas fa-edit'></i>";
+            // editIconFunction(editIcon);
             var saveIcon = document.createElement("div");
             saveIcon.classList.add("save_icon");
             saveIcon.innerHTML = "<i class='fas fa-save'></i>";
@@ -245,7 +245,7 @@ document.getElementById("button_submit").addEventListener("click", function (e) 
             programme.appendChild(year);
             programme.appendChild(class_groups);
             programme.appendChild(lab_groups);
-            programme.appendChild(editIcon);
+            // programme.appendChild(editIcon);
             programme.appendChild(deleteIcon);
             programme.appendChild(saveIcon);
             document.querySelector(".programme_container").appendChild(programme);

@@ -82,7 +82,7 @@
                             <div class="sub_name">
                                 <input type="hidden" value="">
                                 <div class="subject_name"><%=classSub.course.name%> | <%=classSub.class.stream%> | <%if(classSub.group){%>Group <%=classSub.group.groupNumber%><%}else if(classSub.subGroup){%>Lab Group <%=classSub.subGroup.subGroupNumber%><%}%>:</div>
-                                <a target="_blank" href="<%=classSub.link%>" class="anchor_class"><div class="class_link"><%if(classSub.link){%><%=classSub.link%><%}else{%>No link provided<%}%></div></a>
+                                <a target="_blank" href="<%=classSub.link.link%>" class="anchor_class"><div class="class_link"><%if(classSub.link.link){%><%=classSub.link.link%><%}else{%>No link provided<%}%></div></a>
                             </div>
                             <%}%>
                             

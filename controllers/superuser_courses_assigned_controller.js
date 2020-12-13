@@ -1,7 +1,9 @@
 const CourseModel = require("../models/course");
 const ClassModel = require("../models/class");
-let UserModel = require("../models/user");
-const User = require("../models/user");
+const GroupModel = require("../models/group");
+const SubGroupModel = require("../models/sub-group");
+const UserModel = require("../models/user");
+const LinkModel = require('../models/link');
 
 module.exports.courses_assgn = async function(req,res){
     let courseList=await CourseModel.find({
@@ -29,8 +31,25 @@ module.exports.courses_assgn = async function(req,res){
 
 module.exports.courses_assgnCreate = async function(req,res){
     try{
+        console.log("Add request: ", req.body);
         let course = await CourseModel.findById(req.body.code_course);
         let teacher = await UserModel.findById(req.body.name_teacher);
+        if(req.body.group_class == "All"){
+            course.teachers.push({
+                teacher: req.body.name_teacher,
+                classSub: {
+                    course: req.body.code_course,
+                    class: req.body.choose_branch
+                },
+                classType: req.body.lecture_lab
+            });
+            const link = await LinkModel.create({link: ""});
+            teacher.classSub.push({
+                course: req.body.code_course,
+                class: req.body.choose_branch,
+                link: link._id
+            });
+        }
         if(req.body.lecture_lab == "Lecture"){
             course.teachers.push({
                 teacher: req.body.name_teacher,
@@ -41,11 +60,12 @@ module.exports.courses_assgnCreate = async function(req,res){
                 },
                 classType: req.body.lecture_lab
             });
-
+            const link = await LinkModel.create({link: ""});
             teacher.classSub.push({
                 course: req.body.code_course,
                 class: req.body.choose_branch,
-                group: req.body.group_class
+                group: req.body.group_class,
+                link: link._id
             });
         }
         else{
@@ -58,15 +78,16 @@ module.exports.courses_assgnCreate = async function(req,res){
                 },
                 classType: req.body.lecture_lab
             });
-
+            const link = await LinkModel.create({link: ""});
             teacher.classSub.push({
                 course: req.body.code_course,
                 class: req.body.choose_branch,
-                subGroup: req.body.group_class
+                subGroup: req.body.group_class,
+                link: link._id
             });
         }
-        course.save();
-        teacher.save();
+        await course.save();
+        await teacher.save();
         return res.redirect('back');
     }
     catch(err){
@@ -90,6 +111,7 @@ module.exports.courses_assgnDelete = async function(req,res){
                     break;
                 }
         }
+        await LinkModel.findByIdAndDelete(teacher.classSub[teacher_index].link);
         teacher.classSub.splice(teacher_index, 1);
         course.teachers.splice(req.body.index,1);
         teacher.save();
@@ -128,11 +150,15 @@ module.exports.getBranches = async function(req,res){
 }
 
 module.exports.getGroups = async function(req,res){
-    let req_class = await ClassModel.findById(req.body.branch);
-    let group_num;
-    if(req.body.class_type == "Lecture") group_num = req_class.totalGroups;
-    else group_num = req_class.totalSubGroups;
+    console.log(req.body);
+    let groupList = [];
+    if(req.body.class_type == "Lecture"){
+        groupList = await GroupModel.find({class: req.body.branch})
+    }
+    else{
+        groupList = await SubGroupModel.find({class: req.body.branch})
+    }
     return res.status(200).json({
-        group_num: group_num
+        groupList: groupList
     });
 }

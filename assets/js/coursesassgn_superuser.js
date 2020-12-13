@@ -133,8 +133,7 @@ course_form.addEventListener('change', function(e){
                 opt.innerText=obj.stream;
                 branch_form.appendChild(opt);
             }
-            if(response.branchList.length==1) branch_form.selectedIndex=1;
-            else branch_form.selectedIndex=0;
+            branch_form.selectedIndex=0;
             class_type_form.selectedIndex=0;
             group_form.selectedIndex=0;
             teacher_form.selectedIndex=0;
@@ -159,39 +158,32 @@ class_type_form.addEventListener('change', function(e){
     $.ajax({
         url: "/superuser/coursesassigned/form/groups",
         cache: false,
-        type: "GET",
+        type: "POST",
+        data: {
+            branch: branch_form.value,
+            class_type: class_type_form.value
+        },
         success: function(response){
-            $.ajax({
-                url: "/superuser/coursesassigned/form/groups",
-                cache: false,
-                type: "POST",
-                data: {
-                    branch: branch_form.value,
-                    class_type: class_type_form.value
-                },
-                success: function(response){
-                    group_form.innerText = "";
-                    var opt = document.createElement('option');
-                    opt.innerText="---SELECT---";
-                    opt.value = "";
-                    opt.disabled = true;
-                    group_form.appendChild(opt);
-                    var opt_all = document.createElement('option');
-                    opt.innerText="All";
-                    opt.value = "All";
-                    group_form.appendChild(opt);
-                    for(let i=1;i<=response.group_num;i++){
-                        var opt = document.createElement('option');
-                        opt.value=i;
-                        opt.innerText=i;
-                        group_form.appendChild(opt);
-                    }
-                    group_form.selectedIndex=0;
-                    teacher_form.selectedIndex=0;
-                    group_form.disabled = false;
-                    teacher_form.disabled = true;
-                }
-            })
+            group_form.innerText = "";
+            var opt = document.createElement('option');
+            opt.innerText="---SELECT---";
+            opt.value = "";
+            opt.disabled = true;
+            group_form.appendChild(opt);
+            var opt_all = document.createElement('option');
+            opt_all.innerText="All";
+            opt_all.value = "All";
+            group_form.appendChild(opt_all);
+            for(let group_obj of response.groupList){
+                var opt = document.createElement('option');
+                opt.value=group_obj._id;
+                opt.innerText=group_obj.groupNumber || group_obj.subGroupNumber;
+                group_form.appendChild(opt);
+            }
+            group_form.selectedIndex=0;
+            teacher_form.selectedIndex=0;
+            group_form.disabled = false;
+            teacher_form.disabled = true;
         }
     })
 })
@@ -239,53 +231,6 @@ for(let i=0;i<subjectsAdded.length;i++){
         noTeacher[i].style.display = "none";
     }
 }
-
-
-
-// ---------------------------------------------ADD TEACHER-----------------------------------------
-document.getElementById("button_submit").addEventListener("click", function(e){
-    // e.preventDefault();
-    // var container = document.createElement("div");
-    // container.classList.add("subject_container");
-    // var teacherName = document.createElement("div");
-    // teacherName.classList.add("teacher_name_main");
-    // teacherName.textContent = document.getElementById("name_teacher").value;
-    // var branch = document.createElement("div");
-    // branch.classList.add("branch_main");
-    // branch.textContent = document.getElementById("choose_branch").value;
-    // var classType = document.createElement("div");
-    // classType.classList.add("class_type");
-    // classType.textContent = document.getElementById("lecture_lab").value;
-    // var group = document.createElement("div");
-    // group.classList.add("sub_group");
-    // group.textContent = document.getElementById("group_class").value;
-    // var deleteIcon = document.createElement("div");
-    // deleteIcon.classList.add("delete_icon_subject");
-    // deleteIcon.innerHTML = "<i class='fas fa-trash'></i>";
-    // deleteIconFunction(deleteIcon);
-    // container.appendChild(teacherName);
-    // container.appendChild(branch);
-    // container.appendChild(classType);
-    // container.appendChild(group);
-    // container.appendChild(deleteIcon);
-    
-    
-    // // SEARCH AND ADD IN PROPER POSITION
-    // document.querySelector(".subjects_added").appendChild(container);
-    // if(document.querySelector(".subjects_added").childElementCount==3){
-    //     document.querySelector(".no_teacher").style.display = "none";
-    // }
-    // //----------------------------------------------------
-
-    
-    document.getElementById("code_course").selectedIndex = "0";
-    document.getElementById("choose_branch").selectedIndex = "0";
-    document.getElementById("lecture_lab").selectedIndex = "0";
-    document.getElementById("study_year").selectedIndex = "0";
-    document.getElementById("group_class").selectedIndex = "0";
-    // document.getElementById("branch_teacher").selectedIndex = "0";
-    document.getElementById("name_teacher").selectedIndex = "0";
-})
 
 
 var currentArrowIcon = null;

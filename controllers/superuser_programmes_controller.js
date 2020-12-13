@@ -1,4 +1,5 @@
 const ClassModel=require('../models/class');
+const Group = require('../models/group');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
 module.exports.programme=async function(req,res){
@@ -60,6 +61,8 @@ module.exports.programmeDelete=async function(req,res){
             })
         }
         else{
+            await GroupModel.deleteMany({class: req.body.id});
+            await SubGroupModel.deleteMany({class: req.body.id});
             classDeleted=await ClassModel.findByIdAndDelete(req.body.id);
         }
         return res.status(200).json({

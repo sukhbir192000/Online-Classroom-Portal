@@ -90,11 +90,11 @@ var activeIconFunction = function(activeIcon){
                     year_display.innerHTML = "<b>Year:&nbsp;<b>";
                     for(let i=0;i<years.length;i++){
                         year_display.innerHTML+=years[i];
-                        year_display.innerHTML+=","
+                        year_display.innerHTML+=", "
                     }
-                    year_display.innerHTML = year_display.innerHTML.slice(0,-1);
+                    year_display.innerHTML = year_display.innerHTML.slice(0,-2);
 
-                    year_display.style.display = "flex";
+                    year_display.classList.remove("hide");
                     document.getElementsByClassName("new_year_button")[0].removeEventListener("click",submitFunction);
                 }
             })
@@ -118,7 +118,7 @@ var activeIconFunction = function(activeIcon){
                 },
                 success:function(response){
                     activeIcon.classList.toggle("icon_color_change");
-                    activeIcon.parentNode.parentNode.children[1].children[1].children[1].style.display = "none";
+                    activeIcon.parentNode.parentNode.children[1].children[1].children[1].classList.add("hide");
                 }
             })
         }

@@ -38,7 +38,7 @@ module.exports.courseUpdate=async function(req,res){
     try{
         console.log(req.body);
         let course=await CourseModel.findById(req.body.id);
-        if(!req.body.state){
+        if(req.body.state=='false'){
             course.isActive = true;
             course.year = req.body.year
         }

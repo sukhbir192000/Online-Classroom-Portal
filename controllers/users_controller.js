@@ -4,6 +4,7 @@ const User = require('../models/user');
 const UserModel = require('../models/user');
 const CourseModel = require('../models/course');
 const Course = require('../models/course');
+const LinkModel=require('../models/link');
 module.exports.login = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/');
@@ -31,7 +32,8 @@ module.exports.getProfile = async function (req, res) {
         .populate('classSub.course')
         .populate('classSub.class')
         .populate('classSub.group')
-        .populate('classSub.subGroup');
+        .populate('classSub.subGroup')
+        .populate('classSub.link');
         console.log("teachercourses:",courseList.classSub);
         if (res.locals.user.isAdmin) {
             return res.render('adminProfile', {
@@ -129,13 +131,19 @@ module.exports.editCourses = async function (req, res) {
 }
 module.exports.editCourseLinks=async function(req,res){
     console.log(req.body);
-
-    const user=await UserModel.findById(res.locals.user._id);
-    for(let i=0;i<req.body.idList.length;i++){
-        user.classSub[req.body.idList[i]].link=req.body.updated[i];
+    try{
+        const user=await UserModel.findById(res.locals.user._id);
+        for(let i=0;i<req.body.idList.length;i++){
+            let link_obj = await LinkModel.findById(user.classSub[req.body.idList[i]].link);
+            link_obj.link = req.body.updated[i];
+            link_obj.save();
+        }
+        return res.status(200).json({
+            message:"changed courses"
+        })
     }
-    user.save();
-    return res.status(200).json({
-        message:"changed courses"
-    })
+    catch(err){
+        console.log(err);
+        return res.status(200);
+    }
 }
