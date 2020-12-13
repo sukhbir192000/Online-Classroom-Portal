@@ -27,9 +27,16 @@ module.exports.getProfile = async function (req, res) {
     try {
 
         // console.log("myuser", res.locals.user);
+        let courseList=await UserModel.findById(res.locals.user._id)
+        .populate('classSub.course')
+        .populate('classSub.class')
+        .populate('classSub.group')
+        .populate('classSub.subGroup');
+        console.log("teachercourses:",courseList.classSub);
         if (res.locals.user.isAdmin) {
             return res.render('adminProfile', {
-                title: "Profile"
+                title: "Profile",
+                courseList:courseList.classSub
             })
         }
         else {
@@ -38,9 +45,9 @@ module.exports.getProfile = async function (req, res) {
             })
             console.log("mycourses:", userCourseList);
             let courseList = await CourseModel.find({
-                isActive:true,
-                year:res.locals.user.currentYear,
-                offered_to:res.locals.user.dept
+                isActive: true,
+                year: res.locals.user.currentYear,
+                offered_to: res.locals.user.dept
             })
             let group = (await GroupModel.findById(res.locals.user.group)).groupNumber
             let subGroup = (await SubGroupModel.findById(res.locals.user.subGroup)).subGroupNumber;
@@ -64,9 +71,18 @@ module.exports.editProfile = async function (req, res) {
         if (req.xhr) {
             // console.log(req.body);
             let user = await User.findById(res.locals.user._id);
-            user.contact = req.body.contact;
-            user.dob = req.body.date;
-            user.currentYear = req.body.currentYear
+
+            if (req.body.contact) {
+                user.contact = req.body.contact;
+            }
+            if(req.body.date){
+                user.dob = req.body.date;
+            }
+            if(req.body.currentYear){
+                user.currentYear = req.body.currentYear;
+            }
+            
+            
 
             user.save();
             return res.response(200).json({
@@ -110,4 +126,16 @@ module.exports.editCourses = async function (req, res) {
         console.log("error", err);
         return res.redirect('back');
     }
+}
+module.exports.editCourseLinks=async function(req,res){
+    console.log(req.body);
+
+    const user=await UserModel.findById(res.locals.user._id);
+    for(let i=0;i<req.body.idList.length;i++){
+        user.classSub[req.body.idList[i]].link=req.body.updated[i];
+    }
+    user.save();
+    return res.status(200).json({
+        message:"changed courses"
+    })
 }

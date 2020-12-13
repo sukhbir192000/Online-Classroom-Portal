@@ -19,6 +19,7 @@ router.get('/profile/view',passport.checkAuthentication,passport.checkNotSuperUs
 router.post('/profile/edit',passport.checkAuthentication,passport.checkNotSuperUser,usersController.editProfile);
 router.post('/courses/edit',passport.checkAuthentication,passport.checkNotSuperUser,usersController.editCourses)
 router.get('/registerLocal',passport.checkAuthentication,firstTimeCheck.notRegistered,firstTimeCheck.registerPage);
+router.post('/courseLinks/edit',passport.checkAuthentication,passport.checkNotSuperUser,usersController.editCourseLinks);
 router.post('/registerLocal',passport.checkAuthentication,firstTimeCheck.registerUser);
 router.get('/registerLocal/getGroups/:branch/:year',passport.checkAuthentication,firstTimeCheck.notRegistered,firstTimeCheck.getGroupNumber);
 module.exports=router;
