@@ -126,7 +126,7 @@ module.exports.courses_assgnDelete = async function(req,res){
     }
     catch(err){
         console.log("Error while deleting assigned teacher", err);
-        return res.status(400).json({});
+        return res.status(400);
     }
 }
 
