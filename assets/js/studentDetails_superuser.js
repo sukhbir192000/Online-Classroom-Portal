@@ -46,11 +46,6 @@ trashIcon.forEach((trash, j)=>{
 });
 
 
-const studentDetail = document.querySelectorAll('.student_details');
-studentDetail[0].style.display = 'flex';
-studentDetail[0].style.display = 'none';
-
-
 editBtn.forEach((edit, i)=>{
     deletedCourse = [];
     const studentAttribute = document.querySelectorAll('.students')[i];
@@ -248,7 +243,7 @@ function cancelEdit(i){
 list.forEach((student, i)=>{
     student.addEventListener('click', (e)=>{
         const dispDet = document.querySelectorAll('.student_details');
-        if(dispDet[i].style.display == 'none'){
+        if(dispDet[i].style.display=="" || dispDet[i].style.display == 'none'){
             dispDet[i].style.display = 'flex';
             edits[i].style.visibility = 'visible';
             edits[i].children[0].children[0].style.visibility = 'visible';
