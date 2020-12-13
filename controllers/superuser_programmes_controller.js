@@ -74,3 +74,8 @@ module.exports.programmeDelete=async function(req,res){
         return res.status(400);
     }
 }
+module.exports.studentDetails=function(req,res){
+    return res.render('superuser/studentDetails',{
+        title:"Student Details"
+    });
+}
