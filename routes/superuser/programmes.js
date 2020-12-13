@@ -4,5 +4,5 @@ const Router=express.Router();
 Router.get('/',programmesController.programme);
 Router.post('/create',programmesController.programmeCreate);
 Router.post('/delete',programmesController.programmeDelete);
-Router.post('/update',programmesController.programmeUpdate);
+// Router.post('/update',programmesController.programmeUpdate);
 module.exports = Router;

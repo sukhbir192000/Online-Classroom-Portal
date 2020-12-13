@@ -35,17 +35,18 @@ for(let i=0;i<10;i++){
 
 const mainContent = document.querySelector('.main_content');
 const table = document.querySelector('.table');
+const rows = document.querySelectorAll('.table_row');
 const tableBox = document.querySelectorAll('.table_column');
 const modifyBox = document.querySelectorAll('.add_container');
 const addButton = document.querySelectorAll('.add_button');
-const cancelButton = document.querySelector('.cancel_button');
+const cancelButton = document.querySelectorAll('.cancel_button');
 const subCode = document.querySelectorAll('.subject_code');
 const typeClass = document.querySelectorAll('.class_type');
 const group = document.querySelectorAll('.lab_group');
 const duration = document.querySelectorAll('.duration');
 const trash = document.querySelector('.del_btn');
 
-let boxNumber = -1;
+var boxNumber = -1;
 
 tableBox.forEach((box, i)=>{
     box.addEventListener('mouseover', (e)=>{
@@ -99,6 +100,7 @@ tableBox.forEach((box, i)=>{
     });
 })
 
+
 tableBox.forEach((box, i)=>{
     box.addEventListener('mouseout', (e)=>{
         if(!box.classList.contains('table_heading') && box.innerHTML != ''){
@@ -120,7 +122,30 @@ addButton[1].addEventListener('click', (e)=>{
     let classDuration = duration[1].children[1].value;
     if(!tableBox[boxNumber].classList.contains('table_heading')){
         if(tableBox[boxNumber].innerHTML == ""){
-            tableBox[boxNumber].innerHTML = `<div style = "display:flex; flex-direction: column; font-size: 0.8em"><div class = "class_yes_display">${classCode}</div> <div class = "class_no_display">${classType}</div></div>`;
+            let num = boxNumber;
+            var rowNum = -1;
+            let alertGenerated = false;
+            for(let j = 0; j<rows.length; j++){
+                if(num<8*(j+1)) {
+                    rowNum = j;
+                    break;
+                }
+            }
+            var heightMax =(tableBox[boxNumber].offsetHeight);
+            for(let j = 0; j<classDuration; j++){
+                if(rowNum+j < rows.length){
+                    if(rows[rowNum+j].children[0].innerHTML == '16:00 - 17:00' && j !=classDuration-1){
+                        alert("Cannot Hold Class After 5pm!");
+                        alertGenerated = true;
+                    }
+                }
+            }
+            if(!alertGenerated){
+                tableBox[boxNumber].innerHTML = `<div style = "display:flex; flex-direction: column; font-size: 0.8em"><div class = "class_yes_display">${classCode}</div> <div class = "class_no_display">${classType}</div></div>`;
+                rows[rowNum].style.maxHeight = `${heightMax}`;
+                tableBox[boxNumber].style.height = classDuration*(tableBox[boxNumber].offsetHeight);
+                tableBox[boxNumber].style.zIndex = '1';
+            }
         }
         
     }
@@ -129,11 +154,16 @@ addButton[1].addEventListener('click', (e)=>{
     modifyBox[1].style.display = 'none';
 });
 
-cancelButton.addEventListener('click', (e)=>{
-    modifyBox[1].style.display = 'none';
-});
+cancelButton.forEach((cancel,i)=>{
+    cancel.addEventListener('click', (e)=>{
+        cancel.parentNode.parentNode.style.display = 'none';
+        mainContent.style.filter = 'blur(0)';
+        table.style.filter = 'opacity(1)';
+    });
+})
 
 trash.addEventListener('click', (e)=>{
+    let classDuration = duration[0].children[1].innerHTML;
     modifyBox[0].style.display = 'none';
     subCode[0].children[1].innerHTML = '';
     typeClass[0].children[1].innerHTML = '';
@@ -142,6 +172,7 @@ trash.addEventListener('click', (e)=>{
     tableBox[boxNumber].innerHTML = '';
     mainContent.style.filter = 'blur(0)';
     table.style.filter = 'opacity(1)';
+    tableBox[boxNumber].style.height = (tableBox[boxNumber].offsetHeight)/classDuration;
 });
 
 document.addEventListener('click', (e)=>{

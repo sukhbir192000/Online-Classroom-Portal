@@ -53,6 +53,7 @@
     flex-direction: row;
     height: 4em;
     overflow-y: visible;
+    max-height: 4em;
     /* border: 1px solid black; */
 }
 .table_column{
@@ -487,14 +488,14 @@ select{
     outline: none;
 }
 
-/* ISHJOT'S CODE */
+/* --------- ISHJOT'S CODE ----------- */
 .detail{
     width: 5em;
 }
 
 .del_btn{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .class_no_display{

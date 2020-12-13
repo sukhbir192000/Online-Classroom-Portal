@@ -175,8 +175,11 @@ var deleteIconFunction = function (deleteIcon) {
             data:{
                 id:deleteButton.parentNode.id
             },
-            success:function(){
-                deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
+            success:function(response){
+                if(response.err){
+                    alert("Students already enrolled in class. Cannot delete!!")
+                }
+                else deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
             }
         })
         

@@ -71,9 +71,9 @@ var activeIconFunction = function(activeIcon){
                 url:"/superuser/courses/update",
                 data:{
                     id:activeIcon.parentNode.id,
-                    state:state
+                    state:state,
+                    year:years
                 },
-                // --------------------------------take data also-------------------------------
                 success:function(response){
                     console.log("activated");
                     activeIcon.classList.toggle("icon_color_change");
@@ -216,6 +216,10 @@ document.getElementById("button_submit").addEventListener("click", function(e){
             offered_to.push(branch_input.children[i].children[0].name);
         }
     }
+    let year_list = [], year_input = $(".year_select");
+    for(let i=0;i<year_input.length;i++){
+        if(year_input[i].children[0].checked) year_list.push(i+1);
+    }
     $.ajax({
         url: "/superuser/courses/create",
         type: "POST",
@@ -225,7 +229,8 @@ document.getElementById("button_submit").addEventListener("click", function(e){
             credits: document.getElementById("subject_credits").value,
             isActive: document.getElementById("active_course").checked,
             dept:document.getElementById('top_banner_dept').value,
-            offered_to: offered_to
+            offered_to: offered_to,
+            year: year_list
         },
         success: function(response){
             console.log(response);

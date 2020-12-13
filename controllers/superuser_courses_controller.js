@@ -36,8 +36,16 @@ module.exports.courseDelete=async function(req,res){
 }
 module.exports.courseUpdate=async function(req,res){
     try{
+        console.log(req.body);
         let course=await CourseModel.findById(req.body.id);
-        course.isActive=!course.isActive;
+        if(!req.body.state){
+            course.isActive = true;
+            course.year = req.body.year
+        }
+        else{
+            course.isActive = false;
+            course.year = [];
+        }
         course.save();
         return res.status(200).json({
             course:course
