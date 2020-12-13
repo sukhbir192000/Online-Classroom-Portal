@@ -23,7 +23,7 @@
                 <label class="lab_groups_label">Total Lab Groups:</label>
                 <input type="number" name="lab_groups" id="lab_groups" min="1" required><br><br>
                 <div class="submit_button">
-                    <button type="submit" id="button_submit">Add Programme</button>
+                    <button type="button" id="button_submit">Add Programme</button>
                 </div>
             </form>
         </div>
@@ -33,7 +33,7 @@
                 <div class="year_heading">Year</div>
                 <div class="groups_heading">Class groups</div>
                 <div class="sub_groups_heading">Lab Groups</div>
-                <div class="edit_icon" style="visibility: hidden;"><i class="fas fa-edit"></i></div>
+                <!-- <div class="edit_icon" style="visibility: hidden;"><i class="fas fa-edit"></i></div> -->
                 <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>
                 <div class="save_icon" ><i class="fas fa-save"></i></div>
             </div>
@@ -44,7 +44,7 @@
                     <div class="year_main"><%=program.passingOutYear%></div>
                     <div class="groups_main"><%=program.totalGroups%></div>
                     <div class="sub_groups_main"><%=program.totalSubGroups%></div>
-                    <div class="edit_icon"><i class="fas fa-edit"></i></div>
+                    <!-- <div class="edit_icon"><i class="fas fa-edit"></i></div> -->
                     <div class="delete_icon"><i class="fas fa-trash"></i></div>
                     <div class="save_icon" ><i class="fas fa-save"></i></div>
                 </div>

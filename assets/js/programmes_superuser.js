@@ -42,88 +42,88 @@ document.querySelector(".add").addEventListener('click', function (e) {
 
 
 // -------------------------------------EDIT ICON-----------------------------------------------------
-var currentEditIcon = null, arr = [];
-var editIconFunction = function (editIcon) {
-    editIcon.addEventListener("click", function (e) {
-        if (currentEditIcon != null) {
-            currentEditIcon.style.display = "flex";
-            currentEditIcon.parentNode.children[5].style.visibility = "visible";
-            currentEditIcon.parentNode.children[6].style.display = "none";
-            currentEditIcon.parentNode.children[0].textContent = arr[0];
-            currentEditIcon.parentNode.children[1].textContent = arr[1];
-            currentEditIcon.parentNode.children[2].textContent = arr[2];
-            currentEditIcon.parentNode.children[3].textContent = arr[3];
-            currentEditIcon.parentNode.children[0].contentEditable = "false";
-            currentEditIcon.parentNode.children[0].classList.remove("content_color");
-            currentEditIcon.parentNode.children[0].style.border = "none";
-            currentEditIcon.parentNode.children[1].contentEditable = "false";
-            currentEditIcon.parentNode.children[1].classList.remove("content_color");
-            currentEditIcon.parentNode.children[1].style.border = "none";
-            currentEditIcon.parentNode.children[2].contentEditable = "false";
-            currentEditIcon.parentNode.children[2].classList.remove("content_color");
-            currentEditIcon.parentNode.children[2].style.border = "none";
-            currentEditIcon.parentNode.children[3].contentEditable = "false";
-            currentEditIcon.parentNode.children[3].classList.remove("content_color");
-            currentEditIcon.parentNode.children[3].style.border = "none";
-            currentEditIcon = null;
-            arr = [];
-        }
-        this.style.display = "none";
-        this.parentNode.children[5].style.visibility = "hidden";
-        this.parentNode.children[6].style.display = "flex";
-        arr.push(this.parentNode.children[0].textContent);
-        arr.push(this.parentNode.children[1].textContent);
-        arr.push(this.parentNode.children[2].textContent);
-        arr.push(this.parentNode.children[3].textContent);
-        this.parentNode.children[0].contentEditable = "true";
-        this.parentNode.children[0].classList.add("content_color");
-        this.parentNode.children[0].style.border = "1px solid black";
-        this.parentNode.children[1].contentEditable = "true";
-        this.parentNode.children[1].classList.add("content_color");
-        this.parentNode.children[1].style.border = "1px solid black";
-        this.parentNode.children[2].contentEditable = "true";
-        this.parentNode.children[2].classList.add("content_color");
-        this.parentNode.children[2].style.border = "1px solid black";
-        this.parentNode.children[3].contentEditable = "true";
-        this.parentNode.children[3].classList.add("content_color");
-        this.parentNode.children[3].style.border = "1px solid black";
-        currentEditIcon = editIcon;
-    })
-}
+// var currentEditIcon = null, arr = [];
+// var editIconFunction = function (editIcon) {
+//     editIcon.addEventListener("click", function (e) {
+//         if (currentEditIcon != null) {
+//             currentEditIcon.style.display = "flex";
+//             currentEditIcon.parentNode.children[5].style.visibility = "visible";
+//             currentEditIcon.parentNode.children[6].style.display = "none";
+//             currentEditIcon.parentNode.children[0].textContent = arr[0];
+//             currentEditIcon.parentNode.children[1].textContent = arr[1];
+//             currentEditIcon.parentNode.children[2].textContent = arr[2];
+//             currentEditIcon.parentNode.children[3].textContent = arr[3];
+//             currentEditIcon.parentNode.children[0].contentEditable = "false";
+//             currentEditIcon.parentNode.children[0].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[0].style.border = "none";
+//             currentEditIcon.parentNode.children[1].contentEditable = "false";
+//             currentEditIcon.parentNode.children[1].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[1].style.border = "none";
+//             currentEditIcon.parentNode.children[2].contentEditable = "false";
+//             currentEditIcon.parentNode.children[2].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[2].style.border = "none";
+//             currentEditIcon.parentNode.children[3].contentEditable = "false";
+//             currentEditIcon.parentNode.children[3].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[3].style.border = "none";
+//             currentEditIcon = null;
+//             arr = [];
+//         }
+//         this.style.display = "none";
+//         this.parentNode.children[5].style.visibility = "hidden";
+//         this.parentNode.children[6].style.display = "flex";
+//         arr.push(this.parentNode.children[0].textContent);
+//         arr.push(this.parentNode.children[1].textContent);
+//         arr.push(this.parentNode.children[2].textContent);
+//         arr.push(this.parentNode.children[3].textContent);
+//         this.parentNode.children[0].contentEditable = "true";
+//         this.parentNode.children[0].classList.add("content_color");
+//         this.parentNode.children[0].style.border = "1px solid black";
+//         this.parentNode.children[1].contentEditable = "true";
+//         this.parentNode.children[1].classList.add("content_color");
+//         this.parentNode.children[1].style.border = "1px solid black";
+//         this.parentNode.children[2].contentEditable = "true";
+//         this.parentNode.children[2].classList.add("content_color");
+//         this.parentNode.children[2].style.border = "1px solid black";
+//         this.parentNode.children[3].contentEditable = "true";
+//         this.parentNode.children[3].classList.add("content_color");
+//         this.parentNode.children[3].style.border = "1px solid black";
+//         currentEditIcon = editIcon;
+//     })
+// }
 
-document.addEventListener("click", function (e) {
-    if (currentEditIcon != null) {
-        var rect = currentEditIcon.parentNode.getBoundingClientRect();
-        if ((e.x < rect.left || e.x > rect.left + rect.width || e.y < rect.top || e.y > rect.top + rect.height)) {
-            currentEditIcon.style.display = "flex";
-            currentEditIcon.parentNode.children[5].style.visibility = "visible";
-            currentEditIcon.parentNode.children[6].style.display = "none";
-            currentEditIcon.parentNode.children[0].textContent = arr[0];
-            currentEditIcon.parentNode.children[1].textContent = arr[1];
-            currentEditIcon.parentNode.children[2].textContent = arr[2];
-            currentEditIcon.parentNode.children[3].textContent = arr[3];
-            currentEditIcon.parentNode.children[0].contentEditable = "false";
-            currentEditIcon.parentNode.children[0].classList.remove("content_color");
-            currentEditIcon.parentNode.children[0].style.border = "none";
-            currentEditIcon.parentNode.children[1].contentEditable = "false";
-            currentEditIcon.parentNode.children[1].classList.remove("content_color");
-            currentEditIcon.parentNode.children[1].style.border = "none";
-            currentEditIcon.parentNode.children[2].contentEditable = "false";
-            currentEditIcon.parentNode.children[2].classList.remove("content_color");
-            currentEditIcon.parentNode.children[2].style.border = "none";
-            currentEditIcon.parentNode.children[3].contentEditable = "false";
-            currentEditIcon.parentNode.children[3].classList.remove("content_color");
-            currentEditIcon.parentNode.children[3].style.border = "none";
-            currentEditIcon = null;
-            arr = [];
-        }
-    }
-})
+// document.addEventListener("click", function (e) {
+//     if (currentEditIcon != null) {
+//         var rect = currentEditIcon.parentNode.getBoundingClientRect();
+//         if ((e.x < rect.left || e.x > rect.left + rect.width || e.y < rect.top || e.y > rect.top + rect.height)) {
+//             currentEditIcon.style.display = "flex";
+//             currentEditIcon.parentNode.children[5].style.visibility = "visible";
+//             currentEditIcon.parentNode.children[6].style.display = "none";
+//             currentEditIcon.parentNode.children[0].textContent = arr[0];
+//             currentEditIcon.parentNode.children[1].textContent = arr[1];
+//             currentEditIcon.parentNode.children[2].textContent = arr[2];
+//             currentEditIcon.parentNode.children[3].textContent = arr[3];
+//             currentEditIcon.parentNode.children[0].contentEditable = "false";
+//             currentEditIcon.parentNode.children[0].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[0].style.border = "none";
+//             currentEditIcon.parentNode.children[1].contentEditable = "false";
+//             currentEditIcon.parentNode.children[1].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[1].style.border = "none";
+//             currentEditIcon.parentNode.children[2].contentEditable = "false";
+//             currentEditIcon.parentNode.children[2].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[2].style.border = "none";
+//             currentEditIcon.parentNode.children[3].contentEditable = "false";
+//             currentEditIcon.parentNode.children[3].classList.remove("content_color");
+//             currentEditIcon.parentNode.children[3].style.border = "none";
+//             currentEditIcon = null;
+//             arr = [];
+//         }
+//     }
+// })
 
-var editIconPrev = document.querySelectorAll(".edit_icon");
-for (let i = 0; i < editIconPrev.length; i++) {
-    editIconFunction(editIconPrev[i]);
-}
+// var editIconPrev = document.querySelectorAll(".edit_icon");
+// for (let i = 0; i < editIconPrev.length; i++) {
+//     editIconFunction(editIconPrev[i]);
+// }
 
 
 // -----------------------------------------SAVE ICON--------------------------------------------

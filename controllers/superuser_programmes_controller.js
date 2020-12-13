@@ -54,7 +54,7 @@ module.exports.programmeCreate=async function(req,res){
 module.exports.programmeDelete=async function(req,res){
     try{
         let classDeleted=await ClassModel.findById(req.body.id);
-        if(classDeleted.students.length>0){
+        if(classDeleted.students && classDeleted.students.length>0){
             return res.status(200).json({
                 err: true
             })
