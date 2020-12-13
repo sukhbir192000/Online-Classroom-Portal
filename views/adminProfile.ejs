@@ -43,11 +43,9 @@
                         
                         <div class="edit_info_field">
                             <div class="personal_option">
-                                First Name:
+                                Name:
                             </div>
-                            <div class="personal_option">
-                                Last Name:
-                            </div>
+                          
                             <div class="personal_option">
                                 Department:
                             </div>
@@ -56,10 +54,10 @@
                             </div>
                         </div>
                         <div class="edit_info_name">
-                            <input type="text" class="personal_info_input" disabled>
-                            <input type="text" class="personal_info_input" disabled>
-                            <input type="text" class="personal_info_input" disabled value="Electronics & Communication">
-                            <input type="text" class="personal_info_input" id="contact_id" disabled>
+                            <input type="text" class="personal_info_input" disabled value="<%=user.name%>">
+                         
+                            <input type="text" class="personal_info_input" disabled value="<%=user.dept%>">
+                            <input type="text" class="personal_info_input" id="contact_id"  value="<%=user.contact%>" disabled>
                             <div class="submit_container">
                                 <input type="submit" class="submit" value="Edit Information" id="submit_personal">
                             </div>
@@ -78,28 +76,21 @@
                     <input type="hidden">
                 </form>
                 <div class="course_content">
+                        
+                        <div class="course_details">
+                            <%for(let classSub of courseList){%>
+                            <div class="sub_name">
+                                <input type="hidden" value="">
+                                <div class="subject_name"><%=classSub.course.name%> | <%=classSub.class.stream%> | <%if(classSub.group){%>Group <%=classSub.group.groupNumber%><%}else if(classSub.subGroup){%>Lab Group <%=classSub.subGroup.subGroupNumber%><%}%>:</div>
+                                <a target="_blank" href="<%=classSub.link%>" class="anchor_class"><div class="class_link"><%if(classSub.link){%><%=classSub.link%><%}else{%>No link provided<%}%></div></a>
+                            </div>
+                            <%}%>
+                            
+                        </div>
                         <div class="heading_add">
                             <button value="Edit Links" type = "button" class="add" id="add_course">
                                 Edit Links
                             </button> 
-                        </div>
-                        <div class="course_details">
-                            <div class="sub_name">
-                                <div class="subject_name">Information And Technology:</div>
-                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="b z vhq2fz cy _class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                            </div>
-                            <div class="sub_name">
-                                <div class="subject_name">Information And Technology:</div>
-                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                            </div>
-                            <div class="sub_name">
-                                <div class="subject_name">Information And Technology:</div>
-                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                            </div>
-                            <div class="sub_name">
-                                <div class="subject_name">Computer Architecture:</div>
-                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                            </div>
                         </div>
                         
                 </div>      

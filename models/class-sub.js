@@ -17,5 +17,8 @@ module.exports = new mongoose.Schema({
     subGroup: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubGroup'
+    },
+    link:{
+        type:String
     }
 });
