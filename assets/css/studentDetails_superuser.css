@@ -1,0 +1,685 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color:#F1FAEE; 
+    color: black;
+    font-size: 16px;
+    font-family:Helvetica, Arial, sans-serif;
+}
+.bgcolor_welcome_user{
+    background-color: #1D3557;
+}
+.bgcolor_banner{
+    background-color:#72afd5;
+}
+.color_white{
+    color:white;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index:10;
+}
+
+.welcome_user{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.welcome_user_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 2em;
+}
+.hamburger_icon{
+    visibility: hidden;
+    cursor: pointer;
+}
+.profile_icon{
+    display: flex;
+    padding-right:1em;
+    padding-top:0.2em;
+    padding-bottom: 0.2em;
+    font-size: 1.7em;
+    cursor: pointer;
+}
+
+.welcome_user_content{
+    padding: 0.3em 1em 0.3em 0;
+    font-size: 1.3em;
+}
+
+
+.banner{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index:10;
+}
+.banner_content{
+    position:relative;
+    padding: 0.6em;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: rgb(30, 43, 71);
+    text-transform: uppercase;
+}
+.profile{
+    visibility: hidden;
+    position: fixed;
+    top:2.5em;
+    right:3.6em;
+    width:auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: flex-end;
+    border: 2px solid gray;
+    cursor: pointer;
+}
+.profile div{
+    display: flex;
+    padding:0.5em;
+    margin:0;
+    justify-content: center;
+}
+.profile div:hover{
+    background-color: #1D3557;
+    color:white;
+}
+.show{
+    visibility: visible;
+}
+
+
+
+/* --------------------TABLET DEVICES------------------------------------ */
+@media(min-width: 767px) and (max-width: 991px){
+    .banner_content{
+        font-size: 1em;
+    }
+    .welcome_user{
+        justify-content: space-between;
+    }
+    .welcome_user_heading{
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .hamburger_icon{
+        visibility: visible;
+        padding: 0.3em 0 0.3em 1em;
+    }
+    .welcome_user_content{
+        font-size: 1em;
+        padding-right:0.2em ;
+    }
+    .profile{
+        top:2em;
+    }
+    .profile_icon{
+        font-size: 1.5em;
+        display: flex;
+        padding: 0.2em 1em;
+    }
+}
+
+
+
+/* -----------------------MOBILE DEVICES--------------------------------- */
+@media(max-width: 767px){
+    .banner_content{
+        font-size:0.8em;
+    }
+    .welcome_user_content{
+        font-size: 1em;
+        visibility: hidden;
+    }
+    .welcome_user{
+        justify-content: space-between;
+    }
+    .welcome_user_heading{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .profile_icon{
+        font-size: 1.5em;
+        display: flex;
+        padding: 0.2em 0.5em;
+    }
+    .hamburger_icon{
+        visibility: visible;
+        padding: 0.3em 0 0.3em 0.5em;
+    }
+    .profile{
+        top:2em;
+        right:3.2em;
+    }
+    .profile>div{
+        font-size: 0.9em;
+    }
+}
+
+
+
+
+/* NAVBAR CSS */
+
+.navbar{
+    height: 100vh;
+    position: fixed;
+    top:5.4em;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    z-index:11;
+    overflow: auto;
+    padding-bottom: 8em;
+}
+
+
+.nav_icon{
+    padding: 1.2em 0.8em;
+    color: white;
+}
+
+.nav_content{
+    width: 0;
+    overflow: hidden;
+    transition: all 0.3s ;
+}
+
+.navbar:hover .nav_content{
+    width: auto;
+    min-width: 9em;
+    overflow: visible;
+    padding: 1.2em 1.5em 1.2em 0;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar a{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.navbar a:hover .nav_content{
+    font-weight: 600;
+    transform: scale(1.01);
+}
+
+.navbar a:hover .nav_icon{
+    transform: scale(1.01);
+    transition: all 0.3s;
+}
+
+
+#black_screen{
+    transition: all 0.3s;
+}
+
+.navbar:hover ~ #black_screen{
+    position: fixed;
+    top: 5.4em;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index:5;
+    opacity:0.5;
+    background-color: black;
+}
+
+.navbar a:active{
+    background-color: white;
+}
+
+.navbar a:active .nav_content{
+    color: #1D3557;
+}
+
+.navbar a:active .nav_icon{
+    color:#1D3557;
+}
+
+
+.navbar a:target{
+    background-color: #F1FAEE;
+}
+
+.navbar a:target .nav_content{
+    color: #1D3557;
+}
+
+.navbar a:target .nav_icon{
+    color:#1D3557;
+}
+.navbar::-webkit-scrollbar{
+    width:8px;
+}
+.navbar::-webkit-scrollbar-track {
+    background: rgb(231, 232, 233);      
+}
+.navbar::-webkit-scrollbar-thumb {
+    background-color: rgb(189, 187, 187);    
+    border-radius: 20px;        
+}
+
+
+/* --------------------------TABLET DEVICES------------------------------- */
+@media(min-width: 767px) and (max-width: 991px){
+    .navbar{
+        width:0;
+        overflow: hidden;
+    
+    }
+    .show_navbar{
+        overflow-y: auto;
+        width:auto;
+        height: 95%;
+        position: fixed;
+        top:1.9em;
+        left:0;
+        display: flex;
+        flex-direction: column;
+        z-index:11;
+        transition: all 0.3s ; 
+        padding-bottom: 8em; 
+    }
+    .nav_icon{
+        padding: 1.1em 0.8em;
+        color: white;
+    }
+    .nav_content, .navbar:hover .nav_content{
+        width: auto;
+        min-width: 9em;
+        padding: 1.2em 1.5em 1.2em 0;
+        font-size: 1.1em;
+        color: white;
+        text-decoration: none;
+        transition: none;
+    }
+
+    .show_black_screen, .navbar:hover~#black_screen{
+        position: fixed;
+        top: 1.9em;
+        left: 0;
+        width: 100vw;
+        height: 100%;
+        z-index:5;
+        opacity:0.5;
+        background-color: black;
+    }
+}
+
+
+/* ---------------------------------MOBILE DEVICES---------------------------- */
+@media(max-width: 767px){
+    .navbar{
+        width:0;
+        overflow: hidden;
+    }
+    .show_navbar{
+        overflow-y: auto;
+        width:auto;
+        height: 95%;
+        position: fixed;
+        top:1.9em;
+        left:0;
+        display: flex;
+        flex-direction: column;
+        z-index:11;
+        transition: ease 0.3s ;
+        padding-bottom: 8em;
+    }  
+    .nav_icon{
+        padding: 1.1em 0.8em;
+        color: white;
+    }
+    .nav_content, .navbar:hover .nav_content{
+        width: auto;
+        min-width: 9em;
+        padding: 1.2em 1.5em 1.2em 0;
+        font-size: 1.1em;
+        color: white;
+        text-decoration: none;
+        transition: none;
+    }
+    .show_black_screen, .navbar:hover~#black_screen{
+        position: fixed;
+        top: 1.9em;
+        left: 0;
+        width: 100vw;
+        height: 100%;
+        z-index:5;
+        opacity:0.5;
+        background-color: black;
+    }
+}
+
+
+
+/* MAIN CONTENT */
+
+.main{
+    position: relative;
+    min-height: 90vh;
+    margin-left: 5em;
+    /* border:1px solid black; */
+}
+.main_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    /* border:1px solid black; */
+}
+
+.box_layout{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1.5em 3em 1.5em;
+    width: 92%;
+    flex-wrap: wrap;
+    /* border:1px solid black; */
+}
+
+.main_heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+
+}
+.heading{
+    padding: 1em 2em 0 1.7em;
+    font-size: 1.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #1D3557;
+}
+
+.select{
+    display: flex;
+    margin: 0 1.7em;
+    padding: 0.5em 0 0 0; 
+}
+
+#graduating_year{
+    margin-left: 1.5em;
+}
+
+.filtered{
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 3em;
+    margin-left: 1.7em;
+}
+
+
+.list_heading{
+    border-bottom: solid 1px #000;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.heading_name{
+    display: flex;
+    width: 100%;
+}
+
+.detail_heading{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-left: 5em;
+    width: 30%;
+    overflow-wrap: break-word;
+}
+
+.detail_name{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-left: 5em;
+    width: 35%;
+    overflow-wrap: break-word;
+}
+
+.easter_egg{
+    font-size: 1.3em;
+}
+
+/*
+
+.name{
+    display: flex;
+    flex-direction: column;
+}
+
+.name_student{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+    width: 22em;
+    overflow-wrap: break-word;
+} */
+
+.student_details{
+    display: none;
+    justify-content: space-evenly;
+    font-size: 0.9em;
+    margin-top: 2em;
+}
+
+.course_details{
+    margin-left: 2.5em;
+    font-size: 0.9em;
+}
+
+.dets{
+    margin: 0.5em 0;
+}
+
+summary{
+    outline: none;
+}
+
+.course_dets{
+    display: flex;
+}
+
+.edit_course{
+    margin-left: 0.8em;
+}
+
+.edit_dets{
+    padding-right: 2em;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    max-width: 1em;
+}
+
+.students{
+    display: flex;
+    flex-direction: column;
+}
+
+.student_attribute{
+    display: flex;
+    margin: 0.7em;
+}
+
+.attri_name{
+    /* margin: 0.5em; */
+    margin-top: auto;
+}
+
+.non_edit_attri{
+    font-weight: bold;
+    width: 10em;
+    overflow-wrap: break-word;
+}
+
+.editable{
+    min-width: 10em;
+}
+
+.course_table{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+}
+
+.table_heading{
+    display: flex;
+    border-bottom: solid 0.01em #000;
+    font-weight: bold;
+    justify-content: center;
+    background-color: lightgrey;
+    padding: 0.5em;
+    min-width: 20em;
+}
+
+.edit_codes{
+    border-bottom: solid 0.01em black;
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+}
+
+.delete_icon{
+    color: lightgray;
+    padding-left: 15em;
+    z-index: 1;
+}
+
+.icon_hover{
+    color:black;
+}
+
+.icon_hover:hover{
+    color:red;
+}
+
+.save_changes{
+    color: green;
+    cursor: pointer;
+}
+
+.tick_cross{
+    display: none;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.cross{
+    color: red;
+    cursor: pointer;
+}
+
+.fa-edit{
+    cursor: pointer;
+}
+
+.dob{
+    border: none;
+    font-size: 0.8em;
+    outline: none;
+}
+
+.year_student{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+    width: 22em;
+    overflow-wrap: break-word;
+}
+
+/* .yog{
+    margin: 0.5em 0;
+}
+
+.prog_student{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+    width: 22em;
+    overflow-wrap: break-word;
+}
+
+.prog{
+    margin: 0.5em 0;
+} */
+
+
+
+
+
+
+.student_list{
+    display: flex;
+    border-bottom: solid 0.01em black;
+    padding: 0.3em 0;
+    width: 100%;
+}
+
+.det_area{
+    width: 100%;
+}
+
+.student_dets{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.name_arrow{
+    display: flex;
+    align-items: center;
+    width: 35%;
+    margin-left: 5em;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    margin-left: 5em;
+    width: 30%;
+}
+
+.arrow_right{
+    display: flex;
+    align-items: center;
+}
+
+.name_of_student{
+    margin-left: 0.5em;
+    overflow-wrap: break-word;
+}
+
+.btn_edit{
+    visibility: hidden;
+}
