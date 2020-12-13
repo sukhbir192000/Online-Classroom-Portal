@@ -50,41 +50,43 @@ module.exports.courses_assgnCreate = async function(req,res){
                 link: link._id
             });
         }
-        if(req.body.lecture_lab == "Lecture"){
-            course.teachers.push({
-                teacher: req.body.name_teacher,
-                classSub: {
-                    course: req.body.code_course,
-                    class: req.body.choose_branch,
-                    group: req.body.group_class
-                },
-                classType: req.body.lecture_lab
-            });
-            const link = await LinkModel.create({link: ""});
-            teacher.classSub.push({
-                course: req.body.code_course,
-                class: req.body.choose_branch,
-                group: req.body.group_class,
-                link: link._id
-            });
-        }
         else{
-            course.teachers.push({
-                teacher: req.body.name_teacher,
-                classSub: {
+            if(req.body.lecture_lab == "Lecture"){
+                course.teachers.push({
+                    teacher: req.body.name_teacher,
+                    classSub: {
+                        course: req.body.code_course,
+                        class: req.body.choose_branch,
+                        group: req.body.group_class
+                    },
+                    classType: req.body.lecture_lab
+                });
+                const link = await LinkModel.create({link: ""});
+                teacher.classSub.push({
                     course: req.body.code_course,
                     class: req.body.choose_branch,
-                    subGroup: req.body.group_class
-                },
-                classType: req.body.lecture_lab
-            });
-            const link = await LinkModel.create({link: ""});
-            teacher.classSub.push({
-                course: req.body.code_course,
-                class: req.body.choose_branch,
-                subGroup: req.body.group_class,
-                link: link._id
-            });
+                    group: req.body.group_class,
+                    link: link._id
+                });
+            }
+            else{
+                course.teachers.push({
+                    teacher: req.body.name_teacher,
+                    classSub: {
+                        course: req.body.code_course,
+                        class: req.body.choose_branch,
+                        subGroup: req.body.group_class
+                    },
+                    classType: req.body.lecture_lab
+                });
+                const link = await LinkModel.create({link: ""});
+                teacher.classSub.push({
+                    course: req.body.code_course,
+                    class: req.body.choose_branch,
+                    subGroup: req.body.group_class,
+                    link: link._id
+                });
+            }
         }
         await course.save();
         await teacher.save();
@@ -92,7 +94,7 @@ module.exports.courses_assgnCreate = async function(req,res){
     }
     catch(err){
         console.log("Error while assigning teacher", err);
-        return res.render('back');
+        return res.redirect('back');
     }
 }
 

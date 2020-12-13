@@ -22,7 +22,7 @@ module.exports.getClass=async function(req,res){
             $and: [
                 {
                     "date": date,
-                    startingTime:currentHour,
+                    startingTime:{$lte: currentHour, $gt: {$subtract: [currentHour, "$duration"]}},
                     "classSub.course":{$in:user.courses},
                     "classSub.class":user.class
                 },

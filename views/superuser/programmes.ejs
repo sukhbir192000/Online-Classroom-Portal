@@ -39,15 +39,17 @@
             </div>
             <div class="no_courses">No Programmes Added</div>
             <%for(let program of programList){%>
-                <div class="programme" id="<%=program._id%>">
-                    <div class="programme_name_main">BTECH</div>
-                    <div class="year_main"><%=program.passingOutYear%></div>
-                    <div class="groups_main"><%=program.totalGroups%></div>
-                    <div class="sub_groups_main"><%=program.totalSubGroups%></div>
-                    <!-- <div class="edit_icon"><i class="fas fa-edit"></i></div> -->
-                    <div class="delete_icon"><i class="fas fa-trash"></i></div>
-                    <div class="save_icon" ><i class="fas fa-save"></i></div>
-                </div>
+                <a href="./programmes/students/<%=program._id%>">
+                    <div class="programme" id="<%=program._id%>">
+                        <div class="programme_name_main">BTECH</div>
+                        <div class="year_main"><%=program.passingOutYear%></div>
+                        <div class="groups_main"><%=program.totalGroups%></div>
+                        <div class="sub_groups_main"><%=program.totalSubGroups%></div>
+                        <!-- <div class="edit_icon"><i class="fas fa-edit"></i></div> -->
+                        <div class="delete_icon"><i class="fas fa-trash"></i></div>
+                        <div class="save_icon" ><i class="fas fa-save"></i></div>
+                    </div>
+                </a>
             <%}%>
             </div>
     </div>

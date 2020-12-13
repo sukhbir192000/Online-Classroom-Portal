@@ -74,8 +74,18 @@ module.exports.programmeDelete=async function(req,res){
         return res.status(400);
     }
 }
-module.exports.studentDetails=function(req,res){
-    return res.render('superuser/studentDetails',{
-        title:"Student Details"
-    });
+module.exports.studentDetails = async function(req,res){
+    try{
+        let class_obj = await ClassModel.findById(req.params.classId).populate('student');
+        
+        console.log(class_obj.student);
+        return res.render('superuser/studentDetails',{
+            title:"Student Details",
+            studentList: class_obj.student
+        });
+    }
+    catch(err){
+        console.log(err);
+        return redirect('back');
+    }
 }
