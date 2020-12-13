@@ -64,15 +64,18 @@ editBtn.forEach((edit, i)=>{
         for(let j = 0; j<studentAttribute.childElementCount; j++){
             let editable = studentAttribute.children[j].children[1];
             let nonEditable = studentAttribute.children[j].children[0];
-            // if(editable.tagName == 'INPUT'){
-            //     editable.readOnly = false;
-            //     editable.style.border = 'solid 0.01em #000';
-            //     if(i%2!=0){
-            //         editable.style.backgroundColor = '#F1FAEE';
-            //     }
-            // }
-            editable.disabled = false;
-            editable.style.border = 'solid 0.01em #000';
+            if(editable.tagName == 'DIV'){
+                editable.setAttribute('contentEditable', true);
+                editable.style.border = 'solid 0.01em #000';
+                if(i%2!=0){
+                    editable.style.backgroundColor = '#F1FAEE';
+                }
+            }
+            else{
+                editable.disabled = false;
+                editable.style.border = 'solid 0.01em #000';
+            }
+            
             if(i%2==0) nonEditable.style.border = 'solid 0.01em #FFF';
             else nonEditable.style.border = 'solid 0.01em #F1FAEE';
         }
@@ -93,17 +96,18 @@ ticks.forEach((tick,i)=>{
         for(let j = 0; j<studentAttribute.childElementCount; j++){
             let editable = studentAttribute.children[j].children[1];
             let nonEditable = studentAttribute.children[j].children[0];
-            // if(editable.tagName == 'INPUT'){
-            //     changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.value;
-            //     editable.readOnly = true;
-            //     editable.style.border = 'none';
-            //     if(i%2!=0){
-            //         editable.style.backgroundColor = '#F1FAEE';
-            //     }
-            // }
-            
-            changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.innerHTML;
-            editable.disabled = true;
+            if(editable.tagName == 'DIV'){
+                changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.innerHTML;
+                editable.setAttribute('contentEditable', false);
+                editable.style.border = 'none';
+                if(i%2!=0){
+                    editable.style.backgroundColor = '#F1FAEE';
+                }
+            }
+            else{
+                changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.value;
+                editable.disabled = true;
+            }
             editable.style.border = 'none';
             nonEditable.style.border = 'none';
         }
@@ -193,17 +197,18 @@ function deleteChanges(i){
     for(let j = 0; j<studentAttribute.childElementCount; j++){
         let editable = studentAttribute.children[j].children[1];
         let nonEditable = studentAttribute.children[j].children[0];
-        // if(editable.tagName == 'INPUT'){
-        //     changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.value;
-        // }
-        
-        changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.innerHTML;  
+        if(editable.tagName == 'DIV'){
+            changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.innerHTML;
+        }
+        else{
+            changesMade[studentName[i].innerHTML][nonEditable.innerHTML] = editable.value;  
+        }
         
     }
     var name = studentName[i].innerHTML;
     let item = 0;
     for(var data in originalData[name]){
-        if(studentAttribute.children[item].children[1].tagName == 'INPUT') studentAttribute.children[item].children[1].value = originalData[name][data];
+        if(studentAttribute.children[item].children[1].tagName == 'SELECT') studentAttribute.children[item].children[1].value = originalData[name][data];
         else studentAttribute.children[item].children[1].innerHTML = originalData[name][data];
         item+=1;
     }
@@ -219,15 +224,14 @@ function cancelEdit(i){
     for(let j = 0; j<studentAttribute.childElementCount; j++){
         let editable = studentAttribute.children[j].children[1];
         let nonEditable = studentAttribute.children[j].children[0];
-        // if(editable.tagName == 'INPUT'){
-        //     editable.readOnly = true;
-        //     editable.style.border = 'none';
-        //     if(i%2!=0){
-        //         editable.style.backgroundColor = '#F1FAEE';
-        //     }
-        // }
-        
-        editable.disabled = true;
+        if(editable.tagName == 'DIV'){
+            editable.setAttribute('contentEditable', false);
+            editable.style.border = 'none';
+            if(i%2!=0){
+                editable.style.backgroundColor = '#F1FAEE';
+            }
+        }
+        else editable.disabled = true;
         editable.style.border = 'none';
         nonEditable.style.border = 'none';
     }
