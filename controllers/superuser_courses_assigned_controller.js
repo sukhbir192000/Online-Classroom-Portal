@@ -79,7 +79,17 @@ module.exports.courses_assgnDelete = async function(req,res){
     try{
         let course = await CourseModel.findById(req.body.courseId);
         let teacher = await UserModel.findById(course.teachers[req.body.index].teacher);
-        let teacher_index = teacher.classSub.indexOf(course.teachers[req.body.index].classSub);
+        let req_classSub = course.teachers[req.body.index].classSub, teacher_index;
+        for(let i=0;i<teacher.classSub.length;i++){
+            classSubObj = teacher.classSub[i];
+            if(classSubObj.course==req_classSub.course && 
+                classSubObj.class==req_classSub.class && 
+                classSubObj.group==req_classSub.group && 
+                classSubObj.subGroup==req_classSub.subGroup){
+                    teacher_index = i;
+                    break;
+                }
+        }
         teacher.classSub.splice(teacher_index, 1);
         course.teachers.splice(req.body.index,1);
         teacher.save();
