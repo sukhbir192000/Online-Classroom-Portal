@@ -1,12 +1,13 @@
-document.addEventListener('mouseup', function (e) {
-    var position = document.querySelector(".profile_icon").getBoundingClientRect();
-    var rect = document.querySelector(".profile").getBoundingClientRect();
-    if (e.x >= position.left && e.x <= (position.left + position.width) && e.y >= position.top && e.y <= (position.top + position.height)) {
+document.addEventListener('mouseup',function(e){
+    var position=document.querySelector(".profile_icon").getBoundingClientRect();
+    var rect=document.querySelector(".profile").getBoundingClientRect();
+    if(e.x>=position.left && e.x<=(position.left+position.width) && e.y>=position.top && e.y<=(position.top+position.height) ){
         document.querySelector(".profile").classList.toggle("show");
     }
-    else if (e.x < rect.left || e.x > (rect.left + rect.width) || e.y < rect.top || e.y > (rect.top + rect.height)) {
+    else if(e.x<rect.left || e.x>(rect.left+rect.width) || e.y<rect.top || e.y>(rect.top+rect.height) ){
         document.querySelector(".profile").classList.remove("show");
     }
+    
 });
 
 // document.querySelector(".profile_icon").addEventListener("click",function(e){
@@ -46,12 +47,12 @@ document.querySelector("#pencil_btn").addEventListener("click", function (e) {
     });
 });
 
-document.addEventListener('mouseup', function (e) {
-    var container = document.getElementById('profile');
-    if (!container.contains(e.target)) {
-        document.querySelector(".profile").classList.remove("show");
-    }
-});
+// document.addEventListener('mouseup', function (e) {
+//     var container = document.getElementById('profile');
+//     if (!container.contains(e.target)) {
+//         document.querySelector(".profile").classList.remove("show");
+//     }
+// });
 
 document.getElementById("submit_personal").addEventListener("click", function (e) {
 
