@@ -117,9 +117,9 @@
                         <div class="active_icon" style="visibility: hidden;"><i class="fas fa-check"></i></div>
                         <div class="offered_to">
                             <div><b>Offered to:</b> <% for(let i=0;i<course.offered_to.length;i++){ if(i!=0){ %>, <% } %><%= course.offered_to[i] %><% } %></div>
-                            <!-- ------------------------------------CONDITION DAALO----------------------------------------------- -->
-                            <div class="year_show" ><b>Year:</b>&nbsp;1,2,3</div>
-                            <!-- --------------------------------------------------------------------------------------------------------- -->
+                            <% if(course.isActive){ %>
+                                <div class="year_show" ><b>Year:</b>&nbsp;<% for(let i=0;i<course.year.length;i++){ if(i!=0){ %>, <% } %><%= course.year[i] %><% } %></div>
+                            <%}%>
                         </div>
                         
                         <div class="delete_icon" style="visibility: hidden;"><i class="fas fa-trash"></i></div>

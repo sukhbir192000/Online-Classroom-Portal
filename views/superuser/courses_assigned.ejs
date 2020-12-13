@@ -15,7 +15,7 @@
         </div>
         
         <div class="add_admin">
-            <form method="POST" action="#">
+            <form method="POST" action="/superuser/coursesassigned/create">
                 <label class="year_study_label">Year of Study:</label> 
                 <select class="year_study" name="study_year" id="study_year" required>
                     <option selected disabled value="">---SELECT---</option>
@@ -27,16 +27,10 @@
                 <label class="course_code_label">Course Code: </label>
                 <select class="course_code" name="code_course" id="code_course" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="ECN-201">ECN-201</option>
-                    <option value="ECN-202">ECN-202</option>
-                    <option value="ECN-203">ECN-203</option>
-                    <option value="ECN-204">ECN-204</option>
                 </select><br><br>
                 <label class="branch_label">Branch:</label> 
                 <select class="branch_choose" name="choose_branch" id="choose_branch" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="ECE">ECE</option>
-                    <option value="CSE">CSE</option>
                 </select><br><br>
                 <!-- <label class="programme_label">Programme: </label>
                 <select class="programme" name="programme_add" id="programme_add" required>
@@ -47,25 +41,19 @@
                 <label class="lab_lecture_label">Class type:</label>
                 <select class="lab_lecture" name="lecture_lab" id="lecture_lab" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="Lab">Lab</option>
+                    <option value="Lab">Lab/Tutorial</option>
                     <option value="Lecture">Lecture</option>
                 </select><br><br>
                 <label class="class_group_label">Group:</label>
                 <select class="class_group" name="group_class" id="group_class" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="All">All</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
                 </select><br><br>
-                <!-- <select class="branch" name="branch_teacher" id="branch_teacher" required>
-                    <option value="ECE">ECE</option>
-                    <option value="CSE">CSE</option>
-                </select> -->
                 <label class="teacher_name_label">Teacher:</label>
                 <select class="teacher_name" name="name_teacher" id="name_teacher" required>
                     <option selected disabled value="">---SELECT---</option>
-                    <option value="Jyoti Kedia">Jyoti Kedia</option>
-                    <option value="Divya Dhawan">Divya Dhawan</option>
+                    <% for(let teacher_object of teacher_list){ %>
+                        <option value="<%= teacher_object._id %>"><%= teacher_object.name %></option>
+                    <% } %>
                 </select>
                 
                 <div class="submit_button">

@@ -1,144 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/f6bdc44dbc.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/profile_admin.css">
-    </head>
-    <body>
-        <header class="header">
-            <div class="welcome_user bgcolor_welcome_user">
-                <div class="welcome_user_heading">
-                    <div class="back_home_icon"><i class="fa fa-arrow-circle-left color_white arrow_left"></i></div>
-                    <div class="welcome_user_content color_white">
-                        Back to home
+
+<link rel="stylesheet" type="text/css" href="/css/adminProfile.css">
+
+    <div class="main_area_profile">
+        <div class="profile_container">
+            <div class="navbar_profile">
+                <div class="dp_container dp_hover">
+                    <div class="img_container ">
+                        <i class="profile_pic fa fa-user-circle color_white"></i>
+                        <!-- <img class="profile_pic" id="img" src="./imgs/jyoti.jpg" alt="User Image"> -->
                     </div>
+                    <!-- <div class="edit_button pencil">
+                        <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn"></i>
+                        <input type="file" id="change_1" class="change_pic" accept="image/*">
+                        <i class="fa fa-trash  edit_icon" id="delete_btn"></i>
+                    </div> -->
                 </div>
-                    
-                <div class="welcome_user_heading">
-                    <div class="welcome_user_content color_white">
-                        Welcome User!
-                    </div>
-                    <div class="profile_icon"><i class="fa fa-user-circle color_white fa-2x"></i></div>
-                    <div class="profile_icon_small"><i class="fa fa-user-circle color_white fa-lg"></i></div>
+                <div class="profile_options">
+                    <a class="profile_tags" href="#personal_info" ><div class="option">Personal Information</div></a>
+                    <a class="profile_tags" href="#course"><div class="option">Class Details</div></a>
                 </div>
             </div>
-            <div class="banner bgcolor_banner">
-                <div class="banner_content color_white">
-                    Computer Architecture class going on!
+        </div>
+        <div class="content">
+            <div class="dp_container dp_hover responsive_dp">
+                <div class="img_container profile_pic">
+                    <i class="profile_pic fa fa-user-circle color_pic"></i>
+                </div>
+                <!-- <div class="edit_button pencil">
+                    <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn_1"></i>
+                    <input type="file" class="change_pic" accept="image/*">
+                    <i class="fa fa-trash  edit_icon" id="delete_btn_1"></i>
+                </div> -->
+            </div>
+            <div class="profile_content" >
+                <div class="personal_info" >
+                        <div class="edit_info_name table_title">
+                            <div class="personal_option_heading" id="personal_info">
+                                PERSONAL INFORMATION
+                            </div>
+                        </div>
+                    <div class="edit_container">
+                        
+                        <div class="edit_info_field">
+                            <div class="personal_option">
+                                First Name:
+                            </div>
+                            <div class="personal_option">
+                                Last Name:
+                            </div>
+                            <div class="personal_option">
+                                Department:
+                            </div>
+                            <div class="personal_option">
+                                Contact Information:
+                            </div>
+                        </div>
+                        <div class="edit_info_name">
+                            <input type="text" class="personal_info_input" disabled>
+                            <input type="text" class="personal_info_input" disabled>
+                            <input type="text" class="personal_info_input" disabled value="Electronics & Communication">
+                            <input type="text" class="personal_info_input" id="contact_id" disabled>
+                            <div class="submit_container">
+                                <input type="submit" class="submit" value="Edit Information" id="submit_personal">
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
-            <div class="profile" id="profile">
-                <div>My profile</div>
-                <div>Logout</div>
-            </div>
-        </header>
-            <div class="main_area_profile">
-                <div class="profile_container">
-                    <div class="navbar_profile">
-                        <div class="dp_container dp_hover">
-                            <div class="img_container profile_pic">
-                                <img class="profile_pic" id="img" src="./imgs/jyoti.jpg" alt="User Image">
-                            </div>
-                            <div class="edit_button pencil">
-                                <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn"></i>
-                                <input type="file" id="change_1" class="change_pic" accept="image/*">
-                                <i class="fa fa-trash  edit_icon" id="delete_btn"></i>
-                            </div>
-                        </div>
-                        <div class="profile_options">
-                            <a class="profile_tags" href="#personal_info" ><div class="option">Personal Information</div></a>
-                            <a class="profile_tags" href="#course"><div class="option">Class Details</div></a>
-                        </div>
+            <div class="underline"></div>
+            <div class="courses">
+                <div class="edit_info_name table_title" >
+                    <div class="personal_option_heading" id="course" >
+                        CLASS DETAILS
                     </div>
                 </div>
-                <div class="content">
-                    <div class="dp_container dp_hover responsive_dp">
-                        <div class="img_container profile_pic">
-                            <img class="profile_pic" id="img_responsive" src="./imgs/jyoti.jpg" alt="User Image">
+                <form id="link_form">
+                    <input type="hidden">
+                </form>
+                <div class="course_content">
+                        <div class="heading_add">
+                            <button value="Edit Links" type = "button" class="add" id="add_course">
+                                Edit Links
+                            </button> 
                         </div>
-                        <div class="edit_button pencil">
-                            <i class="fa fa-pencil-alt  edit_icon" id="pencil_btn_1"></i>
-                            <input type="file" class="change_pic" accept="image/*">
-                            <i class="fa fa-trash  edit_icon" id="delete_btn_1"></i>
-                        </div>
-                    </div>
-                    <div class="profile_content" >
-                        <div class="personal_info" >
-                                <div class="edit_info_name table_title">
-                                    <div class="personal_option" id="personal_info">
-                                        PERSONAL INFORMATION
-                                    </div>
-                                </div>
-                            <div class="edit_container">
-                                
-                                <div class="edit_info_field">
-                                    <div class="personal_option">
-                                        First Name:
-                                    </div>
-                                    <div class="personal_option">
-                                        Last Name:
-                                    </div>
-                                    <div class="personal_option">
-                                        Department:
-                                    </div>
-                                    <div class="personal_option">
-                                        Contact Information:
-                                    </div>
-                                </div>
-                                <div class="edit_info_name">
-                                    <input type="text" class="personal_info_input">
-                                    <input type="text" class="personal_info_input">
-                                    <input type="text" class="personal_info_input" disabled value="Electronics & Communication">
-                                    <input type="text" class="personal_info_input">
-                                    <div class="submit_container">
-                                        <input type="submit" class="submit" value="Apply Changes" id="submit_personal">
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="underline"></div>
-                    <div class="courses">
-                        <div class="edit_info_name table_title" >
-                            <div class="personal_option" id="course" >
-                                CLASS DETAILS
+                        <div class="course_details">
+                            <div class="sub_name">
+                                <div class="subject_name">Information And Technology:</div>
+                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="b z vhq2fz cy _class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
+                            </div>
+                            <div class="sub_name">
+                                <div class="subject_name">Information And Technology:</div>
+                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
+                            </div>
+                            <div class="sub_name">
+                                <div class="subject_name">Information And Technology:</div>
+                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
+                            </div>
+                            <div class="sub_name">
+                                <div class="subject_name">Computer Architecture:</div>
+                                <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
                             </div>
                         </div>
-                        <form id="link_form">
-                            <input type="hidden">
-                        </form>
-                        <div class="course_content">
-                                <div class="heading_add">
-                                    <button value="Edit Links" type = "button" class="add" id="add_course">
-                                        Edit Links
-                                    </button> 
-                                </div>
-                                <div class="course_details">
-                                    <div class="sub_name">
-                                        <div class="subject_name">Information And Technology:</div>
-                                        <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                                    </div>
-                                    <div class="sub_name">
-                                        <div class="subject_name">Information And Technology:</div>
-                                        <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                                    </div>
-                                    <div class="sub_name">
-                                        <div class="subject_name">Information And Technology:</div>
-                                        <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                                    </div>
-                                    <div class="sub_name">
-                                        <div class="subject_name">Computer Architecture:</div>
-                                        <a target="_blank" href="https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179" class="anchor_class"><div class="class_link">https://meet.google.com/lookup/bq7nscxgqw?authuser=1&hs=179</div></a>
-                                    </div>
-                                </div>
-                        </div>      
-                    </div>
-                </div> 
-            </div>    
-        <script src="./scripts/profile_admin.js"></script>
-    </body>
-</html>
+                        
+                </div>      
+            </div>
+        </div> 
+    
+<script src="/js/adminProfile.js"></script>
