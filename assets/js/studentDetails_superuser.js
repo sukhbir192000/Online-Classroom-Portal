@@ -45,6 +45,12 @@ trashIcon.forEach((trash, j)=>{
     }); 
 });
 
+
+const studentDetail = document.querySelectorAll('.student_details');
+studentDetail[0].style.display = 'flex';
+studentDetail[0].style.display = 'none';
+
+
 editBtn.forEach((edit, i)=>{
     deletedCourse = [];
     const studentAttribute = document.querySelectorAll('.students')[i];
@@ -141,20 +147,21 @@ function displayBox(){
         }
     }
 }
+displayBox();
 
-program_select.addEventListener('change', function(e){
-    prog_check = program_select.value;
-    if(prog_check != 'Select' && year_check != 'Select'){
-        displayBox();
-    }
-});
+// program_select.addEventListener('change', function(e){
+//     prog_check = program_select.value;
+//     if(prog_check != 'Select' && year_check != 'Select'){
+//         displayBox();
+//     }
+// });
 
-year_select.addEventListener('change', function(e){
-    year_check = program_select.value;
-    if(prog_check != 'Select' && year_check != 'Select'){
-        displayBox();
-    }
-});
+// year_select.addEventListener('change', function(e){
+//     year_check = program_select.value;
+//     if(prog_check != 'Select' && year_check != 'Select'){
+//         displayBox();
+//     }
+// });
 
 dob.forEach((date,i)=>{
     if(i%2!=0){
@@ -164,6 +171,7 @@ dob.forEach((date,i)=>{
 
 dets.forEach((det,i) => {
     det.addEventListener('click', (e)=>{
+        console.log(det);
         const icon = det.parentNode.parentNode;
         if(!det.open){
             icon.children[3].style.visibility = 'visible';
@@ -255,7 +263,6 @@ list.forEach((student, i)=>{
             student.children[0].children[0].classList.remove('fa-caret-down');
             if(edits[i].children[1].style.display != 'none'){
                 edits[i].children[1].style.display = 'none';
-                
                 deleteChanges(i);
                 cancelEdit(i);
             }
