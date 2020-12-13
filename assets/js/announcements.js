@@ -47,7 +47,7 @@ function ajaxClassFunc(){
         cache:false,
         success:function(response){
             let sidebox = document.getElementById('class_sidebox');
-            while(sidebox.childElementCount>1){
+            while(sidebox.childElementCount>2){
                 sidebox.removeChild(sidebox.lastElementChild);
             }
             for(let i in response.data){
@@ -69,6 +69,12 @@ function ajaxClassFunc(){
                 content_div.appendChild(time_div);
                 sidebox.appendChild(content_div);
             }
+            if(sidebox.childElementCount>2){
+                sidebox.children[1].style.display = "none";
+            }
+            else{
+                sidebox.children[1].style.display = "flex";
+            }
         }
     })
 }
@@ -81,7 +87,7 @@ function ajaxAssignmentFunc(){
         cache:false,
         success:function(response){
             let sidebox = document.getElementById('assignment_sidebox');
-            while(sidebox.childElementCount>1){
+            while(sidebox.childElementCount>2){
                 sidebox.removeChild(sidebox.lastElementChild);
             }
             for(let i in response.data){
@@ -99,6 +105,12 @@ function ajaxAssignmentFunc(){
                 content_div.appendChild(time_div);
                 sidebox.appendChild(content_div);
             }
+            if(sidebox.childElementCount>2){
+                sidebox.children[1].style.display = "none";
+            }
+            else{
+                sidebox.children[1].style.display = "flex";
+            }
         }
     })
 }
@@ -111,7 +123,7 @@ function ajaxQuizFunc(){
         cache:false,
         success:function(response){
             let sidebox = document.getElementById('quiz_sidebox');
-            while(sidebox.childElementCount>1){
+            while(sidebox.childElementCount>2){
                 sidebox.removeChild(sidebox.lastElementChild);
             }
             for(let i in response.data){
@@ -128,6 +140,12 @@ function ajaxQuizFunc(){
                 content_div.appendChild(title_div);
                 content_div.appendChild(time_div);
                 sidebox.appendChild(content_div);
+            }
+            if(sidebox.childElementCount>2){
+                sidebox.children[1].style.display = "none";
+            }
+            else{
+                sidebox.children[1].style.display = "flex";
             }
         }
     })

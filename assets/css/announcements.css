@@ -458,7 +458,12 @@ li:hover{
     border-radius: 20px;        
 }
 
-
+.no_label{
+    padding:0.5em;
+    display: flex;
+    justify-content: center;
+    overflow-wrap: break-word;
+}
 
 /* For tablet devices */
 @media(min-width: 767px) and (max-width: 991px){
