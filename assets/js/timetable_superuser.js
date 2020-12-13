@@ -100,6 +100,7 @@ tableBox.forEach((box, i)=>{
     });
 })
 
+
 tableBox.forEach((box, i)=>{
     box.addEventListener('mouseout', (e)=>{
         if(!box.classList.contains('table_heading') && box.innerHTML != ''){
