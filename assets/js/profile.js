@@ -160,10 +160,13 @@ document.getElementById("add_course").addEventListener("click", function (e) {
             }
             console.log(subject_codes,deleted_codes);
             // console.log(document.getElementById("new_course").childElementCount);
-            if (document.getElementById("new_course").childElementCount == 2) {
+            if (document.getElementById("new_course").childElementCount == 1) {
                 document.getElementById("course_none").style.display = "flex";
                 // console.log("sksksks")
                 // document.getElementById("heading_add_1").style.marginTop = "10em";
+            }
+            else{
+                document.getElementById("course_none").style.display = "none";
             }
             this.parentNode.remove();
         });
@@ -188,6 +191,14 @@ document.getElementById("submit_courses").addEventListener("click", function (e)
                 }
         
                 document.getElementById("submit_courses").value = "Edit Courses";
+                if (document.getElementById("new_course").childElementCount == 1) {
+                    document.getElementById("course_none").style.display = "flex";
+                    // console.log("sksksks")
+                    // document.getElementById("heading_add_1").style.marginTop = "10em";
+                }
+                else{
+                    document.getElementById("course_none").style.display = "none";
+                }
             }
         })
         
@@ -209,7 +220,7 @@ for (let a = 0; a < document.getElementsByClassName("trash_icon").length; a++) {
 }
 document.getElementById("submit_courses").value = "Edit Courses";
 
-if (document.getElementById("new_course").childElementCount == 2) {
+if (document.getElementById("new_course").childElementCount == 1) {
     document.getElementById("course_none").style.display = "flex";
     // console.log("sksksks")
     // document.getElementById("heading_add_1").style.marginTop = "10em";
@@ -233,10 +244,13 @@ for(let trashItems of trashButtons){
         }
         console.log(subject_codes,deleted_codes);
         // console.log(document.getElementById("new_course").childElementCount);
-        if (document.getElementById("new_course").childElementCount == 2) {
+        if (document.getElementById("new_course").childElementCount == 1) {
             document.getElementById("course_none").style.display = "flex";
             // console.log("sksksks")
             // document.getElementById("heading_add_1").style.marginTop = "10em";
+        }
+        else{
+            document.getElementById("course_none").style.display = "none";
         }
         this.parentNode.remove();
     });

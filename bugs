@@ -1,20 +1,13 @@
 todo:
-    add classlinks to top banner
-    
-    student details page - 12, puneet + mehak
     timetable -14, puneet and sukhbir
-    links in header -13 , P & S
-    guide book 
-    placeholder for class links
-    put picture in bg of login
-    edit profile pic as font awesome icon in user and admin profile
+    guide book
+    all groups subgroups error
 
 Assignments
 - Edit (NOT COMPLETE)
 - View submission
 - add download and href in ejs and js ????
 - file name too long gets chopped off
-- make only future dates vailable in deadline while adding assignment
 
 Timetable
 - changing week breaks hover

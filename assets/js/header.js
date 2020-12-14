@@ -1,4 +1,4 @@
-
+var class_link_id="";
 let currentMinutes=new Date(Date.now()).getMinutes();
 if(currentMinutes==0){
     setBanner();//set for ik ghanta
@@ -18,6 +18,7 @@ function ajaxFunc(){
         url:'/content/getCurrentClass',
         cache:false,
         success:function(response){
+            class_link_id = response.classLink;
             $('#class_name_banner').html(response.className);
             if(response.className != "No"){
                 document.getElementById("bannerid").removeEventListener("click",bannerFunction);
@@ -34,3 +35,17 @@ function ajaxFunc(){
 var bannerFunction = function(e){
     e.preventDefault();
 }
+
+
+$('#bannerid').click(function(e){
+    if(class_link_id!=""){
+        $.ajax({
+            type:'GET',
+            url: '/content/getLink/' + class_link_id,
+            cache:false,
+            success:function(response){
+                window.open(response.link, '_blank');
+            }
+        })
+    }
+})

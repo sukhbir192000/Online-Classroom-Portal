@@ -122,8 +122,13 @@ var activeIconFunction = function(activeIcon){
                     state:state
                 },
                 success:function(response){
-                    activeIcon.classList.toggle("icon_color_change");
-                    activeIcon.parentNode.parentNode.children[1].children[1].children[1].classList.add("hide");
+                    if(response.err){
+                        alert("Cannot deactivate the course as teachers/students are already enrolled!!");
+                    }
+                    else{
+                        activeIcon.classList.toggle("icon_color_change");
+                        activeIcon.parentNode.parentNode.children[1].children[1].children[1].classList.add("hide");
+                    }
                 }
             })
         }
@@ -177,7 +182,12 @@ var deleteIconFunction = function(deleteIcon){
                 id:deleteButton.parentNode.id
             },
             success:function(response){
-                deleteButton.parentNode.parentNode.parentNode.removeChild(deleteButton.parentNode.parentNode);
+                if(response.err){
+                    alert("Cannot delete the course as teachers/students are already enrolled!!");
+                }
+                else{
+                    deleteButton.parentNode.parentNode.parentNode.removeChild(deleteButton.parentNode.parentNode);
+                }
             }
         })
         
@@ -275,10 +285,10 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 }
                 yearShow.innerHTML = yearShow.innerHTML.slice(0,-1);
                 if(yearActive){
-                    yearShow.style.display = "flex";
+                    yearShow.classList.remove("hide");
                 }
                 else{
-                    yearShow.style.display = "none";
+                    yearShow.classList.add("hide");
                 }
                 offered_to_div.appendChild(offeredTo);
                 offered_to_div.appendChild(yearShow);

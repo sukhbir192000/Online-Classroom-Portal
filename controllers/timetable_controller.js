@@ -248,15 +248,23 @@ module.exports.classCreate = async function(req,res){
         classDate.setMinutes(0);
         classDate.setSeconds(0);
         classDate.setMilliseconds(0);
-        let subject = req.body.subject, branch=req.body.branch;
+        let subject = req.body.subject, branch=req.body.branch, req_link;
         if(req.body.sub_group == 'All'){
+            for(let classSub_element of user.classSub){
+                if(classSub_element.course == subject &&
+                    classSub_element.class==branch &&
+                    !classSub_element.group && !classSub_element.subGroup){
+                        req_link = classSub_element.link;
+                    }
+            }
             await TimetableModel.create({
                 startingTime: req.body.slots_available,
                 date: classDate,
                 duration: req.body.duration_hr,
                 classSub:{
                     course: subject,
-                    class: branch
+                    class: branch,
+                    link: req_link
                 },
                 teacher: res.locals.user,
                 classType: req.body.class_type
@@ -264,6 +272,14 @@ module.exports.classCreate = async function(req,res){
         }
         else{
             if(req.body.class_type=="Lecture"){
+                for(let classSub_element of user.classSub){
+                    if(classSub_element.course == subject &&
+                        classSub_element.class==branch &&
+                        classSub_element.group==req.body.sub_group &&
+                        !classSub_element.subGroup){
+                            req_link = classSub_element.link;
+                        }
+                }
                 await TimetableModel.create({
                     startingTime: req.body.slots_available,
                     date: classDate,
@@ -271,13 +287,22 @@ module.exports.classCreate = async function(req,res){
                     classSub: {
                         course: req.body.subject,
                         class: req.body.branch,
-                        group: req.body.sub_group
+                        group: req.body.sub_group,
+                        link: req_link
                     },
                     teacher: res.locals.user,
                     classType: req.body.class_type
                 })
             }
             else{
+                for(let classSub_element of user.classSub){
+                    if(classSub_element.course == subject &&
+                        classSub_element.class==branch &&
+                        !classSub_element.group &&
+                        classSub_element.subGroup==req.body.sub_group){
+                            req_link = classSub_element.link;
+                        }
+                }
                 await TimetableModel.create({
                     startingTime: req.body.slots_available,
                     date: classDate,
@@ -285,7 +310,8 @@ module.exports.classCreate = async function(req,res){
                     classSub: {
                         course: req.body.subject,
                         class: req.body.branch,
-                        subGroup: req.body.sub_group
+                        subGroup: req.body.sub_group,
+                        link: req_link
                     },
                     teacher: res.locals.user,
                     classType: req.body.class_type

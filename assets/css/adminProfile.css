@@ -1063,6 +1063,10 @@ input[type="number"]{
 .class_link_edit:hover{
     color: #1D3557;
 }
+.links[contentEditable=true]:empty:not(:focus):before{
+    content:attr(links-text);
+    color:gray;
+}
 
 /* For tablet dgit initevices */
 @media(min-width: 768px) and (max-width: 991px){

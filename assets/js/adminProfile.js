@@ -92,25 +92,28 @@ document.getElementById("add_course").addEventListener("click", function (e) {
         document.getElementById("add_course").innerHTML = "Apply Changes";
         for (let i = 0; i < linkClass.length; i++) {
             original.push(linkClass[i].textContent);
+            if(linkClass[i].textContent=="No link provided"){
+                linkClass[i].textContent = "";
+            }
             linkClass[i].setAttribute("contenteditable", true);
             linkClass[i].classList.add("class_link_edit");
             document.querySelectorAll(".anchor_class")[i].removeAttribute("href");
             var ignore = linkClass;
-            document.addEventListener("click", function (e) {
-                var isClickInsideElement = true;
-                for (let ign of ignore) {
-                    if (ign.contains(e.target)) {
-                        isClickInsideElement = true;
-                        break;
-                    }
-                    else {
-                        isClickInsideElement = false;
-                    }
-                }
-                if (document.getElementById("add_course").value == "Apply Changes" && !isClickInsideElement && (e.x < changes.left || e.x > changes.left + changes.width || e.y < changes.top || e.y > changes.top + changes.height)) {
-                    linkClass[i].textContent = original[i];
-                }
-            });
+            // document.addEventListener("click", function (e) {
+            //     var isClickInsideElement = true;
+            //     for (let ign of ignore) {
+            //         if (ign.contains(e.target)) {
+            //             isClickInsideElement = true;
+            //             break;
+            //         }
+            //         else {
+            //             isClickInsideElement = false;
+            //         }
+            //     }
+            //     if (document.getElementById("add_course").value == "Apply Changes" && !isClickInsideElement && (e.x < changes.left || e.x > changes.left + changes.width || e.y < changes.top || e.y > changes.top + changes.height)) {
+            //         linkClass[i].textContent = original[i];
+            //     }
+            // });
             iter++;
         }
     }
@@ -118,12 +121,11 @@ document.getElementById("add_course").addEventListener("click", function (e) {
         
         for (let i = 0; i < document.getElementsByClassName("class_link").length; i++) {
             if (document.getElementsByClassName("anchor_class")[i].textContent != original[i]) {
-
                 updated.push(document.getElementsByClassName("anchor_class")[i].textContent);
                 idList.push(i);
             }
         }
-       
+        
         $.ajax({
             url: '../courseLinks/edit',
             type: "POST",
@@ -137,7 +139,14 @@ document.getElementById("add_course").addEventListener("click", function (e) {
                 document.getElementById("add_course").innerHTML = "Edit Links";
                 for (let i = 0; i < document.getElementsByClassName("class_link").length; i++) {
                     document.getElementsByClassName("class_link")[i].setAttribute("contenteditable", false);
-                    document.getElementsByClassName("anchor_class")[i].setAttribute("href", document.getElementsByClassName("anchor_class")[i].textContent);
+                    if(document.getElementsByClassName("anchor_class")[i].textContent!=""){
+                        document.getElementsByClassName("class_link")[i].textContent =  document.getElementsByClassName("anchor_class")[i].textContent;
+                        document.getElementsByClassName("anchor_class")[i].setAttribute("href", document.getElementsByClassName("anchor_class")[i].textContent);
+                    }
+                    else{
+                        document.getElementsByClassName("class_link")[i].textContent = "No link provided";
+                        document.getElementsByClassName("anchor_class")[i].setAttribute("href","#");
+                    }
                     document.getElementsByClassName("class_link")[i].classList.remove("class_link_edit");
                 }
                 document.getElementById("link_form").children[0].setAttribute("value", updated);

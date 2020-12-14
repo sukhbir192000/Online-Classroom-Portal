@@ -1,16 +1,17 @@
-
 <header class="header">
     <div class="welcome_user bgcolor_welcome_user">
-        <div class="icons"> 
+        <div class="icons">
             <!-- <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div> -->
-            
-            <% if(title == 'Profile') {%>
-                <a href="/content/announcements"><div class="back_icon"><i class="fa fa-arrow-left fa-lg color_white"></i></div></a>
+
+            <% if(title=='Profile' ) {%>
+                <a href="/content/announcements">
+                    <div class="back_icon"><i class="fa fa-arrow-left fa-lg color_white"></i></div>
+                </a>
             <%} else{%>
                 <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div>
             <%}%>
         </div>
-        
+
         <div class="welcome_user_heading">
             <div class="welcome_user_content color_white">
                 Welcome <%=user.name%>!
@@ -18,15 +19,20 @@
             <div class="profile_icon"><i class="fa fa-user-circle color_white"></i></div>
         </div>
     </div>
-    <a id="bannerid" href="<%= %>"><div class="banner bgcolor_banner">
-        <div class="banner_content color_white">
-            <span id="class_name_banner"></span> class going on!
+    <a id="bannerid" href=#>
+        <div class="banner bgcolor_banner">
+            <div class="banner_content color_white">
+                <span id="class_name_banner"></span> class going on!
+            </div>
         </div>
-        
-    </div></a>
+    </a>
     <div class="profile" id="profile">
-        <a href="/users/profile/view"><div>My profile</div></a>
-        <a href="/users/logout"><div>Logout</div></a>
+        <a href="/users/profile/view">
+            <div>My profile</div>
+        </a>
+        <a href="/users/logout">
+            <div>Logout</div>
+        </a>
     </div>
 
 </header>
