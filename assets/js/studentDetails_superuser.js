@@ -120,19 +120,19 @@ ticks.forEach((tick, i) => {
                 originalData[name][data] = changesMade[name][data];
             }
         }
-        console.log(changesMade[studentName[i].innerHTML]["Group:"],changesMade[studentName[i].innerHTML]["Lab Group:"],changesMade[studentName[i].innerHTML]["Student ID:"]);
+        console.log(deletedCourse)
         $.ajax({
-            url:'',
+            url:'/programmes/students/updateDetails',
+            method:"POST",
             data:{
-                url:'/programmes/students/updateDetails',
-                data:{
+                student_id: dispDet[i].id,
+                group: changesMade[studentName[i].innerHTML]["Group:"],
+                subGroup: changesMade[studentName[i].innerHTML]["Lab Group:"],
+                sid: changesMade[studentName[i].innerHTML]["Student ID:"]
+            },
+            success:function(obj){
 
-                },
-                method:"POST",
-                success:function(obj){
-
-                }   
-            }
+            } 
         })
         deletedCourse = [];
     });
@@ -269,7 +269,14 @@ list.forEach((student, i) => {
                     message: "check"
                 },
                 success: function (obj) {
-
+                    dispDet[i].children[0].children[0].children[1].innerHTML = "";
+                    for(let group_obj of obj.class_groups){
+                        dispDet[i].children[0].children[0].children[1].innerHTML += `<option value="${group_obj._id}">${group_obj.groupNumber}</option>`
+                    }
+                    dispDet[i].children[0].children[1].children[1].innerHTML = "";
+                    for(let group_obj of obj.class_sub_groups){
+                        dispDet[i].children[0].children[1].children[1].innerHTML += `<option value="${group_obj._id}">${group_obj.subGroupNumber}</option>`
+                    }
                     // console.log(obj);
                     dispDet[i].children[0].children[0].children[1].value = obj.groupNumber;
                     dispDet[i].children[0].children[1].children[1].value = obj.subGroupNumber;

@@ -75,6 +75,7 @@ module.exports.programmeDelete=async function(req,res){
         return res.status(400);
     }
 }
+
 module.exports.studentDetails = async function(req,res){
     try{
         console.log("hi");
@@ -92,6 +93,7 @@ module.exports.studentDetails = async function(req,res){
         return redirect('back');
     }
 }
+
 module.exports.getDetails=async function(req,res){
     try{
         // console.log("Ajax hit")
@@ -100,11 +102,14 @@ module.exports.getDetails=async function(req,res){
         // console.log(userReq);
         let groupNumber=await GroupModel.findById(userReq.group);
         let subGroupNumber=await SubGroupModel.findById(userReq.subGroup);
-        
+        let groups = await GroupModel.find({class: userReq.class}).sort("groupNumber");
+        let sub_groups = await SubGroupModel.find({class: userReq.class}).sort("subGroupNumber");
         return res.status(200).json({
-            groupNumber:groupNumber.groupNumber,
-            subGroupNumber:subGroupNumber.subGroupNumber,
-            userReq:userReq
+            groupNumber:groupNumber._id,
+            subGroupNumber:subGroupNumber._id,
+            userReq:userReq,
+            class_groups: groups,
+            class_sub_groups: sub_groups
         })
     }
     catch(err){
@@ -113,9 +118,16 @@ module.exports.getDetails=async function(req,res){
 
     }
 }
-module.exports.updateDetails=function(req,res){
+
+module.exports.updateDetails = async function(req,res){
     try{
         console.log(req.body);
+        let user_req = await UserModel.findById(req.body.student_id);
+        user_req.group = req.body.group;
+        user_req.subGroup = req.body.subGroup;
+        user_req.sid = req.body.sid;
+
+        user_req.save();
         return res.status(200).json({});
     }
     catch(err){
