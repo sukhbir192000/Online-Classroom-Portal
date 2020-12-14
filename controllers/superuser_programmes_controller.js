@@ -2,6 +2,7 @@ const ClassModel=require('../models/class');
 const Group = require('../models/group');
 const GroupModel=require('../models/group');
 const SubGroupModel=require('../models/sub-group');
+const UserModel=require('../models/user');
 module.exports.programme=async function(req,res){
     let programList=await ClassModel.find({
         stream:res.locals.user.dept
@@ -76,9 +77,11 @@ module.exports.programmeDelete=async function(req,res){
 }
 module.exports.studentDetails = async function(req,res){
     try{
+        console.log("hi");
         let class_obj = await ClassModel.findById(req.params.classId).populate('student');
+        // class_obj=class_obj.execPopulate('student.group')
         
-        console.log(class_obj.student);
+        // console.log(class_obj);
         return res.render('superuser/studentDetails',{
             title:"Student Details",
             studentList: class_obj.student
@@ -88,4 +91,35 @@ module.exports.studentDetails = async function(req,res){
         console.log(err);
         return redirect('back');
     }
+}
+module.exports.getDetails=async function(req,res){
+    try{
+        // console.log("Ajax hit")
+        // console.log(req.body);
+        let userReq=await UserModel.findById(req.body.id).populate('courses');
+        // console.log(userReq);
+        let groupNumber=await GroupModel.findById(userReq.group);
+        let subGroupNumber=await SubGroupModel.findById(userReq.subGroup);
+        
+        return res.status(200).json({
+            groupNumber:groupNumber.groupNumber,
+            subGroupNumber:subGroupNumber.subGroupNumber,
+            userReq:userReq
+        })
+    }
+    catch(err){
+        // console.log("hi2",err);
+        return res.status(400);
+
+    }
+}
+module.exports.updateDetails=function(req,res){
+    try{
+        console.log(req.body);
+        return res.status(200).json({});
+    }
+    catch(err){
+        return res.status(400);
+    }
+    
 }
