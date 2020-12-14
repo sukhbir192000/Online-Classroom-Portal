@@ -10,21 +10,23 @@ module.exports.getClass = async function (req, res) {
     date.setMilliseconds(0);
     let user = res.locals.user;
     let classCurrent
-    console.log(currentHour);
     if (user.isAdmin) {
         classCurrent = await TimetableModel.findOne({
-            teacher: user._id,
-            date: date,
-            startingTime: currentHour
+            $and: [{
+                teacher: user._id,
+                date: date
+            },{
+                $expr: {$lte: ["$startingTime", currentHour]}
+            },{
+                $expr: {$gt: ["$startingTime", {$subtract: [currentHour, "$duration"]}]}
+            }]
         }).populate('classSub.course');
-        console.log('currentClass:', classCurrent);
     }
     else {
         classCurrent = await TimetableModel.findOne({
             $and: [
                 {
                     "date": date,
-                    startingTime: { $lte: currentHour },// $gt: {$subtract: [currentHour, "$duration"]}},
                     "classSub.course": { $in: user.courses },
                     "classSub.class": user.class
                 },
@@ -39,6 +41,12 @@ module.exports.getClass = async function (req, res) {
                         { "classSub.subGroup": undefined },
                         { "classSub.subGroup": user.subGroup }
                     ]
+                },
+                {
+                    $expr: {$lte: ["$startingTime", currentHour]}
+                },
+                {
+                    $expr: {$gt: ["$startingTime", {$subtract: [currentHour, "$duration"]}]}
                 }
             ]
         }).populate('classSub.course');
