@@ -4,7 +4,7 @@ const User = require('../models/user');
 const UserModel = require('../models/user');
 const CourseModel = require('../models/course');
 const Course = require('../models/course');
-const LinkModel=require('../models/link');
+const LinkModel = require('../models/link');
 module.exports.login = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/');
@@ -28,17 +28,17 @@ module.exports.getProfile = async function (req, res) {
     try {
 
         // console.log("myuser", res.locals.user);
-        let courseList=await UserModel.findById(res.locals.user._id)
-        .populate('classSub.course')
-        .populate('classSub.class')
-        .populate('classSub.group')
-        .populate('classSub.subGroup')
-        .populate('classSub.link');
-        console.log("teachercourses:",courseList.classSub);
+        let courseList = await UserModel.findById(res.locals.user._id)
+            .populate('classSub.course')
+            .populate('classSub.class')
+            .populate('classSub.group')
+            .populate('classSub.subGroup')
+            .populate('classSub.link');
+        console.log("teachercourses:", courseList.classSub);
         if (res.locals.user.isAdmin) {
             return res.render('adminProfile', {
                 title: "Profile",
-                courseList:courseList.classSub
+                courseList: courseList.classSub
             })
         }
         else {
@@ -77,14 +77,14 @@ module.exports.editProfile = async function (req, res) {
             if (req.body.contact) {
                 user.contact = req.body.contact;
             }
-            if(req.body.date){
+            if (req.body.date) {
                 user.dob = req.body.date;
             }
-            if(req.body.currentYear){
+            if (req.body.currentYear) {
                 user.currentYear = req.body.currentYear;
             }
-            
-            
+
+
 
             user.save();
             return res.response(200).json({
@@ -129,20 +129,22 @@ module.exports.editCourses = async function (req, res) {
         return res.redirect('back');
     }
 }
-module.exports.editCourseLinks=async function(req,res){
+module.exports.editCourseLinks = async function (req, res) {
     console.log(req.body);
-    try{
-        const user=await UserModel.findById(res.locals.user._id);
-        for(let i=0;i<req.body.idList.length;i++){
-            let link_obj = await LinkModel.findById(user.classSub[req.body.idList[i]].link);
-            link_obj.link = req.body.updated[i];
-            link_obj.save();
+    try {
+        if (req.body.idList) {
+            const user = await UserModel.findById(res.locals.user._id);
+            for (let i = 0; i < req.body.idList.length; i++) {
+                let link_obj = await LinkModel.findById(user.classSub[req.body.idList[i]].link);
+                link_obj.link = req.body.updated[i];
+                link_obj.save();
+            }
         }
         return res.status(200).json({
-            message:"changed courses"
+            message: "changed courses"
         })
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         return res.status(200);
     }

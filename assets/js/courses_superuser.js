@@ -275,10 +275,10 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 }
                 yearShow.innerHTML = yearShow.innerHTML.slice(0,-1);
                 if(yearActive){
-                    yearShow.style.display = "flex";
+                    yearShow.classList.remove("hide");
                 }
                 else{
-                    yearShow.style.display = "none";
+                    yearShow.classList.add("hide");
                 }
                 offered_to_div.appendChild(offeredTo);
                 offered_to_div.appendChild(yearShow);
