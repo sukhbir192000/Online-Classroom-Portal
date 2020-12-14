@@ -45,7 +45,7 @@ const typeClass = document.querySelector('.class_type');
 const group = document.querySelector('.lab_group');
 const duration = document.querySelector('.duration');
 const trash = document.querySelector('.del_btn');
-
+const applyButton=document.getElementById('apply_tt_btn');
 // ============== New Consts =====================
 
 const classes = document.querySelector('.classes');
@@ -63,10 +63,8 @@ for(let k = 0; k<allDetails.length; k++){
     let index = k;
     for(let j = 8; j<17; j++){
         allDetails[k][j] = [];
-        if(tableBox[index+9].innerHTML == ''){
-            allDetails[k][j] = '';
-        }
-        else{
+        if(tableBox[index+9].innerHTML != ''){
+            
             allDetails[k][j].push(boxArray[index+9]);
         }
         index+=8;
@@ -82,6 +80,7 @@ addClass.addEventListener('click', (e)=>{
 });
 
 addButton.addEventListener('click', (e)=>{
+    
     let classCode = subCode.children[1].value;
     let classType = typeClass.children[1].value;
     let groupNum = group.children[1].value;
@@ -109,7 +108,7 @@ addButton.addEventListener('click', (e)=>{
         for(let j = 8; j<17; j++){
             allDetails[k][j] = [];
             if(tableBox[index+9].innerHTML == ''){
-                allDetails[k][j] = '';
+                allDetails[k][j] = [];
             }
             else{
                 allDetails[k][j].push(boxArray[index+9]);
@@ -169,7 +168,7 @@ tableBox.forEach((box,i)=>{
                             for(let j = 8; j<17; j++){
                                 allDetails[k][j] = [];
                                 if(tableBox[index+9].innerHTML == ''){
-                                    allDetails[k][j] = '';
+                                    allDetails[k][j] = [];
                                 }
                                 else{
                                     allDetails[k][j].push(boxArray[index+9]);
@@ -237,5 +236,9 @@ disable.addEventListener('click', (e)=>{
     mainContent.style.filter = 'blur(0)';
     table.style.filter = 'opacity(1)';
     disable.style.zIndex = '-1';
+})
+
+applyButton.addEventListener('click',(e)=>{
+    console.log(allDetails);
 })
 
