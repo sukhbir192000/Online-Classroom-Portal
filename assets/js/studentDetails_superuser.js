@@ -15,6 +15,7 @@ const editBtn = document.querySelectorAll('.btn_edit');
 let prog_check = 'Select';
 let year_check = 'Select';
 
+var courses = [];
 var deletedCourse = [];
 var originalData = {};
 var changesMade = {};
@@ -35,7 +36,6 @@ studentName.forEach((student, i) => {
             changesMade[student.innerHTML][nonEditable.innerHTML] = editable.innerHTML;
         }
     }
-    console.log(changesMade);
 });
 
 trashIcon.forEach((trash, j) => {
@@ -57,9 +57,9 @@ editBtn.forEach((edit, i) => {
         edit.parentNode.parentNode.children[0].style.visibility = 'hidden';
         ticks[i].parentNode.parentNode.children[1].style.display = 'flex';
         editButton[i].style.visibility = 'hidden';
-        var courses = [];
+        courses = [];
         for(let j = 0; j<codes[i].childElementCount; j++){
-            courses.push(codes[i].children[j].children[0].innerHTML);
+            courses.push(codes[i].children[j].children[0].id);
         }
         for (let j = 0; j < codes[i].childElementCount; j++) {
             codes[i].children[j].children[1].classList.add('icon_hover');
@@ -124,7 +124,7 @@ ticks.forEach((tick, i) => {
                 originalData[name][data] = changesMade[name][data];
             }
         }
-        console.log(deletedCourse)
+        console.log(courses);
         $.ajax({
             url:'/programmes/students/updateDetails',
             method:"POST",
@@ -132,7 +132,8 @@ ticks.forEach((tick, i) => {
                 student_id: dispDet[i].id,
                 group: changesMade[studentName[i].innerHTML]["Group:"],
                 subGroup: changesMade[studentName[i].innerHTML]["Lab Group:"],
-                sid: changesMade[studentName[i].innerHTML]["Student ID:"]
+                sid: changesMade[studentName[i].innerHTML]["Student ID:"],
+                courses: courses
             },
             success:function(obj){
 
@@ -185,7 +186,6 @@ dob.forEach((date, i) => {
 
 dets.forEach((det, i) => {
     det.addEventListener('click', (e) => {
-        console.log(det);
         const icon = det.parentNode.parentNode;
         if (!det.open) {
             icon.children[3].style.visibility = 'visible';
@@ -287,15 +287,15 @@ list.forEach((student, i) => {
                     dispDet[i].children[1].children[1].innerHTML = "";
                     for (let courseItem of obj.userReq.courses) {
                         dispDet[i].children[1].children[1].innerHTML += `<div class="edit_codes">
-                    <div class="course_codes">${courseItem.name}</div>
-                    <i class="fa fa-trash delete_icon"></i>
-                    </div>`;
+                        <div class="course_codes" id=${courseItem._id}>${courseItem.name}</div>
+                        <i class="fa fa-trash delete_icon"></i>
+                        </div>`;
                     }
                     const trashIcon = document.querySelectorAll('.delete_icon');
                     trashIcon.forEach((trash, j) => {
                         trash.addEventListener('click', (e) => {
                             deletedCourse.push(trash.parentNode.children[0].innerHTML);
-                            var index = Array.prototype.indexOf.call(trash.parentNode.parentNode,trash.parentNode);
+                            var index = Array.prototype.indexOf.call(trash.parentNode.parentNode.children,trash.parentNode);
                             courses.splice(index,1);
                             trash.parentNode.remove();
                         });
@@ -311,7 +311,6 @@ list.forEach((student, i) => {
 
         }
         else {
-            console.log(courses);
             dispDet[i].style.display = 'none';
             edits[i].style.visibility = 'hidden';
             edits[i].children[0].children[0].style.visibility = 'hidden';

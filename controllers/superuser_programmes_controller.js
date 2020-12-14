@@ -126,7 +126,7 @@ module.exports.updateDetails = async function(req,res){
         user_req.group = req.body.group;
         user_req.subGroup = req.body.subGroup;
         user_req.sid = req.body.sid;
-
+        user_req.courses = req.body.courses;
         user_req.save();
         return res.status(200).json({});
     }
