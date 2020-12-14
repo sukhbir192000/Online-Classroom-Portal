@@ -20,73 +20,7 @@ a{
     color:inherit;
 }
 
-.header{
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index:10;
-}
 
-.welcome_user{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
-.welcome_user_heading{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 2em;
-}
-.hamburger_icon{
-    visibility: hidden;
-    cursor: pointer;
-}
-.profile_icon{
-    display: flex;
-    padding-right:1em;
-    padding-top:0.2em;
-    padding-bottom: 0.2em;
-    font-size: 1.7em;
-    cursor: pointer;
-}
-
-.welcome_user_content{
-    padding: 0.3em 1em 0.3em 0;
-    font-size: 1.3em;
-}
-
-
-.banner{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    z-index:10;
-}
-.banner_content{
-    position:relative;
-    padding: 0.6em;
-    font-size: 1.3em;
-    font-weight: 700;
-    color: rgb(30, 43, 71);
-    text-transform: uppercase;
-}
-.profile{
-    visibility: hidden;
-    position: fixed;
-    top:2.5em;
-    right:3.6em;
-    width:auto;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    justify-content: flex-end;
-    border: 2px solid gray;
-    cursor: pointer;
-}
 .profile div{
     display: flex;
     padding:0.5em;
