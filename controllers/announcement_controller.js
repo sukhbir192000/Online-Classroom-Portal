@@ -364,7 +364,7 @@ module.exports.getSubGroups=async function(req,res){
         });
         let classItem = await ClassModel.findById(req.body.class);
         let allAvailable = false;
-        if((req.body.classType=="Lecture" && groupList.length == classItem.totalGroups) || (req.body.classType=="Lab" && groupList.length == classItem.totalSubGroups)){
+        if((req.body.classType=="Lecture" && (groupList.length == classItem.totalGroups || groupList.length==0)) || (req.body.classType=="Lab" && groupList.length == classItem.totalSubGroups)){
             allAvailable = true;
         }
         return res.status(200).json({

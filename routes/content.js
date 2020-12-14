@@ -12,4 +12,5 @@ Router.use('/viewsubmissions',passport.checkAdmin,require('./assignmentViewSubmi
 Router.use('/quizzes',require('./quizzes'));
 Router.use('/doubts',require('./doubts'));
 Router.get('/getCurrentClass',headerController.getClass);
+Router.get('/getLink/:linkId', headerController.getLink);
 module.exports=Router;
