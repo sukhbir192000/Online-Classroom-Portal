@@ -4,9 +4,57 @@
     <%- include('navbar_superuser') %>
 
     <!-- --------------------------INCLUDING CLASS DETAILS BOX (ISHJOT)------------------------------- -->
+    <div class="all_blocks">
+        <div class="block">
+            <div class="class_details">
+                <div class="no_added_class">
+                    No Added Classes!
+                </div>
+                <div class="added_class">
+                    <div class="classes static_temp_class">
+                        <div>
+                            <div class="sub_code dets_align">
+                                <div class="det_name">Subject Code:</div>
+                                <div class="class_info">xx</div>
+                            </div>
+                            
+                            <div class="type_class dets_align">
+                                <div class="det_name">Class Type:</div>
+                                <div class="class_info">xx</div>
+                            </div>
+            
+                            <div class="group_lab dets_align">
+                                <div class="det_name">Lab Group:</div>
+                                <div class="class_info">xx</div>
+                            </div>
+            
+                            <div class="class_duration dets_align">
+                                <div class="det_name">Duration:</div>
+                                <div class="class_info">xx</div>
+                            </div>
+                        </div>
+        
+                        <div class="del_class">
+                            <i class="fa fa-trash delete_icon"></i>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+    
+                <div class="add_cancel">
+                    <button class="add_class" type="button">Add Class</button>
+                    <button class="cancel_btn" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
 
+
+    </div>
+
+    
    
-    <div class="add_container">
+    <!-- <div class="add_container">
         <div class="subject_code">
             <div>Subject Code:</div>
             <div class="detail"></div>
@@ -27,7 +75,7 @@
             <button class="add_button del_btn" type="button"><i class="fa fa-trash"></i></button>
             <button class="cancel_button" type="button">Cancel</button>
         </div>
-    </div>
+    </div> -->
 
     <div class="add_container">
         <div class="subject_code">
@@ -67,7 +115,7 @@
     
 
     <!-- ---------------------------------------------------------------------------------------------- -->
-
+    <div class="disable_event"></div>
     <div id="black_screen"></div>
 
     <div class="main_content">
@@ -76,42 +124,7 @@
         </div>
         
         <div class="box_layout">
-            <!-- <div class="add_container">
-                <div class="subject_code">
-                    <div>Subject Code:</div>
-                    <select>
-                        <option>ECN-201</option>
-                        <option>ECN-202</option>
-                    </select>
-                </div>
-                <div class="class_type">
-                    <div>Class Type:</div>
-                    <select>
-                        <option>Lab</option>
-                        <option>Lecture</option>
-                    </select>
-                </div>
-                <div class="lab_group">
-                    <div>Group:</div>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
-                </div>
-                <div class="duration">
-                    <div>Duration:</div>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <div class="buttons">
-                    <button class="add_button" type="button">Add Class</button>
-                    <button class="cancel_button" type="button">Cancel</button>
-                </div>
-                
-            </div> -->
+            <!-- DELETED ADD_CONTAINER FROM HERE (CODE WORKS FINE DONT WORRRY!) -->
             <div class=table_background></div>
             <div class="filterData">
             <select name='programme'>
@@ -158,6 +171,9 @@
                     </div>
                 </div>
                 
+                <div class="changes_apply">
+                    <button type="button" class="changes_apply_btn">Apply Changes</button>
+                </div>
                 
             </div>
         </div>

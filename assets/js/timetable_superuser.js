@@ -37,121 +37,188 @@ const mainContent = document.querySelector('.main_content');
 const table = document.querySelector('.table');
 const rows = document.querySelectorAll('.table_row');
 const tableBox = document.querySelectorAll('.table_column');
-const modifyBox = document.querySelectorAll('.add_container');
-const addButton = document.querySelectorAll('.add_button');
+const modifyBox = document.querySelector('.add_container');
+const addButton = document.querySelector('.add_button');
 const cancelButton = document.querySelectorAll('.cancel_button');
-const subCode = document.querySelectorAll('.subject_code');
-const typeClass = document.querySelectorAll('.class_type');
-const group = document.querySelectorAll('.lab_group');
-const duration = document.querySelectorAll('.duration');
+const subCode = document.querySelector('.subject_code');
+const typeClass = document.querySelector('.class_type');
+const group = document.querySelector('.lab_group');
+const duration = document.querySelector('.duration');
 const trash = document.querySelector('.del_btn');
 
-var boxNumber = -1;
+// ============== New Consts =====================
 
-tableBox.forEach((box, i)=>{
+const classes = document.querySelector('.classes');
+const classDetails = document.querySelectorAll('.class_details');
+const addNewClass = document.querySelector('.added_class');
+const addClass = document.querySelector('.add_class');
+const cancel = document.querySelector('.cancel_btn');
+const allBlocks = document.querySelector('.all_blocks');
+const block = document.querySelector('.block');
+const deleteIcon = document.querySelectorAll('.delete_icon');
+const disable = document.querySelector('.disable_event');
+
+var allDetails = [[],[],[],[],[],[],[]];
+for(let k = 0; k<allDetails.length; k++){
+    let index = k;
+    for(let j = 8; j<17; j++){
+        allDetails[k][j] = [];
+        if(tableBox[index+9].innerHTML == ''){
+            allDetails[k][j] = '';
+        }
+        else{
+            allDetails[k][j].push(boxArray[index+9]);
+        }
+        index+=8;
+    }
+}
+
+var boxNumber = -1;
+var boxArray = [];
+
+addClass.addEventListener('click', (e)=>{
+    modifyBox.style.display = 'flex';
+    block.style.display = 'none';
+});
+
+addButton.addEventListener('click', (e)=>{
+    let classCode = subCode.children[1].value;
+    let classType = typeClass.children[1].value;
+    let groupNum = group.children[1].value;
+    let classDuration = duration.children[1].value;
+    let arrInput = [classCode, classType, groupNum, classDuration];
+
+    if(tableBox[boxNumber].innerHTML == ''){
+        boxArray[boxNumber] = [];
+        boxArray[boxNumber].push(arrInput);
+        tableBox[boxNumber].innerHTML = boxArray[boxNumber].length;
+    }
+    else{
+        boxArray[boxNumber].push(arrInput);
+        tableBox[boxNumber].innerHTML = boxArray[boxNumber].length;
+    }
+    block.style.display = 'none';
+    mainContent.style.filter = 'blur(0)';
+    table.style.filter = 'opacity(1)';
+    modifyBox.style.display = 'none';
+    disable.style.zIndex = '-1';
+
+
+    for(let k = 0; k<allDetails.length; k++){
+        let index = k;
+        for(let j = 8; j<17; j++){
+            allDetails[k][j] = [];
+            if(tableBox[index+9].innerHTML == ''){
+                allDetails[k][j] = '';
+            }
+            else{
+                allDetails[k][j].push(boxArray[index+9]);
+            }
+            index+=8;
+        }
+    }
+});
+
+tableBox.forEach((box,i)=>{
+    box.addEventListener('click', (e)=>{
+        if(!box.classList.contains('table_heading')){
+            
+            boxNumber = i;
+            
+            block.style.display = 'flex';
+            mainContent.style.filter = 'opacity(0.4)';
+            table.style.filter = 'blur(0.1em)';
+            disable.style.zIndex = '2';
+            if(box.innerHTML == ''){
+                block.children[0].children[0].style.display = 'flex';
+                block.children[0].children[1].style.display = 'none';
+            }
+            else{
+                while(addNewClass.firstChild){
+                    addNewClass.removeChild(addNewClass.firstChild);
+                }
+                for(let j = 0; j<boxArray[i].length; j++){
+                    var clonedNode = classes.cloneNode(true);
+                    clonedNode.classList.remove('static_temp_class');
+                    for(let k = 0; k<boxArray[i][j].length; k++){
+                        clonedNode.children[0].children[k].children[1].innerHTML = boxArray[i][j][k];
+                    }
+                    clonedNode.style.borderBottom = 'solid 0.1em black';
+                    clonedNode.style.padding = '1em';
+
+                    clonedNode.children[1].children[0].addEventListener('click', (e)=>{
+                        var deleteNum = -1;
+                        let number = box.innerHTML-1;
+                        if(number == 0) box.innerHTML = '';
+                        else box.innerHTML = number;
+                        for(let index = 0; index<addNewClass.childElementCount; index++){
+                            if(addNewClass.children[index] == e.target.parentNode.parentNode) {
+                                deleteNum = index;
+                                break;
+                            }
+                        }
+                        boxArray[boxNumber].splice(deleteNum, 1);
+                        e.target.parentNode.parentNode.remove();
+                        if(box.innerHTML == ''){
+                            block.children[0].children[0].style.display = 'flex';
+                            block.children[0].children[1].style.display = 'none';
+                        }
+
+                        for(let k = 0; k<allDetails.length; k++){
+                            let index = k;
+                            for(let j = 8; j<17; j++){
+                                allDetails[k][j] = [];
+                                if(tableBox[index+9].innerHTML == ''){
+                                    allDetails[k][j] = '';
+                                }
+                                else{
+                                    allDetails[k][j].push(boxArray[index+9]);
+                                }
+                                index+=8;
+                            }
+                        }
+                        console.log(allDetails);
+                        
+                    });
+                    
+                    addNewClass.appendChild(clonedNode);
+                }
+                block.children[0].children[0].style.display = 'none';
+                block.children[0].children[1].style.display = 'flex';
+            }
+        }
+        
+    });
+})
+
+tableBox.forEach((box,i)=>{
     box.addEventListener('mouseover', (e)=>{
-        let classCode = subCode[0].children[1].innerHTML;
-        let classType = typeClass[0].children[1].innerHTML;
-        let groupNum = group[0].children[1].innerHTML;
-        let classDuration = duration[0].children[1].innerHTML;
         if(!box.classList.contains('table_heading') && box.innerHTML != ''){
             box.style.backgroundColor = "#640e1f";
             box.style.color = "white";
             box.style.transition = 'all 0.5s';
-            box.children[0].children[0].classList.add('class_no_display');
-            box.children[0].children[0].classList.remove('class_yes_display');
-            box.children[0].children[1].classList.add('class_yes_display');
-            box.children[0].children[1].classList.remove('class_no_display');
         }
+       
     });
 })
 
-tableBox.forEach((box, i)=>{
-    box.addEventListener('click', (e)=>{
-        let classCode = subCode[1].children[1].value;
-        let classType = typeClass[1].children[1].value;
-        let groupNum = group[1].children[1].value;
-        let classDuration = duration[1].children[1].value;
-
-        boxNumber = i;
-
-        if(!box.classList.contains('table_heading')){
-            setTimeout(()=>{
-                mainContent.style.filter = 'opacity(0.6)';
-                table.style.filter = 'blur(0.1em)';
-            }, 200);
-            if(box.innerHTML == ''){
-                modifyBox[0].style.display = 'none';
-                setTimeout(()=>{
-                    modifyBox[1].style.display = 'flex';
-                }, 200);
-            }
-            else if(!box.innerHTML == ''){
-                setTimeout(()=>{
-                    modifyBox[0].style.display = 'flex';
-                }, 200);
-                modifyBox[1].style.display = 'none';
-                subCode[0].children[1].innerHTML = classCode;
-                typeClass[0].children[1].innerHTML = classType;
-                group[0].children[1].innerHTML = groupNum;
-                duration[0].children[1].innerHTML = classDuration;
-            }
-        }
-    });
-})
-
-
-tableBox.forEach((box, i)=>{
+tableBox.forEach((box,i)=>{
     box.addEventListener('mouseout', (e)=>{
         if(!box.classList.contains('table_heading') && box.innerHTML != ''){
             box.style.backgroundColor = "white";
             box.style.color = "black";
             box.style.transition = 'all 0.5s';
-            box.children[0].children[0].classList.add('class_yes_display');
-            box.children[0].children[0].classList.remove('class_no_display');
-            box.children[0].children[1].classList.add('class_no_display');
-            box.children[0].children[1].classList.remove('class_yes_display');
         }
+        
     });
 })
 
-addButton[1].addEventListener('click', (e)=>{
-    let classCode = subCode[1].children[1].value;
-    let classType = typeClass[1].children[1].value;
-    let groupNum = group[1].children[1].value;
-    let classDuration = duration[1].children[1].value;
-    if(!tableBox[boxNumber].classList.contains('table_heading')){
-        if(tableBox[boxNumber].innerHTML == ""){
-            let num = boxNumber;
-            var rowNum = -1;
-            let alertGenerated = false;
-            for(let j = 0; j<rows.length; j++){
-                if(num<8*(j+1)) {
-                    rowNum = j;
-                    break;
-                }
-            }
-            var heightMax =(tableBox[boxNumber].offsetHeight);
-            for(let j = 0; j<classDuration; j++){
-                if(rowNum+j < rows.length){
-                    if(rows[rowNum+j].children[0].innerHTML == '16:00 - 17:00' && j !=classDuration-1){
-                        alert("Cannot Hold Class After 5pm!");
-                        alertGenerated = true;
-                    }
-                }
-            }
-            if(!alertGenerated){
-                tableBox[boxNumber].innerHTML = `<div style = "display:flex; flex-direction: column; font-size: 0.8em"><div class = "class_yes_display">${classCode}</div> <div class = "class_no_display">${classType}</div></div>`;
-                rows[rowNum].style.maxHeight = `${heightMax}`;
-                tableBox[boxNumber].style.height = classDuration*(tableBox[boxNumber].offsetHeight);
-                tableBox[boxNumber].style.zIndex = '1';
-            }
-        }
-        
-    }
+
+cancel.addEventListener('click', (e)=>{
+    cancel.parentNode.parentNode.parentNode.style.display = 'none';
     mainContent.style.filter = 'blur(0)';
     table.style.filter = 'opacity(1)';
-    modifyBox[1].style.display = 'none';
+    disable.style.zIndex = '-1';
 });
 
 cancelButton.forEach((cancel,i)=>{
@@ -159,29 +226,16 @@ cancelButton.forEach((cancel,i)=>{
         cancel.parentNode.parentNode.style.display = 'none';
         mainContent.style.filter = 'blur(0)';
         table.style.filter = 'opacity(1)';
+        disable.style.zIndex = '-1';
+        
     });
 })
 
-trash.addEventListener('click', (e)=>{
-    let classDuration = duration[0].children[1].innerHTML;
-    modifyBox[0].style.display = 'none';
-    subCode[0].children[1].innerHTML = '';
-    typeClass[0].children[1].innerHTML = '';
-    group[0].children[1].innerHTML = '';
-    duration[0].children[1].innerHTML = '';
-    tableBox[boxNumber].innerHTML = '';
+disable.addEventListener('click', (e)=>{
+    block.style.display = 'none';
+    modifyBox.style.display = 'none';
     mainContent.style.filter = 'blur(0)';
     table.style.filter = 'opacity(1)';
-    tableBox[boxNumber].style.height = (tableBox[boxNumber].offsetHeight)/classDuration;
-});
-
-document.addEventListener('click', (e)=>{
-    let isClickedInside = modifyBox[0].contains(e.target) || modifyBox[1].contains(e.target);
-    if(!isClickedInside){
-        mainContent.style.filter = 'blur(0)';
-        table.style.filter = 'opacity(1)';
-        modifyBox[0].style.display = 'none';
-        modifyBox[1].style.display = 'none';
-    } 
-});
+    disable.style.zIndex = '-1';
+})
 

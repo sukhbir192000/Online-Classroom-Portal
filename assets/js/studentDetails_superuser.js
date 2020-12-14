@@ -47,6 +47,7 @@ trashIcon.forEach((trash, j)=>{
 
 editBtn.forEach((edit, i)=>{
     deletedCourse = [];
+    
     const studentAttribute = document.querySelectorAll('.students')[i];
     const child = studentAttribute;
     const nonChild = studentAttribute;

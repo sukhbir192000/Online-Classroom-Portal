@@ -426,11 +426,11 @@ select{
     padding: 1em;
 
     /* ISHJOT'S CODE */ 
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 1;
+    z-index: 3;
 }
 
 .add_container>div{
@@ -489,8 +489,12 @@ select{
 }
 
 /* --------- ISHJOT'S CODE ----------- */
-.detail{
-    width: 5em;
+
+.class_info{
+    display: flex;
+    width: 6em;
+    margin: 0.2em;
+    margin-left: 2em;
 }
 
 .del_btn{
@@ -507,7 +511,121 @@ select{
     justify-content: center;
 }
 
+/*----------------- NEW CODE ---------------*/
+.block{
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    border:0.2em solid black;
+    width: fit-content;
+    padding: 1em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+}
 
+.classes{
+    display: flex;
+    flex-direction: row;
+}
+
+.static_temp_class{
+    display: none;
+}
+
+.added_class{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    height: 12em;
+    overflow: auto;
+}
+
+.no_added_class{
+    display: none;
+    padding: 2em;
+    font-weight: bold;
+}
+
+.dets_align{
+    display: flex;
+    justify-content: space-between;
+}
+
+.del_class{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: '3';
+}
+
+.delete_icon:hover{
+   color: red;
+}
+
+.det_name{
+    margin: 0.2em;
+}
+
+.add_cancel{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+
+.add_class{
+    width:fit-content;
+    padding: 0.7em 1em;
+    background-color: #d62648;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-color: white;
+    border-radius: 8px;
+    margin-right: 1em;
+    outline: none;
+}
+
+.cancel_btn{
+    width:fit-content;
+    padding: 0.7em 1em;
+    background-color: #d62648;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-color: white;
+    border-radius: 8px;
+    outline: none;
+}
+
+.changes_apply{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.changes_apply_btn{
+    width:fit-content;
+    padding: 0.7em 1em;
+    background-color: #1d3557;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-color: white;
+    border-radius: 8px;
+    margin-top: 1em;
+    outline: none;
+}
+
+.disable_event{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+}
+
+/* ------------------------------------------ */
 @media(min-width: 991px) and (max-width:1100px){
     .table_heading{
         font-size: 0.95em;
