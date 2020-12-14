@@ -415,6 +415,33 @@ select{
     opacity: 1;
 }
 
+.start_end_date{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 3em;
+}
+
+.start_end_text{
+    padding: 0.3em;
+    padding-left: 0;
+    font-weight: bold;
+}
+
+.start_end{
+    margin-right: 2em;
+}
+
+#start_date{
+    margin-top: 0.5em;
+    overflow: hidden;
+    padding: 0.9em;
+}
+
+#end_date{
+    margin-top: 0.5em;
+    overflow: hidden;
+    padding: 0.9em;
+}
 
 
 /* -----------------------ADD CLASS-------------------------------- */
