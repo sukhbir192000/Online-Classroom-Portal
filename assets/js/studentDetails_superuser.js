@@ -57,6 +57,10 @@ editBtn.forEach((edit, i) => {
         edit.parentNode.parentNode.children[0].style.visibility = 'hidden';
         ticks[i].parentNode.parentNode.children[1].style.display = 'flex';
         editButton[i].style.visibility = 'hidden';
+        var courses = [];
+        for(let j = 0; j<codes[i].childElementCount; j++){
+            courses.push(codes[i].children[j].children[0].innerHTML);
+        }
         for (let j = 0; j < codes[i].childElementCount; j++) {
             codes[i].children[j].children[1].classList.add('icon_hover');
             codes[i].children[j].children[1].style.pointerEvents = 'auto';
@@ -291,6 +295,8 @@ list.forEach((student, i) => {
                     trashIcon.forEach((trash, j) => {
                         trash.addEventListener('click', (e) => {
                             deletedCourse.push(trash.parentNode.children[0].innerHTML);
+                            var index = Array.prototype.indexOf.call(trash.parentNode.parentNode,trash.parentNode);
+                            courses.splice(index,1);
                             trash.parentNode.remove();
                         });
                     });
@@ -305,6 +311,7 @@ list.forEach((student, i) => {
 
         }
         else {
+            console.log(courses);
             dispDet[i].style.display = 'none';
             edits[i].style.visibility = 'hidden';
             edits[i].children[0].children[0].style.visibility = 'hidden';
