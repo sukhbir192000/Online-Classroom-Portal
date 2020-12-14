@@ -1,15 +1,14 @@
+<link rel="stylesheet" type="text/css" href="/css/studentDetails_superuser.css">
 
-    <link rel="stylesheet" type="text/css" href="/css/studentDetails_superuser.css">
-
-        <div class="main">
-            <div id="black_screen"></div>
-            <div class="main_content">
-                <div class="main_heading">
-                    <div class="heading">ENROLLED STUDENTS</div>
-                </div>
-            </div>
-            <div class="box_layout">
-                <div class="select">
+<div class="main">
+    <div id="black_screen"></div>
+    <div class="main_content">
+        <div class="main_heading">
+            <div class="heading">ENROLLED STUDENTS</div>
+        </div>
+    </div>
+    <div class="box_layout">
+        <!-- <div class="select">
                     <select name="program" id="program">
                         <option value="Select Program" selected disabled>----Select Programme----</option>
                         <option value="BTECH">BTECH</option>
@@ -20,342 +19,114 @@
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
                     </select>
+                </div> -->
+        <div class="filtered">
+            <div class="list_heading">
+                <div class="heading_name">
+                    <div class="detail_name">NAME</div>
+                    <div class="detail_heading">GRADUATING YEAR</div>
+                    <div class="detail_heading">PROGRAMME</div>
                 </div>
-                <div class="filtered">
-                    <div class="list_heading">
-                        <div class="heading_name">
-                            <div class="detail_name">NAME</div>
-                            <div class="detail_heading">GRADUATING YEAR</div>
-                            <div class="detail_heading">PROGRAMME</div>
-                        </div>
-                        <div class="easter_egg">
-                            <i class="fa fa-grin-squint" style="visibility:hidden; padding-right: 2em; display: flex;"></i>
-                        </div>
-                        
-                    </div>
+                <div class="easter_egg">
+                    <i class="fa fa-grin-squint" style="visibility:hidden; padding-right: 2em; display: flex;"></i>
+                </div>
 
-<!--------------------------------------------------------Student-------------------------------------------------------->
+            </div>
 
-                    <div class="student_list">
-                        <div class="det_area">
-                            <div class="student_dets">
-                                <div class="name_arrow">
-                                    <i class="fa fa-caret-right arrow_right"></i>
-                                    <div class="name_of_student">Ishjot Singh</div>
-                                </div>
-                                
-                                <div class="student_yog info">2022</div>
-                                <div class="student_prog info">BTECH</div>
+            <!--------------------------------------------------------Student-------------------------------------------------------->
+            <%for(let student of studentList){%>
+                <div class="student_list" >
+                    <div class="det_area">
+                        <div class="student_dets">
+                            <div class="name_arrow">
+                                <i class="fa fa-caret-right arrow_right"></i>
+                                <div class="name_of_student"><%=student.name%></div>
                             </div>
-                            <div class="student_details">
-                                <div class="students">
-                                    <!-- <div class="student_attribute">
+
+                            <div class="student_yog info"><%=2025-parseInt(student.currentYear)%></div>
+                            <div class="student_prog info">BTECH</div>
+                        </div>
+                        <div class="student_details"  id="<%=student._id%>">
+                            <div class="students">
+                                <!-- <div class="_student_attribute">
                                         <div class="attri_name non_edit_attri">DOB:</div>
                                         <input class="dob editable" type="date" value="1999-12-11" readonly>
                                     </div> -->
-                                    <div class="student_attribute">
-                                        <div class="attri_name non_edit_attri">Group:</div>
-                                        <select name="group" class="editable"disabled>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                        </select>
-                                        <!-- <div class="editable">1</div> -->
-                                    </div>
-                                    <div class="student_attribute">
-                                        <div class="attri_name non_edit_attri">Lab Group:</div>
-                                        <select name="lab_group" class="editable" disabled>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                        <!-- <div class="editable">3</div> -->
-                                    </div>
-                                    <div class="student_attribute">
-                                        <div class="attri_name non_edit_attri">Student ID:</div>
-                                        <div class="editable">18105051</div>
-                                    </div>
-                                </div>
-                                <div class="course_table">
-                                    <div class="table_heading">
-                                        <div>COURSES</div>
-                                    </div>
+                                <div class="student_attribute">
+                                    <div class="attri_name non_edit_attri">Group:</div>
+                                    <select name="group" class="editable" disabled>
+                                        <!-- <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option> -->
                                     
-                                    <div class="codes_holder">
-                                        <div class="edit_codes">
-                                            <div class="course_codes">ECN302</div>
-                                            <i class="fa fa-trash delete_icon"></i>
-                                        </div>
-                                        
-                                        <div class="edit_codes">
-                                            <div class="course_codes">ECN401</div>
-                                            <i class="fa fa-trash delete_icon"></i>
-                                        </div>
-    
-                                        <div class="edit_codes">
-                                            <div class="course_codes">ECN701</div>
-                                            <i class="fa fa-trash delete_icon"></i>
-                                        </div>
-    
-                                        <div class="edit_codes">
-                                            <div class="course_codes">ECN901</div>
-                                            <i class="fa fa-trash delete_icon"></i>
-                                        </div>
+                                    </select>
+                                    <!-- <div class="editable">1</div> -->
+                                </div>
+                                <div class="student_attribute">
+                                    <div class="attri_name non_edit_attri">Lab Group:</div>
+                                    <select name="lab_group" class="editable" disabled>
+                                        <!-- <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option> -->
+                                    </select>
+                                    <!-- <div class="editable">3</div> -->
+                                </div>
+                                <div class="student_attribute">
+                                    <div class="attri_name non_edit_attri">Student ID:</div>
+                                    <div class="editable"><%=student.sid%></div>
+                                </div>
+                            </div>
+                            <div class="course_table">
+                                <div class="table_heading">
+                                    <div>COURSES</div>
+                                </div>
+
+                                <div class="codes_holder">
+                                    <!-- <div class="edit_codes">
+                                        <div class="course_codes">ECN302</div>
+                                        <i class="fa fa-trash delete_icon"></i>
                                     </div>
-    
-                                </div>  
-    
+
+                                    <div class="edit_codes">
+                                        <div class="course_codes">ECN401</div>
+                                        <i class="fa fa-trash delete_icon"></i>
+                                    </div>
+
+                                    <div class="edit_codes">
+                                        <div class="course_codes">ECN701</div>
+                                        <i class="fa fa-trash delete_icon"></i>
+                                    </div>
+
+                                    <div class="edit_codes">
+                                        <div class="course_codes">ECN901</div>
+                                        <i class="fa fa-trash delete_icon"></i>
+                                    </div> -->
+                                </div>
+
                             </div>
-                            
+
                         </div>
-                        <div class="edit_dets" >
-                            <div>
-                                <i class="fa fa-edit btn_edit"></i>
-                            </div>
-                            <div class="tick_cross">
-                                <i class="fa fa-check save_changes"></i>
-                                <i class="fa fa-times cross"></i>
-                            </div>
+
+                    </div>
+                    <div class="edit_dets">
+                        <div>
+                            <i class="fa fa-edit btn_edit"></i>
+                        </div>
+                        <div class="tick_cross">
+                            <i class="fa fa-check save_changes"></i>
+                            <i class="fa fa-times cross"></i>
                         </div>
                     </div>
-
-<!-- ----------------------------------------------------------------------------------------------------------------- -->
-
-
-<!--------------------------------------------------------Student-------------------------------------------------------->
-
-                        <div class="student_list">
-                            <div class="det_area">
-                                <div class="student_dets">
-                                    <div class="name_arrow">
-                                        <i class="fa fa-caret-right arrow_right"></i>
-                                        <div class="name_of_student">Sukhbir Singh</div>
-                                    </div>
-                                    
-                                    <div class="student_yog info">2022</div>
-                                    <div class="student_prog info">BTECH</div>
-                                </div>
-                                <div class="student_details">
-                                    <div class="students">
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">DOB:</div>
-                                            <input class="dob editable" type="date" value="2000-06-19" readonly>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Group:</div>
-                                            <div class="editable">1</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Lab Group:</div>
-                                            <div class="editable">1</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Student ID:</div>
-                                            <div class="editable">18105018</div>
-                                        </div>
-                                    </div>
-                                    <div class="course_table">
-                                        <div class="table_heading">
-                                            <div>COURSES</div>
-                                        </div>
-                                        
-                                        <div class="codes_holder">
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN302</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                            
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN401</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN701</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN901</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                        </div>
-
-                                    </div>  
-
-                                </div>
-                                
-                            </div>
-                            <div class="edit_dets" >
-                                <div>
-                                    <i class="fa fa-edit btn_edit"></i>
-                                </div>
-                                <div class="tick_cross">
-                                    <i class="fa fa-check save_changes"></i>
-                                    <i class="fa fa-times cross"></i>
-                                </div>
-                            </div>
-                        </div>
-
-<!-- ----------------------------------------------------------------------------------------------------------------- -->
-
-
-<!--------------------------------------------------------Student-------------------------------------------------------->
-
-                        <div class="student_list">
-                            <div  class="det_area">
-                                <div class="student_dets">
-                                    <div class="name_arrow">
-                                        <i class="fa fa-caret-right  arrow_right"></i>
-                                        <div class="name_of_student">Mehak Goyal</div>
-                                    </div>
-                                    
-                                    <div class="student_yog info">2022</div>
-                                    <div class="student_prog info">BTECH</div>
-                                </div>
-                                <div class="student_details">
-                                    <div class="students">
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">DOB:</div>
-                                            <input class="dob editable" type="date" value="1999-10-18" readonly>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Group:</div>
-                                            <div class="editable">2</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Lab Group:</div>
-                                            <div class="editable">5</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Student ID:</div>
-                                            <div class="editable">18105105</div>
-                                        </div>
-                                    </div>
-                                    <div class="course_table">
-                                        <div class="table_heading">
-                                            <div>COURSES</div>
-                                        </div>
-                                        
-                                        <div class="codes_holder">
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN302</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                            
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN401</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN701</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN901</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                        </div>
-
-                                    </div>  
-
-                                </div>
-                                
-                            </div>
-                            <div class="edit_dets" >
-                                <div>
-                                    <i class="fa fa-edit btn_edit"></i>
-                                </div>
-                                <div class="tick_cross">
-                                    <i class="fa fa-check save_changes"></i>
-                                    <i class="fa fa-times cross"></i>
-                                </div>
-                            </div>
-                        </div>
-
-<!-- --------------------------------------------------------------------------------------------------------------------- -->
-
-<!--------------------------------------------------------Student-------------------------------------------------------->
-
-                        <div class="student_list">
-                            <div  class="det_area">
-                                <div class="student_dets">
-                                    <div class="name_arrow">
-                                        <i class="fa fa-caret-right arrow_right"></i>
-                                        <div class="name_of_student">Puneet Singh</div>
-                                    </div>
-                                    
-                                    <div class="student_yog info">2022</div>
-                                    <div class="student_prog info">BTECH</div>
-                                </div>
-                                <div class="student_details">
-                                    <div class="students">
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">DOB:</div>
-                                            <input class="dob editable" type="date" value="1999-12-08" readonly>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Group:</div>
-                                            <div class="editable">2</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Lab Group:</div>
-                                            <div class="editable">5</div>
-                                        </div>
-                                        <div class="student_attribute">
-                                            <div class="attri_name non_edit_attri">Student ID:</div>
-                                            <div class="editable">18105096</div>
-                                        </div>
-                                    </div>
-                                    <div class="course_table">
-                                        <div class="table_heading">
-                                            <div>COURSES</div>
-                                        </div>
-                                        
-                                        <div class="codes_holder">
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN302</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                            
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN401</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN701</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-
-                                            <div class="edit_codes">
-                                                <div class="course_codes">ECN901</div>
-                                                <i class="fa fa-trash delete_icon"></i>
-                                            </div>
-                                        </div>
-
-                                    </div>  
-
-                                </div>
-                                
-                            </div>
-                            
-                            <div class="edit_dets" >
-                                <div>
-                                    <i class="fa fa-edit btn_edit"></i>
-                                </div>
-                                <div class="tick_cross">
-                                    <i class="fa fa-check save_changes"></i>
-                                    <i class="fa fa-times cross"></i>
-                                </div>
-                            </div>
-                        </div>
-
-<!-- ----------------------------------------------------------------------------------------------------------------- -->
                 </div>
-            </div>
-        </div>
-        <script src="/js/studentDetails_superuser.js"></script>
-  
+            <%}%>
 
+        </div>
+    </div>
+</div>
+<script src="/js/studentDetails_superuser.js"></script>

@@ -23,29 +23,29 @@ document.addEventListener('mouseup',function(e){
 //     }
 //  });
 
-document.getElementById("delete_btn").addEventListener("click", function (e) {
-    document.getElementById("img").setAttribute("src", "./imgs/user.png");
-});
+// document.getElementById("delete_btn").addEventListener("click", function (e) {
+//     document.getElementById("img").setAttribute("src", "./imgs/user.png");
+// });
 
-document.getElementById("delete_btn_1").addEventListener("click", function (e) {
-    document.getElementById("img_responsive").setAttribute("src", "./imgs/user_responsive.png");
-});
+// document.getElementById("delete_btn_1").addEventListener("click", function (e) {
+//     document.getElementById("img_responsive").setAttribute("src", "./imgs/user_responsive.png");
+// });
 
-document.querySelector("#pencil_btn_1").addEventListener("click", function (e) {
-    console.log("hiii");
-    document.querySelector(".change_pic").click();
-    document.querySelector(".change_pic").addEventListener("change", function (e) {
-        console.log(this.files);
-    });
-});
+// document.querySelector("#pencil_btn_1").addEventListener("click", function (e) {
+//     console.log("hiii");
+//     document.querySelector(".change_pic").click();
+//     document.querySelector(".change_pic").addEventListener("change", function (e) {
+//         console.log(this.files);
+//     });
+// });
 
-document.querySelector("#pencil_btn").addEventListener("click", function (e) {
-    console.log("hiii");
-    document.querySelector(".change_pic").click();
-    document.querySelector(".change_pic").addEventListener("change", function (e) {
-        console.log(this.files);
-    });
-});
+// document.querySelector("#pencil_btn").addEventListener("click", function (e) {
+//     console.log("hiii");
+//     document.querySelector(".change_pic").click();
+//     document.querySelector(".change_pic").addEventListener("change", function (e) {
+//         console.log(this.files);
+//     });
+// });
 
 // document.addEventListener('mouseup', function (e) {
 //     var container = document.getElementById('profile');

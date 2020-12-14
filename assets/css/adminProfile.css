@@ -932,9 +932,9 @@ input[type="number"]{
     margin-left: 1em;
 }
 
-.trash_icon:hover{
+/* .trash_icon:hover{
     color: #d62648;
-}
+} */
 
 .course_name{
     background-color:lightgray;
@@ -1188,9 +1188,11 @@ input[type="number"]{
     }
 
     .profile_pic{
-        width: 8em;
+        /* width: 8em;
         height: 8em;
-        object-fit: unset;
+        object-fit: unset; */
+        font-size: 2.7em;
+        color: #1D3557;
     }
 
     .content{
@@ -1202,7 +1204,7 @@ input[type="number"]{
         margin: 5em;
     }
 
-    .dp_hover:hover .profile_pic{
+    /* .dp_hover:hover .profile_pic{
         background-color: #000;
         opacity: 0.5;
     }
@@ -1210,7 +1212,7 @@ input[type="number"]{
     .profile_pic:hover{
         background-color: #000;
         opacity: 0.3;
-    }
+    } */
 
     .edit_button{
         color: #000;
@@ -1411,6 +1413,7 @@ input[type="number"]{
 
     #personal_info{
         font-size: 2em;
+        margin-bottom: 1em;
     }
 
     #attendance{
@@ -1433,19 +1436,21 @@ input[type="number"]{
         font-size: 2vw;
     }
     
-    .dp_hover:hover .profile_pic{
+    /* .dp_hover:hover .profile_pic{
         background-color: #000;
         opacity: 0.5;
-    }
+    } */
 
     .edit_button{
         color: #000;
     }
 
     .profile_pic{
-        width: 7em;
+        /* width: 7em;
         height: 7em;
-        object-fit: unset;
+        object-fit: unset; */
+        font-size: 2.5em;
+        color: #1D3557;
     }
 
     .edit_icon{

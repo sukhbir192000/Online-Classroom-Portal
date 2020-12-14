@@ -66,38 +66,43 @@ var activeIconFunction = function(activeIcon){
                     years.push(year_selected[i].children[0].name);
                 }
             }
-            $.ajax({
-                type:"POST",
-                url:"/superuser/courses/update",
-                data:{
-                    id:activeIcon.parentNode.id,
-                    state:state,
-                    year:years
-                },
-                success:function(response){
-                    console.log("activated");
-                    activeIcon.classList.toggle("icon_color_change");
-                    year_select_container.style.display = "none";
-                    document.getElementsByClassName("box_layout")[0].style.opacity = "1";
-                    active_display = false;
-                    document.removeEventListener("click",displayFunction);
-                    var checkboxes = document.getElementsByClassName("new_year_select");
-                    for(let i=0;i<checkboxes.length; i++){
-                        checkboxes[i].children[0].checked = false;
-                    }
-                   
-                    var year_display = activeIcon.parentNode.parentNode.children[1].children[1].children[1];
-                    year_display.innerHTML = "<b>Year:&nbsp;<b>";
-                    for(let i=0;i<years.length;i++){
-                        year_display.innerHTML+=years[i];
-                        year_display.innerHTML+=", "
-                    }
-                    year_display.innerHTML = year_display.innerHTML.slice(0,-2);
+            if(years.length>0){
+                $.ajax({
+                    type:"POST",
+                    url:"/superuser/courses/update",
+                    data:{
+                        id:activeIcon.parentNode.id,
+                        state:state,
+                        year:years
+                    },
+                    success:function(response){
+                        console.log("activated");
+                        activeIcon.classList.toggle("icon_color_change");
+                        year_select_container.style.display = "none";
+                        document.getElementsByClassName("box_layout")[0].style.opacity = "1";
+                        active_display = false;
+                        document.removeEventListener("click",displayFunction);
+                        var checkboxes = document.getElementsByClassName("new_year_select");
+                        for(let i=0;i<checkboxes.length; i++){
+                            checkboxes[i].children[0].checked = false;
+                        }
+                    
+                        var year_display = activeIcon.parentNode.parentNode.children[1].children[1].children[1];
+                        year_display.innerHTML = "<b>Year:&nbsp;<b>";
+                        for(let i=0;i<years.length;i++){
+                            year_display.innerHTML+=years[i];
+                            year_display.innerHTML+=", "
+                        }
+                        year_display.innerHTML = year_display.innerHTML.slice(0,-2);
 
-                    year_display.classList.remove("hide");
-                    document.getElementsByClassName("new_year_button")[0].removeEventListener("click",submitFunction);
-                }
-            })
+                        year_display.classList.remove("hide");
+                        document.getElementsByClassName("new_year_button")[0].removeEventListener("click",submitFunction);
+                    }
+                })
+            }
+            else{
+                alert("Please select atleast one year.");
+            }
         }
         if(!state){
             console.log("hii");

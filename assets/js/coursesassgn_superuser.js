@@ -204,10 +204,10 @@ var deleteIconFunction = function(deleteIcon){
                 index: $(this.parentNode).index()-2
             },
             success: function(response){
-                if(this.parentNode.parentNode.children.length == 3){
-                    this.parentNode.parentNode.children[1].style.display = "flex";
+                if(deleteIcon.parentNode.parentNode.children.length == 3){
+                    deleteIcon.parentNode.parentNode.children[1].style.display = "flex";
                 }
-                this.parentNode.parentNode.removeChild(this.parentNode);
+                deleteIcon.parentNode.parentNode.removeChild(deleteIcon.parentNode);
             }
         })
     })

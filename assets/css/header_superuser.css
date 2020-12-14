@@ -9,7 +9,7 @@
 .welcome_user{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 .welcome_user_heading{
@@ -77,6 +77,20 @@
 }
 .show{
     visibility: visible;
+}
+.icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.back_icon{
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:1em;
 }
 
 

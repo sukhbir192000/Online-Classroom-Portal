@@ -1,7 +1,14 @@
 
 <header class="header">
     <div class="welcome_user bgcolor_welcome_user">
-        <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div>
+        <div class="icons">
+            <% if(title == 'Student Details') {%>
+                <a href="/superuser/programmes"><div class="back_icon" ><i class="fa fa-arrow-left fa-lg color_white"></i></div></a>
+            <%} else{%>
+                <div id="hamburger" class="hamburger_icon"><i class="fa fa-bars fa-lg color_white"></i></div>
+            <%}%>
+        </div>
+        
         <div class="welcome_user_heading">
             <div class="welcome_user_content color_white">
                 Welcome User!
