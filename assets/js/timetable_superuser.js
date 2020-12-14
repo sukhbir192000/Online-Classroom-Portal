@@ -57,6 +57,8 @@ const allBlocks = document.querySelector('.all_blocks');
 const block = document.querySelector('.block');
 const deleteIcon = document.querySelectorAll('.delete_icon');
 const disable = document.querySelector('.disable_event');
+const filterData = document.querySelector('.filterData')
+const year_select = filterData.children[1];
 
 var allDetails = [[],[],[],[],[],[],[]];
 for(let k = 0; k<allDetails.length; k++){
@@ -75,6 +77,19 @@ for(let k = 0; k<allDetails.length; k++){
 
 var boxNumber = -1;
 var boxArray = [];
+
+let year_check = 'Select';
+
+function displayBox(){
+    table.style.display = 'flex';
+}
+
+year_select.addEventListener('change', function(e){
+    year_check = year_select.value;
+    if( year_check != 'Select'){
+        displayBox();
+    }
+});
 
 addClass.addEventListener('click', (e)=>{
     modifyBox.style.display = 'flex';
