@@ -24,7 +24,15 @@ module.exports.courseCreate = async function(req,res){
 }
 module.exports.courseDelete=async function(req,res){
     try{
-        let course=await CourseModel.findByIdAndDelete(req.body.id);
+        let course = await CourseModel.findById(req.body.id);
+        if((course.teachers && course.teachers.length>0) || (course.students && course.students.length>0)){
+            return res.status(200).json({
+                err: true
+            })
+        }
+        else{
+            await CourseModel.findByIdAndDelete(req.body.id);
+        }
         return res.status(200).json({
             course:course   
         });
@@ -43,8 +51,15 @@ module.exports.courseUpdate=async function(req,res){
             course.year = req.body.year
         }
         else{
-            course.isActive = false;
-            course.year = [];
+            if((course.teachers && course.teachers.length>0) || (course.students && course.students.length>0)){
+                return res.status(200).json({
+                    err: true
+                })
+            }
+            else{
+                course.isActive = false;
+                course.year = [];
+            }
         }
         course.save();
         return res.status(200).json({
