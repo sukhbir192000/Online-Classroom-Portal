@@ -237,7 +237,7 @@ async function addAssignments(req, res, classSubList){
     for(let subject in classSubList){
         for(let clas in classSubList[subject]){
             let fullCondition = false;
-            if(classSubList[subject][clas]=={}){
+            if(Object.keys(classSubList[subject][clas]).length === 0){
                 fullCondition = true;
             }
             else{
