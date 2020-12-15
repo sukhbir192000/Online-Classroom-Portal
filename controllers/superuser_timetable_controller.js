@@ -23,15 +23,15 @@ module.exports.timetable = async function (req, res) {
             // --------------------courses-------------------------
             let present_date = new Date();
             let present_year = present_date.getFullYear();
-            let req_year = 4-(req.body.passingOutYear - present_year);
-            if(present_date.getMonth()>5) req_year++;
+            let req_year = 4 - (req.body.passingOutYear - present_year);
+            if (present_date.getMonth() > 5) req_year++;
             let course_available = await CourseModel.find({
                 offered_to: res.locals.user.dept,
                 year: req_year
             });
             //-----------------------groups-------------------------
-            let group_list = await GroupModel.find({class: req_class._id});
-            let sub_group_list = await SubGroupModel.find({class: req_class._id});
+            let group_list = await GroupModel.find({ class: req_class._id });
+            let sub_group_list = await SubGroupModel.find({ class: req_class._id });
             return res.status(200).json({
                 timeTableItems: timeTableItems,
                 courses: course_available,
@@ -41,7 +41,7 @@ module.exports.timetable = async function (req, res) {
 
         }
         else {
-            let present_classes = await ClassModel.find({stream: res.locals.user.dept}).sort('passingOutYear');
+            let present_classes = await ClassModel.find({ stream: res.locals.user.dept }).sort('passingOutYear');
             return res.render('superuser/timetable', {
                 title: 'Timetable',
                 timetableItems: [[], [], [], [], [], [], []],
@@ -82,40 +82,56 @@ module.exports.saveTimeTable = async function (req, res) {
         }
         timeTableItem.timeTableData = req.body.timeTableData
         timeTableItem.save();
-        for(let i=0;i<7;i++){
-            
-     
-            for(let j=8;j<req.body.timeTableData[i].length;j++){
+        for (let i = 0; i < 7; i++) {
+
+
+            for (let j = 8; j < req.body.timeTableData[i].length; j++) {
                 // console.log(req.body.timeTableData[i][j]);
                 //starting time is j
-                if(req.body.timeTableData[i][j][0]!=""){
+                if (req.body.timeTableData[i][j][0] != "") {
 
-                    let timeTableItemsArray=req.body.timeTableData[i][j][0];
-                  
-                    for(let classItem of timeTableItemsArray){
-                        console.log("starting at ",i,j," : ",classItem);
-                        //create wrt this
-                        let classTimeTable=req_class
-                        if(classItem[1]=="Lab"){
+                    let timeTableItemsArray = req.body.timeTableData[i][j][0];
+
+                    for (let classItem of timeTableItemsArray) {
+                        console.log("starting at ", i, j, " : ", classItem);
+                        //here i am at classItem
+
+
+                        if (classItem[1] == "Lab") {
                             console.log("labclass");
-                            
-                            
+                            let my_class_sub = await CourseModel.findById(classItem[0]);
+                            let my_teachers = my_class_sub.teachers;
+                            for (let teacher of my_teachers) {
+                                if (teacher.classSub.class == req_class.id) {
+                                    if (classItem[2] == teacher.classSub.subGroup) {
+                                        //create for this
+                                        for () {
+                                            let classCreated = await TimeTableModel.create({
+                                                startingTime: j,
+                                                duration: classItem[3],
+                                                classSub: teacher.classSub,
+                                                teacher: teacher._id,
+                                                classType: classItem[1]
+                                            })
+                                        }
+                                        break;
+                                    }
+
+                                }
+                            }
+
                         }
-                        else{
+                        else {
                             console.log("lectureclass")
-                            
+
                         }
 
 
                     }
-                    //starting time : j
-                    //date ? week i
-                    //duration timeTableItemsArray ke objects ka last item
-                    //class type same as upar
-                    // class sub and teacher ????
+
                 }
             }
-            
+
         }
         //save to teacher tt too
         return res.status(200).json({
