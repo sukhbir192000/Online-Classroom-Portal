@@ -65,6 +65,7 @@ module.exports.saveTimeTable = async function (req, res) {
         }
         timeTableItem.timeTableData = req.body.timeTableData
         timeTableItem.save();
+        console.log(req.body);
         //save to teacher tt too
         return res.status(200).json({
             message: "Updated TT"

@@ -95,11 +95,13 @@ year_select.addEventListener('change', function (e) {
                 passingOutYear: year_check
             },
             success: function (obj) {
+
                 console.log("fetched data: ", obj.timeTableItems);
                 if(obj.timeTableItems && obj.timeTableItems.timeTableData){
                     allDetails = obj.timeTableItems.timeTableData;
-                    preset_data();
+                    
                 }
+                preset_data();
                 displayBox();
             }
 
