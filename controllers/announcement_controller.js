@@ -66,18 +66,18 @@ module.exports.announcement = async function (req, res) {
                     announcementsList=[];
                     for (let classElement of classId) {
                         console.log("finding:",courseId,classElement._id)
-                        announcementsList.concat(await AnnouncementsModel.find({
+                        let temp_list=await AnnouncementsModel.find({
                             postedBy: user._id,
                             "classSub.course": courseId,
                             "classSub.class": classElement._id
                         }).populate('classSub.course')
                             .populate('classSub.class')
                             .populate('classSub.group')
-                            .populate('classSub.subGroup')
-
-                        );
+                            .populate('classSub.subGroup');
+                        announcementsList=announcementsList.concat(temp_list);
+                        
                     }
-                    console.log("list:",announcementsList);
+                    
                 }
                 else {
                     let courseId = await CourseModel.find({
