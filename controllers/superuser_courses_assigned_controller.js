@@ -35,15 +35,16 @@ module.exports.courses_assgnCreate = async function(req,res){
         let course = await CourseModel.findById(req.body.code_course);
         let teacher = await UserModel.findById(req.body.name_teacher);
         if(req.body.group_class == "All"){
+            const link = await LinkModel.create({link: ""});
             course.teachers.push({
                 teacher: req.body.name_teacher,
                 classSub: {
                     course: req.body.code_course,
-                    class: req.body.choose_branch
+                    class: req.body.choose_branch,
+                    link: link._id
                 },
                 classType: req.body.lecture_lab
             });
-            const link = await LinkModel.create({link: ""});
             teacher.classSub.push({
                 course: req.body.code_course,
                 class: req.body.choose_branch,
@@ -52,16 +53,17 @@ module.exports.courses_assgnCreate = async function(req,res){
         }
         else{
             if(req.body.lecture_lab == "Lecture"){
+                const link = await LinkModel.create({link: ""});
                 course.teachers.push({
                     teacher: req.body.name_teacher,
                     classSub: {
                         course: req.body.code_course,
                         class: req.body.choose_branch,
-                        group: req.body.group_class
+                        group: req.body.group_class,
+                        link: link._id
                     },
                     classType: req.body.lecture_lab
                 });
-                const link = await LinkModel.create({link: ""});
                 teacher.classSub.push({
                     course: req.body.code_course,
                     class: req.body.choose_branch,
@@ -70,16 +72,17 @@ module.exports.courses_assgnCreate = async function(req,res){
                 });
             }
             else{
+                const link = await LinkModel.create({link: ""});
                 course.teachers.push({
                     teacher: req.body.name_teacher,
                     classSub: {
                         course: req.body.code_course,
                         class: req.body.choose_branch,
-                        subGroup: req.body.group_class
+                        subGroup: req.body.group_class,
+                        link: link._id
                     },
                     classType: req.body.lecture_lab
                 });
-                const link = await LinkModel.create({link: ""});
                 teacher.classSub.push({
                     course: req.body.code_course,
                     class: req.body.choose_branch,
