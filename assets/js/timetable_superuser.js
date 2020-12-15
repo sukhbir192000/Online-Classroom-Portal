@@ -117,7 +117,8 @@ year_select.addEventListener('change', function (e) {
                 for(let sub_group_obj of obj.sub_groups){
                     map_sub_group[sub_group_obj._id] = sub_group_obj.subGroupNumber;
                 }
-
+                document.getElementById('start_date').value = obj.timeTableItems.startDate;
+                document.getElementById('end_date').value = obj.timeTableItems.endDate;
                 console.log("fetched data: ", obj.timeTableItems);
                 if (obj.timeTableItems && obj.timeTableItems.timeTableData) {
                     allDetails = obj.timeTableItems.timeTableData;
