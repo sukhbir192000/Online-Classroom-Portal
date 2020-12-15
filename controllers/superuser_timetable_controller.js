@@ -82,6 +82,8 @@ module.exports.saveTimeTable = async function (req, res) {
         }
         timeTableItem.timeTableData = req.body.timeTableData
         timeTableItem.save();
+        //wipe tt
+        
         for (let i = 0; i < 7; i++) {
 
 
@@ -95,34 +97,56 @@ module.exports.saveTimeTable = async function (req, res) {
                     for (let classItem of timeTableItemsArray) {
                         console.log("starting at ", i, j, " : ", classItem);
                         //here i am at classItem
-
-
+                        
+                        
                         if (classItem[1] == "Lab") {
                             console.log("labclass");
-                            let my_class_sub = await CourseModel.findById(classItem[0]);
-                            let my_teachers = my_class_sub.teachers;
-                            for (let teacher of my_teachers) {
-                                if (teacher.classSub.class == req_class.id) {
-                                    if (classItem[2] == teacher.classSub.subGroup) {
+                            let my_class_sub=await CourseModel.findById(classItem[0]);
+                            let my_teachers=my_class_sub.teachers;
+                            for(let teacher of my_teachers){
+                                if(teacher.classSub.class==req_class.id){
+                                    if(classItem[2]==teacher.classSub.subGroup){
                                         //create for this
-                                        for () {
-                                            let classCreated = await TimeTableModel.create({
-                                                startingTime: j,
-                                                duration: classItem[3],
-                                                classSub: teacher.classSub,
-                                                teacher: teacher._id,
-                                                classType: classItem[1]
-                                            })
-                                        }
+                                        console.log("creating lab");
+                                        console.log(classItem)
+                                        break;
+                                        let classCreated=await TimeTableModel.create({
+                                            startingTime:j,
+                                            duration:classItem[3],
+                                            classSub:teacher.classSub,
+                                            teacher:teacher._id,
+                                            classType:classItem[1]
+                                        })
                                         break;
                                     }
-
+                                    
                                 }
                             }
 
                         }
                         else {
-                            console.log("lectureclass")
+                            console.log("lectureclass");
+                            let my_class_sub=await CourseModel.findById(classItem[0]);
+                            let my_teachers=my_class_sub.teachers;
+                            for(let teacher of my_teachers){
+                                if(teacher.classSub.class==req_class.id){
+                                    if(classItem[2]=="All" ||classItem[2]==teacher.classSub.group){
+                                        //create for this
+                                        console.log("creating lecture");
+                                        console.log(classItem)
+                                        break;
+                                        let classCreated=await TimeTableModel.create({
+                                            startingTime:j,
+                                            duration:classItem[3],
+                                            classSub:teacher.classSub,
+                                            teacher:teacher._id,
+                                            classType:classItem[1]
+                                        })
+                                        break;
+                                    }
+                                    
+                                }
+                            }
 
                         }
 
