@@ -451,10 +451,13 @@ module.exports.assignmentCreate=async function(req,res){
 
 module.exports.assignmentUpdate=async function(req,res){
     try{
-        
         let assignment=await AssignmentModel.findById(req.params.assignmentId);
         assignment.title=req.body.title;
         assignment.content=req.body.description;
+        assignment.weightage=req.body.points;
+        if(req.body.deadline_input){
+            assignment.deadline = req.body.deadline_input;
+        }
         let delete_files=(req.body.after_delete_files);
         if(delete_files){
             for(let i=0;i<delete_files.length;i++){

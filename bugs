@@ -1,27 +1,17 @@
 todo:
-    timetable -14, puneet and sukhbir
     guide book
-    courses offered in tt
-    fetch data in tt
-    convert data from superuser tt to teacher tt
+
 Assignments
 - Edit (NOT COMPLETE)
 - View submission
 - add download and href in ejs and js ????
 - file name too long gets chopped off
 
-Timetable
-- changing week breaks hover
-
 BACKEND
 - Added another field to hidden form of assgn (points & deadline)
-- set value of input deadline as current deadline in edit mode (ASSIGNMENT AND QUIZ)
 - remove unsubmitted if graded from backend
 
 BAAD KE KAAM:
 - pagination
 - add backlog field to user schema and make additions accordingly in controllers
 - add isActive field to class-sub schema and make additions accordingly in controllers
-
-
-- ASK JYOTI MAAM KI OTHER BRANCHES KE COURSE OTHER BRANCHES ACTIVE KARTI HAI YA ECE BRANCH

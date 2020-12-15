@@ -73,17 +73,25 @@ week_shift_div.children[0].addEventListener('click', function (e) {
                     rowDiv.innerHTML = `<div class="table_column table_heading">${8 + i}:00 - ${9 + i}:00</div>`;
                     for (let j = 0; j < 7; j++) {
                         if (response.timetableItems[j][8 + i]) {
-                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8 + i]._id}" style="height:${4 * response.timetableItems[j][8 + i].duration}em !important; z-index:2;">${response.timetableItems[j][8 + i].classSub.course.name}
-                            <div class="groupDisplay" style="display: none;">
-                            </div>`
-                            // rowDiv.innerHTML += `<div class="groupDisplay" style="display: none;">`
+                            rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8 + i]._id}" style="height:${4 * response.timetableItems[j][8 + i].duration}em !important; z-index:2;">${response.timetableItems[j][8 + i].classSub.course.name}</div>`
+                            let inner_var = rowDiv.children[rowDiv.childElementCount - 1];
+                            inner_var.innerHTML+=`<div class="groupDisplay" style="display: none;"></div>`
+                            let inner_inner_var = inner_var.children[inner_var.childElementCount-1];
+                            if(response.timetableItems[j][8+i].classSub.group){
+                                inner_inner_var.innerHTML+=`Group: <span class="groupNumber" id="${response.timetableItems[j][8+i].classSub.group}">${response.timetableItems[j][8+i].classSub.group.groupNumber}</span>`
+                            }
+                            if(response.timetableItems[j][8+i].classSub.subGroup){
+                                inner_inner_var.innerHTML+=`Lab Group: <span class="subGroupNumber" id="${response.timetableItems[j][8+i].classSub.subGroup}">${response.timetableItems[j][8+i].classSub.subGroup.subGroupNumber}</span>`
+                            }
+                            inner_inner_var.innerHTML+=`<span class="typeDisplay">${response.timetableItems[j][8+i].classType}</span>`
+                            console.log("new container: ",rowDiv.innerHTML);
                         }
                         else {
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
                         }
 
                     }
-                    console.log("new container: ",new_container.innerHTML);
+                    
                 }
                 new_container.classList.add("timetable_content_container");
                 new_container.style.marginLeft = "-100%";
@@ -130,6 +138,16 @@ week_shift_div.children[1].addEventListener('click', function (e) {
                     for (let j = 0; j < 7; j++) {
                         if (response.timetableItems[j][8 + i]) {
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column" id="${response.timetableItems[j][8 + i]._id}" style="height:${4 * response.timetableItems[j][8 + i].duration}em !important; z-index:2;">${response.timetableItems[j][8 + i].classSub.course.name}</div>`
+                            let inner_var = rowDiv.children[rowDiv.childElementCount - 1];
+                            inner_var.innerHTML+=`<div class="groupDisplay" style="display: none;"></div>`
+                            let inner_inner_var = inner_var.children[inner_var.childElementCount-1];
+                            if(response.timetableItems[j][8+i].classSub.group){
+                                inner_inner_var.innerHTML+=`Group: <span class="groupNumber" id="${response.timetableItems[j][8+i].classSub.group}">${response.timetableItems[j][8+i].classSub.group.groupNumber}</span>`
+                            }
+                            if(response.timetableItems[j][8+i].classSub.subGroup){
+                                inner_inner_var.innerHTML+=`Lab Group: <span class="subGroupNumber" id="${response.timetableItems[j][8+i].classSub.subGroup}">${response.timetableItems[j][8+i].classSub.subGroup.subGroupNumber}</span>`
+                            }
+                            inner_inner_var.innerHTML+=`<span class="typeDisplay">${response.timetableItems[j][8+i].classType}</span>`
                         }
                         else {
                             rowDiv.innerHTML = rowDiv.innerHTML + `<div class="table_column"></div>`
