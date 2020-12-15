@@ -1,4 +1,5 @@
-
+var lab_groups = [], lecture_groups = [];
+var map_group = {}, map_sub_group = {}, map_course = {};
 document.addEventListener('mouseup', function (e) {
     var position = document.querySelector(".profile_icon").getBoundingClientRect();
     var rect = document.querySelector(".profile").getBoundingClientRect();
@@ -66,10 +67,10 @@ for (let k = 0; k < allDetails.length; k++) {
     let index = k;
     for (let j = 8; j < 17; j++) {
         allDetails[k][j] = [];
-        if(tableBox[index + 9].innerHTML==''){
-            allDetails[k][j]=[''];
+        if (tableBox[index + 9].innerHTML == '') {
+            allDetails[k][j] = [''];
         }
-        else{
+        else {
             allDetails[k][j].push(boxArray[index + 9]);
         }
         index += 8;
@@ -95,11 +96,32 @@ year_select.addEventListener('change', function (e) {
                 passingOutYear: year_check
             },
             success: function (obj) {
+                map_course = {};
+                map_group = {};
+                map_sub_group = {};
+                let course_form = document.getElementById('course_select');
+                course_form.innerHTML = '';
+                for (let course_obj of obj.courses) {
+                    course_form.innerHTML += `<option value='${course_obj._id}'>${course_obj.code}</option>`;
+                    map_course[course_obj._id] = course_obj.code;
+                }
+                let group_form = document.getElementById('group_select');
+                group_form.innerHTML = '';
+                for (let group_obj of obj.groups) {
+                    group_form.innerHTML += `<option value='${group_obj._id}'>${group_obj.groupNumber}</option>`;
+                    map_group[group_obj._id] = group_obj.groupNumber;
+                }
+                document.getElementById('type_select').selectedIndex = 0;
+                lab_groups = obj.sub_groups;
+                lecture_groups = obj.groups;
+                for(let sub_group_obj of obj.sub_groups){
+                    map_sub_group[sub_group_obj._id] = sub_group_obj.subGroupNumber;
+                }
 
                 console.log("fetched data: ", obj.timeTableItems);
-                if(obj.timeTableItems && obj.timeTableItems.timeTableData){
+                if (obj.timeTableItems && obj.timeTableItems.timeTableData) {
                     allDetails = obj.timeTableItems.timeTableData;
-                    
+
                 }
                 preset_data();
                 displayBox();
@@ -145,10 +167,10 @@ addButton.addEventListener('click', (e) => {
         let index = k;
         for (let j = 8; j < 17; j++) {
             allDetails[k][j] = [];
-            if(tableBox[index + 9].innerHTML==''){
-                allDetails[k][j]=[''];
+            if (tableBox[index + 9].innerHTML == '') {
+                allDetails[k][j] = [''];
             }
-            else{
+            else {
                 allDetails[k][j].push(boxArray[index + 9]);
             }
             index += 8;
@@ -177,8 +199,16 @@ tableBox.forEach((box, i) => {
                 for (let j = 0; j < boxArray[i].length; j++) {
                     var clonedNode = classes.cloneNode(true);
                     clonedNode.classList.remove('static_temp_class');
-                    for (let k = 0; k < boxArray[i][j].length; k++) {
-                        clonedNode.children[0].children[k].children[1].innerHTML = boxArray[i][j][k];
+                    for (let k = 0; k < boxArray[i][j].length; k+=4) {
+                        clonedNode.children[0].children[0].children[1].innerHTML = map_course[boxArray[i][j][0]];
+                        clonedNode.children[0].children[1].children[1].innerHTML = boxArray[i][j][1];
+                        if(boxArray[i][j][1] == "Lecture"){
+                            clonedNode.children[0].children[2].children[1].innerHTML = map_group[boxArray[i][j][2]];
+                        }
+                        else{
+                            clonedNode.children[0].children[2].children[1].innerHTML = map_sub_group[boxArray[i][j][2]];
+                        }
+                        clonedNode.children[0].children[3].children[1].innerHTML = boxArray[i][j][3];
                     }
                     clonedNode.style.borderBottom = 'solid 0.1em black';
                     clonedNode.style.padding = '1em';
@@ -205,10 +235,10 @@ tableBox.forEach((box, i) => {
                             let index = k;
                             for (let j = 8; j < 17; j++) {
                                 allDetails[k][j] = [];
-                                if(tableBox[index + 9].innerHTML==''){
-                                    allDetails[k][j]=[''];
+                                if (tableBox[index + 9].innerHTML == '') {
+                                    allDetails[k][j] = [''];
                                 }
-                                else{
+                                else {
                                     allDetails[k][j].push(boxArray[index + 9]);
                                 }
                                 index += 8;
@@ -281,43 +311,60 @@ applyButton.addEventListener('click', (e) => {
     let startDate = document.getElementById('start_date').value;
     let endDate = document.getElementById('end_date').value;
     // if (startDate && endDate) {
-        $.ajax({
-            url: "/superuser/timetable/save",
-            method: "POST",
-            data: {
-                passingOutYear: year_select.value,
-                timeTableData: allDetails,
-                startDate: startDate,
-                endDate: endDate
-            },
-            success: function (obj) {
-                console.log(obj);
+    $.ajax({
+        url: "/superuser/timetable/save",
+        method: "POST",
+        data: {
+            passingOutYear: year_select.value,
+            timeTableData: allDetails,
+            startDate: startDate,
+            endDate: endDate
+        },
+        success: function (obj) {
+            console.log(obj);
 
-            }
-        })
+        }
+    })
     // }
     // else{
     //     alert("Please set start date and end date of semester.");
     // }
 })
 
-function preset_data(){
+function preset_data() {
     for (let k = 0; k < allDetails.length; k++) {
         let index = k;
         for (let j = 8; j < 17; j++) {
-            if(allDetails[k][j] == ['']) boxArray[index+9] = '';
+            if (allDetails[k][j] == ['']) boxArray[index + 9] = '';
             else {
-                boxArray[index+9] = [];
-                for(let i = 0; i< allDetails[k][j].length; i++){
-                console.log(allDetails[k][j][i]);
-                    for(let killmePls = 0; killmePls<allDetails[k][j][i].length; killmePls++){
-                        boxArray[index+9].push(allDetails[k][j][i][killmePls]);
-                    }              
+                boxArray[index + 9] = [];
+                for (let i = 0; i < allDetails[k][j].length; i++) {
+                    console.log(allDetails[k][j][i]);
+                    for (let killmePls = 0; killmePls < allDetails[k][j][i].length; killmePls++) {
+                        boxArray[index + 9].push(allDetails[k][j][i][killmePls]);
+                    }
                 }
-                if(boxArray[index+9] == '') tableBox[index+9].innerHTML = '';
-                else tableBox[index+9].innerHTML = boxArray[index+9].length ;
+                if (boxArray[index + 9] == '') tableBox[index + 9].innerHTML = '';
+                else tableBox[index + 9].innerHTML = boxArray[index + 9].length;
             }
             index += 8;
         }
     }
 }
+
+let type_input = document.getElementById('type_select')
+type_input.addEventListener('change', function (e) {
+    let group_form = document.getElementById('group_select');
+    group_form.innerHTML = '';
+    
+    if (this.value == "Lecture") {
+        for (let group_obj of lecture_groups) {
+            group_form.innerHTML += `<option value='${group_obj._id}'>${group_obj.groupNumber}</option>`
+        }
+    }
+    else if (this.value == "Lab") {
+        for (let group_obj of lab_groups) {
+            group_form.innerHTML += `<option value='${group_obj._id}'>${group_obj.subGroupNumber}</option>`
+        }
+    }
+})

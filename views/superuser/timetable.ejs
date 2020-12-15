@@ -80,32 +80,33 @@
     <div class="add_container">
         <div class="subject_code">
             <div>Subject Code:</div>
-            <select>
+            <select id="course_select">
                 <option>ECN-201</option>
                 <option>ECN-202</option>
             </select>
         </div>
         <div class="class_type">
             <div>Class Type:</div>
-            <select>
-                <option>Lab</option>
-                <option>Lecture</option>
+            <select id="type_select">
+                <option value="Lecture">Lecture</option>
+                <option value="Lab">Lab/Tutorial</option>
             </select>
         </div>
         <div class="lab_group">
             <div>Group:</div>
-            <select>
+            <select id="group_select">
                 <option>1</option>
                 <option>2</option>
             </select>
         </div>
         <div class="duration">
             <div>Duration:</div>
-            <select>
+            <input type="number" min=1 value=1 step=1>
+            <!-- <select>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
-            </select>
+            </select> -->
         </div>
         <div class="buttons">
             <button class="add_button" type="button">Add Class</button>

@@ -1,7 +1,9 @@
 const TimeTableModel = require('../models/timetable')
 const ClassModel = require('../models/class');
 const SuperUserTimeTable = require('../models/superuser_dept_timetable');
-const Class = require('../models/class');
+const CourseModel = require('../models/course');
+const GroupModel = require('../models/group');
+const SubGroupModel = require('../models/sub-group');
 
 module.exports.timetable = async function (req, res) {
     try {
@@ -18,9 +20,23 @@ module.exports.timetable = async function (req, res) {
                     class: req_class._id
                 })
             }
+            // --------------------courses-------------------------
+            let present_date = new Date();
+            let present_year = present_date.getFullYear();
+            let req_year = 4-(req.body.passingOutYear - present_year);
+            if(present_date.getMonth()>5) req_year++;
+            let course_available = await CourseModel.find({
+                offered_to: res.locals.user.dept,
+                year: req_year
+            });
+            //-----------------------groups-------------------------
+            let group_list = await GroupModel.find({class: req_class._id});
+            let sub_group_list = await SubGroupModel.find({class: req_class._id});
             return res.status(200).json({
-                timeTableItems: timeTableItems
-                //load this shit into js and ejs
+                timeTableItems: timeTableItems,
+                courses: course_available,
+                groups: group_list,
+                sub_groups: sub_group_list
             })
 
         }

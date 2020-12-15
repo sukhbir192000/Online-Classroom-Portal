@@ -46,9 +46,13 @@ module.exports.getProfile = async function (req, res) {
                 _id: { $in: res.locals.user.courses }
             })
             console.log("mycourses:", userCourseList);
+            let present_date = new Date();
+            let present_year = present_date.getFullYear();
+            let req_year = 4-(res.locals.user.class.passingOutYear - present_year);
+            if(present_date.getMonth()>5) req_year++;
             let courseList = await CourseModel.find({
                 isActive: true,
-                year: res.locals.user.currentYear,
+                year: req_year,
                 offered_to: res.locals.user.dept
             })
             let group = (await GroupModel.findById(res.locals.user.group)).groupNumber
