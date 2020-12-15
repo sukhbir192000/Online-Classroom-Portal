@@ -372,15 +372,29 @@ module.exports.quizCreate=async function(req,res){
 }
 
 module.exports.quizUpdate=async function(req,res){
-    await QuizModel.findByIdAndUpdate(req.params.quizId,{
-        $set: {
-            title: req.body.title,
-            content: req.body.description,
-            link:req.body.link,
-            dateTime: req.body.deadline,
-            duration: req.body.duration
-        }
-    });
+    console.log(req.body);
+    if(req.body.deadline){
+        await QuizModel.findByIdAndUpdate(req.params.quizId,{
+            $set: {
+                title: req.body.title,
+                content: req.body.description,
+                link:req.body.link,
+                dateTime: req.body.deadline,
+                duration: req.body.duration
+            }
+        });
+    }
+    else{
+        await QuizModel.findByIdAndUpdate(req.params.quizId,{
+            $set: {
+                title: req.body.title,
+                content: req.body.description,
+                link:req.body.link,
+                duration: req.body.duration
+            }
+        });
+    }
+
     return res.redirect('back');
 };
 

@@ -1,3 +1,25 @@
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+if(dd<10){
+    dd='0'+dd;
+} 
+if(mm<10){
+    mm='0'+mm;
+} 
+var hh = today.getHours();
+if(hh<10){
+    hh = '0'+hh;
+}
+var minutes = today.getMinutes();
+if(minutes<10){
+    minutes = '0'+minutes;
+}
+today = yyyy+'-'+mm+'-'+dd+'T'+hh+':'+minutes;
+document.getElementById("date_quiz").setAttribute("min", today);
+
+
 document.querySelector(".add").addEventListener('click',function(e){
     if(document.querySelector(".add_content").textContent == "Cancel"){
         document.querySelector(".add_content").textContent = "Add";
@@ -84,6 +106,7 @@ for(let i=0;i<boxelements.length;i++){
         duration.classList.add("content_edit")
         deadline_content.style.display = "none";
         deadline_input.style.display = "flex";
+        document.getElementById("deadline_current").setAttribute("min", today);
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
@@ -92,7 +115,8 @@ for(let i=0;i<boxelements.length;i++){
             current_box.children[1].children[0].children[8].children[1].children[1].children[0].setAttribute('value',title.textContent);
             current_box.children[1].children[0].children[8].children[1].children[1].children[1].setAttribute('value',description.textContent);
             current_box.children[1].children[0].children[8].children[1].children[1].children[2].setAttribute('value',link.textContent);
-            current_box.children[1].children[0].children[8].children[1].children[1].children[3].setAttribute('value',duration.value);
+            console.log(duration.textContent);
+            current_box.children[1].children[0].children[8].children[1].children[1].children[3].setAttribute('value',duration.textContent);
             current_box.children[1].children[0].children[8].children[1].children[1].children[4].setAttribute('value',deadline_input.value);
             current_box.children[1].children[0].children[8].children[1].children[1].submit();
         })
@@ -105,6 +129,7 @@ document.addEventListener('click',function(e){
         var savebutton =current_box.children[1].children[0].children[8].children[1].children[0];
         const style = getComputedStyle(savebutton);
         if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height) && style.visibility=='visible'){
+            console.log("else");
             var editbutton = current_box.children[1].children[0].children[8].children[0].children[0];
             var deletebutton = current_box.children[1].children[0].children[8].children[0].children[1];
             var savebutton = current_box.children[1].children[0].children[8].children[1].children[0];

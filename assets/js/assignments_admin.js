@@ -26,6 +26,7 @@ let boxelements = document.querySelectorAll('.box');
 for(let i=0;i<boxelements.length;i++){
     var editbutton = boxelements[i].children[1].children[3].children[0].children[0];
     editbutton.addEventListener('click',function(e){
+        console.log("hii");
         if(current_box!=null){
             var editbutton = current_box.children[1].children[3].children[0].children[0];
             var deletebutton = current_box.children[1].children[3].children[0].children[1];
@@ -64,7 +65,8 @@ for(let i=0;i<boxelements.length;i++){
             current_box=null;
             arr=[];
             links=[];
-            deleted_files = [];
+            deleted_files = [];c
+            console.log("inside");
         }
         var editbutton = boxelements[i].children[1].children[3].children[0].children[0];
         var deletebutton = boxelements[i].children[1].children[3].children[0].children[1];
@@ -80,6 +82,7 @@ for(let i=0;i<boxelements.length;i++){
         arr.push(deadline_content.textContent);
         deadline_content.style.display = "none";
         deadline_input.style.display = "flex";
+        document.getElementById("deadline_current").setAttribute("min", today);
         title.contentEditable="true";
         points.contentEditable="true";
         description.contentEditable="true";
@@ -91,6 +94,7 @@ for(let i=0;i<boxelements.length;i++){
         deletebutton.classList.add("hide");
         editbutton.classList.add("hide");
         savebutton.classList.add("show");
+        console.log("inside");
         current_box=boxelements[i];
         current_box.children[1].children[2].style.display = "none"
         fileDeleteButtons = current_box.children[1].children[1];
@@ -138,7 +142,11 @@ document.addEventListener('click',function(e){
         var rect = current_box.getBoundingClientRect();
         var savebutton =current_box.children[1].children[3].children[1].children[0];
         const style = getComputedStyle(savebutton);
-        if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>rect.top+rect.height) && style.visibility=='visible'){
+        if((e.x<rect.left || e.x>rect.left+rect.width || e.y<rect.top || e.y>(rect.top+rect.height)) && style.visibility=='visible'){
+            console.log(e.x<rect.left);
+            console.log(e.x>rect.left+rect.width);
+            console.log(e.y<rect.top);
+            console.log(e.y>rect.top+rect.height);
             var editbutton = current_box.children[1].children[3].children[0].children[0];
             var deletebutton = current_box.children[1].children[3].children[0].children[1];
             var title = current_box.children[0].children[1];

@@ -33,7 +33,8 @@ module.exports.getProfile = async function (req, res) {
             .populate('classSub.class')
             .populate('classSub.group')
             .populate('classSub.subGroup')
-            .populate('classSub.link');
+            .populate('classSub.link')
+            .populate('class');
         console.log("teachercourses:", courseList.classSub);
         if (res.locals.user.isAdmin) {
             return res.render('adminProfile', {
@@ -48,9 +49,11 @@ module.exports.getProfile = async function (req, res) {
             console.log("mycourses:", userCourseList);
             let present_date = new Date();
             let present_year = present_date.getFullYear();
-            let req_year = 4-(res.locals.user.class.passingOutYear - present_year);
+            console.log(courseList.class);
+            let req_year = 4-(courseList.class.passingOutYear - present_year);
             if(present_date.getMonth()>5) req_year++;
-            let courseList = await CourseModel.find({
+            console.log(req_year)
+            courseList = await CourseModel.find({
                 isActive: true,
                 year: req_year,
                 offered_to: res.locals.user.dept
