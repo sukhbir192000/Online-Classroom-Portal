@@ -57,8 +57,9 @@ module.exports.recordedLecture=async function(req,res){
                     let classId=await ClassModel.find({
                         stream:req.query.branch
                     });
-                    classId = classId[0]._id;
-                    recordedLecturesList = await RecordedLecturesModel.find({
+                    for (let classElement of classId) {
+
+                        let temp_list = await RecordedLecturesModel.find({
                         postedBy: user._id,
                         "classSub.course":courseId,
                         "classSub.class":classId
@@ -66,6 +67,8 @@ module.exports.recordedLecture=async function(req,res){
                     .populate('classSub.class')
                     .populate('classSub.group')
                     .populate('classSub.subGroup');
+                    recordedLecturesList =recordedLecturesList.concat(temp_list);
+                }
                 }
                 else{
                     let courseId=await CourseModel.find({
