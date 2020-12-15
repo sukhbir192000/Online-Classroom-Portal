@@ -96,6 +96,7 @@ year_select.addEventListener('change', function (e) {
                 passingOutYear: year_check
             },
             success: function (obj) {
+                allDetails = [[], [], [], [], [], [], []];
                 map_course = {};
                 map_group = {};
                 map_sub_group = {};
@@ -118,8 +119,8 @@ year_select.addEventListener('change', function (e) {
                     map_sub_group[sub_group_obj._id] = sub_group_obj.subGroupNumber;
                 }
                 if (obj.timeTableItems) {
-                    document.getElementById('start_date').value = obj.timeTableItems.startDate;
-                    document.getElementById('end_date').value = obj.timeTableItems.endDate;
+                    document.getElementById('start_date').value =  obj.timeTableItems.startDate.split("T")[0];
+                    document.getElementById('end_date').value = obj.timeTableItems.endDate.split("T")[0] ;
                 }
                 console.log("fetched data: ", obj.timeTableItems);
                 if (obj.timeTableItems && obj.timeTableItems.timeTableData) {
@@ -335,18 +336,32 @@ applyButton.addEventListener('click', (e) => {
 })
 
 function preset_data() {
+    for (let i = 9; i < tableBox.length; i++) {
+        if (!tableBox[i].classList.contains('table_heading')) {
+            tableBox[i].innerHTML = '';
+        }
+    }
+    for (let i = 9; i < boxArray.length; i++) {
+        // if (!tableBox[i].classList.contains('table_heading')){
+        boxArray[i] = [];
+        // }
+    }
+
     for (let k = 0; k < allDetails.length; k++) {
         let index = k;
         for (let j = 8; j < 17; j++) {
             if (allDetails[k][j] == ['']) boxArray[index + 9] = '';
             else {
                 boxArray[index + 9] = [];
-                for (let i = 0; i < allDetails[k][j].length; i++) {
-                    console.log(allDetails[k][j][i]);
-                    for (let killmePls = 0; killmePls < allDetails[k][j][i].length; killmePls++) {
-                        boxArray[index + 9].push(allDetails[k][j][i][killmePls]);
+                if (allDetails[k][j]) {
+                    for (let i = 0; i < allDetails[k][j].length; i++) {
+                        console.log(allDetails[k][j][i]);
+                        for (let killmePls = 0; killmePls < allDetails[k][j][i].length; killmePls++) {
+                            boxArray[index + 9].push(allDetails[k][j][i][killmePls]);
+                        }
                     }
                 }
+
                 if (boxArray[index + 9] == '') tableBox[index + 9].innerHTML = '';
                 else tableBox[index + 9].innerHTML = boxArray[index + 9].length;
             }

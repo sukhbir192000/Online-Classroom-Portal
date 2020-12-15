@@ -170,12 +170,12 @@ class_type_form.addEventListener('change', function(e){
             opt.value = "";
             opt.disabled = true;
             group_form.appendChild(opt);
-            if(class_type_form.value=="Lecture"){
-                var opt_all = document.createElement('option');
-                opt_all.innerText="All";
-                opt_all.value = "All";
-                group_form.appendChild(opt_all);
-            }
+            // if(class_type_form.value=="Lecture"){
+            //     var opt_all = document.createElement('option');
+            //     opt_all.innerText="All";
+            //     opt_all.value = "All";
+            //     group_form.appendChild(opt_all);
+            // }
             for(let group_obj of response.groupList){
                 var opt = document.createElement('option');
                 opt.value=group_obj._id;

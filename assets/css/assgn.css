@@ -121,7 +121,7 @@
 .box_content{
     display: flex;
     flex-direction: column;
-    padding: 0.5em 1em;
+    padding: 0.5em 1em 1em 1em;
     justify-content:center;
 }
 .box_content_details{

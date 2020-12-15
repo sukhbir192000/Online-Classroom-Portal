@@ -63,9 +63,10 @@ var activeIconFunction = function(activeIcon){
             var year_selected = document.getElementsByClassName("new_year_select");
             for(let i=0;i<year_selected.length;i++){
                 if(year_selected[i].children[0].checked){
-                    years.push(year_selected[i].children[0].name);
+                    years.push(year_selected[i].children[0].value);
                 }
             }
+            console.log(years);
             if(years.length>0){
                 $.ajax({
                     type:"POST",
@@ -279,7 +280,7 @@ document.getElementById("button_submit").addEventListener("click", function(e){
                 for(let i=0;i<year_display.length;i++){
                     if(year_display[i].children[0].checked){
                         yearActive = true;
-                        yearShow.innerHTML+=year_display[i].children[0].name;
+                        yearShow.innerHTML+=year_display[i].children[0].value;
                         yearShow.innerHTML+=",";
                     }
                 }
