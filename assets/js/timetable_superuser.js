@@ -131,6 +131,7 @@ addButton.addEventListener('click', (e) => {
         boxArray[boxNumber].push(arrInput);
         tableBox[boxNumber].innerHTML = boxArray[boxNumber].length;
     }
+    console.log(boxArray[boxNumber])
     block.style.display = 'none';
     mainContent.style.filter = 'blur(0)';
     table.style.filter = 'opacity(1)';
@@ -299,5 +300,22 @@ applyButton.addEventListener('click', (e) => {
 })
 
 function preset_data(){
-    
+    for (let k = 0; k < allDetails.length; k++) {
+        let index = k;
+        for (let j = 8; j < 17; j++) {
+            if(allDetails[k][j] == ['']) boxArray[index+9] = '';
+            else {
+                boxArray[index+9] = [];
+                for(let i = 0; i< allDetails[k][j].length; i++){
+                console.log(allDetails[k][j][i]);
+                    for(let killmePls = 0; killmePls<allDetails[k][j][i].length; killmePls++){
+                        boxArray[index+9].push(allDetails[k][j][i][killmePls]);
+                    }              
+                }
+                if(boxArray[index+9] == '') tableBox[index+9].innerHTML = '';
+                else tableBox[index+9].innerHTML = boxArray[index+9].length ;
+            }
+            index += 8;
+        }
+    }
 }
