@@ -65,7 +65,8 @@ module.exports.announcement = async function (req, res) {
                     // classId = classId[0]._id;
                     announcementsList=[];
                     for (let classElement of classId) {
-                        announcementsList.push(await AnnouncementsModel.find({
+                        console.log("finding:",courseId,classElement._id)
+                        announcementsList.concat(await AnnouncementsModel.find({
                             postedBy: user._id,
                             "classSub.course": courseId,
                             "classSub.class": classElement._id
@@ -76,6 +77,7 @@ module.exports.announcement = async function (req, res) {
 
                         );
                     }
+                    console.log("list:",announcementsList);
                 }
                 else {
                     let courseId = await CourseModel.find({
