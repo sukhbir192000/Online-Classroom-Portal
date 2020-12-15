@@ -140,7 +140,7 @@ module.exports.saveTimeTable = async function (req, res) {
                                                 date:initialDate,
                                                 duration: classItem[3],
                                                 classSub: teacher.classSub,
-                                                teacher: teacher._id,
+                                                teacher: teacher.teacher,
                                                 classType: classItem[1]
                                             })
                                             initialDate.setDate(initialDate.getDate() + 7);
@@ -168,7 +168,7 @@ module.exports.saveTimeTable = async function (req, res) {
                                                 date:initialDate,
                                                 duration: classItem[3],
                                                 classSub: teacher.classSub,
-                                                teacher: teacher._id,
+                                                teacher: teacher.teacher,
                                                 classType: classItem[1]
                                             })
                                             initialDate.setDate(initialDate.getDate() + 7);  
