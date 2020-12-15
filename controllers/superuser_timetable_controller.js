@@ -44,7 +44,7 @@ module.exports.timetable = async function (req, res) {
 module.exports.saveTimeTable = async function (req, res) {
 
     try {
-        console.log("saving data",req.body.timeTableData);
+        // console.log("saving data",req.body.timeTableData);
         // let parsed_data = JSON.parse(req.body);
         // console.log("after parse",parsed_data);
         let req_class = await ClassModel.findOne({
@@ -65,7 +65,20 @@ module.exports.saveTimeTable = async function (req, res) {
         }
         timeTableItem.timeTableData = req.body.timeTableData
         timeTableItem.save();
-        console.log(req.body);
+        for(let i=0;i<7;i++){
+            
+     
+            for(let j=8;j<req.body.timeTableData[i].length;j++){
+                // console.log(req.body.timeTableData[i][j]);
+                //starting time is j
+                if(req.body.timeTableData[i][j][0]!=""){
+
+                    let timeTableItemsArray=req.body.timeTableData[i][j][0];
+                    console.log("starting at ",i,j," : ",timeTableItemsArray);
+                }
+            }
+            
+        }
         //save to teacher tt too
         return res.status(200).json({
             message: "Updated TT"
