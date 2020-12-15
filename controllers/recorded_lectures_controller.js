@@ -57,6 +57,7 @@ module.exports.recordedLecture=async function(req,res){
                     let classId=await ClassModel.find({
                         stream:req.query.branch
                     });
+                    recordedLecturesList=[];
                     for (let classElement of classId) {
 
                         let temp_list = await RecordedLecturesModel.find({
