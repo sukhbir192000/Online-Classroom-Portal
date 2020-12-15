@@ -2,6 +2,7 @@ const TimeTableModel = require('../models/timetable')
 const ClassModel = require('../models/class');
 const SuperUserTimeTable = require('../models/superuser_dept_timetable');
 const Class = require('../models/class');
+
 module.exports.timetable = async function (req, res) {
     try {
         if (req.xhr) {
@@ -74,7 +75,28 @@ module.exports.saveTimeTable = async function (req, res) {
                 if(req.body.timeTableData[i][j][0]!=""){
 
                     let timeTableItemsArray=req.body.timeTableData[i][j][0];
-                    console.log("starting at ",i,j," : ",timeTableItemsArray);
+                  
+                    for(let classItem of timeTableItemsArray){
+                        console.log("starting at ",i,j," : ",classItem);
+                        //create wrt this
+                        let classTimeTable=req_class
+                        if(classItem[1]=="Lab"){
+                            console.log("labclass");
+                            
+                            
+                        }
+                        else{
+                            console.log("lectureclass")
+                            
+                        }
+
+
+                    }
+                    //starting time : j
+                    //date ? week i
+                    //duration timeTableItemsArray ke objects ka last item
+                    //class type same as upar
+                    // class sub and teacher ????
                 }
             }
             
