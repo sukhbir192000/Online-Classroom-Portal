@@ -51,7 +51,7 @@ module.exports.staffUpdate=async function(req,res){
 module.exports.staffDelete=async function(req,res){
     try{
         let faculty=await UserModel.findById(req.body.id);
-        if(faculty.classSub.length>0){
+        if(faculty.classSub.length==0){
             await UserModel.findByIdAndDelete(req.body.id);
         }
         else{

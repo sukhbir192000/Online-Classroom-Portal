@@ -39,6 +39,7 @@
             </div>
             <div class="no_courses">No Programmes Added</div>
             <%for(let program of programList){%>
+            <div class="programme_color_container">
                 <a href="./programmes/students/<%=program._id%>">
                     <div class="programme" id="<%=program._id%>">
                         <div class="programme_name_main">BTECH</div>
@@ -50,6 +51,7 @@
                         <div class="save_icon" ><i class="fas fa-save"></i></div>
                     </div>
                 </a>
+            </div>
             <%}%>
             </div>
     </div>
