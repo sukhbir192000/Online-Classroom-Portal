@@ -82,10 +82,11 @@ module.exports.studentDetails = async function (req, res) {
         let class_obj = await ClassModel.findById(req.params.classId).populate('student');
         // class_obj=class_obj.execPopulate('student.group')
 
-        // console.log(class_obj);
+        console.log(class_obj.student);
         return res.render('superuser/studentDetails', {
             title: "Student Details",
-            studentList: class_obj.student
+            studentList: class_obj.student, 
+            passingYear: class_obj.passingOutYear
         });
     }
     catch (err) {

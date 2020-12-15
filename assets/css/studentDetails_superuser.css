@@ -500,13 +500,12 @@ summary{
 .edit_codes{
     border-bottom: solid 0.01em black;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding: 0.5em;
 }
 
 .delete_icon{
     color: lightgray;
-    padding-left: 15em;
     z-index: 1;
 }
 
