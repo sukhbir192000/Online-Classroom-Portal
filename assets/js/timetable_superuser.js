@@ -85,7 +85,20 @@ function displayBox(){
 year_select.addEventListener('change', function(e){
     year_check = year_select.value;
     if( year_check != 'Select'){
-        displayBox();
+        $.ajax({
+            url:"/superuser/timetable",
+            method:"POST",
+            data:{
+                passingOutYear:year_check
+            },
+            success:function(obj){
+                console.log(obj);
+                displayBox();
+            }
+                
+            
+        })
+    
     }
 });
 
@@ -255,5 +268,18 @@ disable.addEventListener('click', (e)=>{
 
 applyButton.addEventListener('click',(e)=>{
     console.log(allDetails);
+    $.ajax({
+        url:"/superuser/timetable/save",
+        method:"POST",
+        cache:false,
+        data:{
+            passingOutYear:year_select.value,
+            timeTableData:allDetails
+        },
+        success:function(obj){
+            console.log(obj);
+            
+        }
+    })
 })
 
