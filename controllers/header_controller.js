@@ -10,6 +10,7 @@ module.exports.getClass = async function (req, res) {
     date.setMilliseconds(0);
     let user = res.locals.user;
     let classCurrent
+    console.log(currentHour);
     if (user.isAdmin) {
         classCurrent = await TimetableModel.findOne({
             teacher: user._id,
@@ -60,7 +61,7 @@ module.exports.getLink = async function (req, res) {
     try {
         let req_link = await LinkModel.findById(req.params.linkId);
         return res.status(200).json({
-            link: req_link
+            link: req_link.link
         })
     }
     catch (err) {
