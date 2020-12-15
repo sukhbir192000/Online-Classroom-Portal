@@ -62,15 +62,20 @@ module.exports.announcement = async function (req, res) {
                     let classId = await ClassModel.find({
                         stream: req.query.branch
                     });
-                    classId = classId[0]._id;
-                    announcementsList = await AnnouncementsModel.find({
-                        postedBy: user._id,
-                        "classSub.course": courseId,
-                        "classSub.class": classId
-                    }).populate('classSub.course')
-                        .populate('classSub.class')
-                        .populate('classSub.group')
-                        .populate('classSub.subGroup');
+                    // classId = classId[0]._id;
+                    announcementsList=[];
+                    for (let classElement of classId) {
+                        announcementsList.push(await AnnouncementsModel.find({
+                            postedBy: user._id,
+                            "classSub.course": courseId,
+                            "classSub.class": classElement._id
+                        }).populate('classSub.course')
+                            .populate('classSub.class')
+                            .populate('classSub.group')
+                            .populate('classSub.subGroup')
+
+                        );
+                    }
                 }
                 else {
                     let courseId = await CourseModel.find({
