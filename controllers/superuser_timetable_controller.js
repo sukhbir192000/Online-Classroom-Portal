@@ -4,6 +4,7 @@ const SuperUserTimeTable = require('../models/superuser_dept_timetable');
 const CourseModel = require('../models/course');
 const GroupModel = require('../models/group');
 const SubGroupModel = require('../models/sub-group');
+const { init } = require('../models/timetable');
 
 module.exports.timetable = async function (req, res) {
     try {
@@ -83,68 +84,98 @@ module.exports.saveTimeTable = async function (req, res) {
         timeTableItem.timeTableData = req.body.timeTableData
         timeTableItem.save();
         //wipe tt
-        
-        for (let i = 0; i < 7; i++) {
+        await TimeTableModel.deleteMany({
+            "classSub.class":req_class._id
+        })
 
+
+        for (let i = 0; i < 7; i++) {
 
             for (let j = 8; j < req.body.timeTableData[i].length; j++) {
                 // console.log(req.body.timeTableData[i][j]);
                 //starting time is j
+
                 if (req.body.timeTableData[i][j][0] != "") {
 
                     let timeTableItemsArray = req.body.timeTableData[i][j][0];
-
+                    console.log("***************************")
+                    console.log(timeTableItemsArray[0],timeTableItemsArray[1]);
                     for (let classItem of timeTableItemsArray) {
                         console.log("starting at ", i, j, " : ", classItem);
                         //here i am at classItem
-                        
-                        
+                        let initialDate = new Date(req.body.startDate);
+
+                        while (!(i == 6 && initialDate.getDay() == 0) && !(initialDate.getDay() == i + 1)) {
+
+                            initialDate.setDate(initialDate.getDate() + 1);
+                        }
+                        initialDate.setHours(1);
+                        initialDate.setSeconds(0);
+                        initialDate.setMinutes(0);
+                        initialDate.setMilliseconds(0);
+                        let finalDate = new Date(req.body.endDate);
+
                         if (classItem[1] == "Lab") {
                             console.log("labclass");
-                            let my_class_sub=await CourseModel.findById(classItem[0]);
-                            let my_teachers=my_class_sub.teachers;
-                            for(let teacher of my_teachers){
-                                if(teacher.classSub.class==req_class.id){
-                                    if(classItem[2]==teacher.classSub.subGroup){
+                            let my_class_sub = await CourseModel.findById(classItem[0]);
+                            let my_teachers = my_class_sub.teachers;
+                            for (let teacher of my_teachers) {
+
+
+                                if (teacher.classSub.class == req_class.id) {
+                                    console.log("reached here",classItem[2],teacher.classSub.subGroup);
+                                    if (classItem[2] == teacher.classSub.subGroup) {
                                         //create for this
                                         console.log("creating lab");
                                         console.log(classItem)
-                                        break;
-                                        let classCreated=await TimeTableModel.create({
-                                            startingTime:j,
-                                            duration:classItem[3],
-                                            classSub:teacher.classSub,
-                                            teacher:teacher._id,
-                                            classType:classItem[1]
-                                        })
+
+                                        console.log("data:", req.body.startDate, req.body.endDate);
+                                        //ith day
+
+                                        console.log("initialDate:", initialDate);
+
+                                        while (initialDate < finalDate) {
+                                            let classCreated = await TimeTableModel.create({
+                                                startingTime: j,
+                                                date:initialDate,
+                                                duration: classItem[3],
+                                                classSub: teacher.classSub,
+                                                teacher: teacher._id,
+                                                classType: classItem[1]
+                                            })
+                                            initialDate.setDate(initialDate.getDate() + 7);
+                                        }
                                         break;
                                     }
-                                    
+
                                 }
                             }
 
                         }
                         else {
                             console.log("lectureclass");
-                            let my_class_sub=await CourseModel.findById(classItem[0]);
-                            let my_teachers=my_class_sub.teachers;
-                            for(let teacher of my_teachers){
-                                if(teacher.classSub.class==req_class.id){
-                                    if(classItem[2]=="All" ||classItem[2]==teacher.classSub.group){
+                            let my_class_sub = await CourseModel.findById(classItem[0]);
+                            let my_teachers = my_class_sub.teachers;
+                            for (let teacher of my_teachers) {
+                                if (teacher.classSub.class == req_class.id) {
+                                    if (classItem[2] == "All" || classItem[2] == teacher.classSub.group) {
                                         //create for this
                                         console.log("creating lecture");
                                         console.log(classItem)
-                                        break;
-                                        let classCreated=await TimeTableModel.create({
-                                            startingTime:j,
-                                            duration:classItem[3],
-                                            classSub:teacher.classSub,
-                                            teacher:teacher._id,
-                                            classType:classItem[1]
-                                        })
+                                        while (initialDate < finalDate) {
+                                            let classCreated = await TimeTableModel.create({
+                                                startingTime: j,
+                                                date:initialDate,
+                                                duration: classItem[3],
+                                                classSub: teacher.classSub,
+                                                teacher: teacher._id,
+                                                classType: classItem[1]
+                                            })
+                                            initialDate.setDate(initialDate.getDate() + 7);  
+                                        }
                                         break;
                                     }
-                                    
+
                                 }
                             }
 

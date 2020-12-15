@@ -114,11 +114,13 @@ year_select.addEventListener('change', function (e) {
                 document.getElementById('type_select').selectedIndex = 0;
                 lab_groups = obj.sub_groups;
                 lecture_groups = obj.groups;
-                for(let sub_group_obj of obj.sub_groups){
+                for (let sub_group_obj of obj.sub_groups) {
                     map_sub_group[sub_group_obj._id] = sub_group_obj.subGroupNumber;
                 }
-                document.getElementById('start_date').value = obj.timeTableItems.startDate;
-                document.getElementById('end_date').value = obj.timeTableItems.endDate;
+                if (obj.timeTableItems) {
+                    document.getElementById('start_date').value = obj.timeTableItems.startDate;
+                    document.getElementById('end_date').value = obj.timeTableItems.endDate;
+                }
                 console.log("fetched data: ", obj.timeTableItems);
                 if (obj.timeTableItems && obj.timeTableItems.timeTableData) {
                     allDetails = obj.timeTableItems.timeTableData;
@@ -200,13 +202,13 @@ tableBox.forEach((box, i) => {
                 for (let j = 0; j < boxArray[i].length; j++) {
                     var clonedNode = classes.cloneNode(true);
                     clonedNode.classList.remove('static_temp_class');
-                    for (let k = 0; k < boxArray[i][j].length; k+=4) {
+                    for (let k = 0; k < boxArray[i][j].length; k += 4) {
                         clonedNode.children[0].children[0].children[1].innerHTML = map_course[boxArray[i][j][0]];
                         clonedNode.children[0].children[1].children[1].innerHTML = boxArray[i][j][1];
-                        if(boxArray[i][j][1] == "Lecture"){
+                        if (boxArray[i][j][1] == "Lecture") {
                             clonedNode.children[0].children[2].children[1].innerHTML = map_group[boxArray[i][j][2]];
                         }
-                        else{
+                        else {
                             clonedNode.children[0].children[2].children[1].innerHTML = map_sub_group[boxArray[i][j][2]];
                         }
                         clonedNode.children[0].children[3].children[1].innerHTML = boxArray[i][j][3];
@@ -311,25 +313,25 @@ applyButton.addEventListener('click', (e) => {
     console.log(allDetails);
     let startDate = document.getElementById('start_date').value;
     let endDate = document.getElementById('end_date').value;
-    // if (startDate && endDate) {
-    $.ajax({
-        url: "/superuser/timetable/save",
-        method: "POST",
-        data: {
-            passingOutYear: year_select.value,
-            timeTableData: allDetails,
-            startDate: startDate,
-            endDate: endDate
-        },
-        success: function (obj) {
-            console.log(obj);
+    if (startDate && endDate) {
+        $.ajax({
+            url: "/superuser/timetable/save",
+            method: "POST",
+            data: {
+                passingOutYear: year_select.value,
+                timeTableData: allDetails,
+                startDate: startDate,
+                endDate: endDate
+            },
+            success: function (obj) {
+                console.log(obj);
 
-        }
-    })
-    // }
-    // else{
-    //     alert("Please set start date and end date of semester.");
-    // }
+            }
+        })
+    }
+    else {
+        alert("Please set start date and end date of semester.");
+    }
 })
 
 function preset_data() {
@@ -357,7 +359,7 @@ let type_input = document.getElementById('type_select')
 type_input.addEventListener('change', function (e) {
     let group_form = document.getElementById('group_select');
     group_form.innerHTML = '';
-    
+
     if (this.value == "Lecture") {
         for (let group_obj of lecture_groups) {
             group_form.innerHTML += `<option value='${group_obj._id}'>${group_obj.groupNumber}</option>`
