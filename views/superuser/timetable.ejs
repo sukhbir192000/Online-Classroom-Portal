@@ -146,6 +146,9 @@
             </select>
             <select name='graduation_year'>
                 <option selected disabled>---Select year of Graduation---</option>
+                <% for(class_obj of present_classes){ %>
+                    <option value="<%= class_obj.passingOutYear %>"><%= class_obj.passingOutYear %></option>
+                <% } %>
             </select>
             </div>
             <div class="table">

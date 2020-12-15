@@ -8,6 +8,12 @@ const superUserTimetableSchema = new mongoose.Schema({
     class:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Class"
+    },
+    startDate: {
+        type: Date
+    },
+    endDate:{
+        type: Date
     }
 }, {
     timestamps: true

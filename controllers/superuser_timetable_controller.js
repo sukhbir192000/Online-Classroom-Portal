@@ -11,7 +11,7 @@ module.exports.timetable = async function (req, res) {
                 passingOutYear: req.body.passingOutYear
 
             })
-            let timeTableItems
+            let timeTableItems;
             if (req_class) {
                 timeTableItems = await SuperUserTimeTable.findOne({
                     class: req_class._id
@@ -24,9 +24,11 @@ module.exports.timetable = async function (req, res) {
 
         }
         else {
+            let present_classes = await ClassModel.find({stream: res.locals.user.dept}).sort('passingOutYear');
             return res.render('superuser/timetable', {
                 title: 'Timetable',
-                timetableItems: [[], [], [], [], [], [], []]
+                timetableItems: [[], [], [], [], [], [], []],
+                present_classes: present_classes
             });
         }
     }
@@ -42,7 +44,9 @@ module.exports.timetable = async function (req, res) {
 module.exports.saveTimeTable = async function (req, res) {
 
     try {
-        console.log("saving data",req.body.passingOutYear);
+        console.log("saving data",req.body.timeTableData);
+        // let parsed_data = JSON.parse(req.body);
+        // console.log("after parse",parsed_data);
         let req_class = await ClassModel.findOne({
             stream: res.locals.user.dept,
             passingOutYear: req.body.passingOutYear
@@ -53,11 +57,10 @@ module.exports.saveTimeTable = async function (req, res) {
             class: req_class._id
         })
         if (!timeTableItem) {
-            
-
             timeTableItem = await SuperUserTimeTable.create({
-                class: req_class._id
-
+                class: req_class._id,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate
             })
         }
         timeTableItem.timeTableData = req.body.timeTableData
