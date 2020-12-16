@@ -231,12 +231,18 @@ module.exports.availableSlots=async function(req,res){
 }
 
 module.exports.classInfo = async function(req, res){
-    if(req.xhr){
-        let class_info = await TimetableModel.findById(req.params.id);
-        console.log(class_info);
-        return res.status(200).json({
-            data: class_info
-        })
+    try{
+        if(req.xhr){
+            let class_info = await TimetableModel.findById(req.params.id);
+            console.log(class_info);
+            return res.status(200).json({
+                data: class_info
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        return res.status(400);
     }
 }
 
@@ -332,11 +338,17 @@ module.exports.classCreate = async function(req,res){
 }
 
 module.exports.classDelete=async function(req,res){
-    if(req.xhr){
+    try{
+        if(req.xhr){
        
-        await TimetableModel.findByIdAndDelete(req.params.id);
-        return res.status(200).json({
-            message:"deleted class"
-        })
+            await TimetableModel.findByIdAndDelete(req.params.id);
+            return res.status(200).json({
+                message:"deleted class"
+            })
+        }    
+    }
+    catch(err){
+        console.log(err);
+        res.status(400);
     }
 }

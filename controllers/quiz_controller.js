@@ -199,68 +199,73 @@ module.exports.quiz = async function (req, res) {
 }
 
 async function addQuizzes(req, res, classSubList) {
-    let user = res.locals.user;
-    for (let subject in classSubList) {
-        for (let clas in classSubList[subject]) {
-            let fullCondition = false;
-            if (Object.keys(classSubList[subject][clas]).length === 0) {
-                fullCondition = true;
-            }
-            else {
-                let classInfo = await ClassModel.findById(clas);
-                if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+    try {
+        let user = res.locals.user;
+        for (let subject in classSubList) {
+            for (let clas in classSubList[subject]) {
+                let fullCondition = false;
+                if (Object.keys(classSubList[subject][clas]).length === 0) {
                     fullCondition = true;
                 }
-            }
-            if (fullCondition) {
-                await QuizModel.create({
-                    title: req.body.quiz_title,
-                    content: req.body.instructions,
-                    classSub: {
-                        course: subject,
-                        class: clas
-                    },
-                    postedBy: user._id,
-                    link: req.body.quiz_link,
-                    dateTime: req.body.quiz_date,
-                    duration: req.body.time_quiz
-                })
-            }
-            else {
-                for (let groupItem of classSubList[subject][clas].groups) {
-                    if (req.body.class_type == "Lecture") {
-                        await QuizModel.create({
-                            title: req.body.quiz_title,
-                            content: req.body.instructions,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                group: groupItem
-                            },
-                            postedBy: user._id,
-                            link: req.body.quiz_link,
-                            dateTime: req.body.quiz_date,
-                            duration: req.body.time_quiz
-                        })
+                else {
+                    let classInfo = await ClassModel.findById(clas);
+                    if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+                        fullCondition = true;
                     }
-                    else {
-                        await QuizModel.create({
-                            title: req.body.quiz_title,
-                            content: req.body.instructions,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                subGroup: groupItem
-                            },
-                            postedBy: user._id,
-                            link: req.body.quiz_link,
-                            dateTime: req.body.quiz_date,
-                            duration: req.body.time_quiz
-                        })
+                }
+                if (fullCondition) {
+                    await QuizModel.create({
+                        title: req.body.quiz_title,
+                        content: req.body.instructions,
+                        classSub: {
+                            course: subject,
+                            class: clas
+                        },
+                        postedBy: user._id,
+                        link: req.body.quiz_link,
+                        dateTime: req.body.quiz_date,
+                        duration: req.body.time_quiz
+                    })
+                }
+                else {
+                    for (let groupItem of classSubList[subject][clas].groups) {
+                        if (req.body.class_type == "Lecture") {
+                            await QuizModel.create({
+                                title: req.body.quiz_title,
+                                content: req.body.instructions,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    group: groupItem
+                                },
+                                postedBy: user._id,
+                                link: req.body.quiz_link,
+                                dateTime: req.body.quiz_date,
+                                duration: req.body.time_quiz
+                            })
+                        }
+                        else {
+                            await QuizModel.create({
+                                title: req.body.quiz_title,
+                                content: req.body.instructions,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    subGroup: groupItem
+                                },
+                                postedBy: user._id,
+                                link: req.body.quiz_link,
+                                dateTime: req.body.quiz_date,
+                                duration: req.body.time_quiz
+                            })
+                        }
                     }
                 }
             }
         }
+    }
+    catch (err) {
+        console.log(err);
     }
 }
 
@@ -380,42 +385,52 @@ module.exports.quizCreate = async function (req, res) {
 }
 
 module.exports.quizUpdate = async function (req, res) {
-    console.log(req.body);
-    if (req.body.deadline) {
-        await QuizModel.findByIdAndUpdate(req.params.quizId, {
-            $set: {
-                title: req.body.title,
-                content: req.body.description,
-                link: req.body.link,
-                dateTime: req.body.deadline,
-                duration: req.body.duration
-            }
-        });
-    }
-    else {
-        await QuizModel.findByIdAndUpdate(req.params.quizId, {
-            $set: {
-                title: req.body.title,
-                content: req.body.description,
-                link: req.body.link,
-                duration: req.body.duration
-            }
-        });
-    }
+    try {
+        if (req.body.deadline) {
+            await QuizModel.findByIdAndUpdate(req.params.quizId, {
+                $set: {
+                    title: req.body.title,
+                    content: req.body.description,
+                    link: req.body.link,
+                    dateTime: req.body.deadline,
+                    duration: req.body.duration
+                }
+            });
+        }
+        else {
+            await QuizModel.findByIdAndUpdate(req.params.quizId, {
+                $set: {
+                    title: req.body.title,
+                    content: req.body.description,
+                    link: req.body.link,
+                    duration: req.body.duration
+                }
+            });
+        }
 
-    return res.redirect('back');
+        return res.redirect('back');
+    }
+    catch (err) {
+        console.log(err);
+        return res.redirect('back');
+    }
 };
 
 module.exports.quizDelete = function (req, res) {
-    QuizModel.findByIdAndDelete(req.params.id, function (err) {
-        if (err) {
-            console.log("error while deleting quiz :", err);
-            return res.redirect('back');
-        }
-        else {
-            req.flash('success', 'Quiz Deleted');
-            return res.redirect('back');
-        }
-    })
-
+    try {
+        QuizModel.findByIdAndDelete(req.params.id, function (err) {
+            if (err) {
+                console.log("error while deleting quiz :", err);
+                return res.redirect('back');
+            }
+            else {
+                req.flash('success', 'Quiz Deleted');
+                return res.redirect('back');
+            }
+        })
+    }
+    catch (err) {
+        console.log(err);
+        return res.redirect('back');
+    }
 }

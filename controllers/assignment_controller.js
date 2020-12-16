@@ -241,98 +241,104 @@ module.exports.assignment = async function (req, res) {
 }
 
 async function addAssignments(req, res, classSubList) {
-    let user = res.locals.user;
-    let count = 0;
-    for (let subject in classSubList) {
-        for (let clas in classSubList[subject]) {
-            let fullCondition = false;
-            if (Object.keys(classSubList[subject][clas]).length === 0) {
-                fullCondition = true;
-            }
-            else {
-                let classInfo = await ClassModel.findById(clas);
-                if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+    try {
+        let user = res.locals.user;
+        let count = 0;
+        for (let subject in classSubList) {
+            for (let clas in classSubList[subject]) {
+                let fullCondition = false;
+                if (Object.keys(classSubList[subject][clas]).length === 0) {
                     fullCondition = true;
                 }
-            }
-            if (fullCondition) {
-                let assignment = await AssignmentModel.create({
-                    title: req.body.title,
-                    content: req.body.message,
-                    classSub: {
-                        course: subject,
-                        class: clas
-                    },
-                    postedBy: user._id,
-                    weightage: req.body.weightage,
-                    deadline: req.body.lecture_deadline
-                })
-                count++;
-                if (req.files) {
-                    for (let file in req.files) {
-                        assignment.files.push({
-                            url: AssignmentModel.filePath + req.files[file][0].filename,
-                            name: req.files[file][0].originalname
-                        });
+                else {
+                    let classInfo = await ClassModel.findById(clas);
+                    if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+                        fullCondition = true;
                     }
                 }
-                assignment.save();
-            }
-            else {
-                for (let groupItem of classSubList[subject][clas].groups) {
-                    if (req.body.class_type == "Lecture") {
-                        let assignment = await AssignmentModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                group: groupItem
-                            },
-                            postedBy: user._id,
-                            weightage: req.body.weightage,
-                            deadline: req.body.lecture_deadline
-                        })
-                        count++;
-                        if (req.files) {
-                            for (let file in req.files) {
-                                assignment.files.push({
-                                    url: AssignmentModel.filePath + req.files[file][0].filename,
-                                    name: req.files[file][0].originalname
-                                });
-                            }
+                if (fullCondition) {
+                    let assignment = await AssignmentModel.create({
+                        title: req.body.title,
+                        content: req.body.message,
+                        classSub: {
+                            course: subject,
+                            class: clas
+                        },
+                        postedBy: user._id,
+                        weightage: req.body.weightage,
+                        deadline: req.body.lecture_deadline
+                    })
+                    count++;
+                    if (req.files) {
+                        for (let file in req.files) {
+                            assignment.files.push({
+                                url: AssignmentModel.filePath + req.files[file][0].filename,
+                                name: req.files[file][0].originalname
+                            });
                         }
-                        assignment.save();
                     }
-                    else {
-                        let assignment = await AssignmentModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                subGroup: groupItem
-                            },
-                            postedBy: user._id,
-                            weightage: req.body.weightage,
-                            deadline: req.body.lecture_deadline
-                        })
-                        count++;
-                        if (req.files) {
-                            for (let file in req.files) {
-                                assignment.files.push({
-                                    url: AssignmentModel.filePath + req.files[file][0].filename,
-                                    name: req.files[file][0].originalname
-                                });
+                    assignment.save();
+                }
+                else {
+                    for (let groupItem of classSubList[subject][clas].groups) {
+                        if (req.body.class_type == "Lecture") {
+                            let assignment = await AssignmentModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    group: groupItem
+                                },
+                                postedBy: user._id,
+                                weightage: req.body.weightage,
+                                deadline: req.body.lecture_deadline
+                            })
+                            count++;
+                            if (req.files) {
+                                for (let file in req.files) {
+                                    assignment.files.push({
+                                        url: AssignmentModel.filePath + req.files[file][0].filename,
+                                        name: req.files[file][0].originalname
+                                    });
+                                }
                             }
+                            assignment.save();
                         }
-                        assignment.save();
+                        else {
+                            let assignment = await AssignmentModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    subGroup: groupItem
+                                },
+                                postedBy: user._id,
+                                weightage: req.body.weightage,
+                                deadline: req.body.lecture_deadline
+                            })
+                            count++;
+                            if (req.files) {
+                                for (let file in req.files) {
+                                    assignment.files.push({
+                                        url: AssignmentModel.filePath + req.files[file][0].filename,
+                                        name: req.files[file][0].originalname
+                                    });
+                                }
+                            }
+                            assignment.save();
+                        }
                     }
                 }
             }
         }
+        return count;
     }
-    return count;
+    catch (err) {
+        console.log(err);
+        return 0;
+    }
 }
 
 module.exports.assignmentCreate = async function (req, res) {
@@ -507,27 +513,33 @@ module.exports.assignmentUpdate = async function (req, res) {
 };
 
 module.exports.assignmentDelete = async function (req, res) {
-    var assignment = await AssignmentModel.findById(req.params.id);
-    for (let file of assignment.files) {
-        var fileElement = await FileModel.findOne({ url: file.url });
-        if (fileElement.timesUsed > 1) {
-            fileElement.timesUsed--;
-            fileElement.save();
+    try {
+        var assignment = await AssignmentModel.findById(req.params.id);
+        for (let file of assignment.files) {
+            var fileElement = await FileModel.findOne({ url: file.url });
+            if (fileElement.timesUsed > 1) {
+                fileElement.timesUsed--;
+                fileElement.save();
+            }
+            else {
+                fs.unlinkSync(path.join(__dirname, '..', file.url));
+                await FileModel.findByIdAndDelete(fileElement._id);
+            }
         }
-        else {
-            fs.unlinkSync(path.join(__dirname, '..', file.url));
-            await FileModel.findByIdAndDelete(fileElement._id);
+        var submissions = await AssignmentSubmissionModel.find({ assignmentId: assignment._id });
+        for (let submission of submissions) {
+            for (let i = 0; i < submission.files.length; i++) {
+                fs.unlinkSync(path.join(__dirname, '..', submission.files[i].url));
+                console.log("Found and deleted file");
+            }
+            await AssignmentSubmissionModel.findByIdAndRemove(submission._id);
         }
+        await AssignmentModel.findByIdAndDelete(assignment._id);
+        req.flash('success', 'Assignment Deleted');
+        return res.redirect('back');
     }
-    var submissions = await AssignmentSubmissionModel.find({ assignmentId: assignment._id });
-    for (let submission of submissions) {
-        for (let i = 0; i < submission.files.length; i++) {
-            fs.unlinkSync(path.join(__dirname, '..', submission.files[i].url));
-            console.log("Found and deleted file");
-        }
-        await AssignmentSubmissionModel.findByIdAndRemove(submission._id);
+    catch(err){
+        console.log(err);
+        return res.redirect('back');
     }
-    await AssignmentModel.findByIdAndDelete(assignment._id);
-    req.flash('success', 'Assignment Deleted');
-    return res.redirect('back');
 }
