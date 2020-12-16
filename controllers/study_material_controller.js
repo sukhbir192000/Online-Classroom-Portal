@@ -60,7 +60,7 @@ module.exports.studyMaterial = async function (req, res) {
                     let classId = await ClassModel.find({
                         stream: req.query.branch
                     });
-                  
+
                     studyMaterialList = []
                     for (let classElement of classId) {
 
@@ -72,7 +72,7 @@ module.exports.studyMaterial = async function (req, res) {
                             .populate('classSub.class')
                             .populate('classSub.group')
                             .populate('classSub.subGroup');
-                        studyMaterialList=studyMaterialList.concat(temp_list);
+                        studyMaterialList = studyMaterialList.concat(temp_list);
                     }
                 }
                 else {
@@ -204,92 +204,98 @@ module.exports.studyMaterial = async function (req, res) {
 }
 
 async function addStudyMaterials(req, res, classSubList) {
-    let user = res.locals.user;
-    let count = 0;
-    for (let subject in classSubList) {
-        for (let clas in classSubList[subject]) {
-            let fullCondition = false;
-            if (Object.keys(classSubList[subject][clas]).length === 0) {
-                fullCondition = true;
-            }
-            else {
-                let classInfo = await ClassModel.findById(clas);
-                if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+    try {
+        let user = res.locals.user;
+        let count = 0;
+        for (let subject in classSubList) {
+            for (let clas in classSubList[subject]) {
+                let fullCondition = false;
+                if (Object.keys(classSubList[subject][clas]).length === 0) {
                     fullCondition = true;
                 }
-            }
-            if (fullCondition) {
-                let studyMaterial = await StudyMaterialsModel.create({
-                    title: req.body.title,
-                    content: req.body.message,
-                    classSub: {
-                        course: subject,
-                        class: clas
-                    },
-                    postedBy: user._id
-                })
-                count++;
-                if (req.files) {
-                    for (let file in req.files) {
-                        studyMaterial.files.push({
-                            url: StudyMaterialsModel.filePath + req.files[file][0].filename,
-                            name: req.files[file][0].originalname
-                        });
+                else {
+                    let classInfo = await ClassModel.findById(clas);
+                    if ((req.body.class_type == "Lecture" && classInfo.totalGroups == classSubList[subject][clas].groups.length) || (req.body.class_type == "Lab" && classInfo.totalSubGroups == classSubList[subject][clas].groups.length)) {
+                        fullCondition = true;
                     }
                 }
-                studyMaterial.save();
-            }
-            else {
-                for (let groupItem of classSubList[subject][clas].groups) {
-                    if (req.body.class_type == "Lecture") {
-                        let studyMaterial = await StudyMaterialsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                group: groupItem
-                            },
-                            postedBy: user._id
-                        })
-                        count++;
-                        if (req.files) {
-                            for (let file in req.files) {
-                                studyMaterial.files.push({
-                                    url: StudyMaterialsModel.filePath + req.files[file][0].filename,
-                                    name: req.files[file][0].originalname
-                                });
-                            }
+                if (fullCondition) {
+                    let studyMaterial = await StudyMaterialsModel.create({
+                        title: req.body.title,
+                        content: req.body.message,
+                        classSub: {
+                            course: subject,
+                            class: clas
+                        },
+                        postedBy: user._id
+                    })
+                    count++;
+                    if (req.files) {
+                        for (let file in req.files) {
+                            studyMaterial.files.push({
+                                url: StudyMaterialsModel.filePath + req.files[file][0].filename,
+                                name: req.files[file][0].originalname
+                            });
                         }
-                        studyMaterial.save();
                     }
-                    else {
-                        let studyMaterial = await StudyMaterialsModel.create({
-                            title: req.body.title,
-                            content: req.body.message,
-                            classSub: {
-                                course: subject,
-                                class: clas,
-                                subGroup: groupItem
-                            },
-                            postedBy: user._id
-                        })
-                        count++;
-                        if (req.files) {
-                            for (let file in req.files) {
-                                studyMaterial.files.push({
-                                    url: StudyMaterialsModel.filePath + req.files[file][0].filename,
-                                    name: req.files[file][0].originalname
-                                });
+                    studyMaterial.save();
+                }
+                else {
+                    for (let groupItem of classSubList[subject][clas].groups) {
+                        if (req.body.class_type == "Lecture") {
+                            let studyMaterial = await StudyMaterialsModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    group: groupItem
+                                },
+                                postedBy: user._id
+                            })
+                            count++;
+                            if (req.files) {
+                                for (let file in req.files) {
+                                    studyMaterial.files.push({
+                                        url: StudyMaterialsModel.filePath + req.files[file][0].filename,
+                                        name: req.files[file][0].originalname
+                                    });
+                                }
                             }
+                            studyMaterial.save();
                         }
-                        studyMaterial.save();
+                        else {
+                            let studyMaterial = await StudyMaterialsModel.create({
+                                title: req.body.title,
+                                content: req.body.message,
+                                classSub: {
+                                    course: subject,
+                                    class: clas,
+                                    subGroup: groupItem
+                                },
+                                postedBy: user._id
+                            })
+                            count++;
+                            if (req.files) {
+                                for (let file in req.files) {
+                                    studyMaterial.files.push({
+                                        url: StudyMaterialsModel.filePath + req.files[file][0].filename,
+                                        name: req.files[file][0].originalname
+                                    });
+                                }
+                            }
+                            studyMaterial.save();
+                        }
                     }
                 }
             }
         }
+        return count;
     }
-    return count;
+    catch (err) {
+        console.log(err);
+        return 0;
+    }
 }
 
 module.exports.studyMaterialCreate = async function (req, res) {
@@ -456,6 +462,7 @@ module.exports.studyMaterialUpdate = async function (req, res) {
 };
 
 module.exports.studyMaterialDelete = async function (req, res) {
+    try{
     var studyMaterial = await StudyMaterialsModel.findById(req.params.id);
     for (let file of studyMaterial.files) {
         var fileElement = await FileModel.findOne({ url: file.url });
@@ -471,4 +478,8 @@ module.exports.studyMaterialDelete = async function (req, res) {
     await StudyMaterialsModel.findByIdAndDelete(studyMaterial._id);
     req.flash('success', 'Study Material Deleted');
     return res.redirect('back');
+}catch(err){
+    console.log(err);
+    return res.redirect('back');
+}
 };
