@@ -64,15 +64,15 @@ module.exports.assignment = async function (req, res) {
                     // classId = classId[0]._id;
                     assignmentList = [];
                     for (let classElement of classId) {
-                        let temp_list=assignmentList = await AssignmentModel.find({
+                        let temp_list = await AssignmentModel.find({
                             postedBy: user._id,
                             "classSub.course": courseId,
-                            "classSub.class": classId
+                            "classSub.class": classElement._id
                         }).populate('classSub.course')
                             .populate('classSub.class')
                             .populate('classSub.group')
                             .populate('classSub.subGroup');
-                            assignmentList=assignmentList.concat(temp_list);
+                        assignmentList = assignmentList.concat(temp_list);
 
                     }
                 }

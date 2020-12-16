@@ -63,12 +63,12 @@ module.exports.quiz = async function (req, res) {
                         let temp_list = await QuizModel.find({
                             postedBy: user._id,
                             "classSub.course": courseId,
-                            "classSub.class": classId
+                            "classSub.class": classElement._id
                         }).populate('classSub.course')
                             .populate('classSub.class')
                             .populate('classSub.group')
                             .populate('classSub.subGroup');
-                            temp_list = temp_list.concat(temp_list);
+                        quizList = quizList.concat(temp_list);
                     }
                 }
                 else {

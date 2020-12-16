@@ -65,7 +65,7 @@ module.exports.doubts = async function (req, res) {
                         let temp_list = await DoubtsModel.find({
                             postedFor: user._id,
                             "classSub.course": courseId,
-                            "classSub.class": classId
+                            "classSub.class": classElement._id
                         }).populate('classSub.course')
                             .populate('classSub.class')
                             .populate({
@@ -75,7 +75,7 @@ module.exports.doubts = async function (req, res) {
                                 }
                             })
                             .populate('postedBy');
-                            doubtsList = doubtsList.concat(temp_list);
+                        doubtsList = doubtsList.concat(temp_list);
                     }
 
                 }

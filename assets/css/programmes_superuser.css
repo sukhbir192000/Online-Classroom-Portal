@@ -145,6 +145,7 @@ input{
     margin:1em 0 2em 1.5em;
     /* border:1px solid black; */
 }
+
 .programme_heading{
     width:100%;
     min-height:1em;
@@ -198,10 +199,10 @@ input{
     justify-content: center;
     padding-left: 0.3em;
 }
-.programme:nth-child(2n+1){
+.programme_color_container:nth-child(2n+1){
     background-color: white;
-    
 }
+
 .programme_name_main{
     width: 35%;
     /* border: 1px solid black; */

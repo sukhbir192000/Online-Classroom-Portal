@@ -148,7 +148,11 @@ var deleteIconFunction = function(deleteIcon){
                 id:deleteButton.parentNode.id
             },
             success:function(response){
-                deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
+                if(response.err){
+                    alert("Teacher has courses assigned to it. Remove courses before deleting teacher.");
+                }
+                else
+                    deleteButton.parentNode.parentNode.removeChild(deleteButton.parentNode);
             }
         })
     })
